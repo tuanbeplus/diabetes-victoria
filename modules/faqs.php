@@ -37,7 +37,7 @@ if (empty($heading) && empty($faqs)) {
                                 <div class="accordion__content-inner">
                                 <?php echo $item['content']; ?>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     <?php } ?>
                 </div>
