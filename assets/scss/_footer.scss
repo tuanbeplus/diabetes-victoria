@@ -1,0 +1,182 @@
+// Footer style
+footer.site-footer {
+    color: $dv_white;
+    background-color: $dv_black;
+    p {
+        color: $dv_white;
+        font-size: 0.875rem;
+    }
+    ul , ol {
+        padding: 0;
+        margin: 20px 0;
+        li:last-child {
+            margin-bottom: 0;
+        }
+    }
+    li {
+        min-width: 200px;
+        margin-bottom: 10px;
+        list-style: none;
+        color: $dv_white;
+        font-size: 0.875rem;
+    }
+    a {
+        color: $dv_white;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .footer-banner {
+        width: 100%;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+    .footer-logo.tablet {
+        display: none;
+        img {
+            width: 160px;
+        }
+    }
+    .footer-wrapper {
+        padding: 66px 0 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 160px;
+        .info {
+            max-width: 340px;
+            img {
+                margin: 20px 0;
+            }
+            img.certified-img {
+                width: 136px;
+            }
+            *:last-child {
+                margin-bottom: 0;
+            }
+        }
+        .quick-links {
+            display: flex;
+            justify-content: space-between;
+            gap: 160px;
+            ul.contacts-list {
+                margin-top: 60px;
+                li {
+                    white-space: nowrap;
+                }
+            }
+        }
+        .footer-logo {
+            display: flex;
+            justify-content: left;
+            align-items: end;
+            img {
+                width: 160px;
+            }
+        }
+    }
+    .copyright {
+        text-align: center;
+        margin: 0;
+        padding-bottom: 66px;
+    }
+    .acknoledgement {
+        padding: 74px 0;
+        background-color: $dv_background;
+        color: $dv_black;
+        p, li {
+            color: $dv_black;
+        }
+        img.flag {
+            display: inline-block;
+            margin-right: 28px;
+            width: 66px;
+        }
+    }
+}
+
+/*************************** Laptop **************************/
+@media only screen and (max-width: 1440px) {
+    footer.site-footer {
+        .footer-wrapper {
+            gap: 100px;
+            .quick-links {
+                gap: 100px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    footer.site-footer {
+        .footer-wrapper {
+            gap: 80px;
+            .quick-links {
+                gap: 60px;
+            }
+        }
+    }
+}
+
+/*************************** Tablet **************************/
+@media only screen and (max-width: 1024px) {
+    footer.site-footer {
+        .footer-logo.tablet {
+            display: block;
+            padding-top: 40px;
+        }
+        .footer-wrapper {
+            padding: 20px 0 30px;
+            justify-content: left;
+            .footer-logo {
+                display: none;
+            }
+        }
+        .copyright {
+            padding-bottom: 40px;
+        }
+        .acknoledgement {
+            padding: 40px 0;
+        }
+    }
+}
+
+/*************************** Mobile **************************/
+@media only screen and (max-width: 768px) {
+    footer.site-footer {
+        .footer-wrapper {
+            justify-content: left;
+            flex-wrap: wrap;
+            gap: 40px;
+            .quick-links {
+                justify-content: left;
+                flex-wrap: wrap;
+                gap: 80px;
+                ul.contacts-list {
+                    margin-top: 40px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    footer.site-footer {
+        .footer-wrapper {
+            .quick-links {
+                gap: 40px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    footer.site-footer {
+        .footer-wrapper {
+            gap: 30px;
+            .quick-links {
+                gap: 30px;
+            }
+        }
+    }
+}

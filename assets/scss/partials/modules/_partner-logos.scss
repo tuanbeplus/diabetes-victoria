@@ -1,0 +1,81 @@
+.partner-logos {
+    padding: 90px 0;
+    background-color: #fff;
+    .logos {
+        margin: auto;
+        max-width: 1100px;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-wrap: wrap;
+        column-gap: 150px;
+        row-gap: 80px;
+        .logo {
+            img {
+                width: auto;
+                display: block;
+                height: 100%;
+                object-fit: contain;
+            }
+            &:last-child {
+                img {
+                    margin-top: -12px;
+                }
+            }
+        }
+    }
+}
+
+/*************************** Laptop **************************/
+@media only screen and (max-width: 1200px) {
+    .partner-logos {
+        .logos {
+            column-gap: 120px;
+        }
+    }
+}
+
+/*************************** Tablet **************************/
+@media only screen and (max-width: 1024px) {
+    .partner-logos {
+        padding: 60px 0;
+        .logos {
+            column-gap: 100px;
+            row-gap: 60px;
+            .logo {
+                img {
+                    max-width: 180px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .partner-logos {
+        .logos {
+            column-gap: 80px;
+            .logo {
+                img {
+                    max-width: 160px;
+                }
+            }
+        }
+    }
+}
+
+/*************************** Mobile **************************/
+@media only screen and (max-width: 425px) {
+    .partner-logos {
+        padding: 40px 0;
+        .logos {
+            column-gap: 40px;
+            row-gap: 40px;
+            .logo {
+                img {
+                    max-width: 120px;
+                }
+            }
+        }
+    }
+}

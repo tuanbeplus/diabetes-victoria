@@ -1,0 +1,612 @@
+body.admin-bar {
+    header.site-header {
+        &.sticky {
+            top: 32px;
+        }
+    }
+}
+
+header.site-header {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    background-color: $primary_color;
+    &.sticky {
+        position: fixed;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+        #header-logo {
+            img.logo-full-color {
+                display: block;
+            }
+            img.logo-white-color {
+                display: none;
+            }
+        }
+        #btn-nav-bar {
+            color: $primary_color;
+        }
+        nav#site-navigation {
+            ul#primary-menu-list {
+                li.menu-item {
+                    a {
+                        color: $primary_color;
+                    }
+                }
+                li.menu-item-has-children{
+                    &::after {
+                        background-image: url("/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-blu.svg");
+                    }
+                }
+                .sub-menu {
+                    li.menu-item {
+                        a {
+                            color: $dv_white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.top-menu-mobile {
+    #top-menu {
+        display: none;
+    }
+}
+
+// Top menu
+#top-menu {
+    border-bottom: 2px solid $primary_color;
+    background-color: $dv_white;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .top-menu-list {
+        display: flex;
+        justify-content: right;
+
+        .col {
+            display: flex;
+            justify-content: right;
+        }
+
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            border-left: 3px solid $primary_color;
+            a {
+                font-family: $primary_font_bold;
+                transition: all 0.3s;
+            }
+            button {
+                padding: 12px 20px;
+                border: none;
+                font-family: $primary_font_bold;
+                transition: all 0.3s;
+            }
+            svg {
+                transition: all 0.3s;
+            }
+        }
+        .useful-links {
+            justify-content: right;
+            border-left: none;
+        }
+        .useful-links-list {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 8px;
+            padding: 18px 76px 14px 16px;
+            li {
+                padding: 2px 8px 0;
+                border-right: 2px solid $primary_color;
+                border-left: none;
+                font-size: 0.875rem;
+                line-height: 1;
+                font-family: $primary_font_bold;
+                color: $primary_color;
+            }
+            li:last-child {
+                border-right: none;
+            }
+            a {
+                margin-bottom: -2px;
+                color: $primary_color;
+                white-space: nowrap;
+            }
+            a:hover {
+                color: $secondary_color;
+            }
+        }
+        .phone {
+            max-width: 64px;
+        }
+        .member-login {
+            max-width: 214px;
+            border-right: 3px solid $primary_color;
+        }
+        .search {
+            max-width: 66px;
+            border-left: none;
+        }
+        .donate {
+            max-width: 214px;
+            border-left: none;
+        }
+        .languages {
+            border-left: none;
+        }
+        #btn-phone {
+            height: -webkit-fill-available;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 20px;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        #btn-phone:hover {
+            background-color: $primary_color;
+            svg g {
+                fill: $dv_white;
+            }
+        }
+
+        #btn-member-login {
+            width: 100%;
+            height: -webkit-fill-available;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            padding: 12px 30px;
+            color: $primary_color;
+            white-space: nowrap;
+        }
+        #btn-member-login:hover {
+            color: $dv_white;
+            background-color: $primary_color;
+        }
+
+        #btn-search {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            background-color: $dv_white;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        #btn-search:hover {
+            color: $dv_white;
+            background-color: $primary_color;
+            svg g {
+                stroke: $dv_white;
+            }
+        }
+        #btn-search.active {
+            background-color: $primary_color;
+            svg g {
+                stroke: $dv_white;
+            }
+        }
+
+        #btn-donate {
+            width: 100%;
+            height: 100%;
+            padding: 12px 70px;
+            color: $dv_white;
+            font-size: 1.25rem;
+            background-color: $secondary_color;
+        }
+        #btn-donate:hover {
+            background-color: $primary_color;
+        }
+        
+        #btn-languages {
+            width: 100%;
+            height: -webkit-fill-available;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 30px;
+            color: $dv_dark;
+            font-size: 1.25rem;
+            background-color: $accent_color;
+            svg g#language-solid {
+                transition: all 0.3s;
+            }
+        }
+        #btn-languages:hover {
+            color: $dv_white;
+            background-color: $primary_color;
+            svg g {
+                fill: $dv_white;
+            }
+        }
+    }
+}
+
+.header-inner {
+    padding: 38px 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// Logo
+#header-logo {
+    img {
+        width: 100%;
+        max-width: 214px;
+    }
+    img.logo-full-color {
+        display: none;
+    }
+}
+
+#btn-nav-bar {
+    display: none;
+    color: #fff;
+    padding: 6px;
+    margin: 0;
+    height: fit-content;
+    font-size: 30px;
+    line-height: 1;
+    border: none;
+    background-color: transparent;
+}
+
+nav#site-navigation {
+    ul#primary-menu-list {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: left;
+        flex-wrap: wrap;
+        gap: 2px;
+        li.menu-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+            gap: 8px;
+            padding: 10px 10px 18px;
+            font-size: 1.094rem;
+            line-height: 110%;
+            list-style: none;
+            white-space: nowrap;
+            font-family: $primary_font_bold;
+            a {
+                color: $dv_white;
+            }
+        }
+        li.menu-item-has-children {
+            &::after {
+                content: "";
+                display: block;
+                width: 16px;
+                height: 16px;
+                background-image: url("/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-white.svg");
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                transition: all 0.2s;
+                margin-top: -4px;
+            }
+            &:hover{
+                .sub-menu {
+                    display: block;
+                }
+                &::after {
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+        .sub-menu {
+            display: none;
+            padding: 6px 16px 0;
+            position: absolute;
+            transform: translateY(100%);
+            bottom: 6px;
+            background-color: $primary_color;
+            transition: all 0.3s;
+            z-index: 10;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        }
+    }
+}
+
+/*************************** Laptop **************************/
+@media only screen and (max-width: 1440px) {
+    #top-menu {
+        .top-menu-list {
+            .useful-links-list {
+                padding: 16px 16px 14px 16px;
+                li {
+                    font-size: 0.8rem;
+                }
+            }
+            #btn-phone {
+                padding: 12px 16px;
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+            #btn-member-login {
+                font-size: 1.125rem;
+            }
+            #btn-search {
+                padding: 12px 16px;
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+            #btn-donate {
+                font-size: 1.125rem;
+            }
+            #btn-languages {
+                font-size: 1.125rem;
+            }
+        }
+    }
+    .header-inner{
+        padding: 20px 0;
+    }
+    #header-logo {
+        img {
+            max-width: 190px;
+        }
+    }
+    nav#site-navigation {
+        ul#primary-menu-list {
+            li.menu-item {
+                font-size: 1rem;
+            }
+        } 
+    }
+}
+
+/*************************** Tablet **************************/
+@media only screen and (max-width: 1024px) {
+    #top-menu {
+        .top-menu-list {
+            flex-wrap: wrap;
+            justify-content: center;
+            .col {
+                width: 100%;
+                justify-content: center;
+                border-bottom: 1px solid $primary_color;
+            }
+            #btn-member-login {
+                font-size: 1rem;
+            }
+            #btn-donate {
+                font-size: 1rem;
+            }
+            #btn-languages {
+                font-size: 1rem;
+            }
+        } 
+    }
+    .header-inner{
+        padding: 16px 0;
+    }
+    #header-logo {
+        img {
+            max-width: 150px;
+        }
+    }
+    #btn-nav-bar {
+        display: block;
+    }
+    nav#site-navigation {
+        display: none;
+        position: absolute;
+        right: 0;
+        left: 0;
+        padding: 16px 20px 20px;
+        background-color: $dv_dark;
+        animation: nav-slide-show 0.2s linear both;
+        ul#primary-menu-list {
+            flex-direction: column;
+            li.menu-item {
+                a {
+                    color: $dv_white!important;
+                }
+            } 
+            li.menu-item-has-children {
+                &::after {
+                    background-image: url("/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-white.svg")!important;
+                }
+            }
+        }
+    }
+    nav#site-navigation.active {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 782px) {
+    body.admin-bar {
+        header.site-header {
+            &.sticky {
+                top: 46px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #top-menu {
+        .top-menu-list {
+            display: none;
+        }
+    }
+    .top-menu-mobile {
+        #top-menu {
+            display: block;
+            border-bottom: none;
+            background-color: $dv_dark;
+            .top-menu-list {
+                display: flex;
+                .col {
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    border-bottom: none;
+                }
+                li {
+                    border: none;
+                }
+                .useful-links-list {
+                    justify-content: center;
+                    li {
+                        padding-top: 2px;
+                        font-size: 0.875rem;
+                        border-color: $dv_white;
+                        a {
+                            color: $dv_white;
+                        }
+                    }
+                }
+                #btn-phone {
+                    padding: 10px 16px;
+                    background-color: $dv_white;
+                    height: fit-content;
+                }
+                #btn-member-login {
+                    padding: 10px 20px;
+                    line-height: 1;
+                    background-color: $dv_white;
+                    height: fit-content;
+                }
+                #btn-search {
+                    padding: 10px 16px;
+                    height: fit-content;
+                }
+                #btn-donate {
+                    padding: 12px 22px;
+                    line-height: 1;
+                    height: fit-content;
+                }
+                #btn-languages {
+                    padding: 10px 16px;
+                    line-height: 1;
+                    height: fit-content;
+                }
+            }
+        }
+    }
+    .header-inner {
+        padding: 10px 0;
+    }
+    #header-logo {
+        img {
+            max-width: 120px;
+        }
+    }
+    #btn-nav-bar {
+        font-size: 26px;
+    }
+    .search-common-wrapper {
+        #btn-close-search {
+            top: -46px;
+            right: 0;
+            padding: 10px 16px!important;
+        }
+    }
+}
+
+/*************************** Mobile **************************/
+@media only screen and (max-width: 600px) {
+    body {
+        #wpadminbar {
+            position: fixed;
+        }
+    }
+    .search-common-wrapper {
+        #btn-close-search {
+            right: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #header-logo {
+        max-width: 110px;
+    }
+    #btn-nav-bar {
+        font-size: 24px;
+    }
+    .top-menu-mobile {
+        border-top: 1px solid $dv_white;
+        #top-menu {
+            .top-menu-list {
+                .col:first-child {
+                    justify-content: start;
+                }
+                .useful-links-list {
+                    flex-direction: column;
+                    margin-bottom: 10px;
+                    padding-left: 4px;
+                    row-gap: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes header-slide-down {
+    0% {
+        display: none;
+        transform: translateY(-100%);
+    }
+  
+    50% {
+        display: block;
+        transform: translateY(-50%);
+    }
+  
+    100% {
+        display: block;
+        transform: translateY(0%);
+    }
+}
+
+@keyframes nav-slide-show {
+    0% {
+        visibility: hidden;
+        transform: translateX(110%);
+    }
+    20% {
+        visibility: hidden;
+        transform: translateX(80%);
+    }
+    50% {
+        visibility: visible;
+        transform: translateX(50%);
+    }
+    80% {
+        visibility: visible;
+        transform: translateX(20%);
+    }
+    100% {
+        visibility: visible;
+        transform: translateX(0%);
+    }
+}

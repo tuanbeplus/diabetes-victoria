@@ -1,0 +1,230 @@
+// Site tools
+.site-tools {
+    position: fixed;
+    width: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    &.show {
+        width: 100%;
+    }
+    
+    #btn-scroll-top {
+        visibility: hidden;
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        padding: 8px;
+        border-radius: 100%;
+        border: 2px solid $primary_color;
+        width: 40px;
+        height: 40px;
+        transform: rotate(180deg);
+        background-color: #fff;
+    }
+    #btn-scroll-top.show {
+        visibility: visible;
+    }
+}
+
+body {
+    nav#pojo-a11y-toolbar {
+        top: 0;
+        width: 0;
+        height: 100%;
+        padding-top: 80px;
+        display: flex;
+        flex-direction: column;
+        
+        &.pojo-a11y-toolbar-left{
+            left: 0;
+            &.pojo-a11y-toolbar-open {
+                left: 0;
+                a#btn-toggle-accessibility-toolbar {
+                    pointer-events: none;
+                }
+                #btn-close-accessibility-toolbar {
+                    display: block;
+                }
+                .pojo-a11y-toolbar-overlay {
+                    transform: translateY(0);
+                    visibility: visible;
+                    opacity: 1;
+                    transition: all 0.4s;
+                }
+                .pojo-a11y-toolbar-toggle {
+                    left: 0;
+                    animation: access-options-show 0.2s linear both;
+                }
+                .background-overlay {
+                    display: block;
+                }
+            }
+            .pojo-a11y-toolbar-toggle {
+                left: -244px;
+            }
+        }
+        .pojo-a11y-toolbar-overlay {
+            width: 200px;
+            margin-left: 36px;
+            z-index: 100;
+            transform: translateY(100%);
+            visibility: hidden;
+            opacity: 0;
+
+            .pojo-a11y-toolbar-title {
+                font-family: $primary_font_bold;
+            }
+
+            ul.pojo-a11y-toolbar-items {
+                li.pojo-a11y-toolbar-item {
+                    a {
+                        transition: all 0.2s;
+                        .active {
+                            background-color: $secondary_color!important;
+                        }
+                        &:hover {
+                            color: #fff;
+                            background-color: $secondary_color;
+                        }
+                        .pojo-a11y-toolbar-text {
+                            vertical-align: unset;
+                        }
+                    }
+                }
+            }
+        }
+        .pojo-a11y-toolbar-toggle {
+            position: relative;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            animation: access-options-hide 0.2s linear both;
+
+            #btn-toggle-accessibility-toolbar {
+                display: flex;
+                align-items: center;
+                gap: 32px;
+                padding: 30px 34px 28px;
+                width: 340px;
+                font-size: 18px;
+                font-family: $primary_font_bold;
+                line-height: 150%;
+                border: none;
+                border-radius: 0 54px 54px 0;
+                color: $dv_dark;
+                background-color: #99D6E9;
+                box-sizing: unset;
+                box-shadow: 0 0 2px 0 rgba(0,0,0,0.2)!important;
+                .text {
+                    white-space: nowrap;
+                    text-decoration: underline;
+                    text-align: center;
+                    text-underline-offset: 2px;
+                    z-index: 1;
+                }
+                .accessibility-icon {
+                    line-height: 1;
+                    svg {
+                        g path {
+                            fill: $dv_dark;
+                        }
+                    }
+                }
+            }
+        }
+
+        #btn-close-accessibility-toolbar {
+            display: none;
+            box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .background-overlay {
+            display: none;
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.8);
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 90;
+        }
+    }
+
+    .socials-share-wrapper {
+        position: relative;
+        margin-top: 30px;
+        display: flex;
+        gap: 20px;
+        width: fit-content;
+        #btn-socials-share {
+            width: fit-content;
+            height: 45px;
+            padding: 0;
+            line-height: 1;
+            border: none;
+            border-radius: 0 22px 22px 0;
+            box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
+        }
+        .share-content {
+            display: none;
+            position: absolute;
+            right: -50px;
+            bottom: 0;
+            transform: translate(100%);
+            z-index: 100;
+            width: 600px;
+            padding: 20px;
+            border-radius: 4px;
+            background-color: $dv_background;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            > h3 {
+                float: left;
+            }
+            #btn-close-share {
+                float: right;
+                transition: all 0.3s;
+            }
+            .essb_links {
+                margin-bottom: 0;
+                li {
+                    a {
+                        margin: 10px 10px 0px 0;
+                    }
+                }
+            }
+        }    
+    }
+}
+
+@keyframes access-options-show {
+    0% {
+        left: -244px;
+    }
+    50% {
+        left: -122px;
+    }
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes access-options-hide {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: -122px;
+    }
+    100% {
+        left: -244px;
+    }
+}

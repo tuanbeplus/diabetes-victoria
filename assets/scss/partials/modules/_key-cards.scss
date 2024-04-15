@@ -1,0 +1,195 @@
+// Key Cards style
+.key-cards {
+    padding: 68px 0;
+    .cards-list {
+        max-width: 1024px;
+        margin: auto;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 64px;
+
+        .card {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            list-style: none;
+            background-color: #fff;
+            border: 1px solid #f6f6f6;
+            .card-img {
+                overflow: hidden;
+                height: 160px;
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 0.3s;
+                }
+                img:hover {
+                    transform: scale(1.1);
+                }
+            }
+            .card-body {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            .card-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                padding: 34px 26px;
+                .landing-page {
+                    margin-bottom: 16px;
+                    a {
+                        position: relative;
+                        display: inline-block;
+                        font-size: 1.313rem;
+                        font-family: $primary_font_bold;
+                        line-height: 124%;
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            width: 100%;
+                            transform: scaleX(0);
+                            height: 2px;
+                            bottom: 2px;
+                            left: 0;
+                            background-color: $primary_color;
+                            transform-origin: bottom left;
+                            transition: transform 0.2s ease-out;
+                        }
+                        &:hover {
+                            &::after {
+                                transform: scaleX(1);
+                                transform-origin: bottom left;
+                            }
+                        }
+                    }
+                }
+                .card-title {
+                    margin-top: 0;
+                    margin-bottom: 16px;
+                }
+                .card-description {
+                    font-size: 0.875rem;
+                    *:first-child {
+                        margin-top: 0;
+                    }
+                    *:last-child {
+                        margin-bottom: 0;
+                    }
+                    a {
+                        font-family: $primary_font_demi;
+                        text-decoration: underline;
+                    }
+                }
+                > *:last-child {
+                    margin-bottom: 0;
+                }
+            }
+            .card-cta {
+                padding: 0 26px 34px;
+                a.cta-btn {
+                    display: inline-block;
+                    padding: 10px 16px 8px;
+                    font-size: 1rem;
+                    line-height: 1;
+                    font-family: $primary_font_bold;
+                    color: #fff;
+                    background-color: $primary_color;
+                    border: 2px solid transparent;
+                    transition: all 0.4s;
+                }
+            }
+        }
+    }
+}
+
+/*************************** Tablet **************************/
+@media only screen and (max-width: 1024px) {
+    .key-cards {
+        .cards-list {
+            gap: 32px;
+            .card {
+                .card-content {
+                    padding: 24px;
+                    .landing-page {
+                        a {
+                            font-size: 1.125rem;
+                        }
+                    }
+                    .card-title {
+                        font-size: 1.375rem;
+                    }
+                }
+                .card-cta {
+                    padding: 0 24px 24px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .key-cards {
+        padding: 40px 0;
+        .cards-list {
+            gap: 16px;
+            .card {
+                .card-content {
+                    padding: 16px;
+                    .landing-page {
+                        margin-bottom: 10px;
+                        a {
+                            font-size: 1rem;
+                        }
+                    }
+                    .card-title {
+                        margin-bottom: 10px;
+                        font-size: 1.125rem;
+                    }
+                }
+                .card-cta {
+                    padding: 0 16px 16px;
+                    a.cta-btn {
+                        padding: 8px 12px 6px;
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*************************** Mobile **************************/
+@media only screen and (max-width: 600px) {
+    .key-cards {
+        .cards-list {
+            flex-wrap: wrap;
+            row-gap: 24px;
+            .card {
+                .card-content {
+                    .landing-page {
+                        margin-bottom: 10px;
+                        a {
+                            font-size: 1rem;
+                        }
+                    }
+                    .card-title {
+                        margin-bottom: 10px;
+                        font-size: 1.125rem;
+                    }
+                }
+                .card-cta {
+                    a.cta-btn {
+                        padding: 8px 12px 6px;
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+        }
+    }
+}
+

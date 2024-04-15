@@ -1,0 +1,22 @@
+{
+  "name": "diabetes-victoria",
+  "description": "=== WP Diabetes Victoria Theme ===",
+  "version": "1.0.0",
+  "main": "webpack.mix.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx mix watch",
+    "build": "npx mix --production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "laravel-mix": "^6.0.49"
+  },
+  "devDependencies": {
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.72.0",
+    "sass-loader": "^12.6.0"
+  }
+}

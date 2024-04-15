@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="61px" height="45px" viewBox="0 0 61 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Social Share</title>
+    <g id="DV-Redesign-R1.3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01-DV-Homepage-Redesign-R1.1" transform="translate(0, -873)">
+            <g id="Social-Share" transform="translate(0, 873)">
+                <rect id="Rectangle" fill="#99D6E9" x="0" y="0" width="38" height="45"></rect>
+                <circle id="Oval" fill="#99D6E9" cx="38.5" cy="22.5" r="22.5"></circle>
+                <circle id="Oval" stroke="#007995" stroke-width="3" cx="35" cy="15" r="3.5"></circle>
+                <circle id="Oval-Copy" stroke="#007995" stroke-width="3" cx="21" cy="23" r="3.5"></circle>
+                <circle id="Oval-Copy-2" stroke="#007995" stroke-width="3" cx="35" cy="30" r="3.5"></circle>
+                <line x1="24.5" y1="20.5" x2="30.5" y2="17.5" id="Line-4" stroke="#007995" stroke-width="3" stroke-linecap="square"></line>
+                <line x1="26.5" y1="27.5" x2="30" y2="26" id="Line-4" stroke="#007995" stroke-width="3" stroke-linecap="square" transform="translate(28.5, 26.5) scale(1, -1) translate(-28.5, -26.5)"></line>
+            </g>
+        </g>
+    </g>
+</svg>

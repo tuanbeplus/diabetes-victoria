@@ -1,0 +1,148 @@
+
+// color variables
+$primary_color:   #019BC2;
+$secondary_color: #3F51B5;
+$tertiary_color:  #E9730C;
+$accent_color: #99D6E9;
+$dv_black: #223540;
+$dv_background: #F5FBFD;
+$dv_white: #ffffff;
+$dv_dark: #007995;
+
+// font variables
+$primary_font_light:  'ITC-Avant-Garde-Gothic-Pro_Light';
+$primary_font_book:   'ITC-Avant-Garde-Gothic-Pro_Book';
+$primary_font_medium: 'ITC-Avant-Garde-Gothic-Pro_Medium';
+$primary_font_demi:   'ITC-Avant-Garde-Gothic-Pro_Demi';
+$primary_font_bold:   'ITC-Avant-Garde-Gothic-Pro_Bold';
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    letter-spacing: 0.2px;
+    font-family: $primary_font_medium;
+    font-weight: normal;
+    line-height: 140%;
+    background-color: $dv_background;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $primary_font_bold;
+}
+
+h1 {
+    font-size: 2.313rem;
+    line-height: 110%;
+    font-weight: bold;
+}
+h2 {
+    font-size: 1.688rem;
+    line-height: 115%;
+    font-weight: bold;
+}
+h3 {
+    margin: 20px 0;
+    font-size: 1.313rem;
+    line-height: 115%;
+    font-weight: bold;
+}
+h4 {
+    font-size: 1.213rem;
+    line-height: 115%;
+    font-weight: bold;
+}
+h5 {
+    font-size: 1.113rem;
+    line-height: 115%;
+    font-weight: bold;
+}
+h6 {
+    font-size: 1.013rem;
+    line-height: 115%;
+    font-weight: bold;
+}
+
+p , li {
+    color: $dv_black;
+    font-family: $primary_font_medium;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1366px;
+    margin: auto;
+    padding: 0 15px;
+}
+
+.btn-small {
+    padding: 10px 14px;
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+    background-color: $dv_dark;
+    border: none;
+}
+.btn-small:hover {
+    background-color: $secondary_color;
+}
+
+section.error-404 {
+    max-width: 1054px;
+    margin: 0 auto;
+    padding: 80px 15px;
+    h1 {
+        margin-top: 0;
+        color: $primary_color;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .container {
+        max-width: 1266px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        max-width: 1100px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    h3 {
+        margin: 18px 0;
+        font-size: 1.125rem;
+    }
+    .container {
+        max-width: 900px;
+    }
+}
+
