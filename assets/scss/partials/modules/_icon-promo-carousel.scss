@@ -1,14 +1,7 @@
 .ipro-carousel-section {
     padding: 60px 0;
-    .container {
-        max-width: 1446px;
-    }
 }
 .ipro-carousel-wrapper {
-    .ipro-heading-wrap {
-        max-width: 1030px;
-        margin: 0 auto 50px;
-    }
     .ipro-heading {
         font-family: $primary_font_bold;
         font-size: 2.313rem;
@@ -18,18 +11,6 @@
         margin: 0;
     }
     .carousel-wrapper {
-        position: relative;
-        padding: 0 100px;
-        .slick-arrow {
-            position: absolute;
-            top: 115px;
-            left: 0;
-            &.slick-next {
-                left: auto;
-                right: 0;
-            }
-        }
-
         .slick-list {
             max-width: 1080px;
             margin: 0 auto;
@@ -38,8 +19,6 @@
             padding: 0 30px;
         }
         .ipro-item {
-            max-width: 300px;
-            margin: 0 auto;
             &--icon {
                 position: relative;
                 padding-bottom: 100%;

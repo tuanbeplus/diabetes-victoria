@@ -47,14 +47,11 @@ $carousel_json = json_encode($carousel_data);
 <section class="ipro-carousel-section">
     <div class="container">
         <div class="ipro-carousel-wrapper">
-            <div class="ipro-heading-wrap">
-                <?php if(!empty($heading)) { ?>
-                    <h1 class="ipro-heading">
-                        <?php echo $heading; ?>
-                    </h1>
-                <?php } ?>
-                
-            </div>
+            <?php if(!empty($heading)) { ?>
+                <h1 class="ipro-heading">
+                    <?php echo $heading; ?>
+                </h1>
+            <?php } ?>
 
             <?php if(!empty($list_item)) { ?>
                 <div class="carousel-wrapper js-carousel" data-carousel="<?php echo esc_attr($carousel_json); ?>">

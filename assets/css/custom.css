@@ -236,14 +236,7 @@ section.error-404 h1 {
 .ipro-carousel-section {
   padding: 60px 0;
 }
-.ipro-carousel-section .container {
-  max-width: 1446px;
-}
 
-.ipro-carousel-wrapper .ipro-heading-wrap {
-  max-width: 1030px;
-  margin: 0 auto 50px;
-}
 .ipro-carousel-wrapper .ipro-heading {
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
   font-size: 2.313rem;
@@ -252,29 +245,12 @@ section.error-404 h1 {
   color: #019BC2;
   margin: 0;
 }
-.ipro-carousel-wrapper .carousel-wrapper {
-  position: relative;
-  padding: 0 100px;
-}
-.ipro-carousel-wrapper .carousel-wrapper .slick-arrow {
-  position: absolute;
-  top: 115px;
-  left: 0;
-}
-.ipro-carousel-wrapper .carousel-wrapper .slick-arrow.slick-next {
-  left: auto;
-  right: 0;
-}
 .ipro-carousel-wrapper .carousel-wrapper .slick-list {
   max-width: 1080px;
   margin: 0 auto;
 }
 .ipro-carousel-wrapper .carousel-wrapper .carousel-inner {
   padding: 0 30px;
-}
-.ipro-carousel-wrapper .carousel-wrapper .ipro-item {
-  max-width: 300px;
-  margin: 0 auto;
 }
 .ipro-carousel-wrapper .carousel-wrapper .ipro-item--icon {
   position: relative;
