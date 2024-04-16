@@ -23,6 +23,8 @@ get_header();
             get_template_part('modules/content-promo');
             get_template_part('modules/latest-posts');
             get_template_part('modules/partner-logos');
+            get_template_part('modules/faqs');
+            get_template_part('modules/icon-promo-carousel');
 
         endwhile;
 

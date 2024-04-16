@@ -45,13 +45,11 @@ function dv_get_latest_posts($post_type, $number_posts, $order_by) {
  */
 function dv_breadcrumb() {
 	global $post;
-    // $arrow_right = '<span class="chevron-right-icon"><i class="fa-solid fa-chevron-right"></i></span>';
-    $arrow_right = '<span class="arrow-right"> > </span>';
-	if ( ! is_home() ) {
+    $arrow_right = '<span class="arrow"> > </span>';
+	if ( ! is_front_page() ) {
         echo '<nav aria-label="Breadcrumbs" class="breadcrumb">';
-        echo '  <div class="container">';
-        echo '      <ol class="breadcrumb-list">';
-		echo '          <li><a href="' . site_url() . '">Home</a></li> '.$arrow_right;
+        echo '	<ol class="breadcrumb-list">';
+		echo '		<li><a href="' . site_url() . '">Home</a></li> '.$arrow_right;
 		if ( is_category() || is_single() ) {
 			the_category( $arrow_right );
 			if ( is_single() ) {
@@ -70,8 +68,7 @@ function dv_breadcrumb() {
 				echo '<li aria-current="page"><strong> ' . get_the_title() . '</strong></li>';
 			}
 		}
-        echo '      </ol>';
-        echo '  </div>';
+        echo '	</ol>';
         echo '</nav>';
 	}
 }

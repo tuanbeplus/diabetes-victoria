@@ -124,41 +124,44 @@
             }
         }
     }
-    .owl-dots {
-        position: absolute;
+    .slick-dots {
+        width: 100%;
         right: 0;
         left: 0;
         bottom: 32px;
+        position: absolute;
         display: flex;
         gap: 8px;
-        .owl-dot {
-            display: block;
-            width: 22px;
-            height: 22px;
-            background-color: transparent;
-            border: 2px solid #fff;
-            border-radius: 100%;
-        }
-        .owl-dot.active {
-            background-color: #fff;
-        }
-    }
-    .owl-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        button {
-            padding: 4px 6px;
-            svg {
-                font-size: 30px;
-                path {
-                    fill: #fff;
+        list-style: none;
+        li {
+            button {
+                width: 22px;
+                height: 22px;
+                color: transparent;
+                background-color: transparent;
+                border: 2px solid #fff;
+                border-radius: 50%;
+            }
+            &.slick-active {
+                button {
+                    background-color: #fff;
                 }
             }
         }
+    }
+    .slick-prev {
+        position: absolute;
+        z-index: 1;
+        bottom: 50%;
+        transform: translateY(-50%);
+        left: 0;
+    }
+    .slick-next {
+        position: absolute;
+        z-index: 1;
+        bottom: 50%;
+        transform: translateY(-50%);
+        right: 0;
     }
 }
 
