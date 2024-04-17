@@ -6,7 +6,7 @@
 .__carousel-navigation-style {
     display: none;
     position: relative;
-    padding: 0 70px;
+    padding: 0 85px;
     .slick-arrow {
         position: absolute;
         top: calc(50% - 40px);
@@ -92,7 +92,7 @@
         }
     }
     @media(max-width: 1023.98px) {
-        padding: 0 45px;
+        padding: 0 60px;
         .slick-arrow {
             width: 45px;
             height: 45px;
@@ -102,7 +102,7 @@
         }
     }
     @media(max-width: 767.98px) {
-        padding: 0 35px;
+        padding: 0 50px;
         .slick-arrow {
             width: 35px;
             height: 35px;

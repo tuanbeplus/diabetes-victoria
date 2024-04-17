@@ -26,18 +26,10 @@
     .carousel-wrapper {
         @extend .__carousel-navigation-style;
         .slick-list {
+            position: relative;
             max-width: 1080px;
             margin: 0 auto;
-        }
-        .carousel-inner {
-            margin: 0 60px;
-        }
-
-        // Continue working..
-
-        .bespoke-list {
-            position: relative;
-            display: flex;
+            padding: 0 60px;
             &:before {
                 content: "";
                 position: absolute;
@@ -48,6 +40,33 @@
                 background: #fff;
                 border-radius: 10px;
                 transform: translate(-50%, -50%);
+            }
+            .carousel-item {
+                &:not(.slick-active) {
+                    opacity: 0;
+                }
+                &:nth-child(2n) {
+                    .bespoke-item {
+                        margin-top: 360px;
+                        margin-bottom: 0;
+                        &:before {
+                            top: -78px;
+                            bottom: auto;
+                            height: 105px;
+                        }
+                        &:after {
+                            top: -90px;
+                            bottom: auto;
+                        }
+                        &:not(.has-thumbnail) {
+                            padding-top: 35px;
+                        }
+                        &--inner {
+                            top: auto;
+                            bottom: 0;
+                        }
+                    }
+                }
             }
             .bespoke-item {
                 position: relative;
@@ -76,33 +95,11 @@
                     background: #fff;
                     border-radius: 50px;
                 }
-                &:nth-child(2n) {
-                    margin-top: 360px;
-                    margin-bottom: 0;
-                    &:before {
-                        top: -78px;
-                        bottom: auto;
-                        height: 105px;
-                    }
-                    &:after {
-                        top: -90px;
-                        bottom: auto;
-                    }
-                    &:not(.has-thumbnail) {
-                        padding-top: 35px;
-                    }
-                    .bespoke-item {
-                        &--inner {
-                            top: auto;
-                            bottom: 0;
-                        }
-                    }
-                }
                 &--inner {
                     font-size: 14px;
                     color: #fff;
-                    width: 200px;
-                    margin: 0 -40px;
+                    max-width: 200px;
+                    margin: 0 -35%;
                 }
                 &--thumbnail {
                     position: relative;
@@ -123,6 +120,7 @@
                 &--desc {
                     overflow: hidden;
                     width: 100%;
+                    height: 90px;
                     display: -webkit-box;
                     -webkit-line-clamp: 4;
                     -webkit-box-orient: vertical;

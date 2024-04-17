@@ -35,9 +35,9 @@ $carousel_json = json_encode($carousel_data);
     <div class="container">
         <div class="media-slider-wrapper">
             <?php if(!empty($heading)) { ?>
-                <h1 class="media-slider-heading">
-                    <?php echo $heading; ?>
-                </h1>
+                <h2 class="media-slider-heading">
+                    <?php echo '<span>' . $heading . '</span>'; ?>
+                </h2>
             <?php } ?>
 
             <?php if(!empty($list_item)) { ?>

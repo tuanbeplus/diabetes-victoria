@@ -94,5 +94,13 @@
         .ipro-heading-wrap {
             flex-direction: column;
         }
+        .ipro-heading {
+            font-size: 1.8rem;
+        }
+        .carousel-wrapper {
+            .carousel-inner {
+                padding: 0 15px;
+            }
+        }
     }
 }

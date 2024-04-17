@@ -33,13 +33,15 @@ $carousel_data['responsive'] = array(
     array(
         'breakpoint' => 1023,
         'settings' => array(
-            'slidesToShow' => 2
+            'slidesToShow' => 2,
+            'slidesToScroll' => 2
         )
     ),
     array(
         'breakpoint' => 767,
         'settings' => array(
-            'slidesToShow' => 1
+            'slidesToShow' => 1,
+            'slidesToScroll' => 1
         )
     ),
 );
@@ -52,14 +54,14 @@ $carousel_json = json_encode($carousel_data);
         <div class="ipro-carousel-wrapper">
             <div class="ipro-heading-wrap">
                 <?php if(!empty($heading)) { ?>
-                    <h1 class="ipro-heading">
-                        <?php echo $heading; ?>
-                    </h1>
+                    <h2 class="ipro-heading">
+                        <?php echo '<span>' . $heading . '</span>'; ?>
+                    </h2>
                 <?php } ?>
                 <?php if(!empty($link_url)) { ?>
                     <div class="ipro-link">
                         <a href="<?php echo esc_url($link_url); ?>" class="ipro-find-out-more">
-                            <?php echo !empty($link_text) ? $link_text : __('Find out more', 'diabetes-victoria'); ?>
+                            <span><?php echo !empty($link_text) ? $link_text : __('Find out more', 'diabetes-victoria'); ?></span>
                         </a>
                     </div>
                 <?php } ?>

@@ -27,6 +27,50 @@ $carousel_data['dots'] = true;
 $carousel_data['dotsClass'] = 'slick-dots-custom';
 $carousel_data['pauseOnFocus'] = true;
 $carousel_data['pauseOnHover'] = true;
+$carousel_data['responsive'] = array(
+    array(
+        'breakpoint' => 1190,
+        'settings' => array(
+            'slidesToShow' => 6,
+            'slidesToScroll' => 6
+        )
+    ),
+    array(
+        'breakpoint' => 1023,
+        'settings' => array(
+            'slidesToShow' => 5,
+            'slidesToScroll' => 5
+        )
+    ),
+    array(
+        'breakpoint' => 991,
+        'settings' => array(
+            'slidesToShow' => 4,
+            'slidesToScroll' => 4
+        )
+    ),
+    array(
+        'breakpoint' => 767,
+        'settings' => array(
+            'slidesToShow' => 3,
+            'slidesToScroll' => 3
+        )
+    ),
+    array(
+        'breakpoint' => 560,
+        'settings' => array(
+            'slidesToShow' => 2,
+            'slidesToScroll' => 2
+        )
+    ),
+    array(
+        'breakpoint' => 420,
+        'settings' => array(
+            'slidesToShow' => 1,
+            'slidesToScroll' => 1
+        )
+    ),
+);
 
 $carousel_json = json_encode($carousel_data);
 
@@ -36,9 +80,9 @@ $carousel_json = json_encode($carousel_data);
         <div class="bespoke-slider-wrapper">
             <?php if(!empty($heading)) { ?>
                 <div class="bespoke-slider-heading-wrap">
-                    <h1 class="bespoke-slider-heading">
-                        <?php echo $heading; ?>
-                    </h1>
+                    <h2 class="bespoke-slider-heading">
+                        <?php echo '<span>' . $heading . '</span>'; ?>
+                    </h2>
                 </div>
             <?php } ?>
 
@@ -58,13 +102,13 @@ $carousel_json = json_encode($carousel_data);
 
                                         <?php if(!empty($item['year'])) { ?>
                                             <div class="bespoke-item--year">
-                                                <?php echo $item['year']; ?>
+                                                <?php echo '<span>' . $item['year'] . '</span>'; ?>
                                             </div>
                                         <?php } ?>
 
                                         <?php if(!empty($item['description'])) { ?>
                                             <div class="bespoke-item--desc">
-                                                <?php echo $item['description']; ?>
+                                                <?php echo '<span>' . $item['description'] . '</span>'; ?>
                                             </div>
                                         <?php } ?>
                                     </div>
