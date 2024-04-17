@@ -114,9 +114,41 @@ section.error-404 h1 {
   color: #019BC2;
 }
 
+.breadcrumb {
+  padding: 28px 0;
+  background-color: #99D6E9;
+}
+.breadcrumb .breadcrumb-list {
+  max-width: 1054px;
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  margin: 0 auto;
+  padding: 0 15px;
+  line-height: 1;
+}
+.breadcrumb .breadcrumb-list li {
+  color: #007995;
+  font-size: 0.875rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
+.breadcrumb .breadcrumb-list li a {
+  color: #007995;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.breadcrumb .breadcrumb-list .arrow {
+  margin-top: -2px;
+  color: #007995;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
+
 @media only screen and (max-width: 1400px) {
   .container {
     max-width: 1266px;
+  }
+  .breadcrumb {
+    padding: 18px 0;
   }
 }
 @media only screen and (max-width: 1200px) {
