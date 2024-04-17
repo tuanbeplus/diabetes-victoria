@@ -48,6 +48,7 @@
         color: $primary_color;
         font-family: $primary_font_medium;
         text-decoration: underline;
+        text-underline-offset: 2px;
         .close-icon {
             margin-top: -4px;
             width: 40px;

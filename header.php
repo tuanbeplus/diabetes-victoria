@@ -57,7 +57,7 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 			</div>
 		</div>
 		<!-- Breadcrumb -->
-		<?php // dv_breadcrumb(); ?>
+		<?php dv_breadcrumb(); ?>
 		<!-- .Breadcrumb -->
 	</header><!-- #masthead -->
 

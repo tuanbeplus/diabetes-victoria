@@ -8,6 +8,7 @@ $dv_black: #223540;
 $dv_background: #F5FBFD;
 $dv_white: #ffffff;
 $dv_dark: #007995;
+$donate_color: #3F51B5;
 
 // font variables
 $primary_font_light:  'ITC-Avant-Garde-Gothic-Pro_Light';
@@ -124,9 +125,41 @@ section.error-404 {
     }
 }
 
+.breadcrumb {
+    padding: 28px 0;
+    background-color: #99D6E9;
+    .breadcrumb-list {
+        max-width: 1054px;
+        list-style: none;
+        display: flex;
+        gap: 6px;
+        margin: 0 auto;
+        padding: 0 15px;
+        line-height: 1;
+        li {
+            color: $dv_dark;
+            font-size: 0.875rem;
+            font-family: $primary_font_bold;
+            a {
+                color: $dv_dark;
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            }
+        }
+        .arrow {
+            margin-top: -2px;
+            color: $dv_dark;
+            font-family: $primary_font_bold;
+        }
+    }
+}
+
 @media only screen and (max-width: 1400px) {
     .container {
         max-width: 1266px;
+    }
+    .breadcrumb {
+        padding: 18px 0;
     }
 }
 
