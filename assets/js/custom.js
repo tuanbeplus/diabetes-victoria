@@ -1,4 +1,5 @@
-jQuery(document).ready(function ($) {
+!(function($){
+	"use strict";
 
     // Accordion
     function DV_Accordion() {
@@ -63,7 +64,6 @@ jQuery(document).ready(function ($) {
 
         });
     }
-    DV_Accordion();
 
     // Carousel
     function DV_Carousel() {
@@ -75,11 +75,30 @@ jQuery(document).ready(function ($) {
 
         $.each(carousel, function () {
             $(this).slick($(this).data('carousel'));
+            $(this).show();
         });
     }
-    DV_Carousel();
 
+    // Carousel Dots Custom
+    function DV_Carousel_Dots_Custom() {
+        var carousel = $('.js-carousel');
 
+        $.each(carousel, function () {
+            $(this).find('.slick-dots-custom li').each(function(){
+                $(this).find('button').html('<span>' + $(this).find('button').attr('aria-label') + '</span>');
+            });
+        });
+    }
+
+    jQuery(document).ready(function ($) {
+        DV_Accordion();
+        DV_Carousel();
+        DV_Carousel_Dots_Custom();
     
+    });
 
-});
+    jQuery(window).on('resize', function() {
+        DV_Carousel_Dots_Custom();
+    });
+
+})(jQuery);

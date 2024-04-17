@@ -1,0 +1,142 @@
+.bespoke-slider-section {
+    background-color: $dv_black;
+    padding: 0 0 90px;
+    .container {
+        max-width: 1446px; 
+    }
+}
+.bespoke-slider-wrapper { 
+    .bespoke-slider-heading-wrap {
+        max-width: 1336px;
+        margin: 0 auto 90px;
+    }
+    .bespoke-slider-heading {
+        font-family: $primary_font_bold;
+        font-size: 1.688rem;
+        font-weight: normal;
+        line-height: 1;
+        color: #fff;
+        background: $primary_color;
+        display: inline-block;
+        min-width: 230px;
+        text-align: center;
+        padding: 26px 30px 22px;
+        margin: 0;
+    }
+    .carousel-wrapper {
+        @extend .__carousel-navigation-style;
+        .slick-list {
+            position: relative;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 60px;
+            &:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: calc(100% + 120px);
+                height: 7px;
+                background: #fff;
+                border-radius: 10px;
+                transform: translate(-50%, -50%);
+            }
+            .carousel-item {
+                &:not(.slick-active) {
+                    opacity: 0;
+                }
+                &:nth-child(2n) {
+                    .bespoke-item {
+                        margin-top: 360px;
+                        margin-bottom: 0;
+                        &:before {
+                            top: -78px;
+                            bottom: auto;
+                            height: 105px;
+                        }
+                        &:after {
+                            top: -90px;
+                            bottom: auto;
+                        }
+                        &:not(.has-thumbnail) {
+                            padding-top: 35px;
+                        }
+                        &--inner {
+                            top: auto;
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+            .bespoke-item {
+                position: relative;
+                width: 100%;
+                margin-bottom: 360px;
+                z-index: 1;
+                &:not(.has-thumbnail) {
+                    padding-top: 90px;
+                }
+                &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: -78px;
+                    left: calc(50% - 1px);
+                    width: 2px;
+                    height: 70px;
+                    background: #fff;
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: -90px;
+                    left: calc(50% - 12px);
+                    width: 24px;
+                    height: 24px;
+                    background: #fff;
+                    border-radius: 50px;
+                }
+                &--inner {
+                    font-size: 14px;
+                    color: #fff;
+                    max-width: 200px;
+                    margin: 0 -35%;
+                }
+                &--thumbnail {
+                    position: relative;
+                    width: 90px;
+                    height: 90px;
+                    margin: 0 auto;
+                    overflow: hidden;
+                    border-radius: 100px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                &--year {
+                    font-family: $primary_font_bold;
+                }
+                &--desc {
+                    overflow: hidden;
+                    width: 100%;
+                    height: 90px;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                }
+            }
+        }
+        
+    }
+    @media(max-width: 767.98px) {
+        
+    }
+    @media(max-width: 420px) {
+        .carousel-wrapper {
+            .slick-list {
+                padding: 0 40px;
+            }
+        }
+    }
+}

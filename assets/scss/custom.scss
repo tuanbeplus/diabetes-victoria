@@ -2,5 +2,123 @@
 @import "_common";
 @import "_fonts";
 
+
+.__carousel-navigation-style {
+    display: none;
+    position: relative;
+    padding: 0 85px;
+    .slick-arrow {
+        position: absolute;
+        top: calc(50% - 40px);
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        font-size: 0;
+        line-height: 0;
+        background: $primary_color;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        transform: translateY(-50%);
+        &:before {
+            font-family: FontAwesome;
+            content: "\f0d9";
+            font-size: 32px; 
+            color: #fff;
+        }
+        &.slick-next  {
+            left: auto;
+            right: 0;
+            &:before {
+                content: "\f0da"; 
+            }
+        }
+        &.slick-disabled {
+            opacity: 0.25;
+            cursor: default;
+        }
+    }
+    .slick-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        list-style: none;
+        margin: 50px 0 0;
+        padding: 0;
+        .slick-active {
+            button {
+                opacity: 1;
+                cursor: auto;
+            }
+        }
+        button {
+            font-size: 0;
+            line-height: 0;
+            width: 12px;
+            height: 12px;
+            background: $primary_color;
+            opacity: 0.25;
+            padding: 0;
+            border: none;
+            border-radius: 100px;
+        }
+    }
+    .slick-dots-custom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        margin: 50px 0 0;
+        padding: 0;
+        li {
+            margin: 0;
+            padding: 0;
+        }
+        .slick-active {
+            button {
+                display: block;
+                cursor: auto;
+            }
+        }
+        button {
+            font-family: $primary_font_bold;
+            font-size: 24px;
+            color: $primary_color;
+            background-color: transparent;
+            display: none;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+        }
+    }
+    @media(max-width: 1023.98px) {
+        padding: 0 60px;
+        .slick-arrow {
+            width: 45px;
+            height: 45px;
+            &:before {
+                font-size: 24px;
+            }
+        }
+    }
+    @media(max-width: 767.98px) {
+        padding: 0 50px;
+        .slick-arrow {
+            width: 35px;
+            height: 35px;
+            &:before {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
 @import "partials/modules/_faqs"; 
 @import "partials/modules/_icon-promo-carousel"; 
+@import "partials/modules/_media-slider"; 
+@import "partials/modules/_bespoke-slider"; 
+@import "partials/modules/_contact-us";
