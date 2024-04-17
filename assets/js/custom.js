@@ -75,6 +75,12 @@ jQuery(document).ready(function ($) {
 
         $.each(carousel, function () {
             $(this).slick($(this).data('carousel'));
+            
+            $(this).find('.slick-dots-custom li').each(function(){
+                $(this).find('button').html($(this).find('button').attr('aria-label'));
+            });
+            
+            $(this).show();
         });
     }
     DV_Carousel();

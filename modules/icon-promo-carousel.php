@@ -9,6 +9,8 @@ if( get_row_layout() != 'icon_promo_carousel' ) {
 }
 
 $heading = get_sub_field('heading');
+$link_text = get_sub_field('link_text');
+$link_url = get_sub_field('link_url');
 $list_item = get_sub_field('list_item');
 
 if (empty($heading) && empty($list_item)) {
@@ -18,12 +20,13 @@ if (empty($heading) && empty($list_item)) {
 $carousel_data = array();
 $carousel_data['infinite'] = false;
 $carousel_data['slidesToShow'] = 3;
-$carousel_data['slidesToScroll'] = 1;
+$carousel_data['slidesToScroll'] = 3;
 $carousel_data['accessibility'] = true;
 $carousel_data['autoplay'] = false;
 $carousel_data['autoplaySpeed'] = 2000;
 $carousel_data['arrows'] = true;
 $carousel_data['dots'] = true;
+$carousel_data['dotsClass'] = 'slick-dots-custom';
 $carousel_data['pauseOnFocus'] = true;
 $carousel_data['pauseOnHover'] = true;
 $carousel_data['responsive'] = array(
@@ -47,11 +50,20 @@ $carousel_json = json_encode($carousel_data);
 <section class="ipro-carousel-section">
     <div class="container">
         <div class="ipro-carousel-wrapper">
-            <?php if(!empty($heading)) { ?>
-                <h1 class="ipro-heading">
-                    <?php echo $heading; ?>
-                </h1>
-            <?php } ?>
+            <div class="ipro-heading-wrap">
+                <?php if(!empty($heading)) { ?>
+                    <h1 class="ipro-heading">
+                        <?php echo $heading; ?>
+                    </h1>
+                <?php } ?>
+                <?php if(!empty($link_url)) { ?>
+                    <div class="ipro-link">
+                        <a href="<?php echo esc_url($link_url); ?>" class="ipro-find-out-more">
+                            <?php echo !empty($link_text) ? $link_text : __('Find out more', 'diabetes-victoria'); ?>
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
 
             <?php if(!empty($list_item)) { ?>
                 <div class="carousel-wrapper js-carousel" data-carousel="<?php echo esc_attr($carousel_json); ?>">
