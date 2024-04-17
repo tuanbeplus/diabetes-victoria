@@ -13,6 +13,13 @@
  */
 
 get_header(); 
+    if (is_singular() && !is_front_page()) {
+        echo '<section class="post-title">
+                <div class="container">
+                    <h1>'. get_the_title() .'</h1>
+                </div>
+            </section>';
+    }
     // check if the flexible content field has rows of data
     if( have_rows('page_builder') ):
         // loop through the rows of data
@@ -25,6 +32,9 @@ get_header();
             get_template_part('modules/partner-logos');
             get_template_part('modules/faqs');
             get_template_part('modules/icon-promo-carousel');
+            get_template_part('modules/media-slider');
+            get_template_part('modules/bespoke-slider');
+            get_template_part('modules/main-content');
 
         endwhile;
 

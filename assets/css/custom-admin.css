@@ -5,3 +5,6 @@
 .acf-field[data-name=cards_list] .acf-field[data-name=card] .acf-editor-wrap iframe {
     height: 150px!important;
 }
+.layout[data-layout=main_content] .acf-field[data-name=content_editor] .acf-editor-wrap iframe {
+    height: 500px!important;
+}

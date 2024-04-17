@@ -77,6 +77,8 @@ header.site-header {
         }
 
         li {
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -211,9 +213,12 @@ header.site-header {
             color: $dv_white;
             font-size: 1.25rem;
             background-color: $secondary_color;
-        }
-        #btn-donate:hover {
-            background-color: $primary_color;
+            &:hover {
+                background-color: $primary_color;
+            }
+            &.active {
+                z-index: 100;
+            }
         }
         
         #btn-languages {
@@ -318,10 +323,11 @@ nav#site-navigation {
         }
         .sub-menu {
             display: none;
+            margin: 0;
             padding: 6px 16px 0;
             position: absolute;
             transform: translateY(100%);
-            bottom: 6px;
+            bottom: 1px;
             background-color: $primary_color;
             transition: all 0.3s;
             z-index: 10;
@@ -341,48 +347,149 @@ nav#site-navigation {
     height: 100%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.8);
+    &.show {
+        display: block;
+    }
     .donate-wrapper {
-        margin: 100px auto 0;
+        display: none;
+        position: relative;
+        margin: 80px auto 0;
         padding: 70px 40px 60px;
-        max-width: 1200px;
         background-color: $donate_color;
         p {
             margin-top: 0;
+            color: #fff;
+            font-family: $primary_font_demi!important;
+            a {
+                color: #fff;
+                text-decoration: underline;
+                font-family: $primary_font_demi!important;
+            }
         }
-        .amount-options {
+        
+        #btn-close-donate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             display: flex;
-            gap: 28px;
-            .amounts-list {
+            padding: 0;
+            align-items: center;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: all 0.2s;
+            &:hover {
+                .close-icon {
+                    background-color: #fff;
+                }
+            }
+            .close-icon {
+                margin-left: 6px;
+                width: 38px;
+                height: 36px;
+                padding: 6px;
+                font-size: 22px;
+                line-height: 1;
+                background-color: #99D6E9;
+                color: $donate_color;
+            }
+        }
+        form {
+            margin: auto;
+            max-width: 1200px;
+            fieldset {
+                margin: 0;
+                padding: 0;
+                border: none;
+                legend {
+                    margin-bottom: 20px;
+                    color: #fff;
+                    font-family: $primary_font_demi!important;
+                }
+            }
+            .amount-options {
+                margin-bottom: 26px;
                 display: flex;
-                gap: 36px;
-                label {
+                justify-content: space-between;
+                gap: 28px;
+                .amounts-list {
+                    display: flex;
+                    gap: 36px;
+                    label {
+                        display: flex;
+                        align-items: center;
+                        padding: 10px 24px 8px;
+                        font-size: 1rem;
+                        line-height: 1;
+                        font-family: $primary_font_bold;
+                        color: #fff;
+                        background-color: transparent;
+                        border: 2px solid #fff;
+                        transition: all 0.3s;
+                        &:focus-within {
+                            color: $donate_color;
+                            background-color: #fff;
+                        }
+                    }
+                    input[type=radio] {
+                        display: none;
+                    }
+                    input[type="radio"]:checked + label {
+                        color: $donate_color;
+                        background-color: #fff;
+                    }
+                }
+                input#other-amount {
+                    width: 100%;
+                    max-width: 292px;
+                    height: 38px;
+                    padding: 10px 12px 8px;
+                    font-size: 1rem;
+                    color: #fff;
+                    border: 2px solid #fff;
+                    background-color: #4F9BCE;
+                    font-family: $primary_font_bold;
+                    &::placeholder {
+                        font-family: $primary_font_medium;
+                        color: #fff;
+                    }
+                }
+                #btn-regular-gift {
                     display: inline-block;
-                    padding: 10px 24px 8px;
+                    padding: 10px 26px 8px;
                     font-size: 1rem;
                     line-height: 1;
                     font-family: $primary_font_bold;
                     color: #fff;
-                    background-color: transparent;
                     border: 2px solid #fff;
-                    transition: all 0.3s;
+                    background-color: $donate_color;
+                    transition: all 0.2s;
                     &:hover {
                         color: $donate_color;
                         background-color: #fff;
                     }
                 }
-                input[type=radio] {
-                    display: none;
-                }
             }
-            input#other-amount {
-                width: 100%;
-                max-width: 292px;
-                height: 38px;
-                padding: 8px 12px;
-                font-size: 1rem;
-                color: #fff;
-                border: 2px solid #fff;
-                background-color: #4F9BCE;
+            .form-footer {
+                display: flex;
+                justify-content: space-between;
+                #btn-continue-donate {
+                    padding: 10px 22px 8px;
+                    font-size: 1rem;
+                    line-height: 1;
+                    font-family: $primary_font_bold;
+                    color: $donate_color;
+                    border: 2px solid #fff;
+                    background-color: #fff;
+                    transition: all 0.3s;
+                    &:hover {
+                        color: #fff;
+                        background-color: $donate_color;
+                    }
+                }
             }
         }
     }

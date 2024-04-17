@@ -47,6 +47,7 @@ function dv_breadcrumb() {
 	global $post;
     $arrow_right = '<span class="arrow"> > </span>';
 	if ( ! is_front_page() ) {
+		if (is_404()) return;
         echo '<nav aria-label="Breadcrumbs" class="breadcrumb">';
         echo '	<ol class="breadcrumb-list">';
 		echo '		<li><a href="' . site_url() . '">Home</a></li> '.$arrow_right;
@@ -71,4 +72,29 @@ function dv_breadcrumb() {
         echo '	</ol>';
         echo '</nav>';
 	}
+}
+
+
+/**
+ * Remove attributes from tags in HTML string
+ * 
+ * @param string $html_string    HTML string
+ *
+ * @return string Clean HTML string
+ * 
+ */
+function dv_clean_html_content_editor($html_string) {
+    $clean_html = preg_replace_callback(
+        '/<(table|tbody|tr|th|td|p|ul|ol|script)([^>]*)>/',
+        function ($matches) {
+            // For <script> tags, return an empty string to remove them completely
+            if ($matches[1] === 'script') {
+                return '';
+            } else {
+                return "<{$matches[1]}>";
+            }
+        },
+        $html_string
+    );
+    return $clean_html;
 }
