@@ -35,7 +35,7 @@
           position: absolute;
           right: 15px;
           top: 12px;
-          color: $dv_black;
+          color: $primary_color;
           transition: all .3s;
         }
         h5 {
@@ -67,5 +67,10 @@
         height: 0;
         overflow: hidden;
       }
+  }
+  @media(max-width: 767.98px) {
+    .faqs-heading {
+        font-size: 1.8rem;
+    }
   }
 }

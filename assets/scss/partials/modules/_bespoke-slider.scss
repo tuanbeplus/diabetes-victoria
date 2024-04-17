@@ -132,4 +132,11 @@
     @media(max-width: 767.98px) {
         
     }
+    @media(max-width: 420px) {
+        .carousel-wrapper {
+            .slick-list {
+                padding: 0 40px;
+            }
+        }
+    }
 }

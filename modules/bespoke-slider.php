@@ -63,13 +63,6 @@ $carousel_data['responsive'] = array(
             'slidesToScroll' => 2
         )
     ),
-    array(
-        'breakpoint' => 420,
-        'settings' => array(
-            'slidesToShow' => 1,
-            'slidesToScroll' => 1
-        )
-    ),
 );
 
 $carousel_json = json_encode($carousel_data);

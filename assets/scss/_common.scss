@@ -75,6 +75,39 @@ p , li {
     font-family: $primary_font_medium;
 }
 
+p {
+    margin: 20px 0;
+    font-size: 0.875rem;
+    line-height: 142%;
+}
+
+ul, ol {
+    margin: 24px 0;
+    padding-left: 16px;
+}
+
+li {
+    margin-bottom: 4px;
+    padding-left: 6px;
+    font-size: 0.875rem;
+    line-height: 142%;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+ul {
+    li {
+        &::marker {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+strong, b {
+    font-family: $primary_font_bold;
+}
+
 a {
     text-decoration: none;
 }
@@ -137,6 +170,8 @@ section.error-404 {
         padding: 0 15px;
         line-height: 1;
         li {
+            margin: 0;
+            padding: 0;
             color: $dv_dark;
             font-size: 0.875rem;
             font-family: $primary_font_bold;
@@ -147,10 +182,21 @@ section.error-404 {
             }
         }
         .arrow {
-            margin-top: -2px;
             color: $dv_dark;
             font-family: $primary_font_bold;
         }
+    }
+}
+
+section.post-title {
+    padding: 50px 0;
+    .container {
+        max-width: 1054px;
+    }
+    h1 {
+        margin: 0;
+        max-width: 660px;
+        color: $primary_color;
     }
 }
 

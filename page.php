@@ -35,6 +35,7 @@ get_header();
             get_template_part('modules/media-slider');
             get_template_part('modules/bespoke-slider');
             get_template_part('modules/main-content');
+            get_template_part('modules/contact-us');
 
         endwhile;
 
