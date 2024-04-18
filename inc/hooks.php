@@ -21,3 +21,4 @@ function dv_custom_search_query($query) {
   }
 }
 add_action('pre_get_posts', 'dv_custom_search_query');
+

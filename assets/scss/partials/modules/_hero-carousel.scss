@@ -90,44 +90,49 @@
             }
         }
     }
-    .slick-dots {
-        width: 100%;
-        right: 0;
-        left: 0;
-        bottom: 50px;
-        position: absolute;
-        display: flex;
-        gap: 8px;
-        list-style: none;
-        li {
-            button {
-                width: 22px;
-                height: 22px;
-                color: transparent;
-                background-color: transparent;
-                border: 2px solid #fff;
-                border-radius: 50%;
-            }
-            &.slick-active {
+    .carousel-wrapper {
+        .slick-dots {
+            width: 100%;
+            right: 0;
+            left: 0;
+            bottom: 50px;
+            position: absolute;
+            display: flex;
+            gap: 10px;
+            justify-content: left;
+            list-style: none;
+            li {
+                margin: 0;
+                padding: 0;
                 button {
-                    background-color: #fff;
+                    width: 22px;
+                    height: 22px;
+                    color: transparent;
+                    background-color: transparent;
+                    border: 2px solid #fff;
+                    border-radius: 50%;
+                }
+                &.slick-active {
+                    button {
+                        background-color: #fff;
+                    }
                 }
             }
         }
-    }
-    .slick-prev {
-        position: absolute;
-        z-index: 1;
-        bottom: 50%;
-        transform: translateY(-50%);
-        left: 0;
-    }
-    .slick-next {
-        position: absolute;
-        z-index: 1;
-        bottom: 50%;
-        transform: translateY(-50%);
-        right: 0;
+        .slick-prev {
+            position: absolute;
+            z-index: 1;
+            bottom: 50%;
+            transform: translateY(-50%);
+            left: 0;
+        }
+        .slick-next {
+            position: absolute;
+            z-index: 1;
+            bottom: 50%;
+            transform: translateY(-50%);
+            right: 0;
+        }
     }
 }
 

@@ -131,9 +131,11 @@
         bottom: 32px;
         position: absolute;
         display: flex;
-        gap: 8px;
+        gap: 10px;
         list-style: none;
         li {
+            margin: 0;
+            padding: 0;
             button {
                 width: 22px;
                 height: 22px;
