@@ -1,6 +1,16 @@
 // Key Cards style
 .key-cards {
-    padding: 68px 0;
+    background-color: var(--s-bg-color);
+    padding-top: var(--s-pd-top, 70px);
+    padding-bottom: var(--s-pd-bottom, 70px);
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 70px) * 0.75);
+        padding-bottom: calc(var(--s-pd-bottom, 70px) * 0.75);
+    }
+    @media(max-width: 768px) {
+        padding-top: calc(var(--s-pd-top, 70px) * 0.5);
+        padding-bottom: calc(var(--s-pd-bottom, 70px) * 0.5);
+    }
     .cards-list {
         max-width: 1024px;
         margin: auto;
@@ -136,7 +146,6 @@
 
 @media only screen and (max-width: 768px) {
     .key-cards {
-        padding: 40px 0;
         .cards-list {
             gap: 16px;
             .card {

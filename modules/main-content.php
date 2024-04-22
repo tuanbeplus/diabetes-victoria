@@ -21,10 +21,6 @@ if( get_row_layout() == 'main_content' ):
     $aib_visibility = $additional_info_boxes['visibility'];
     $aib_list = $additional_info_boxes['info_boxes'];
 
-    // Style
-    $padding = get_sub_field('padding');
-    $background_color = get_sub_field('background_color');
-
     if (!empty($banner_image) || !empty($content_editor)):
         ?>
         <section class="main-content">
@@ -87,14 +83,22 @@ if( get_row_layout() == 'main_content' ):
                     </div><!-- .Sidebar -->
                 <?php endif; ?>
             </div>
-            <style>
-                section.main-content {
-                    --padding-top: <?php echo $padding['top'].'px' ?? '' ?>;
-                    --padding-bottom: <?php echo $padding['bottom'].'px' ?? '' ?>;
-                    --background-color: <?php echo $background_color ?? '' ?>;
-                }
-            </style>
         </section>
         <?php
+        // Style
+        $bg_color = get_sub_field('background_color');
+        $bg_color = !empty($bg_color) ? $bg_color : '';
+        $pd_top = get_sub_field('padding_top');
+        $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
+        $pd_bottom = get_sub_field('padding_bottom');
+        $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
+        
+        echo '<style>
+                section.main-content {
+                    --s-bg-color: ' . $bg_color . ';
+                    --s-pd-top: ' . $pd_top . ';
+                    --s-pd-bottom: ' . $pd_bottom . ';
+                }
+            </style>';
     endif;
 endif;

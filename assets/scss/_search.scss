@@ -370,3 +370,32 @@ form.search-form {
         }
     }
 }
+
+/*************************** Tablet **************************/
+@media only screen and (max-width: 1024px) {
+    .global-search-wrapper {
+        .search-header {
+            img.site-logo {
+                width: 150px;
+            }
+        }
+        form.search-form {
+            margin: 10vh auto auto;
+            input[type=search] {
+                padding: 16px 20px 14px;
+                font-size: 1rem;
+            }
+            button.search-submit-btn {
+                padding: 12px 20px;
+            }
+        }
+        #btn-close-search {
+            font-size: 1rem;
+            .close-icon {
+                width: 36px;
+                height: 34px;
+                padding: 8px;
+            }
+        }
+    }
+}

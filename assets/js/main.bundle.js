@@ -58,11 +58,13 @@ jQuery(document).ready(function ($) {
     }
 
     // Sticky sidebar
-    var sibar_scroll_offset = $('#main-content-sidebar').offset().top - $('#content.site-content').offset().top;
-    if ($(window).scrollTop() > sibar_scroll_offset) {
-      $('#main-content-sidebar').addClass('sticky');
-    } else {
-      $('#main-content-sidebar').removeClass('sticky');
+    if ($('#main-content-sidebar').length > 0) {
+      var sibar_scroll_offset = $('#main-content-sidebar').offset().top - $('#content.site-content').offset().top;
+      if ($(window).scrollTop() > sibar_scroll_offset) {
+        $('#main-content-sidebar').addClass('sticky');
+      } else {
+        $('#main-content-sidebar').removeClass('sticky');
+      }
     }
   }
 

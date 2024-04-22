@@ -1,6 +1,15 @@
 .partner-logos {
-    padding: 90px 0;
-    background-color: #fff;
+    background-color: var(--s-bg-color, #fff);
+    padding-top: var(--s-pd-top, 90px);
+    padding-bottom: var(--s-pd-bottom, 90px);
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 90px) * 0.75);
+        padding-bottom: calc(var(--s-pd-bottom, 90px) * 0.75);
+    }
+    @media(max-width: 425px) {
+        padding-top: calc(var(--s-pd-top, 90px) * 0.5);
+        padding-bottom: calc(var(--s-pd-bottom, 90px) * 0.5);
+    }
     .logos {
         margin: auto;
         max-width: 1100px;
@@ -38,7 +47,6 @@
 /*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
     .partner-logos {
-        padding: 60px 0;
         .logos {
             column-gap: 100px;
             row-gap: 60px;
@@ -67,7 +75,6 @@
 /*************************** Mobile **************************/
 @media only screen and (max-width: 425px) {
     .partner-logos {
-        padding: 40px 0;
         .logos {
             column-gap: 40px;
             row-gap: 40px;

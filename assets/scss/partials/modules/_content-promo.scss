@@ -1,169 +1,185 @@
 // Promo module
 .content-promo {
-    background-color: $primary_color;
-    .carousel-item {
-        .carousel-inner {
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            gap: 80px;
-            .carousel-content {
-                color: #fff;
-
-                .main-content {
-                    display: flex;
-                    gap: 80px;
-                    margin-top: 48px;
-                    max-width: 700px;
-                    .col-left {
-                        max-width: 380px;
-                    }
-                }
-                .landing-page {
-                    .cta-btn {
-                        display: inline-block;
-                        padding: 26px 38px 22px;
-                        font-size: 1.688rem;
-                        line-height: 1;
-                        color: $primary_color;
-                        background-color: #fff;
-                        font-family: $primary_font_bold;
-                        border: 2px solid #fff;
-                        border-top: none;
-                        transition: all 0.3s;
-                    }
-                }
-                .title {
-                    margin: 0;
-                    font-size: 2.313rem;
-                    line-height: 115%;
-                }
-                .description {
-                    font-size: 0.875rem;
-                    line-height: 140%;
+    background-color: var(--s-bg-color);
+    padding-top: var(--s-pd-top, 60px);
+    padding-bottom: var(--s-pd-bottom, 60px);
+    @media(max-width: 768px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
+    }
+    .carousel-wrapper {
+        background-color: $primary_color;
+        .carousel-item {
+            &:not(:first-child) {
+                display: none;
+            }
+            &.slick-slide {
+                display: block;
+            }
+            .item-inner {
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                gap: 80px;
+                .item-content {
                     color: #fff;
-                }
-                .group-cta {
-                    margin-top: 32px;
-                    display: flex;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 26px;
-                    .primary-cta {
-                        display: block;
-                        padding: 12px 26px 10px;
-                        font-size: 1.125rem;
-                        font-family: $primary_font_bold;
-                        line-height: 1;
-                        background-color: #fff;
-                        border: 2px solid #fff;
-                        transition: all 0.4s;
+    
+                    .main-content {
+                        display: flex;
+                        gap: 80px;
+                        margin-top: 48px;
+                        max-width: 700px;
+                        .col-left {
+                            max-width: 380px;
+                        }
                     }
-                    .secondary-cta {
-                        position: relative;
-                        display: block;
-                        font-size: 1.125rem;
-                        font-family: $primary_font_bold;
-                        line-height: 1;
-                        color: #fff;
-                        border-bottom: 2px solid #fff;
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            width: 100%;
-                            transform: scaleX(0);
-                            height: 2px;
-                            bottom: -2px;
-                            left: 0;
+                    .landing-page {
+                        .cta-btn {
+                            display: inline-block;
+                            padding: 26px 38px 22px;
+                            font-size: 1.688rem;
+                            line-height: 1;
+                            color: $primary_color;
                             background-color: #fff;
-                            transform-origin: bottom right;
-                            transition: transform 0.4s ease-out;
-                        }
-                        &:hover {
-                            border-color: transparent!important;
-                            &::after {
-                                transform: scaleX(1);
-                                transform-origin: bottom left;
-                            }
+                            font-family: $primary_font_bold;
+                            border: 2px solid #fff;
+                            border-top: none;
+                            transition: all 0.3s;
                         }
                     }
-                }
-                .additional-content {
-                    width: 100%;
-                    min-width: 180px;
-                    max-width: 300px;
-                    h3 {
-                        margin-top: 4px;
-                        font-size: 1rem;
-                    }
-                    ul {
+                    .title {
                         margin: 0;
-                        padding: 0;
-                        li {
-                            margin-bottom: 6px;
-                            list-style: none;
-                            font-size: 0.875rem;
-                            a {
-                                color: #fff;
-                                text-decoration: underline;
-                                text-underline-offset: 2px;
+                        font-size: 2.313rem;
+                        line-height: 115%;
+                    }
+                    .description {
+                        font-size: 0.875rem;
+                        line-height: 140%;
+                        color: #fff;
+                    }
+                    .group-cta {
+                        margin-top: 32px;
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 26px;
+                        .primary-cta {
+                            display: block;
+                            padding: 12px 26px 10px;
+                            font-size: 1.125rem;
+                            font-family: $primary_font_bold;
+                            line-height: 1;
+                            background-color: #fff;
+                            border: 2px solid #fff;
+                            transition: all 0.4s;
+                        }
+                        .secondary-cta {
+                            position: relative;
+                            display: block;
+                            font-size: 1.125rem;
+                            font-family: $primary_font_bold;
+                            line-height: 1;
+                            color: #fff;
+                            border-bottom: 2px solid #fff;
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                width: 100%;
+                                transform: scaleX(0);
+                                height: 2px;
+                                bottom: -2px;
+                                left: 0;
+                                background-color: #fff;
+                                transform-origin: bottom right;
+                                transition: transform 0.4s ease-out;
+                            }
+                            &:hover {
+                                border-color: transparent!important;
+                                &::after {
+                                    transform: scaleX(1);
+                                    transform-origin: bottom left;
+                                }
+                            }
+                        }
+                    }
+                    .additional-content {
+                        width: 100%;
+                        min-width: 180px;
+                        max-width: 300px;
+                        h3 {
+                            margin-top: 4px;
+                            font-size: 1rem;
+                        }
+                        ul {
+                            margin: 0;
+                            padding: 0;
+                            li {
+                                margin-bottom: 6px;
+                                list-style: none;
+                                font-size: 0.875rem;
+                                a {
+                                    color: #fff;
+                                    text-decoration: underline;
+                                    text-underline-offset: 2px;
+                                }
                             }
                         }
                     }
                 }
-            }
-            .carousel-img {
-                position: relative;
-                width: 100%;
-                max-width: 620px;
-                margin-bottom: -2px;
-                img.main-img {
+                .item-img {
                     position: relative;
-                    z-index: 2;
+                    width: 100%;
+                    max-width: 620px;
+                    margin-bottom: -2px;
+                    img.main-img {
+                        position: relative;
+                        z-index: 2;
+                        margin: -154px 0 -64px;
+                    }
                 }
             }
         }
-    }
-    .slick-dots {
-        width: 100%;
-        right: 0;
-        left: 0;
-        bottom: 32px;
-        position: absolute;
-        display: flex;
-        gap: 10px;
-        list-style: none;
-        li {
-            margin: 0;
-            padding: 0;
-            button {
-                width: 22px;
-                height: 22px;
-                color: transparent;
-                background-color: transparent;
-                border: 2px solid #fff;
-                border-radius: 50%;
-            }
-            &.slick-active {
+        .slick-dots {
+            width: 100%;
+            right: 0;
+            left: 0;
+            bottom: 32px;
+            position: absolute;
+            display: flex;
+            gap: 10px;
+            list-style: none;
+            li {
+                margin: 0;
+                padding: 0;
                 button {
-                    background-color: #fff;
+                    width: 22px;
+                    height: 22px;
+                    color: transparent;
+                    background-color: transparent;
+                    border: 2px solid #fff;
+                    border-radius: 50%;
+                }
+                &.slick-active {
+                    button {
+                        background-color: #fff;
+                    }
                 }
             }
         }
-    }
-    .slick-prev {
-        position: absolute;
-        z-index: 1;
-        bottom: 50%;
-        transform: translateY(-50%);
-        left: 0;
-    }
-    .slick-next {
-        position: absolute;
-        z-index: 1;
-        bottom: 50%;
-        transform: translateY(-50%);
-        right: 0;
+        .slick-prev {
+            position: absolute;
+            z-index: 1;
+            bottom: 50%;
+            transform: translateY(-50%);
+            left: 0;
+        }
+        .slick-next {
+            position: absolute;
+            z-index: 1;
+            bottom: 50%;
+            transform: translateY(-50%);
+            right: 0;
+        }
     }
 }
 
@@ -171,15 +187,12 @@
 @media only screen and (max-width: 1440px) {
     .content-promo {
         .carousel-item {
-            .carousel-inner {
+            .item-inner {
                 gap: 50px;
-                .carousel-content {
+                .item-content {
                     .main-content {
                         gap: 40px;
                     }
-                }
-                .carousel-img {
-                    max-width: 520px;
                 }
             }
         }

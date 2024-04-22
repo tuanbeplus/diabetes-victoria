@@ -53,9 +53,9 @@ if( get_row_layout() == 'content_promo' ):
                         $links_list = $item['additional_links']['links_list'];
                         ?>
                         <div class="carousel-item item-<?php echo $id; ?>" style="background-color:<?php echo $background_color; ?>">
-                            <div class="carousel-inner container">
+                            <div class="item-inner container">
                                 <!-- Carousel content -->
-                                <div class="carousel-content">
+                                <div class="item-content">
                                     <?php if ($landing_page['page_name'] && $landing_page['page_link']): ?>
                                         <div class="landing-page">
                                             <a class="cta-btn" href="<?php echo $landing_page['page_link']; ?>" role="button">
@@ -113,7 +113,7 @@ if( get_row_layout() == 'content_promo' ):
 
                                 <?php if ($image && $image['url']): ?>
                                     <!-- Carousel image -->
-                                    <div class="carousel-img">
+                                    <div class="item-img">
                                         <img class="main-img" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>" loading="lazy">
                                     </div><!-- .Carousel image -->
                                 <?php endif; ?>
@@ -177,5 +177,20 @@ if( get_row_layout() == 'content_promo' ):
             });
             </script>
         <?php endif;
+        // Style
+        $bg_color = get_sub_field('background_color');
+        $bg_color = !empty($bg_color) ? $bg_color : '';
+        $pd_top = get_sub_field('padding_top');
+        $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
+        $pd_bottom = get_sub_field('padding_bottom');
+        $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
+        
+        echo '<style>
+                section.content-promo {
+                    --s-bg-color: ' . $bg_color . ';
+                    --s-pd-top: ' . $pd_top . ';
+                    --s-pd-bottom: ' . $pd_bottom . ';
+                }
+            </style>';
     endif;
 endif;
