@@ -21,7 +21,7 @@ $button_link = get_sub_field('button_link');
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="574px" height="631px" viewBox="0 0 574 631" version="1.1">
             <path d="M286.688536,0 L286.577902,0 C128.301435,0 0,121.530741 0,271.455998 L0,271.511321 C0,391.472273 82.1668526,493.176643 196.092718,529.081253 C209.81831,534.620466 221.158345,543.126373 216.138305,564.978947 L200.960636,631 L253.518933,586.292122 C271.780539,570.953828 305.973511,547.904894 336.978826,538.721281 C471.275268,516.197916 573.321755,405.171624 573.321755,271.511321 L573.321755,271.455998 C573.321755,121.530741 444.971918,0 286.688536,0" id="path-1"/>
         </svg>
-        
+
         <div class="ctu-wrapper">
             <?php if(!empty($heading)) { ?>
                 <h2 class="ctu-heading">
@@ -66,3 +66,19 @@ $button_link = get_sub_field('button_link');
         </div>
     </div>
 </section>
+
+<?php 
+$bg_color = get_sub_field('background_color');
+$bg_color = $bg_color ? $bg_color : '#019BC2';
+$pd_top = get_sub_field('padding_top');
+$pd_top = $pd_top ? $pd_top . 'px' : '60px';
+$pd_bottom = get_sub_field('padding_bottom');
+$pd_bottom = $pd_bottom ? $pd_bottom . 'px' : '60px';
+
+echo '<style>
+        .contact-us-section {
+            --s-bg-color: ' . $bg_color . ';
+            --s-pd-top: ' . $pd_top . ';
+            --s-pd-bottom: ' . $pd_bottom . ';
+        }
+    </style>';

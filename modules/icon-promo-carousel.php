@@ -94,3 +94,19 @@ $carousel_json = json_encode($carousel_data);
         </div>
     </div>
 </section>
+
+<?php 
+$bg_color = get_sub_field('background_color');
+$bg_color = $bg_color ? $bg_color : '#F5FBFD';
+$pd_top = get_sub_field('padding_top');
+$pd_top = $pd_top ? $pd_top . 'px' : '60px';
+$pd_bottom = get_sub_field('padding_bottom');
+$pd_bottom = $pd_bottom ? $pd_bottom . 'px' : '60px';
+
+echo '<style>
+        .ipro-carousel-section {
+            --s-bg-color: ' . $bg_color . ';
+            --s-pd-top: ' . $pd_top . ';
+            --s-pd-bottom: ' . $pd_bottom . ';
+        }
+    </style>';
