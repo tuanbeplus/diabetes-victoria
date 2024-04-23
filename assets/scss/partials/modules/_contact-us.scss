@@ -24,9 +24,12 @@
         z-index: -1;
         transform: rotate(2deg);
     }
+    .container {
+        max-width: 1054px; 
+    }
     .ctu-wrapper {
-        width: 62%;
-        max-width: 820px;
+        width: 75%;
+        max-width: 768px;
         .ctu-content-wrap {
             display: flex;
             flex-wrap: wrap;
@@ -45,7 +48,7 @@
             margin: 0 0 10px;
         }
         .ctu-content {
-            max-width: 260px; 
+            max-width: 263px; 
             color: #fff;
             > * {
                 font-family: inherit;

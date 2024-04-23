@@ -8,8 +8,11 @@
   }
 }
 
-.faqs-section {
+.faqs-section { 
   position: relative;
+  .container {
+    max-width: 1054px;
+  }
   .faqs-wrapper {
     background: #fff;
     padding: 50px 30px;

@@ -113,6 +113,11 @@ add_action( 'init', function() {
 }, 99);
 
 /**
+ * CPT Recipe
+ */
+require get_template_directory() . '/inc/cpt-recipe.php';
+
+/**
  * Custom static functions
  */
 require get_template_directory() . '/inc/statics.php';

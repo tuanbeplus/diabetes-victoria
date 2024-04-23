@@ -407,6 +407,9 @@ section.post-title h1 {
 .faqs-section {
   position: relative;
 }
+.faqs-section .container {
+  max-width: 1054px;
+}
 .faqs-section .faqs-wrapper {
   background: #fff;
   padding: 50px 30px;
@@ -815,9 +818,12 @@ section.post-title h1 {
   z-index: -1;
   transform: rotate(2deg);
 }
+.contact-us-section .container {
+  max-width: 1054px;
+}
 .contact-us-section .ctu-wrapper {
-  width: 62%;
-  max-width: 820px;
+  width: 75%;
+  max-width: 768px;
 }
 .contact-us-section .ctu-wrapper .ctu-content-wrap {
   display: flex;
@@ -837,7 +843,7 @@ section.post-title h1 {
   margin: 0 0 10px;
 }
 .contact-us-section .ctu-wrapper .ctu-content {
-  max-width: 260px;
+  max-width: 263px;
   color: #fff;
 }
 .contact-us-section .ctu-wrapper .ctu-content > * {
