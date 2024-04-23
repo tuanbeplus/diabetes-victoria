@@ -1,7 +1,12 @@
 
-.main-content {
-    padding-top: var(--padding-top);
-    padding-bottom: var(--padding-bottom);
+section.main-content {
+    background-color: var(--s-bg-color);
+    padding-top: var(--s-pd-top, 60px);
+    padding-bottom: var(--s-pd-bottom, 60px);  
+    @media(max-width: 768px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
+    }
     .main-content-inner {
         max-width: 1054px;
         margin: 0 auto;
@@ -14,14 +19,14 @@
             img {
                 display: block;
             }
-            .__title {
-                margin-bottom: 30px;
-                font-size: 2.313rem;
-                line-height: 110%;
-                color: $primary_color;
-            }
             .__content {
                 padding: 38px 26px;
+                .__title {
+                    margin-bottom: 30px;
+                    font-size: 2.313rem;
+                    line-height: 110%;
+                    color: $primary_color;
+                }
                 & > *:first-child {
                     margin-top: 0;
                 } 
@@ -33,8 +38,13 @@
                     text-decoration: underline;
                     text-underline-offset: 2px;
                 }
-                strong, b {
-                    font-family: $primary_font_demi;
+                img {
+                    margin: 30px 0;
+                    width: auto;
+                    &.aligncenter {
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
                 }
             }
         }
@@ -161,9 +171,72 @@
 
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1200px) {
-    .main-content {
+    section.main-content {
         .main-content-inner {
             gap: 30px;
+            .content-wrapper {
+                .__content {
+                    .__title {
+                        font-size: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*************************** Tablet **************************/
+@media only screen and (max-width: 1024px) {
+    section.main-content {
+        .main-content-inner {
+            gap: 20px;
+            .content-wrapper {
+                .__content {
+                    padding: 26px 20px;
+                    .__title {
+                        font-size: 1.675rem;
+                    }
+                }
+            }
+            .sidebar {
+                .on-this-page {
+                    padding: 20px;
+                }
+                .secondary-info {
+                    padding: 20px;
+                }
+                .additional-info-boxes {
+                    .aib-box {
+                        margin-top: 20px;
+                        padding: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 840px) {
+    section.main-content {
+        .main-content-inner {
+            flex-wrap: wrap-reverse;
+            .sidebar {
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    section.main-content {
+        .main-content-inner {
+            .content-wrapper {
+                .__content {
+                    .__title {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
         }
     }
 }

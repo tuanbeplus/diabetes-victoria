@@ -55,20 +55,25 @@ function dv_breadcrumb() {
 			the_category( $arrow_right );
 			if ( is_single() ) {
 				echo $arrow_right;
-                echo '<li aria-current="page"><strong> ' . get_the_title() . '</strong></li>';
+                echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
 			}
-		} elseif ( is_page() ) {
+		} 
+		elseif ( is_page() ) {
 			if ( $post->post_parent ) {
 				$anc   = get_post_ancestors( $post->ID );
 				foreach ( $anc as $ancestor ) {
 					$output = '<li><a href="' . get_permalink( $ancestor ) . '" title="' . get_the_title( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li> '.$arrow_right;
 				}
 				echo $output;
-				echo '<li aria-current="page"><strong> ' . get_the_title() . '</strong></li>';
+				echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
 			} else {
-				echo '<li aria-current="page"><strong> ' . get_the_title() . '</strong></li>';
+				echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
 			}
 		}
+		elseif ( is_search() ) {
+			echo '<li aria-current="page"><span>Search result for: ' . esc_html(get_search_query()) . '</span></li>';
+		}
+		
         echo '	</ol>';
         echo '</nav>';
 	}

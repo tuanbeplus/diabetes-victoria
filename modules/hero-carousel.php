@@ -32,8 +32,8 @@ if( get_row_layout() == 'hero_carousel' ):
                         $additional_links = $item['additional_links'];
                         ?>
                         <div class="carousel-item item-<?php echo $id; ?>" style="background-color:<?php echo $background_color; ?>">
-                            <div class="carousel-inner container">
-                                <div class="carousel-content">
+                            <div class="item-inner container">
+                                <div class="item-content">
                                     <!-- Main content -->
                                     <div class="main-content">
                                         <?php if ($title): ?>
@@ -63,7 +63,7 @@ if( get_row_layout() == 'hero_carousel' ):
 
                                 <?php if ($image && $image['url']): ?>
                                     <!-- Carousel image -->
-                                    <div class="carousel-img">
+                                    <div class="item-img">
                                         <img class="main-img" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>" loading="lazy">
                                         <img class="quote-shape" src="<?php echo DV_IMG_DIR.'quote-shape-blu-2.png'; ?>" alt="Quote Shape" loading="lazy">
                                     </div><!-- .Carousel image -->
@@ -112,8 +112,23 @@ if( get_row_layout() == 'hero_carousel' ):
                 pauseOnFocus: true,
                 pauseOnHover: true,
             });
-        });
+        }); 
         </script>
         <?php
+        // Style
+        $bg_color = get_sub_field('background_color');
+        $bg_color = !empty($bg_color) ? $bg_color : '';
+        $pd_top = get_sub_field('padding_top');
+        $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
+        $pd_bottom = get_sub_field('padding_bottom');
+        $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
+        
+        echo '<style>
+                section.hero-carousel {
+                    --s-bg-color: ' . $bg_color . ';
+                    --s-pd-top: ' . $pd_top . ';
+                    --s-pd-bottom: ' . $pd_bottom . ';
+                }
+            </style>';
     endif;
 endif;

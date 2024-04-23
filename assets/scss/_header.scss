@@ -359,11 +359,10 @@ nav#site-navigation {
         p {
             margin-top: 0;
             color: #fff;
-            font-family: $primary_font_demi!important;
+            font-size: 1rem;
             a {
                 color: #fff;
                 text-decoration: underline;
-                font-family: $primary_font_demi!important;
             }
         }
         
@@ -407,12 +406,13 @@ nav#site-navigation {
                 legend {
                     margin-bottom: 20px;
                     color: #fff;
-                    font-family: $primary_font_demi!important;
+                    font-size: 1rem;
                 }
             }
             .amount-options {
                 margin-bottom: 26px;
                 display: flex;
+                flex-wrap: wrap;
                 justify-content: space-between;
                 gap: 28px;
                 .amounts-list {
@@ -570,7 +570,7 @@ nav#site-navigation {
         } 
     }
     .header-inner{
-        padding: 16px 0;
+        padding: 12px 0;
     }
     #header-logo {
         img {

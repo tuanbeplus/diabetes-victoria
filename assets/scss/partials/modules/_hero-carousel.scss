@@ -1,96 +1,111 @@
 // Carousel component
 .hero-carousel {
-    background-color: $primary_color;
-    .carousel-item {
-        min-height: 440px;
-        .carousel-inner {
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            gap: 60px;
-            .carousel-content {
-                max-width: 760px;
-                padding: 60px 0 20px;
-                color: #fff;
+    background-color: var(--s-bg-color);
+    padding-top: var(--s-pd-top, 60px);
+    padding-bottom: var(--s-pd-bottom, 60px);
+    @media(max-width: 768px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
+    }
+    .carousel-wrapper {
+        overflow-y: hidden;
+        background-color: $primary_color;
+        .carousel-item {
+            min-height: 440px;
+            &:not(:first-child) {
+                display: none;
+            }
+            &.slick-slide {
+                display: block;
+            }
+            .item-inner {
+                margin: 0 auto;
                 display: flex;
-
-                .title {
-                    margin: 0;
-                    font-size: 2.688rem;
-                    line-height: 120%;
-                }
-                .description {
-                    font-size: 0.875rem;
-                    line-height: 140%;
+                justify-content: space-between;
+                gap: 60px;
+                .item-content {
+                    max-width: 760px;
+                    padding: 60px 0 20px;
                     color: #fff;
-                }
-                .group-cta {
-                    margin-top: 32px;
                     display: flex;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 26px;
-                    .primary-cta {
-                        display: block;
-                        padding: 14px 36px 12px;
-                        font-size: 1.125rem;
-                        font-family: $primary_font_bold;
-                        line-height: 1;
-                        background-color: #fff;
-                        border: 2px solid #fff;
-                        transition: all 0.4s;
+    
+                    .title {
+                        margin: 0;
+                        font-size: 2.688rem;
+                        line-height: 120%;
                     }
-                    .secondary-cta {
-                        position: relative;
-                        display: block;
-                        font-size: 1.125rem;
-                        font-family: $primary_font_bold;
-                        line-height: 1;
+                    .description {
+                        font-size: 0.875rem;
+                        line-height: 140%;
                         color: #fff;
-                        border-bottom: 2px solid #fff;
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            width: 100%;
-                            transform: scaleX(0);
-                            height: 2px;
-                            bottom: -2px;
-                            left: 0;
+                    }
+                    .group-cta {
+                        margin-top: 32px;
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 26px;
+                        .primary-cta {
+                            display: block;
+                            padding: 14px 36px 12px;
+                            font-size: 1.125rem;
+                            font-family: $primary_font_bold;
+                            line-height: 1;
                             background-color: #fff;
-                            transform-origin: bottom right;
-                            transition: transform 0.4s ease-out;
+                            border: 2px solid #fff;
+                            transition: all 0.4s;
                         }
-                        &:hover {
-                            border-color: transparent!important;
+                        .secondary-cta {
+                            position: relative;
+                            display: block;
+                            font-size: 1.125rem;
+                            font-family: $primary_font_bold;
+                            line-height: 1;
+                            color: #fff;
+                            border-bottom: 2px solid #fff;
                             &::after {
-                                transform: scaleX(1);
-                                transform-origin: bottom left;
+                                content: '';
+                                position: absolute;
+                                width: 100%;
+                                transform: scaleX(0);
+                                height: 2px;
+                                bottom: -2px;
+                                left: 0;
+                                background-color: #fff;
+                                transform-origin: bottom right;
+                                transition: transform 0.4s ease-out;
+                            }
+                            &:hover {
+                                border-color: transparent!important;
+                                &::after {
+                                    transform: scaleX(1);
+                                    transform-origin: bottom left;
+                                }
                             }
                         }
                     }
                 }
-            }
-            .carousel-img {
-                position: relative;
-                width: 100%;
-                max-width: 526px;
-                margin-bottom: -2px;
-                img.main-img {
+                .item-img {
                     position: relative;
-                    min-height: 442px;
-                    z-index: 2;
-                }
-                img.quote-shape {
-                    position: absolute;
-                    top: 20px;
-                    right: -30%;
-                    width: 322px;
-                    z-index: 1;
+                    width: 100%;
+                    max-width: 526px;
+                    margin-bottom: -2px;
+                    img.main-img {
+                        position: relative;
+                        margin: -94px 0 -34px;
+                        min-height: 442px;
+                        z-index: 2;
+                    }
+                    img.quote-shape {
+                        position: absolute;
+                        top: 20px;
+                        right: -30%;
+                        width: 322px;
+                        z-index: 1;
+                    }
                 }
             }
         }
-    }
-    .carousel-wrapper {
         .slick-dots {
             width: 100%;
             right: 0;
@@ -141,14 +156,14 @@
     .hero-carousel {
         .carousel-item {
             min-height: unset;
-            .carousel-inner {
-                .carousel-content {
+            .item-inner {
+                .item-content {
                     max-width: 660px;
                     .title {
                         font-size: 2.288rem;
                     }
                 }
-                .carousel-img {
+                .item-img {
                     img.main-img {
                         min-height: unset;
                     }
@@ -164,23 +179,27 @@
 @media only screen and (max-width: 1200px) {
     .hero-carousel {
         .carousel-item {
+            padding-bottom: 30px;
             min-height: unset;
-            .carousel-inner {
-                .carousel-content {
+            .item-inner {
+                .item-content {
                     padding: 30px 0 20px;
                     .title {
                         font-size: 2.188rem;
                     }
                 }
-                .carousel-img {
+                .item-img {
                     img.quote-shape {
                         width: 240px;
                     }
                 }
             }
         }
-        .owl-dots {
-            bottom: 24px;
+        .carousel-wrapper {
+            .slick-dots {
+                justify-content: center;
+                bottom: 30px;
+            }
         }
     }
 }
@@ -190,14 +209,24 @@
     .hero-carousel {
         .carousel-item {
             min-height: unset;
-            .carousel-inner {
-                .carousel-content {
+            .item-inner {
+                .item-content {
                     max-width: 560px;
                     .title {
                         font-size: 2rem;
                     }
+                    .group-cta {
+                        margin-top: 24px;
+                        .primary-cta {
+                            padding: 12px 20px 10px;
+                            font-size: 1rem;
+                        }
+                        .secondary-cta {
+                            font-size: 1rem;
+                        }
+                    }
                 }
-                .carousel-img {
+                .item-img {
                     img.main-img {
                         min-height: unset;
                     }
@@ -205,6 +234,14 @@
                         width: 170px;
                     }
                 }
+            }
+        }
+        .carousel-wrapper {
+            padding-bottom: 30px;
+            .slick-dots {
+                position: relative;
+                bottom: unset;
+                margin-top: 4px;
             }
         }
     }

@@ -40,33 +40,33 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 2.313rem;
-    line-height: 110%;
+    line-height: 120%;
     font-weight: bold;
 }
 h2 {
     font-size: 1.688rem;
-    line-height: 115%;
+    line-height: 120%;
     font-weight: bold;
 }
 h3 {
     margin: 20px 0;
     font-size: 1.313rem;
-    line-height: 115%;
+    line-height: 120%;
     font-weight: bold;
 }
 h4 {
     font-size: 1.213rem;
-    line-height: 115%;
+    line-height: 120%;
     font-weight: bold;
 }
 h5 {
     font-size: 1.113rem;
-    line-height: 115%;
+    line-height: 120%;
     font-weight: bold;
 }
 h6 {
     font-size: 1.013rem;
-    line-height: 115%;
+    line-height: 120%;
     font-weight: bold;
 }
 
@@ -197,12 +197,13 @@ section.error-404 {
 }
 
 .breadcrumb {
-    padding: 28px 0;
+    padding: 28px 0 26px;
     background-color: #99D6E9;
     .breadcrumb-list {
         max-width: 1054px;
         list-style: none;
         display: flex;
+        flex-wrap: wrap;
         gap: 6px;
         margin: 0 auto;
         padding: 0 15px;
@@ -213,6 +214,9 @@ section.error-404 {
             color: $dv_dark;
             font-size: 0.875rem;
             font-family: $primary_font_bold;
+            &:last-child {
+                margin-top: 1px;
+            }
             a {
                 color: $dv_dark;
                 text-decoration: underline;
@@ -243,17 +247,26 @@ section.post-title {
         max-width: 1266px;
     }
     .breadcrumb {
-        padding: 18px 0;
+        padding: 18px 0 16px;
     }
 }
 
 @media only screen and (max-width: 1200px) {
+    h1 {
+        font-size: 2rem;
+    }
     .container {
         max-width: 1100px;
     }
 }
 
 @media only screen and (max-width: 1024px) {
+    h1 {
+        font-size: 1.675rem;
+    }
+    h2 {
+        font-size: 1.425rem;
+    }
     h3 {
         margin: 18px 0;
         font-size: 1.125rem;
@@ -261,5 +274,26 @@ section.post-title {
     .container {
         max-width: 900px;
     }
+    section.post-title {
+        padding: 30px 0;
+    }
 }
 
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    h2 {
+        font-size: 1.25rem;
+    }
+    p {
+        margin: 14px 0;
+    }
+    .breadcrumb {
+        .breadcrumb-list {
+            li {
+                font-size: 0.75rem;
+            }
+        }
+    }
+}
