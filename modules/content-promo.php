@@ -71,7 +71,7 @@ if( get_row_layout() == 'content_promo' ):
                                             <?php endif; ?>
 
                                             <?php if ($item['description']): ?>
-                                                <p class="description"><?php echo $item['description']; ?></p>
+                                                <div class="description"><?php echo $item['description']; ?></div>
                                             <?php endif; ?>
 
                                             <?php if ($primary_cta['visibility'] == true || $secondary_cta['visibility'] == true): ?>
@@ -89,8 +89,8 @@ if( get_row_layout() == 'content_promo' ):
                                                 </div>
                                             <?php endif; ?>
                                         </div>
-                                        <div class="col-right">
-                                            <?php if (!empty($additional_links) && !empty($links_list)): ?>
+                                        <?php if (!empty($additional_links) && !empty($links_list)): ?>
+                                            <div class="col-right">
                                                 <!-- Additional content -->
                                                 <div class="additional-content">
                                                     <?php if ($additional_links['heading']): ?>
@@ -106,8 +106,8 @@ if( get_row_layout() == 'content_promo' ):
                                                         </ul>
                                                     <?php endif; ?>
                                                 </div><!-- .Additional content -->
-                                            <?php endif; ?>
-                                        </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div><!-- .Main content -->
                                 </div><!-- .Carousel content -->
 

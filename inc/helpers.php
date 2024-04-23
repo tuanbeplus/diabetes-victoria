@@ -54,6 +54,9 @@ function dv_breadcrumb() {
 		if ( is_category() || is_single() ) {
 			the_category( $arrow_right );
 			if ( is_single() ) {
+				$post_type = get_post_type_object(get_post_type());
+				$slug = $post_type->rewrite;
+				echo '<li><a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a></li>';
 				echo $arrow_right;
                 echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
 			}

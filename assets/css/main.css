@@ -2076,26 +2076,17 @@ body .socials-share-wrapper .share-content .essb_links li a {
   font-size: 1.313rem;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
   line-height: 124%;
+  transition: all 0.3s;
 }
-.key-cards .cards-list .card .card-content .landing-page a::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 2px;
-  left: 0;
-  background-color: #019BC2;
-  transform-origin: bottom left;
-  transition: transform 0.2s ease-out;
-}
-.key-cards .cards-list .card .card-content .landing-page a:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+.key-cards .cards-list .card .card-content .landing-page a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 .key-cards .cards-list .card .card-content .card-title {
   margin-top: 0;
   margin-bottom: 16px;
+  font-size: var(--card-title-size);
 }
 .key-cards .cards-list .card .card-content .card-description {
   font-size: 0.875rem;
@@ -2140,7 +2131,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
     font-size: 1.125rem;
   }
   .key-cards .cards-list .card .card-content .card-title {
-    font-size: 1.375rem;
+    font-size: calc(var(--card-title-size) * 0.85);
   }
   .key-cards .cards-list .card .card-cta {
     padding: 0 24px 24px;
@@ -2161,7 +2152,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   }
   .key-cards .cards-list .card .card-content .card-title {
     margin-bottom: 10px;
-    font-size: 1.125rem;
+    font-size: calc(var(--card-title-size) * 0.75);
   }
   .key-cards .cards-list .card .card-cta {
     padding: 0 16px 16px;
@@ -2228,7 +2219,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   max-width: 700px;
 }
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .main-content .col-left {
-  max-width: 380px;
+  width: 100%;
 }
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .landing-page .cta-btn {
   display: inline-block;
@@ -2239,7 +2230,6 @@ body .socials-share-wrapper .share-content .essb_links li a {
   background-color: #fff;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
   border: 2px solid #fff;
-  border-top: none;
   transition: all 0.3s;
 }
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .title {
@@ -2250,6 +2240,9 @@ body .socials-share-wrapper .share-content .essb_links li a {
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .description {
   font-size: 0.875rem;
   line-height: 140%;
+  color: #fff;
+}
+.content-promo .carousel-wrapper .carousel-item .item-inner .item-content .description * {
   color: #fff;
 }
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .group-cta {
@@ -2369,6 +2362,18 @@ body .socials-share-wrapper .share-content .essb_links li a {
   bottom: 50%;
   transform: translateY(-50%);
   right: 0;
+}
+.content-promo.static .carousel-wrapper {
+  overflow: hidden;
+}
+.content-promo.static .carousel-wrapper .carousel-item .item-inner {
+  gap: 40px;
+}
+.content-promo.static .carousel-wrapper .carousel-item .item-inner .item-content {
+  margin-bottom: 40px;
+}
+.content-promo.static .carousel-wrapper .carousel-item .item-inner .item-img {
+  max-width: 900px;
 }
 
 /*************************** Laptop **************************/

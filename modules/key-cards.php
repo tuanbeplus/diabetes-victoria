@@ -6,9 +6,10 @@
 
 if( get_row_layout() == 'key_cards' ):
     $cards_list = get_sub_field('cards_list');
+    $section_id = rand(0, 999);
     if (!empty($cards_list)):
         ?>
-        <section class="key-cards">
+        <section id="key-cards-section-<?php echo $section_id; ?>" class="key-cards">
             <div class="container">
                 <ul class="cards-list">
                 <?php foreach ($cards_list as $index => $row): 
@@ -84,12 +85,15 @@ if( get_row_layout() == 'key_cards' ):
         $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '70px';
         $pd_bottom = get_sub_field('padding_bottom');
         $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '70px';
+        $title_font_size =  get_sub_field('title_font_size');
+        $title_font_size = (isset($title_font_size) && $title_font_size !== '') ? $title_font_size . 'rem' : '1.688rem';
         
         echo '<style>
-                section.key-cards {
+                #key-cards-section-'.$section_id.' {
                     --s-bg-color: ' . $bg_color . ';
                     --s-pd-top: ' . $pd_top . ';
                     --s-pd-bottom: ' . $pd_bottom . ';
+                    --card-title-size: ' . $title_font_size . ';
                 }
             </style>';
     endif;
