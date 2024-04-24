@@ -27,10 +27,13 @@ if( get_row_layout() == 'content_promo' ):
         $promo_class = 'static';
     }
 
+    $cta_text_color = get_sub_field('cta_text_color');
+    $cta_text_color = !empty($cta_text_color) ? $cta_text_color : '';
+
     if(!empty($promo_data)):
         ?>
         <!-- Content Promo -->
-        <section class="content-promo <?php echo $promo_class; ?>">
+        <section id="content-promo-<?php echo $wrapper_id; ?>" class="content-promo <?php echo $promo_class; ?>">
             <div class="carousel-wrapper promo-carousel-<?php echo $wrapper_id; ?>">
                 <?php foreach ($promo_data as $id => $row): 
                     if ($promo_options == 'carousel_layout') {
@@ -44,7 +47,7 @@ if( get_row_layout() == 'content_promo' ):
                         $title = $item['title'];
                         $image = $item['image'];
                         $text_color = !empty($item['text_color']) ? $item['text_color'] : '#FFF';
-                        $background_color = !empty($item['background_color']) ? $item['background_color'] : '#019BC2';
+                        $background_color = !empty($item['background_color']) ? $item['background_color'] : '';
                         $cta_background_color = !empty($item['cta_background_color']) ? $item['cta_background_color'] : '#FFF';
                         $description = $item['description'];
                         $primary_cta = $item['primary_cta'];
@@ -64,10 +67,10 @@ if( get_row_layout() == 'content_promo' ):
                                         </div>
                                     <?php endif; ?>
                                     <!-- Main content -->
-                                    <div class="main-content">
+                                    <div class="main-content"> 
                                         <div class="col-left">
                                             <?php if ($title): ?>
-                                                <h1 class="title"><?php echo $title; ?></h1>
+                                                <h2 class="title"><?php echo $title; ?></h2>
                                             <?php endif; ?>
 
                                             <?php if ($item['description']): ?>
@@ -130,7 +133,7 @@ if( get_row_layout() == 'content_promo' ):
                                 }
                                 .content-promo .item-<?php echo $id; ?> .landing-page .cta-btn:hover {
                                     color: <?php echo $cta_background_color; ?>!important;
-                                    box-shadow: inset 300px 0 0 0 <?php echo $background_color; ?>!important;
+                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $cta_text_color; ?>!important;
                                 }
                                 .content-promo .item-<?php echo $id; ?> .carousel-content {
                                     color: <?php echo $text_color; ?>!important;
@@ -142,7 +145,7 @@ if( get_row_layout() == 'content_promo' ):
                                 }
                                 .content-promo .item-<?php echo $id; ?> .group-cta .primary-cta:hover {
                                     color: <?php echo $cta_background_color; ?>!important;
-                                    box-shadow: inset 300px 0 0 0 <?php echo $background_color; ?>!important;
+                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $cta_text_color; ?>!important;
                                 }
                                 .content-promo .item-<?php echo $id; ?> .group-cta .secondary-cta {
                                     color: <?php echo $text_color; ?>!important;
@@ -184,12 +187,16 @@ if( get_row_layout() == 'content_promo' ):
         $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
         $pd_bottom = get_sub_field('padding_bottom');
         $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
+        $image_width = get_sub_field('image_width');
+        $image_width = (isset($image_width) && $image_width !== '') ? $image_width . 'px' : '740px';
         
         echo '<style>
-                section.content-promo {
+                #content-promo-'. $wrapper_id .' {
                     --s-bg-color: ' . $bg_color . ';
                     --s-pd-top: ' . $pd_top . ';
                     --s-pd-bottom: ' . $pd_bottom . ';
+                    --s-img-width: '. $image_width .';
+                    --s-cta-color: '. $cta_text_color .';
                 }
             </style>';
     endif;

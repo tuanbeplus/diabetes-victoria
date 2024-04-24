@@ -21,14 +21,19 @@
         left: 16px;
         padding: 8px;
         border-radius: 100%;
-        border: 2px solid $primary_color;
+        border: 2px solid  var(--post-brand-color, $primary_color);
         width: 40px;
         height: 40px;
         transform: rotate(180deg);
         background-color: #fff;
-    }
-    #btn-scroll-top.show {
-        visibility: visible;
+        &.show {
+            visibility: visible;
+        }
+        svg {
+            #menu-item {
+                stroke: var(--post-brand-color, $dv_dark);
+            }
+        }
     }
 }
 
@@ -121,8 +126,8 @@ body {
                 line-height: 140%;
                 border: none;
                 border-radius: 0 54px 54px 0;
-                color: $dv_dark;
-                background-color: #99D6E9;
+                color: var(--post-sub-brand-color, $dv_dark);
+                background-color: var(--post-brand-color, #99D6E9);
                 box-sizing: unset;
                 box-shadow: 0 0 2px 0 rgba(0,0,0,0.2)!important;
                 .text {
@@ -136,7 +141,7 @@ body {
                     line-height: 1;
                     svg {
                         g path {
-                            fill: $dv_dark;
+                            fill: var(--post-sub-brand-color, $dv_dark);
                         }
                     }
                 }
@@ -176,6 +181,18 @@ body {
             border: none;
             border-radius: 0 22px 22px 0;
             box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
+            svg {
+                rect#Rectangle {
+                    fill: var(--post-brand-color, #99D6E9);
+                }
+                circle, line {
+                    stroke: var(--post-sub-brand-color, #007995);;
+                }
+                circle:first-of-type {
+                    fill: var(--post-brand-color, #99D6E9);
+                    stroke: none;
+                }
+            }
         }
         .share-content {
             display: none;

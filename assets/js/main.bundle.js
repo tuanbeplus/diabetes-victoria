@@ -99,6 +99,8 @@ jQuery(document).ready(function ($) {
           h2_tag.attr('id', 'heading2-item-' + counter); // Add ID to h2
           tocs_wrapper.append(toc_item); // Add link to TOCs
         });
+      } else {
+        main_content.find('.on-this-page').remove();
       }
     }
   }

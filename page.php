@@ -12,7 +12,20 @@
  * @package WordPress
  */
 
+$brand_color = get_field('brand_color');
+$brand_color = !empty($brand_color) ? $brand_color : '';
+$sub_brand_color = !empty($brand_color) ? '#fff' : '';
+$bg_color = get_field('background_color');
+$bg_color = !empty($bg_color) ? $bg_color : '';
+
 get_header(); 
+    // Post brand css variable
+    echo '<style> html {';
+        if (!empty($brand_color)) echo '--post-brand-color: '. $brand_color .';';
+        if (!empty($sub_brand_color)) echo '--post-sub-brand-color: '. $sub_brand_color .';';
+        if (!empty($bg_color)) echo '--post-bg-color: '. $bg_color .';';
+    echo '} </style>';
+    // Post Title
     if (is_singular() && !is_front_page()) {
         echo '<section class="post-title">
                 <div class="container">

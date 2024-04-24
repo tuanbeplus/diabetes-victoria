@@ -16,6 +16,7 @@ footer.site-footer {
     li {
         min-width: 200px;
         margin-bottom: 10px;
+        padding: 0;
         list-style: none;
         color: $dv_white;
         font-size: 0.875rem;
@@ -82,7 +83,7 @@ footer.site-footer {
     }
     .acknoledgement {
         padding: 74px 0;
-        background-color: $dv_background;
+        background-color: var(--post-bg-color, $dv_background);
         color: $dv_black;
         p, li {
             color: $dv_black;

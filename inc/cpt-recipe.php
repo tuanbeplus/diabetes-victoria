@@ -6,6 +6,7 @@
 function dv_recipe_register() {
 
 	$cpt_slug = get_theme_mod('dv_recipe_slug');
+	$ctp_icon = DV_IMG_DIR . 'ctp-recipe-book-icon-2.png';
 
 	if(isset($cpt_slug) && $cpt_slug != ''){
 		$cpt_slug = $cpt_slug;
@@ -33,10 +34,10 @@ function dv_recipe_register() {
 		'show_ui'         => true,
 		'capability_type' => 'post',
 		'hierarchical'    => false,
-		'menu_icon'       => 'dashicons-admin-post',
+		'menu_icon'       => $ctp_icon,
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
-		'supports'        => array('title', 'editor', 'thumbnail')
-  );
+		'supports'        => array('title', 'thumbnail')
+  	);
 
   add_filter( 'enter_title_here',  'dv_recipe_change_default_title');
 

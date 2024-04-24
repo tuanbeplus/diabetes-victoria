@@ -6,9 +6,11 @@
 
 if( get_row_layout() == 'main_content' ):
     // Content
+    $section_id = rand(0, 9999);
     $banner_image = get_sub_field('banner_image');
     $content_title = get_sub_field('content_title');
     $content_editor = get_sub_field('content_editor');
+    $bottom_cta = get_sub_field('bottom_cta');
     $sidebar = get_sub_field('sidebar');
     $show_sidebar = $sidebar['show_sidebar'];
     $on_this_page = $sidebar['on_this_page'];
@@ -23,7 +25,7 @@ if( get_row_layout() == 'main_content' ):
 
     if (!empty($banner_image) || !empty($content_editor)):
         ?>
-        <section class="main-content">
+        <section id="main-content-<?php echo $section_id; ?>" class="main-content">
             <div class="main-content-inner">
                 <!-- Content -->
                 <div class="content-wrapper">
@@ -34,6 +36,11 @@ if( get_row_layout() == 'main_content' ):
                         <div class="__content">
                             <?php if(!empty($content_title)) echo '<h2 class="__title">'.$content_title.'</h2>'; ?>
                             <?php echo dv_clean_html_content_editor($content_editor); ?>
+                            <?php if ($bottom_cta['visibility'] == true && !empty($bottom_cta['link'])): ?>
+                                <a class="__cta" href="<?php echo $bottom_cta['link']; ?>" role="button">
+                                    <span><?php echo $bottom_cta['text']; ?></span>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
                 </div><!-- .Content -->
@@ -94,7 +101,7 @@ if( get_row_layout() == 'main_content' ):
         $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
         
         echo '<style>
-                section.main-content {
+                #main-content-'. $section_id .' {
                     --s-bg-color: ' . $bg_color . ';
                     --s-pd-top: ' . $pd_top . ';
                     --s-pd-bottom: ' . $pd_bottom . ';

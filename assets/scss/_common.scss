@@ -31,7 +31,7 @@ body {
     font-family: $primary_font_medium;
     font-weight: normal;
     line-height: 140%;
-    background-color: $dv_background;
+    background-color: var(--post-bg-color, $dv_background);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -80,10 +80,10 @@ p {
     font-size: 0.875rem;
     line-height: 142%;
 }
-
+    
 ul, ol {
-    margin: 24px 0;
-    padding-left: 16px;
+    margin: 24px 0 34px;
+    padding-left: 30px;
 }
 
 li {
@@ -198,7 +198,7 @@ section.error-404 {
 
 .breadcrumb {
     padding: 28px 0 26px;
-    background-color: #99D6E9;
+    background-color: var(--post-brand-color, #99D6E9);
     .breadcrumb-list {
         max-width: 1054px;
         list-style: none;
@@ -211,20 +211,20 @@ section.error-404 {
         li {
             margin: 0;
             padding: 0;
-            color: $dv_dark;
+            color: var(--post-sub-brand-color, $dv_dark);
             font-size: 0.875rem;
             font-family: $primary_font_bold;
             &:last-child {
                 margin-top: 1px;
             }
             a {
-                color: $dv_dark;
+                color: var(--post-sub-brand-color, $dv_dark);
                 text-decoration: underline;
                 text-underline-offset: 2px;
             }
         }
         .arrow {
-            color: $dv_dark;
+            color: var(--post-sub-brand-color, $dv_dark);
             font-family: $primary_font_bold;
         }
     }
@@ -238,7 +238,7 @@ section.post-title {
     h1 {
         margin: 0;
         max-width: 660px;
-        color: $primary_color;
+        color: var(--post-brand-color, $primary_color);
     }
 }
 

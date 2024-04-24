@@ -25,7 +25,7 @@ section.main-content {
                     margin-bottom: 30px;
                     font-size: 2.313rem;
                     line-height: 110%;
-                    color: $primary_color;
+                    color: var(--post-brand-color, $primary_color);
                 }
                 & > *:first-child {
                     margin-top: 0;
@@ -34,7 +34,7 @@ section.main-content {
                     margin-bottom: 0;
                 } 
                 a {
-                    color: $primary_color;
+                    color: var(--post-brand-color, $primary_color);
                     text-decoration: underline;
                     text-underline-offset: 2px;
                 }
@@ -45,6 +45,17 @@ section.main-content {
                         margin-left: auto;
                         margin-right: auto;
                     }
+                }
+                .__cta {
+                    display: block;
+                    width: fit-content;
+                    margin-top: 30px;   
+                    padding: 12px 34px 10px;
+                    color: #fff;
+                    background-color: var(--post-brand-color, $primary_color);
+                    text-decoration: none;
+                    font-size: 1rem;
+                    font-family: $primary_font_bold;
                 }
             }
         }
@@ -62,6 +73,9 @@ section.main-content {
                     position: sticky;
                     // top: var(--header-height);
                     top: 40px;
+                    & > *:first-child {
+                        margin-top: 0;
+                    }
                 }
             }
             ul {
@@ -74,7 +88,7 @@ section.main-content {
             }
             .on-this-page {
                 padding: 32px 30px;
-                background-color: $primary_color;
+                background-color: var(--post-brand-color, $primary_color);
                 & > *:first-child {
                     margin-top: 0;
                 } 
@@ -98,7 +112,7 @@ section.main-content {
             }
             .secondary-info {
                 padding: 10px 30px 32px;
-                background-color: $primary_color;
+                background-color: var(--post-brand-color, $primary_color);
                 .__heading {
                     color: #fff;
                 }
@@ -138,16 +152,20 @@ section.main-content {
                 }
             }
             .additional-info-boxes {
+                margin-top: 30px;
                 .aib-box {
                     margin-top: 30px;
                     padding: 30px;
                     background-color: #fff;
+                    &:first-child {
+                        margin-top: 0;
+                    }
                     a {
-                        color: $primary_color;
+                        color: var(--post-brand-color, $primary_color);
                         font-family: $primary_font_bold;
                     }
                     strong ,b {
-                        color: $primary_color;
+                        color: var(--post-brand-color, $primary_color);
                     }
                     .__heading {
                         border-color: $dv_black;

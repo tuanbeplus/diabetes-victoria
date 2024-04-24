@@ -98,6 +98,9 @@ jQuery(document).ready(function ($) {
                     tocs_wrapper.append(toc_item) // Add link to TOCs
                 })
             }
+            else {
+                main_content.find('.on-this-page').remove()
+            }
         }
     }
 

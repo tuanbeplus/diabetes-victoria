@@ -1,6 +1,5 @@
 // Promo module
 .content-promo {
-    background-color: var(--s-bg-color);
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
     @media(max-width: 768px) {
@@ -8,7 +7,7 @@
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
     }
     .carousel-wrapper {
-        background-color: $primary_color;
+        background-color: var(--s-bg-color);
         .carousel-item {
             &:not(:first-child) {
                 display: none;
@@ -40,11 +39,14 @@
                             padding: 26px 38px 22px;
                             font-size: 1.688rem;
                             line-height: 1;
-                            color: $primary_color;
+                            color: var(--s-cta-color, $primary_color);
                             background-color: #fff;
                             font-family: $primary_font_bold;
                             border: 2px solid #fff;
                             transition: all 0.3s;
+                            &:hover {
+                                box-shadow: inset 300px 0 0 0 var(--s-cta-color, $primary_color);
+                            }
                         }
                     }
                     .title {
@@ -72,9 +74,13 @@
                             font-size: 1.125rem;
                             font-family: $primary_font_bold;
                             line-height: 1;
+                            color: var(--s-cta-color, $primary_color);
                             background-color: #fff;
                             border: 2px solid #fff;
                             transition: all 0.4s;
+                            &:hover {
+                                box-shadow: inset 300px 0 0 0 var(--s-cta-color, $primary_color);
+                            }
                         }
                         .secondary-cta {
                             position: relative;
@@ -194,7 +200,7 @@
                         margin-bottom: 40px;
                     }
                     .item-img {
-                        max-width: 900px;
+                        max-width: var(--s-img-width);
                     }
                 }
             }
