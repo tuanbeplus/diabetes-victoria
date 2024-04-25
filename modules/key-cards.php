@@ -14,8 +14,8 @@ if( get_row_layout() == 'key_cards' ):
                 <ul class="cards-list">
                 <?php foreach ($cards_list as $index => $row): 
                     $card = $row['card'] ?? '';
-                    $brand_color = $card['brand_color'] ?? '#019BC2';
-                    $img_url = !empty($card['image']['url']) ? $card['image']['url'] : DV_IMG_DIR.'card-img-placeholder';
+                    $brand_color = ($card['brand_color'] !== '') ? $card['brand_color'] : '#019BC2';
+                    $img_url = !empty($card['image']['url']) ? $card['image']['url'] : DV_IMG_DIR.'card-img-placeholder.png';
                     $img_alt = $card['image']['alt'] ?? '';
                     $landing_page_name = !empty($card['landing_page_name']) ? $card['landing_page_name'] : $card['landing_page_link'];
                     $landing_page_link = $card['landing_page_link'] ?? '';
@@ -56,17 +56,17 @@ if( get_row_layout() == 'key_cards' ):
                                 </div>
                             <?php endif; ?>
                             <style>
-                                #card-<?php echo $index; ?> .landing-page a::after {
-                                    background-color: <?php echo $brand_color ?>!important;
-                                }
-                                #card-<?php echo $index; ?> .card-content a {
+                                #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .landing-page a {
                                     color: <?php echo $brand_color ?>!important;
                                 }
-                                #card-<?php echo $index; ?> .card-cta a {
+                                #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .card-content a {
+                                    color: <?php echo $brand_color ?>!important;
+                                }
+                                #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .card-cta a {
                                     border: 2px solid <?php echo $brand_color ?>!important;
                                     background-color: <?php echo $brand_color ?>!important;
                                 }
-                                #card-<?php echo $index; ?> .card-cta a:hover {
+                                #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .card-cta a:hover {
                                     color: <?php echo $brand_color; ?>!important;
                                     box-shadow: inset 200px 0 0 0 #fff!important;
                                 }
@@ -87,6 +87,8 @@ if( get_row_layout() == 'key_cards' ):
         $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '70px';
         $title_font_size =  get_sub_field('title_font_size');
         $title_font_size = (isset($title_font_size) && $title_font_size !== '') ? $title_font_size . 'rem' : '1.688rem';
+        $cards_per_row =  get_sub_field('cards_per_row');
+        $cards_per_row = (isset($cards_per_row) && $cards_per_row !== '') ? $cards_per_row : '3';
         
         echo '<style>
                 #key-cards-section-'.$section_id.' {
@@ -94,6 +96,7 @@ if( get_row_layout() == 'key_cards' ):
                     --s-pd-top: ' . $pd_top . ';
                     --s-pd-bottom: ' . $pd_bottom . ';
                     --card-title-size: ' . $title_font_size . ';
+                    --card-per-row: ' . $cards_per_row . ';
                 }
             </style>';
     endif;

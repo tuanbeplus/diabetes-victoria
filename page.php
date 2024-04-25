@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying all pages
+ * The template for displaying all Pages, Post, Custom post type
  *
  * This is the template that displays all pages by default.
  * Please note that this is the WordPress construct of pages
@@ -49,6 +49,7 @@ get_header();
             get_template_part('modules/bespoke-slider');
             get_template_part('modules/main-content');
             get_template_part('modules/contact-us');
+            get_template_part('modules/search-form');
 
         endwhile;
 

@@ -140,27 +140,27 @@ table {
             border-bottom: 3px solid;
         }
         th {
-            padding: 12px 30px 10px;
+            padding: 12px 40px 10px;
             border: 1px solid;
             text-align: right;
             &:first-child {
-                padding: 12px 60px 10px 15px;
+                padding: 12px 80px 10px 15px;
                 text-align: left;
             }
             &:last-child {
-                padding: 12px 15px 10px 60px;
+                padding: 12px 15px 10px 80px;
             }
         }
         td {
-            padding: 12px 30px 10px;
+            padding: 12px 40px 10px;
             border: 1px solid;
             text-align: right;
             &:first-child {
-                padding: 12px 60px 10px 15px;
+                padding: 12px 80px 10px 15px;
                 text-align: left;
             }
             &:last-child {
-                padding: 12px 15px 10px 60px;
+                padding: 12px 15px 10px 80px;
             }
         }
     }
@@ -231,13 +231,13 @@ section.error-404 {
 }
 
 section.post-title {
-    padding: 50px 0;
+    padding: 50px 0 0;
     .container {
         max-width: 1054px;
     }
     h1 {
         margin: 0;
-        max-width: 660px;
+        max-width: 650px;
         color: var(--post-brand-color, $primary_color);
     }
 }
@@ -275,7 +275,7 @@ section.post-title {
         max-width: 900px;
     }
     section.post-title {
-        padding: 30px 0;
+        padding: 30px 0 0;
     }
 }
 

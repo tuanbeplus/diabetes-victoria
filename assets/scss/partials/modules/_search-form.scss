@@ -1,0 +1,128 @@
+// Key Cards style
+.search-section {
+    background-color: var(--s-bg-color);
+    padding-top: var(--s-pd-top, 60px);
+    padding-bottom: var(--s-pd-bottom, 100px);
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
+        padding-bottom: calc(var(--s-pd-bottom, 100px) * 0.75);
+    }
+    @media(max-width: 768px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
+        padding-bottom: calc(var(--s-pd-bottom, 100px) * 0.5);
+    }
+    .container {
+        max-width: 990px;
+    }
+    .heading {
+        margin: 0 0 26px;
+        font-size: 2.313rem;
+        color: var(--post-brand-color, $primary_color);
+    }
+    form {
+        max-width: 100%;
+        .form-wrapper {
+            display: flex;
+            gap: 30px;
+            border: none;
+            input[type=search] {
+                padding: 20px 24px 16px;
+                font-size: 1rem;
+                color: $dv_black;
+                border: 2px solid var(--post-brand-color, $primary_color);
+                &::placeholder {
+                    color: $dv_black;
+                }
+            }
+            button.search-submit-btn {
+                padding: 20px 56px 18px;
+                font-size: 1rem;
+                font-family: $primary_font_bold;
+                white-space: nowrap;
+                color: #fff;
+                background-color: var(--post-brand-color, $primary_color);
+                border: 2px solid var(--post-brand-color, $primary_color);
+                transition: all 0.3s;
+                &:hover {
+                    color: var(--post-brand-color, $primary_color);
+                    box-shadow: inset 300px 0 0 0 #fff;
+                }
+            }
+        }
+        .form-suggest {
+            font-size: 1rem;
+            font-family: $primary_font_bold;
+            ul.suggest-list {
+                li {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 1rem;
+                    a {
+                        color: var(--post-brand-color, $primary_color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*************************** laptop **************************/
+@media only screen and (max-width: 1200px) {
+    .search-section {
+        .heading {
+            font-size: 2rem;
+        }
+    }
+}
+
+/*************************** Tablet **************************/
+@media only screen and (max-width: 1024px) {
+    .search-section {
+        .container {
+            max-width: 900px;
+        }
+        form {
+            .form-wrapper {
+                gap: 20px;
+                input[type=search] {
+                    padding: 16px 20px 14px;
+                }
+                button.search-submit-btn {
+                    padding: 17px 44px 16px;
+                }
+            }
+            .form-suggest {
+                font-size: 0.875rem;
+                ul.suggest-list {
+                    li {
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*************************** Mobile **************************/
+@media only screen and (max-width: 600px) {
+    .search-section {
+        .heading {
+            margin: 0 0 20px;
+            font-size: 1.125rem;
+        }
+        form {
+            .form-wrapper {
+                flex-wrap: wrap;
+                gap: 16px;
+                input[type=search] {
+                    padding: 12px 16px 10px;
+                    font-size: 0.875rem;
+                }
+                button.search-submit-btn {
+                    padding: 14px 34px 10px;
+                    font-size: 0.875rem;
+                }
+            }
+        }
+    }
+}

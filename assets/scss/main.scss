@@ -6,10 +6,14 @@
 @import "_search";
 @import "_site-tools";
 
-// Components
+// Modules
 @import "partials/modules/_hero-carousel";
 @import "partials/modules/_key-cards";
 @import "partials/modules/_content-promo";
 @import "partials/modules/_latest-posts";
 @import "partials/modules/_partner-logos";
 @import "partials/modules/_main-content";
+@import "partials/modules/_search-form";
+
+@import "partials/modules/_contact-us";
+@import "partials/modules/_faqs"; 

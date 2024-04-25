@@ -29,8 +29,11 @@ if (empty($heading) && empty($faqs)) {
                 <div class="accordion js-accordion" role="tablist" aria-live="polite" data-behavior="accordion">
                     <?php foreach($faqs as $key => $item) { ?>
                         <div class="accordion__item js-show-item-default" data-binding="expand-accordion-item">
-                            <div id="<?php echo 'tab' . $key; ?>" tabindex="0" class="accordion__title" aria-controls="<?php echo 'panel' . $key; ?>" role="tab" aria-selected="false" aria-expanded="false" data-binding="expand-accordion-trigger">
-                                <h5><?php echo $item['heading']; ?></h5>
+                            <div id="<?php echo 'tab' . $key; ?>" class="accordion__title" tabindex="0" aria-controls="<?php echo 'panel' . $key; ?>" role="tab" aria-selected="false" aria-expanded="false" data-binding="expand-accordion-trigger">
+                                <h3 class="heading"><?php echo $item['heading']; ?></h3>
+                                <span class="chevron-down-icon">
+                                    <?php echo dv_get_icon_svg('chevron-down-blu-thin-icon'); ?>
+                                </span>
                             </div>
 
                             <div id="<?php echo 'panel' . $key; ?>" class="accordion__content" role="tabpanel" aria-hidden="true" aria-labelledby="tab5" data-binding="expand-accordion-container">

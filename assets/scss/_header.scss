@@ -310,7 +310,7 @@ nav#site-navigation {
                 background-size: contain;
                 background-position: center;
                 transition: all 0.2s;
-                margin-top: -4px;
+                margin-top: -6px;
             }
             &:hover{
                 .sub-menu {
@@ -365,7 +365,6 @@ nav#site-navigation {
                 text-decoration: underline;
             }
         }
-        
         #btn-close-donate {
             position: absolute;
             top: 20px;
@@ -373,6 +372,7 @@ nav#site-navigation {
             display: flex;
             padding: 0;
             align-items: center;
+            gap: 6px;
             border: none;
             background: none;
             font-size: 1rem;

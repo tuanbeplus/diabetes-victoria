@@ -81,6 +81,7 @@ body {
             transform: translateY(100%);
             visibility: hidden;
             opacity: 0;
+            border: 1px solid var(--post-brand-color, #007995);
 
             .pojo-a11y-toolbar-title {
                 font-family: $primary_font_bold;
@@ -93,12 +94,12 @@ body {
                     font-size: 1rem;
                     a {
                         transition: all 0.2s;
-                        .active {
-                            background-color: $secondary_color!important;
+                        &.active {
+                            background-color: var(--post-brand-color, #007995)!important;
                         }
                         &:hover {
                             color: #fff;
-                            background-color: $secondary_color;
+                            background-color: var(--post-brand-color, #007995);
                         }
                         .pojo-a11y-toolbar-text {
                             vertical-align: unset;
@@ -119,7 +120,7 @@ body {
                 display: flex;
                 align-items: center;
                 gap: 32px;
-                padding: 30px 34px 28px;
+                padding: 28px 34px 26px;
                 width: 340px;
                 font-size: 1.125rem;
                 font-family: $primary_font_bold;
@@ -151,6 +152,7 @@ body {
         #btn-close-accessibility-toolbar {
             display: none;
             box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+            background-color: var(--post-brand-color, #007995);
         }
 
         .background-overlay {
@@ -174,10 +176,13 @@ body {
         gap: 20px;
         width: fit-content;
         #btn-socials-share {
+            position: relative;
+            left: -1px;
             width: fit-content;
             height: 45px;
             padding: 0;
             line-height: 1;
+            background-color: var(--post-brand-color, #99D6E9);
             border: none;
             border-radius: 0 22px 22px 0;
             box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
@@ -186,7 +191,7 @@ body {
                     fill: var(--post-brand-color, #99D6E9);
                 }
                 circle, line {
-                    stroke: var(--post-sub-brand-color, #007995);;
+                    stroke: var(--post-sub-brand-color, #007995);
                 }
                 circle:first-of-type {
                     fill: var(--post-brand-color, #99D6E9);
@@ -207,11 +212,13 @@ body {
             background-color: $dv_background;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             > h3 {
+                margin-top: 0;
                 float: left;
             }
             #btn-close-share {
                 float: right;
                 transition: all 0.3s;
+                background-color: var(--post-brand-color, #007995);
             }
             .essb_links {
                 margin-bottom: 0;

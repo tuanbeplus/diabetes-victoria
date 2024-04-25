@@ -27,8 +27,9 @@ if( get_row_layout() == 'content_promo' ):
         $promo_class = 'static';
     }
 
-    $cta_text_color = get_sub_field('cta_text_color');
-    $cta_text_color = !empty($cta_text_color) ? $cta_text_color : '';
+    // Style
+    $bg_color = get_sub_field('background_color');
+    $bg_color = !empty($bg_color) ? $bg_color : '#019BC2';
 
     if(!empty($promo_data)):
         ?>
@@ -133,19 +134,19 @@ if( get_row_layout() == 'content_promo' ):
                                 }
                                 .content-promo .item-<?php echo $id; ?> .landing-page .cta-btn:hover {
                                     color: <?php echo $cta_background_color; ?>!important;
-                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $cta_text_color; ?>!important;
+                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $bg_color; ?>!important;
                                 }
                                 .content-promo .item-<?php echo $id; ?> .carousel-content {
                                     color: <?php echo $text_color; ?>!important;
                                 }
                                 .content-promo .item-<?php echo $id; ?> .group-cta .primary-cta {
-                                    color: <?php echo $background_color; ?>!important;
+                                    color: <?php echo ($background_color !== '') ? $background_color : $bg_color; ?>!important;
                                     background-color: <?php echo $cta_background_color; ?>!important;
                                     border-color: <?php echo $cta_background_color; ?>!important;
                                 }
                                 .content-promo .item-<?php echo $id; ?> .group-cta .primary-cta:hover {
                                     color: <?php echo $cta_background_color; ?>!important;
-                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $cta_text_color; ?>!important;
+                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $bg_color; ?>!important;
                                 }
                                 .content-promo .item-<?php echo $id; ?> .group-cta .secondary-cta {
                                     color: <?php echo $text_color; ?>!important;
@@ -181,8 +182,6 @@ if( get_row_layout() == 'content_promo' ):
             </script>
         <?php endif;
         // Style
-        $bg_color = get_sub_field('background_color');
-        $bg_color = !empty($bg_color) ? $bg_color : '';
         $pd_top = get_sub_field('padding_top');
         $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
         $pd_bottom = get_sub_field('padding_bottom');
@@ -196,7 +195,6 @@ if( get_row_layout() == 'content_promo' ):
                     --s-pd-top: ' . $pd_top . ';
                     --s-pd-bottom: ' . $pd_bottom . ';
                     --s-img-width: '. $image_width .';
-                    --s-cta-color: '. $cta_text_color .';
                 }
             </style>';
     endif;
