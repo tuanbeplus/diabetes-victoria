@@ -242,6 +242,22 @@ section.post-title {
     }
 }
 
+/* Spinner Circle Rotation */
+.dv-spinner {
+    width: 28px;
+	height: 28px;
+	clear: both;
+    border: 4px rgba(#fff, 0.25) solid;
+	border-top: 4px rgba(#fff, 1) solid;
+	border-radius: 50%;
+	-webkit-animation: spCircRot .6s infinite linear;
+	animation: spCircRot .6s infinite linear;
+}
+@keyframes spCircRot {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(359deg); }
+}
+
 @media only screen and (max-width: 1400px) {
     .container {
         max-width: 1266px;

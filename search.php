@@ -103,12 +103,14 @@ get_header();
 			echo 'Results not found.';
 		}
 	?>
-	<div id="ajax-loading-spinner"><?php echo dv_get_icon_svg('spinner-blu-150px'); ?></div>
 	</div>
-	<?php if ($wp_query->found_posts > 2): ?>
+	<?php if ($wp_query->found_posts > $wp_query->query_vars['posts_per_page']): ?>
 		<div class="bottom-cta">
 			<button id="btn-load-more-results" data-next-page="2">
-				<span>View more</span>
+				<span class="text">View more</span>
+				<div class="loading-wrapper">
+					<div class="dv-spinner"></div>
+				</div>
 			</button>
 		</div>
 	<?php endif; ?>

@@ -337,17 +337,6 @@ form.search-form {
                 font-family: $primary_font_book;
             }
         }
-        #ajax-loading-spinner {
-            display: none;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 0;
-            svg {
-                width: 80px;
-                height: 80px;
-            }
-        }
     }
 
     .bottom-cta {
@@ -355,6 +344,7 @@ form.search-form {
         display: flex;
         justify-content: center;
         #btn-load-more-results {
+            position: relative;
             display: inline-block;
             padding: 14px 26px 12px;
             font-size: 1rem;
@@ -366,6 +356,21 @@ form.search-form {
             transition: all 0.3s;
             &:hover {
                 background-color: $secondary_color;
+            }
+            .loading-wrapper {
+                display: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            &.loading {
+                .text {
+                    visibility: hidden;
+                }
+                .loading-wrapper {
+                    display: block;
+                }
             }
         }
     }

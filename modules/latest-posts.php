@@ -6,19 +6,29 @@
 
 if( get_row_layout() == 'latest_posts' ):
 
+    $section_id = rand(0, 999);
     $heading = get_sub_field('heading');
     $post_type = get_sub_field('post_type');
+    $paged = 1;
     $number_posts = get_sub_field('number_posts');
     $order_by = get_sub_field('order_by');
     $top_cta = get_sub_field('top_cta');
-    $bottom_cta = get_sub_field('bottom_cta');
+    $load_more_cta = get_sub_field('load_more_cta');
 
     // Get posts
-    $posts = dv_get_latest_posts($post_type, $number_posts, $order_by);
+    $posts = dv_get_latest_posts($post_type, $paged, $number_posts, $order_by);
+    $max_posts = dv_get_latest_posts($post_type, $paged, '-1', $order_by);
+    $max_posts = is_array($max_posts) ? count($max_posts) : '';
 
     if (!empty($posts)): ?>
         <!-- Latest Posts -->
-        <section class="latest-posts">
+        <section id="latest-posts-section-<?php echo $section_id ?>" class="latest-posts">
+
+            <input type="hidden" name="post_type" value="<?php echo $post_type ?>">
+            <input type="hidden" name="number_posts" value="<?php echo $number_posts ?>">
+            <input type="hidden" name="order_by" value="<?php echo $order_by ?>">
+            <input type="hidden" name="max_posts" value="<?php echo $max_posts ?>">
+
             <div class="container">
                 <div class="posts-wrapper">
                     <?php if (!empty($heading) || $top_cta['visibility'] == true): ?>
@@ -52,11 +62,14 @@ if( get_row_layout() == 'latest_posts' ):
                         </li>
                     <?php endforeach; ?>
                     </ul>
-                    <?php if ($bottom_cta['visibility'] == true && !empty($bottom_cta['cta_link'])): ?>
+                    <?php if ($load_more_cta['visibility'] == true && $number_posts < $max_posts): ?>
                         <div class="bottom">
-                            <a class="bottom-cta-btn" href="<?php echo $bottom_cta['cta_link']; ?>">
-                                <span><?php echo $bottom_cta['cta_text']; ?></span>
-                            </a>
+                            <button class="load-more-cta" role="button" data-next-page="2">
+                                <span class="text"><?php echo $load_more_cta['cta_text']; ?></span>
+                                <div class="loading-wrapper">
+                                    <div class="dv-spinner"></div>
+                                </div>
+                            </button>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -74,7 +87,7 @@ if( get_row_layout() == 'latest_posts' ):
     $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
     
     echo '<style>
-            section.latest-posts {
+            #latest-posts-section-'. $section_id .' {
                 --s-bg-color: ' . $bg_color . ';
                 --s-pd-top: ' . $pd_top . ';
                 --s-pd-bottom: ' . $pd_bottom . ';

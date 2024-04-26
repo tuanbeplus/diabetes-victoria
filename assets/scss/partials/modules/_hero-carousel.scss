@@ -92,8 +92,7 @@
                     margin-bottom: -2px;
                     img.main-img {
                         position: relative;
-                        margin: -94px 0 -34px;
-                        min-height: 442px;
+                        margin: 0 0 -34px;
                         z-index: 2;
                     }
                     img.quote-shape {
@@ -154,21 +153,23 @@
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
     .hero-carousel {
-        .carousel-item {
-            min-height: unset;
-            .item-inner {
-                .item-content {
-                    max-width: 660px;
-                    .title {
-                        font-size: 2.288rem;
+        .carousel-wrapper {
+            .carousel-item {
+                min-height: unset;
+                .item-inner {
+                    .item-content {
+                        max-width: 660px;
+                        .title {
+                            font-size: 2.288rem;
+                        }
                     }
-                }
-                .item-img {
-                    img.main-img {
-                        min-height: unset;
-                    }
-                    img.quote-shape {
-                        width: 300px;
+                    .item-img {
+                        img.main-img {
+                            min-height: unset;
+                        }
+                        img.quote-shape {
+                            width: 300px;
+                        }
                     }
                 }
             }
@@ -178,26 +179,25 @@
 
 @media only screen and (max-width: 1200px) {
     .hero-carousel {
-        .carousel-item {
-            padding-bottom: 30px;
-            min-height: unset;
-            .item-inner {
-                .item-content {
-                    padding: 30px 0 20px;
-                    .title {
-                        font-size: 2.188rem;
+        .carousel-wrapper {
+            .carousel-item {
+                padding-bottom: 16px;
+                min-height: unset;
+                .item-inner {
+                    .item-content {
+                        padding: 30px 0 20px;
+                        .title {
+                            font-size: 2.188rem;
+                        }
                     }
-                }
-                .item-img {
-                    img.quote-shape {
-                        width: 240px;
+                    .item-img {
+                        img.quote-shape {
+                            width: 240px;
+                        }
                     }
                 }
             }
-        }
-        .carousel-wrapper {
             .slick-dots {
-                justify-content: center;
                 bottom: 30px;
             }
         }
@@ -207,37 +207,37 @@
 /*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
     .hero-carousel {
-        .carousel-item {
-            min-height: unset;
-            .item-inner {
-                .item-content {
-                    max-width: 560px;
-                    .title {
-                        font-size: 2rem;
-                    }
-                    .group-cta {
-                        margin-top: 24px;
-                        .primary-cta {
-                            padding: 12px 20px 10px;
-                            font-size: 1rem;
+        .carousel-wrapper {
+            padding-bottom: 30px;
+            .carousel-item {
+                min-height: unset;
+                .item-inner {
+                    .item-content {
+                        max-width: 560px;
+                        .title {
+                            font-size: 2rem;
                         }
-                        .secondary-cta {
-                            font-size: 1rem;
+                        .group-cta {
+                            margin-top: 24px;
+                            .primary-cta {
+                                padding: 12px 20px 10px;
+                                font-size: 1rem;
+                            }
+                            .secondary-cta {
+                                font-size: 1rem;
+                            }
                         }
                     }
-                }
-                .item-img {
-                    img.main-img {
-                        min-height: unset;
-                    }
-                    img.quote-shape {
-                        width: 170px;
+                    .item-img {
+                        img.main-img {
+                            min-height: unset;
+                        }
+                        img.quote-shape {
+                            width: 170px;
+                        }
                     }
                 }
             }
-        }
-        .carousel-wrapper {
-            padding-bottom: 30px;
             .slick-dots {
                 position: relative;
                 bottom: unset;

@@ -247,7 +247,6 @@ jQuery(document).ready(function ($) {
     var searchOrder = $('input#search-order').val();
     var countResults = formSearch.find('#number-results-count');
     var searchResults = $('#search-results');
-    var spinner = $('#ajax-loading-spinner');
     $.ajax({
       type: 'POST',
       url: ajaxUrl,
@@ -259,15 +258,51 @@ jQuery(document).ready(function ($) {
         'search_order': searchOrder
       },
       beforeSend: function beforeSend(xhr) {
-        spinner.show();
+        btn.addClass('loading');
       },
       success: function success(response) {
-        spinner.hide();
         searchResults.append(response);
         btn.data('next-page', page + 1);
+        btn.removeClass('loading');
         var resultItem = $('#search-results article.result-item');
         countResults.text(resultItem.length);
-        if (resultItem.length == searchFoundPosts) {
+        if (resultItem.length >= searchFoundPosts) {
+          btn.remove();
+        }
+      }
+    });
+  });
+
+  // Ajax Load more search results
+  $(document).on('click', '.latest-posts .load-more-cta', function (e) {
+    e.preventDefault();
+    var btn = $(this);
+    var sectionWrapper = btn.closest('.latest-posts');
+    var paged = btn.data('next-page');
+    var postType = sectionWrapper.find('input[name=post_type]').val();
+    var numberPosts = sectionWrapper.find('input[name=number_posts]').val();
+    var orderBy = sectionWrapper.find('input[name=order_by]').val();
+    var maxPosts = sectionWrapper.find('input[name=max_posts]').val();
+    var postList = sectionWrapper.find('ul.posts-list');
+    $.ajax({
+      type: 'POST',
+      url: ajaxUrl,
+      data: {
+        'action': 'dv_load_more_latest_posts',
+        'paged': paged,
+        'post_type': postType,
+        'number_posts': numberPosts,
+        'order_by': orderBy
+      },
+      beforeSend: function beforeSend(xhr) {
+        btn.addClass('loading');
+      },
+      success: function success(response) {
+        postList.append(response);
+        btn.data('next-page', paged + 1);
+        btn.removeClass('loading');
+        var currentPost = postList.find('.post').length;
+        if (currentPost >= maxPosts) {
           btn.remove();
         }
       }

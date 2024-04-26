@@ -26,9 +26,10 @@ function dv_get_icon_svg($icon_file_name) {
  * @return Posts object
  * 
  */
-function dv_get_latest_posts($post_type, $number_posts, $order_by) {
+function dv_get_latest_posts($post_type, $paged, $number_posts, $order_by) {
     $args = array(
 		'post_type' => $post_type,
+		'paged' => $paged,
 		'posts_per_page' => $number_posts,
 		'post_status' => 'publish',
 		'orderby' => 'date',
@@ -82,7 +83,6 @@ function dv_breadcrumb() {
 	}
 }
 
-
 /**
  * Remove attributes from tags in HTML string
  * 
@@ -105,4 +105,26 @@ function dv_clean_html_content_editor($html_string) {
         $html_string
     );
     return $clean_html;
+}
+
+/**
+ * Get the Summary from content of Post, Page, Custom post type
+ * 
+ * @param string $post_id    Post ID
+ *
+ * @return string the Summary
+ * 
+ */
+function dv_get_post_summary($post_id) {
+	// Get ACF page builder
+	$page_builder = get_field('page_builder');
+	$summary = '';
+	foreach ($page_builder as $module) {
+		if ($module['acf_fc_layout'] == 'main_content') {
+			$summary .= $module['content_editor'];
+		}
+	}
+	$summary = wp_trim_words( $summary , 35, ' (...)' );
+
+	return $summary;
 }

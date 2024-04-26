@@ -59,6 +59,8 @@ header.site-header {
 
 // Top menu
 #top-menu {
+    display: flex;
+    justify-content: right;
     border-bottom: 2px solid $primary_color;
     background-color: $dv_white;
     ul {
@@ -70,7 +72,7 @@ header.site-header {
         position: relative;
         display: flex;
         justify-content: right;
-
+        background-color: $primary_color;
         .col {
             display: flex;
             justify-content: right;
@@ -83,6 +85,7 @@ header.site-header {
             justify-content: center;
             align-items: center;
             width: fit-content;
+            height: fit-content;
             border-left: 3px solid $primary_color;
             a {
                 font-family: $primary_font_bold;
@@ -101,12 +104,13 @@ header.site-header {
         .useful-links {
             justify-content: right;
             border-left: none;
+            background-color: $dv_white;
         }
         .useful-links-list {
             display: flex;
             flex-wrap: wrap;
             row-gap: 8px;
-            padding: 18px 76px 14px 16px;
+            padding: 18px 76px 16px 16px;
             li {
                 padding: 2px 8px 0;
                 border-right: 2px solid $primary_color;
@@ -147,42 +151,46 @@ header.site-header {
             border-left: none;
         }
         #btn-phone {
-            height: -webkit-fill-available;
+            height: auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px 20px;
+            padding: 14px 20px;
+            background-color: $dv_white;
             svg {
                 width: 20px;
                 height: 20px;
             }
-        }
-        #btn-phone:hover {
-            background-color: $primary_color;
-            svg g {
-                fill: $dv_white;
+            &:hover {
+                background-color: $primary_color;
+                svg g {
+                    fill: $dv_white;
+                }
             }
         }
 
         #btn-member-login {
             width: 100%;
-            height: -webkit-fill-available;
+            height: auto;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 1.25rem;
-            padding: 12px 30px;
+            line-height: 1;
+            padding: 14px 30px;
             color: $primary_color;
             white-space: nowrap;
-        }
-        #btn-member-login:hover {
-            color: $dv_white;
-            background-color: $primary_color;
+            background-color: $dv_white;
+            &:hover {
+                color: $dv_white;
+                background-color: $primary_color;
+            }
         }
 
         #btn-search {
-            height: 100%;
+            height: auto;
             display: flex;
+            padding: 14px 20px;
             justify-content: center;
             align-items: center;
             z-index: 2;
@@ -191,24 +199,24 @@ header.site-header {
                 width: 20px;
                 height: 20px;
             }
-        }
-        #btn-search:hover {
-            color: $dv_white;
-            background-color: $primary_color;
-            svg g {
-                stroke: $dv_white;
+            &:hover {
+                color: $dv_white;
+                background-color: $primary_color;
+                svg g {
+                    stroke: $dv_white;
+                }
             }
-        }
-        #btn-search.active {
-            background-color: $primary_color;
-            svg g {
-                stroke: $dv_white;
+            &.active {
+                background-color: $primary_color;
+                svg g {
+                    stroke: $dv_white;
+                }
             }
         }
 
         #btn-donate {
             width: 100%;
-            height: 100%;
+            height: auto;
             padding: 12px 70px;
             color: $dv_white;
             font-size: 1.25rem;
@@ -223,12 +231,12 @@ header.site-header {
         
         #btn-languages {
             width: 100%;
-            height: -webkit-fill-available;
+            height: auto;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 6px;
-            padding: 12px 30px;
+            padding: 14px 30px;
             color: $dv_dark;
             font-size: 1.25rem;
             background-color: $accent_color;
@@ -549,6 +557,9 @@ nav#site-navigation {
 
 /*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
+    header.site-header {
+        box-shadow: 0px 10px 20px -25px rgba(0, 0, 0, 0.5);
+    }
     #top-menu {
         .top-menu-list {
             flex-wrap: wrap;

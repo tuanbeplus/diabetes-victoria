@@ -252,7 +252,6 @@ jQuery(document).ready(function ($) {
         let searchOrder = $('input#search-order').val()
         let countResults = formSearch.find('#number-results-count')
         let searchResults = $('#search-results')
-        let spinner = $('#ajax-loading-spinner')
 
         $.ajax({
             type: 'POST',
@@ -265,17 +264,53 @@ jQuery(document).ready(function ($) {
                 'search_order'   : searchOrder,
             },
             beforeSend : function ( xhr ) {
-                spinner.show();
+                btn.addClass('loading')
             },
             success:function(response){
-                spinner.hide();
                 searchResults.append(response)
                 btn.data('next-page', page + 1);
+                btn.removeClass('loading')
                 let resultItem = $('#search-results article.result-item')
                 countResults.text(resultItem.length)
-
-                if (resultItem.length == searchFoundPosts) {
+                if (resultItem.length >= searchFoundPosts) {
                     btn.remove();
+                }
+            }
+        });
+    });
+
+    // Ajax Load more search results
+    $(document).on('click', '.latest-posts .load-more-cta', function(e){
+        e.preventDefault()
+        let btn = $(this)
+        let sectionWrapper = btn.closest('.latest-posts')
+        let paged = btn.data('next-page')
+        let postType = sectionWrapper.find('input[name=post_type]').val()
+        let numberPosts = sectionWrapper.find('input[name=number_posts]').val()
+        let orderBy = sectionWrapper.find('input[name=order_by]').val()
+        let maxPosts = sectionWrapper.find('input[name=max_posts]').val()
+        let postList = sectionWrapper.find('ul.posts-list')
+
+        $.ajax({
+            type: 'POST',
+            url: ajaxUrl,
+            data:{
+                'action'         : 'dv_load_more_latest_posts',
+                'paged'          : paged,
+                'post_type'      : postType,
+                'number_posts'   : numberPosts,
+                'order_by'       : orderBy,
+            },
+            beforeSend : function ( xhr ) {
+                btn.addClass('loading')
+            },
+            success:function(response){
+                postList.append(response)
+                btn.data('next-page', paged + 1);
+                btn.removeClass('loading')
+                let currentPost = postList.find('.post').length
+                if (currentPost >= maxPosts) {
+                    btn.remove()
                 }
             }
         });
