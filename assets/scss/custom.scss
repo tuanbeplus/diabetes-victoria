@@ -1,5 +1,22 @@
 // Site main style
-@import "_common";
+// color variables
+$primary_color:   #019BC2;
+$secondary_color: #3F51B5;
+$tertiary_color:  #E9730C;
+$accent_color: #99D6E9;
+$dv_black: #223540;
+$dv_background: #F5FBFD;
+$dv_white: #ffffff;
+$dv_dark: #007995;
+$donate_color: #3F51B5;
+
+// font variables
+$primary_font_light:  'ITC-Avant-Garde-Gothic-Pro_Light';
+$primary_font_book:   'ITC-Avant-Garde-Gothic-Pro_Book';
+$primary_font_medium: 'ITC-Avant-Garde-Gothic-Pro_Medium';
+$primary_font_demi:   'ITC-Avant-Garde-Gothic-Pro_Demi';
+$primary_font_bold:   'ITC-Avant-Garde-Gothic-Pro_Bold';
+
 @import "_fonts";
 
 
@@ -24,16 +41,23 @@
         border-radius: 0;
         transform: translateY(-50%);
         &:before {
-            font-family: FontAwesome;
-            content: "\f0d9";
-            font-size: 32px; 
-            color: #fff;
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            margin: 0 4px 0 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: none;
+            border-right: 22px solid #fff;
         }
         &.slick-next  {
             left: auto;
             right: 0;
             &:before {
-                content: "\f0da"; 
+                margin: 0 0 0 4px;
+                border-left: 22px solid #fff;
+                border-right: none;
             }
         }
         &.slick-disabled {
@@ -95,13 +119,26 @@
             border-radius: 0;
         }
     }
+    @media(max-width: 1200px) {
+        .slick-arrow {
+            width: 60px;
+            height: 60px;
+        }
+    }
     @media(max-width: 1023.98px) {
         padding: 0 60px;
         .slick-arrow {
             width: 45px;
             height: 45px;
             &:before {
-                font-size: 24px;
+                border-top-width: 12px;
+                border-bottom-width: 12px;
+                border-right-width: 18px;
+            }
+            &.slick-next {
+                &:before {
+                    border-left-width: 18px;
+                }
             }
         }
     }
@@ -111,7 +148,14 @@
             width: 35px;
             height: 35px;
             &:before {
-                font-size: 20px;
+                border-top-width: 10px;
+                border-bottom-width: 10px;
+                border-right-width: 16px;
+            }
+            &.slick-next {
+                &:before {
+                    border-left-width: 16px;
+                }
             }
         }
     }

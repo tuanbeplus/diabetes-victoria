@@ -317,10 +317,14 @@ jQuery(document).ready(function ($) {
     var wrapper_margin = this_btn.offset().top + this_btn.outerHeight();
     var donate_popup = $('#donate-popup');
     var donate_wrapper = donate_popup.find('.donate-wrapper');
+    var input_field = donate_popup.find('input#other-amount');
     donate_popup.toggleClass('show');
     donate_wrapper.css('margin-top', wrapper_margin + 'px');
     donate_wrapper.slideToggle(200);
     dv_aria_expanded_status(this_btn);
+    setTimeout(function () {
+      input_field.focus();
+    }, 200);
   });
 
   // Close donate popup
@@ -367,6 +371,11 @@ jQuery(document).ready(function ($) {
         scrollTop: target.offset().top - offset
       }, 300);
     }
+  });
+
+  // Select all <table> elements and wrap them with a <div>
+  $('.main-content .content-wrapper table').each(function () {
+    $(this).wrap('<div class="table-wrapper" role="region" tabindex="0"></div>');
   });
 });
 

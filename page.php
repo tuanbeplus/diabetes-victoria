@@ -55,6 +55,7 @@ get_header();
 
     else:
         // no layouts found
+        echo '<div class="no-layouts" style="padding:30px;"></div>';
     endif;
 
 get_footer();

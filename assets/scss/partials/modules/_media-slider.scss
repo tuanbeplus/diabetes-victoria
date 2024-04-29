@@ -2,6 +2,10 @@
     background: var(--s-bg-color, #fff);
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
+    }
     @media(max-width: 767.98px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);

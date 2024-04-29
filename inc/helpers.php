@@ -53,12 +53,19 @@ function dv_breadcrumb() {
         echo '	<ol class="breadcrumb-list">';
 		echo '		<li><a href="' . site_url() . '">Home</a></li> '.$arrow_right;
 		if ( is_category() || is_single() ) {
-			the_category( $arrow_right );
 			if ( is_single() ) {
 				$post_type = get_post_type_object(get_post_type());
 				$slug = $post_type->rewrite;
 				echo '<li><a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a></li>';
 				echo $arrow_right;
+				// $categories = get_the_category($post->ID);
+				// if (isset($categories) && !empty($categories)) {
+				// 	$category_name = $categories[0]->name ?? '';
+				// 	if (!empty($category_name)) {
+				// 		echo '<li><span> ' . $category_name . '</span></li>';
+				// 		echo $arrow_right;
+				// 	}
+				// }
                 echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
 			}
 		} 
@@ -104,6 +111,7 @@ function dv_clean_html_content_editor($html_string) {
         },
         $html_string
     );
+
     return $clean_html;
 }
 

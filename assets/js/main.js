@@ -324,11 +324,16 @@ jQuery(document).ready(function ($) {
         let wrapper_margin = this_btn.offset().top + this_btn.outerHeight();
         let donate_popup = $('#donate-popup')
         let donate_wrapper = donate_popup.find('.donate-wrapper')
+        let input_field = donate_popup.find('input#other-amount')
 
         donate_popup.toggleClass('show')
         donate_wrapper.css('margin-top', wrapper_margin +'px')
         donate_wrapper.slideToggle(200)
         dv_aria_expanded_status(this_btn);
+
+        setTimeout(function() {
+            input_field.focus();
+        }, 200);
     });
 
     // Close donate popup
@@ -377,6 +382,11 @@ jQuery(document).ready(function ($) {
                 scrollTop: target.offset().top - offset
             }, 300);
         }
+    });
+
+    // Select all <table> elements and wrap them with a <div>
+    $('.main-content .content-wrapper table').each(function() {
+        $(this).wrap('<div class="table-wrapper" role="region" tabindex="0"></div>');
     });
 
 })

@@ -208,7 +208,7 @@ section.main-content {
 @media only screen and (max-width: 1024px) {
     section.main-content {
         .main-content-inner {
-            gap: 20px;
+            gap: 24px;
             .content-wrapper {
                 .__content {
                     padding: 26px 20px;
@@ -254,6 +254,11 @@ section.main-content {
                     .__title {
                         font-size: 1.5rem;
                     }
+                }
+            }
+            .sidebar {
+                .additional-info-boxes {
+                    margin-top: 24px;
                 }
             }
         }

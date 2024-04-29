@@ -8,6 +8,7 @@ if( get_row_layout() != 'icon_promo_carousel' ) {
     return;
 }
 
+$section_id = rand(0, 999);
 $heading = get_sub_field('heading');
 $link_text = get_sub_field('link_text');
 $link_url = get_sub_field('link_url');
@@ -49,7 +50,7 @@ $carousel_data['responsive'] = array(
 $carousel_json = json_encode($carousel_data);
 
 ?>
-<section class="ipro-carousel-section">
+<section id="ipro-carousel-section-<?php echo $section_id ?>" class="ipro-carousel-section">
     <div class="container">
         <div class="ipro-carousel-wrapper">
             <div class="ipro-heading-wrap">
@@ -96,15 +97,16 @@ $carousel_json = json_encode($carousel_data);
 </section>
 
 <?php 
+// Style
 $bg_color = get_sub_field('background_color');
-$bg_color = $bg_color ? $bg_color : '#F5FBFD';
+$bg_color = !empty($bg_color) ? $bg_color : '#F5FBFD';
 $pd_top = get_sub_field('padding_top');
-$pd_top = $pd_top ? $pd_top . 'px' : '60px';
+$pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
 $pd_bottom = get_sub_field('padding_bottom');
-$pd_bottom = $pd_bottom ? $pd_bottom . 'px' : '60px';
+$pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
 
 echo '<style>
-        .ipro-carousel-section {
+        #ipro-carousel-section-'. $section_id .' {
             --s-bg-color: ' . $bg_color . ';
             --s-pd-top: ' . $pd_top . ';
             --s-pd-bottom: ' . $pd_bottom . ';

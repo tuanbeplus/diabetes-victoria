@@ -128,39 +128,42 @@ input[type=submit] {
     cursor: pointer;
 }
 
+div.table-wrapper[role=region] {
+    margin: 34px 0;
+    overflow-x: auto;
+    background: linear-gradient(to right, #fff 30%, rgba(255, 255, 255, 0)), 
+                linear-gradient(to right, rgba(255, 255, 255, 0), #fff 70%) 0 100%, 
+                radial-gradient(farthest-side at 0% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), 
+                radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+    background-repeat: no-repeat;
+    background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-position: 0 0, 100%, 0 0, 100%;
+    background-attachment: local, local, scroll, scroll;
+}
+
 table {
-    margin: 30px 0;
+    min-width: 500px;
+    font-size: 0.875rem;
+    line-height: 140%;
     border: 3px solid;
     border-color: $dv_black;
     border-collapse: collapse;
-    font-size: 0.875rem;
-    line-height: 140%;
     tr {
         &:first-child {
             border-bottom: 3px solid;
+            th, td {
+                font-family: $primary_font_bold;
+            }
         }
-        th {
-            padding: 12px 40px 10px;
+        th, td {
+            min-width: 160px;
+            max-width: 300px;
+            padding: 14px 16px 10px;
             border: 1px solid;
             text-align: right;
             &:first-child {
-                padding: 12px 80px 10px 15px;
+                min-width: 200px;
                 text-align: left;
-            }
-            &:last-child {
-                padding: 12px 15px 10px 80px;
-            }
-        }
-        td {
-            padding: 12px 40px 10px;
-            border: 1px solid;
-            text-align: right;
-            &:first-child {
-                padding: 12px 80px 10px 15px;
-                text-align: left;
-            }
-            &:last-child {
-                padding: 12px 15px 10px 80px;
             }
         }
     }
@@ -196,6 +199,7 @@ section.error-404 {
     }
 }
 
+/* Site Breadcrumb */
 .breadcrumb {
     padding: 28px 0 26px;
     background-color: var(--post-brand-color, #99D6E9);
@@ -230,6 +234,7 @@ section.error-404 {
     }
 }
 
+/* Post main title */
 section.post-title {
     padding: 50px 0 0;
     .container {
@@ -258,6 +263,7 @@ section.post-title {
 	to { transform: rotate(359deg); }
 }
 
+/*************************** Laptop **************************/
 @media only screen and (max-width: 1400px) {
     .container {
         max-width: 1266px;
@@ -276,6 +282,7 @@ section.post-title {
     }
 }
 
+/*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
     h1 {
         font-size: 1.675rem;
@@ -286,6 +293,19 @@ section.post-title {
     h3 {
         margin: 18px 0;
         font-size: 1.125rem;
+    }
+    div.table-wrapper[role=region] {
+        margin: 24px 0;
+    }
+    table {
+        tr {
+            th, td {
+                min-width: 100px;
+                &:first-child {
+                    min-width: 140px;
+                }
+            }
+        }
     }
     .container {
         max-width: 900px;
@@ -309,6 +329,17 @@ section.post-title {
         .breadcrumb-list {
             li {
                 font-size: 0.75rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    table {
+        min-width: auto;
+        tr {
+            th, td {
+                padding: 12px 14px 8px;
             }
         }
     }

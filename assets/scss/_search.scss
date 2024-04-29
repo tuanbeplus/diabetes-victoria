@@ -57,6 +57,32 @@
             background-color: $primary_color;
         }
     }
+    /*********************** Tablet ********************/
+    @media only screen and (max-width: 1024px) {
+        .search-header {
+            img.site-logo {
+                width: 150px;
+            }
+        }
+        form.search-form {
+            margin: 10vh auto auto;
+            input[type=search] {
+                padding: 16px 20px 14px;
+                font-size: 1rem;
+            }
+            button.search-submit-btn {
+                padding: 12px 20px;
+            }
+        }
+        #btn-close-search {
+            font-size: 1rem;
+            .close-icon {
+                width: 36px;
+                height: 34px;
+                padding: 8px;
+            }
+        }
+    }
 }
 
 // Search form
@@ -182,21 +208,21 @@ form.search-form {
             margin-bottom: 45px;
             label {
                 width: 100%;
-                input[type=search] {
-                    width: 100%;
-                    padding: 20px 22px 19px;
-                    line-height: 1;
-                    font-size: 1rem;
-                    font-family: $primary_font_bold;
-                    color: $dv_black;
-                    background-color: #fff;
-                    border: 1px solid $primary_color;
-                }
+            }
+            input[type=search] {
+                width: 100%;
+                padding: 20px 22px 19px;
+                line-height: 1;
+                font-size: 1rem;
+                font-family: $primary_font_bold;
+                color: $dv_black;
+                background-color: #fff;
+                border: 1px solid $primary_color;
             }
             button[type=submit] {
-                width: 100%;
-                max-width: 226px;
-                padding: 22px 40px;
+                width: fit-content;
+                padding: 22px 60px;
+                white-space: nowrap;
                 font-size: 1rem;
                 line-height: 1;
                 font-family: $primary_font_bold;
@@ -316,6 +342,9 @@ form.search-form {
         background-color: #fff;
         .result-item {
             margin-bottom: 30px;
+            &:last-child {
+                margin-bottom: 0;
+            }
             .__title {
                 margin: 0 0 6px;
             }
@@ -327,6 +356,7 @@ form.search-form {
                 color: $primary_color;
                 text-decoration: underline;
                 text-underline-offset: 2px;
+                word-break: break-word;
                 transition: all 0.3s;
                 &:hover {
                     color: $secondary_color;
@@ -374,33 +404,55 @@ form.search-form {
             }
         }
     }
-}
 
-/*************************** Tablet **************************/
-@media only screen and (max-width: 1024px) {
-    .global-search-wrapper {
-        .search-header {
-            img.site-logo {
-                width: 150px;
+    /********************* Tablet ********************/
+    @media only screen and (max-width: 1024px) {
+        padding: 40px 15px 100px;
+        form.search-results-form {
+            .search-inner {
+                margin-bottom: 32px;
+                input[type=search] {
+                    padding: 16px 18px 15px;
+                }
+                button[type=submit] {
+                    padding: 18px 40px;
+                }
             }
         }
-        form.search-form {
-            margin: 10vh auto auto;
-            input[type=search] {
-                padding: 16px 20px 14px;
-                font-size: 1rem;
-            }
-            button.search-submit-btn {
-                padding: 12px 20px;
+        #search-results {
+            padding: 32px 24px;
+        }
+    }
+
+    /********************* Mobile ********************/
+    @media only screen and (max-width: 600px) {
+        padding: 40px 15px 40px;
+        form.search-results-form {
+            .search-inner {
+                margin-bottom: 24px;
+                flex-wrap: wrap;
+                justify-content: right;
+                gap: 16px;
+                input[type=search] {
+                    padding: 14px 16px 12px;
+                }
+                button[type=submit] {
+                    padding: 14px 26px 12px;
+                }
             }
         }
-        #btn-close-search {
-            font-size: 1rem;
-            .close-icon {
-                width: 36px;
-                height: 34px;
-                padding: 8px;
+        #search-results {
+            .result-item {
+                .__title {
+                    font-size: 1.125rem;
+                }
+                .__link {
+                    margin-bottom: 8px;
+                }
             }
+        }
+        .bottom-cta {
+            margin-top: 32px;
         }
     }
 }

@@ -54,6 +54,11 @@ header.site-header {
 .top-menu-mobile {
     #top-menu {
         display: none;
+        ul.top-menu-list {
+            li {
+                height: auto;
+            }
+        }
     }
 }
 
@@ -61,6 +66,7 @@ header.site-header {
 #top-menu {
     display: flex;
     justify-content: right;
+    height: auto;
     border-bottom: 2px solid $primary_color;
     background-color: $dv_white;
     ul {
@@ -72,7 +78,6 @@ header.site-header {
         position: relative;
         display: flex;
         justify-content: right;
-        background-color: $primary_color;
         .col {
             display: flex;
             justify-content: right;
@@ -85,7 +90,7 @@ header.site-header {
             justify-content: center;
             align-items: center;
             width: fit-content;
-            height: fit-content;
+            height: 100%;
             border-left: 3px solid $primary_color;
             a {
                 font-family: $primary_font_bold;
@@ -103,13 +108,13 @@ header.site-header {
         }
         .useful-links {
             justify-content: right;
+            height: 100%;
             border-left: none;
-            background-color: $dv_white;
         }
         .useful-links-list {
             display: flex;
             flex-wrap: wrap;
-            row-gap: 8px;
+            row-gap: 6px;
             padding: 18px 76px 16px 16px;
             li {
                 padding: 2px 8px 0;
@@ -136,7 +141,6 @@ header.site-header {
             max-width: 64px;
         }
         .member-login {
-            max-width: 214px;
             border-right: 3px solid $primary_color;
         }
         .search {
@@ -151,7 +155,7 @@ header.site-header {
             border-left: none;
         }
         #btn-phone {
-            height: auto;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -170,14 +174,13 @@ header.site-header {
         }
 
         #btn-member-login {
-            width: 100%;
-            height: auto;
+            height: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center;    
             font-size: 1.25rem;
             line-height: 1;
-            padding: 14px 30px;
+            padding: 14px 30px 12px;
             color: $primary_color;
             white-space: nowrap;
             background-color: $dv_white;
@@ -188,7 +191,7 @@ header.site-header {
         }
 
         #btn-search {
-            height: auto;
+            height: 100%;
             display: flex;
             padding: 14px 20px;
             justify-content: center;
@@ -216,7 +219,7 @@ header.site-header {
 
         #btn-donate {
             width: 100%;
-            height: auto;
+            height: 100%;
             padding: 12px 70px;
             color: $dv_white;
             font-size: 1.25rem;
@@ -231,7 +234,7 @@ header.site-header {
         
         #btn-languages {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;

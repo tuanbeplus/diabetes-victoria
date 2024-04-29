@@ -23,7 +23,7 @@ if( get_row_layout() == 'search_form' ):
                                 title="<?php _ex( 'Search for:', 'label' ); ?>">
                     </label>
                     <button type="submit" class="search-submit-btn" aria-label="Search">
-                        <span>Show reults</span>
+                        <span>Show results</span>
                     </button>
                 </div>
                 <?php if (!empty($suggestions)): ?>

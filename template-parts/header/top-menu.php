@@ -35,9 +35,9 @@ $languages    = get_field('languages', 'option');
                 </a>
             </li>
             <li class="member-login">
-                <a id="btn-member-login" href="<?php echo $member_login['login_page'] ?? ''; ?>" role="button">
+                <button id="btn-member-login" role="button">
                     <span><?php echo $member_login['button_text'] ?? ''; ?></span>
-                </a>
+                </button>
             </li>
             <li class="search">
                 <button id="btn-search" title="Search" aria-label="Search"

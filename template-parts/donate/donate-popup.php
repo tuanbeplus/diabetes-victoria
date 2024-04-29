@@ -4,13 +4,14 @@
  *
  */
 $donate = get_field('donate', 'option');
+$donate_page = $donate['donate_page'];
 $amount_options = $donate['amount_options'];
 $other_ways_link = $donate['other_ways_to_get_involved'];
 ?>
 <!-- Donate popup -->
 <div id="donate-popup" class="donate-popup">
     <div class="donate-wrapper">
-        <form method="get" class="donate-form" action="<?php echo esc_url( home_url( '/donate' ) ); ?>">
+        <form method="get" class="donate-form" action="<?php echo esc_url( $donate_page ); ?>">
             <div class="form-inner">
                 <fieldset>
                     <legend>Choose your amount ($)</legend>

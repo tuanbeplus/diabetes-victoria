@@ -2,6 +2,10 @@
     background-color: var(--s-bg-color);
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
+    }
     @media(max-width: 768px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
@@ -108,7 +112,7 @@
                 }
                 .__thumb {
                     overflow: hidden;
-                    max-height: 180px;
+                    height: 164px;
                     img {
                         display: block;
                         height: 100%;
@@ -121,6 +125,7 @@
                 }
                 .__title {
                     font-size: 1.125rem;
+                    line-height: 130%;
                     font-family: $primary_font_bold;
                     a {
                         display: block;
@@ -213,9 +218,6 @@
             }
             .bottom {
                 margin-top: 24px;
-            }
-            .heading {
-                font-size: 1.125rem;
             }
             .load-more-cta {
                 padding: 10px 24px 8px;

@@ -8,6 +8,7 @@ if( get_row_layout() != 'bespoke_slider' ) {
     return;
 }
 
+$section_id = rand(0, 999);
 $heading = get_sub_field('heading');
 $list_item = get_sub_field('list_item');
 
@@ -68,7 +69,7 @@ $carousel_data['responsive'] = array(
 $carousel_json = json_encode($carousel_data);
 
 ?>
-<section class="bespoke-slider-section">
+<section id="bespoke-slider-section-<?php echo $section_id ?>" class="bespoke-slider-section">
     <div class="container">
         <div class="bespoke-slider-wrapper">
             <?php if(!empty($heading)) { ?>
@@ -116,15 +117,16 @@ $carousel_json = json_encode($carousel_data);
 </section>
 
 <?php 
+// Style
 $bg_color = get_sub_field('background_color');
-$bg_color = $bg_color ? $bg_color : '#223540';
+$bg_color = !empty($bg_color) ? $bg_color : '#223540';
 $pd_top = get_sub_field('padding_top');
-$pd_top = $pd_top ? $pd_top . 'px' : '90px';
+$pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
 $pd_bottom = get_sub_field('padding_bottom');
-$pd_bottom = $pd_bottom ? $pd_bottom . 'px' : '90px';
+$pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
 
 echo '<style>
-        .bespoke-slider-section {
+        #bespoke-slider-section-'. $section_id .' {
             --s-bg-color: ' . $bg_color . ';
             --s-pd-top: ' . $pd_top . ';
             --s-pd-bottom: ' . $pd_bottom . ';

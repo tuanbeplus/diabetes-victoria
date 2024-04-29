@@ -6,7 +6,7 @@
 
 if( get_row_layout() == 'main_content' ):
     // Content
-    $section_id = rand(0, 9999);
+    $section_id = rand(0, 999);
     $banner_image = get_sub_field('banner_image');
     $content_title = get_sub_field('content_title');
     $content_editor = get_sub_field('content_editor');
@@ -35,7 +35,9 @@ if( get_row_layout() == 'main_content' ):
                     <?php if (!empty($content_editor)): ?>
                         <div class="__content">
                             <?php if(!empty($content_title)) echo '<h2 class="__title">'.$content_title.'</h2>'; ?>
+
                             <?php echo dv_clean_html_content_editor($content_editor); ?>
+
                             <?php if ($bottom_cta['visibility'] == true && !empty($bottom_cta['link'])): ?>
                                 <a class="__cta" href="<?php echo $bottom_cta['link']; ?>" role="button">
                                     <span><?php echo $bottom_cta['text']; ?></span>
