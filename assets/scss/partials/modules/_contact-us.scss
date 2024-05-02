@@ -117,6 +117,12 @@
         }
     }
 
+    @media(max-width: 1024px) {
+        .container {
+            max-width: 900px; 
+        }
+    }
+
     @media(max-width: 767.98px) {
         svg {
             top: -5%;

@@ -26,11 +26,23 @@ footer.site-footer {
         text-decoration: underline;
         text-underline-offset: 2px;
     }
+    .heading {
+        margin-top: 0;
+    }
     .footer-banner {
         width: 100%;
         img {
             display: block;
             width: 100%;
+            transform: scale(0.1);
+            border-radius: 100%;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        &.active {
+            img {
+                transform: scale(1);
+                border-radius: 0;
+            }
         }
     }
     .footer-logo.tablet {
@@ -40,7 +52,7 @@ footer.site-footer {
         }
     }
     .footer-wrapper {
-        padding: 66px 0 20px;
+        padding: 80px 0 20px;
         display: flex;
         justify-content: space-between;
         gap: 160px;
@@ -163,9 +175,24 @@ footer.site-footer {
 
 @media only screen and (max-width: 500px) {
     footer.site-footer {
+        .footer-banner {
+            img {
+                height: 150px;
+                object-fit: cover;
+            }
+        }
+        .footer-logo.tablet {
+            img {
+                width: 140px;
+            }
+        }
         .footer-wrapper {
             .quick-links {
                 gap: 40px;
+                ul {
+                    margin-top: 20px;
+                    margin-bottom: 0;
+                }
             }
         }
     }

@@ -94,7 +94,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             column-gap: 66px;
-            row-gap: 100px;
+            row-gap: 80px;
             .post {
                 margin: 0;
                 padding: 0;
@@ -220,7 +220,7 @@
                 margin-top: 24px;
             }
             .load-more-cta {
-                padding: 10px 24px 8px;
+                padding: 12px 20px 10px;
                 font-size: 0.875rem;
             }
             .posts-list {

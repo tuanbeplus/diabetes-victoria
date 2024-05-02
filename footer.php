@@ -41,7 +41,7 @@ $acknoledgement = get_field('acknoledgement', 'option');
 			<?php endif; ?>
 			<div class="footer-wrapper">
 				<div class="info">
-					<h3><?php echo $footer_title; ?></h3>
+					<h3 class="heading"><?php echo $footer_title; ?></h3>
 					<?php if ($footer_description) echo $footer_description; ?>
 					<?php if (isset($certified_image['url']) && !empty($certified_image['url'])): ?>
 						<img class="certified-img" src="<?php echo $certified_image['url']; ?>" alt="<?php echo $certified_image['alt'] ?? 'DV Certified'; ?>">
@@ -52,7 +52,7 @@ $acknoledgement = get_field('acknoledgement', 'option');
 						<?php foreach ($quick_links as $row): ?>
 							<div class="links-list">
 								<?php if ($row['heading']): ?>
-									<h3><?php echo $row['heading']; ?></h3>
+									<h3 class="heading"><?php echo $row['heading']; ?></h3>
 								<?php endif; ?>
 								<?php if ($row['links_list']): ?>
 									<ul>
@@ -96,7 +96,7 @@ $acknoledgement = get_field('acknoledgement', 'option');
 				<div class="container">
 					<div class="ack-wrapper">
 						<?php if ($acknoledgement['content']['heading']): ?>
-							<h3><?php echo $acknoledgement['content']['heading']; ?></h3>
+							<h3 class="heading"><?php echo $acknoledgement['content']['heading']; ?></h3>
 						<?php endif; ?>
 						<?php if ($acknoledgement['content']['description']): ?>
 							<?php echo $acknoledgement['content']['description']; ?>

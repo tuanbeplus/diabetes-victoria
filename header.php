@@ -68,6 +68,8 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 	</div>
 	
 	<?php get_template_part( 'template-parts/search/search-popup' ); ?>
+
+	<?php get_template_part( 'template-parts/donate/donate-popup' ); ?>
 			
 	<div id="content" class="site-content">
 		<div id="primary" class="content-area">

@@ -115,7 +115,6 @@ body {
             display: flex;
             align-items: center;
             gap: 20px;
-            animation: access-options-hide 0.2s linear both;
 
             #btn-toggle-accessibility-toolbar {
                 display: flex;
@@ -132,6 +131,7 @@ body {
                 background-color: var(--post-brand-color, #99D6E9);
                 box-sizing: unset;
                 box-shadow: 0 0 2px 0 rgba(0,0,0,0.2)!important;
+                transition: all 0.3s;
                 .text {
                     white-space: nowrap;
                     text-decoration: underline;
@@ -237,6 +237,8 @@ body {
 @media only screen and (max-width: 1440px) {
     body {
         nav#pojo-a11y-toolbar {
+            justify-content: end;
+            padding-bottom: 84px;
             &.pojo-a11y-toolbar-open {
                 .pojo-a11y-toolbar-toggle {
                     #btn-toggle-accessibility-toolbar {
@@ -256,6 +258,70 @@ body {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+/*************************** Mobile **************************/
+@media only screen and (max-width: 600px) {
+    body {
+        nav#pojo-a11y-toolbar {
+            padding-bottom: 64px;
+            &.pojo-a11y-toolbar-open {
+                .pojo-a11y-toolbar-toggle {
+                    #btn-toggle-accessibility-toolbar {
+                        margin: 0;
+                    }
+                }
+            } 
+            &.pojo-a11y-toolbar-left {
+                .pojo-a11y-toolbar-overlay {
+                    margin-left: 15px;
+                }
+            }
+            .pojo-a11y-toolbar-toggle {
+                #btn-toggle-accessibility-toolbar {
+                    gap: 16px;
+                    margin-left: 66px;
+                    padding: 14px 20px 10px;
+                    font-size: 0.875rem;
+                    border-radius: 0 40px 40px 0;
+                    .accessibility-icon {
+                        svg {
+                            width: 26px;
+                        }
+                    }
+                }
+            }
+            #btn-close-accessibility-toolbar {
+                font-size: 18px;
+                padding: 8px 12px;
+            }
+        }
+        .socials-share-wrapper {
+            margin-top: 18px;
+            #btn-socials-share {
+                height: 40px;
+                svg {
+                    width: 50px;
+                    height: 40px;
+                }
+            }
+            .share-content {
+                right: -24px;
+                width: 240px;
+                padding: 16px;
+                #btn-close-share {
+                    padding: 8px 12px;
+                    font-size: 18px;
+                }
+            }
+        }
+        .site-tools {
+            #btn-scroll-top {
+                bottom: 8px;
+                left: 8px;
             }
         }
     }

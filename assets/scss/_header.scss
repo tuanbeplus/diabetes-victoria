@@ -11,6 +11,7 @@ header.site-header {
     position: relative;
     z-index: 10;
     background-color: $primary_color;
+    animation: dv-slide-down 0.3s linear both;
     &.sticky {
         position: fixed;
         top: 0;
@@ -65,7 +66,7 @@ header.site-header {
 // Top menu
 #top-menu {
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     height: auto;
     border-bottom: 2px solid $primary_color;
     background-color: $dv_white;
@@ -114,7 +115,7 @@ header.site-header {
         .useful-links-list {
             display: flex;
             flex-wrap: wrap;
-            row-gap: 6px;
+            row-gap: 10px;
             padding: 18px 76px 16px 16px;
             li {
                 padding: 2px 8px 0;
@@ -174,6 +175,7 @@ header.site-header {
         }
 
         #btn-member-login {
+            width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -191,6 +193,7 @@ header.site-header {
         }
 
         #btn-search {
+            width: 100%;
             height: 100%;
             display: flex;
             padding: 14px 20px;
@@ -223,6 +226,7 @@ header.site-header {
             padding: 12px 70px;
             color: $dv_white;
             font-size: 1.25rem;
+            line-height: 1;
             background-color: $secondary_color;
             &:hover {
                 background-color: $primary_color;
@@ -242,6 +246,7 @@ header.site-header {
             padding: 14px 30px;
             color: $dv_dark;
             font-size: 1.25rem;
+            line-height: 1;
             background-color: $accent_color;
             svg g#language-solid {
                 transition: all 0.3s;
@@ -300,6 +305,7 @@ nav#site-navigation {
             align-items: center;
             position: relative;
             gap: 8px;
+            margin: 0;
             padding: 10px 10px 18px;
             font-size: 1.094rem;
             line-height: 110%;
@@ -360,6 +366,9 @@ nav#site-navigation {
     background-color: rgba(255, 255, 255, 0.8);
     &.show {
         display: block;
+        .donate-wrapper {
+            display: block;
+        }
     }
     .donate-wrapper {
         display: none;
@@ -367,6 +376,7 @@ nav#site-navigation {
         margin: 80px auto 0;
         padding: 70px 40px 60px;
         background-color: $donate_color;
+        animation: dv-slide-down 0.2s linear both;
         p {
             margin-top: 0;
             color: #fff;
@@ -374,6 +384,7 @@ nav#site-navigation {
             a {
                 color: #fff;
                 text-decoration: underline;
+                font-family: $primary_font_bold;
             }
         }
         #btn-close-donate {
@@ -387,6 +398,7 @@ nav#site-navigation {
             border: none;
             background: none;
             font-size: 1rem;
+            font-family: $primary_font_bold;
             color: #fff;
             text-decoration: underline;
             text-underline-offset: 2px;
@@ -428,10 +440,13 @@ nav#site-navigation {
                 gap: 28px;
                 .amounts-list {
                     display: flex;
+                    flex-wrap: wrap;
                     gap: 36px;
                     label {
+                        min-width: 120px;
                         display: flex;
                         align-items: center;
+                        justify-content: center;
                         padding: 10px 24px 8px;
                         font-size: 1rem;
                         line-height: 1;
@@ -487,6 +502,7 @@ nav#site-navigation {
             .form-footer {
                 display: flex;
                 justify-content: space-between;
+                flex-wrap: wrap;
                 #btn-continue-donate {
                     padding: 10px 22px 8px;
                     font-size: 1rem;
@@ -602,6 +618,10 @@ nav#site-navigation {
         padding: 16px 20px 20px;
         background-color: $dv_dark;
         animation: nav-slide-show 0.2s linear both;
+        .primary-menu-container {
+            max-width: 890px;
+            margin: auto;
+        }
         ul#primary-menu-list {
             flex-direction: column;
             li.menu-item {
@@ -646,13 +666,14 @@ nav#site-navigation {
                 display: flex;
                 .col {
                     flex-wrap: wrap;
-                    gap: 8px;
+                    gap: 12px;
                     border-bottom: none;
                 }
                 li {
                     border: none;
                 }
                 .useful-links-list {
+                    margin-bottom: 16px;
                     justify-content: center;
                     li {
                         padding-top: 2px;
@@ -664,18 +685,18 @@ nav#site-navigation {
                     }
                 }
                 #btn-phone {
-                    padding: 10px 16px;
+                    padding: 12px 16px;
                     background-color: $dv_white;
                     height: fit-content;
                 }
                 #btn-member-login {
-                    padding: 10px 20px;
+                    padding: 12px 22px;
                     line-height: 1;
                     background-color: $dv_white;
                     height: fit-content;
                 }
                 #btn-search {
-                    padding: 10px 16px;
+                    padding: 12px 16px;
                     height: fit-content;
                 }
                 #btn-donate {
@@ -709,6 +730,21 @@ nav#site-navigation {
             padding: 10px 16px!important;
         }
     }
+    .donate-popup {
+        .donate-wrapper {
+            margin-top: 120px!important;
+            p {
+                font-size: 0.875rem;
+            }
+            form {
+                .amount-options {
+                    .amounts-list {
+                        gap: 24px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 /*************************** Mobile **************************/
@@ -721,6 +757,25 @@ nav#site-navigation {
     .search-common-wrapper {
         #btn-close-search {
             right: 20px;
+        }
+    }
+    .donate-popup {
+        .donate-wrapper {
+            padding: 60px 24px 40px;
+            form {
+                .amount-options {
+                    .amounts-list {
+                        gap: 24px;
+                    }
+                }
+            }
+            #btn-close-donate {
+                .close-icon {
+                    width: 32px;
+                    height: 30px;
+                    font-size: 18px;
+                }
+            }
         }
     }
 }
@@ -750,20 +805,16 @@ nav#site-navigation {
     }
 }
 
-
-@keyframes header-slide-down {
+@keyframes dv-slide-down {
     0% {
-        display: none;
         transform: translateY(-100%);
     }
   
     50% {
-        display: block;
         transform: translateY(-50%);
     }
   
     100% {
-        display: block;
         transform: translateY(0%);
     }
 }

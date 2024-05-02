@@ -12,10 +12,6 @@
 
     &.active {
         display: block;
-        form.search-form {
-            display: block;
-            animation: search-slide-down 0.2s linear both;
-        }
     }
     .container {
         width: 100%;
@@ -34,8 +30,8 @@
         }
     }
     form.search-form {
-        display: none;
         margin: 20vh auto auto;
+        animation: search-slide-down 0.2s linear both;
     }
     #btn-close-search {
         padding: 0;
@@ -83,6 +79,33 @@
             }
         }
     }
+
+    /********************** Mobile ********************/
+    @media only screen and (max-width: 600px) {
+        .search-header {
+            margin-top: 60px;
+            img.site-logo {
+                width: 120px;
+            }
+        }
+        form.search-form {
+            input[type=search] {
+                padding: 14px 16px 12px;
+                font-size: 1rem;
+            }
+            button.search-submit-btn {
+                padding: 10px 16px;
+                .search-icon {
+                    width: 18px;
+                    height: 18px;
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Search form
@@ -107,7 +130,7 @@ form.search-form {
             display: flex;
             gap: 4px;
             li {
-                font-size: 0.857rem;
+                font-size: 0.875rem;
                 a {
                     color: $primary_color;
                     font-family: $primary_font_bold;
@@ -125,7 +148,7 @@ form.search-form {
     input[type=search] {
         min-height: 38px;
         width: 100%;
-        padding: 25px 36px 21px;
+        padding: 22px 36px 18px;
         font-size: 1.125rem;
         font-family: $primary_font_bold;
         letter-spacing: 0.6px;
@@ -136,7 +159,7 @@ form.search-form {
         }
     }
     button.search-submit-btn {
-        padding: 20px;
+        padding: 20px 22px;
         line-height: 1;
         border: none;
         background: none;
@@ -176,22 +199,22 @@ form.search-form {
 
 @keyframes search-slide-down {
     0% {
-        visibility: hidden;
+        opacity: 0;
         transform: translateY(-200%);
     }
     50% {
-        visibility: visible;
+        opacity: 0.5;
         transform: translateY(-100%);
     }
     100% {
-        visibility: visible;
+        opacity: 1;
         transform: translateY(0);
     }
 }
 
 // ================== Search page ===================
 .search-results-wrapper {
-    padding: 50px 15px 150px;
+    padding: 50px 15px 120px;
     margin: 0 auto;
     max-width: 1054px;
     width: 100%;
@@ -407,7 +430,8 @@ form.search-form {
 
     /********************* Tablet ********************/
     @media only screen and (max-width: 1024px) {
-        padding: 40px 15px 100px;
+        max-width: 900px;
+        padding: 40px 15px 80px;
         form.search-results-form {
             .search-inner {
                 margin-bottom: 32px;
@@ -438,21 +462,28 @@ form.search-form {
                 }
                 button[type=submit] {
                     padding: 14px 26px 12px;
+                    font-size: 0.875rem;
                 }
             }
         }
         #search-results {
+            padding: 24px 16px;
             .result-item {
                 .__title {
-                    font-size: 1.125rem;
+                    font-size: 1rem;
                 }
                 .__link {
                     margin-bottom: 8px;
+                    font-size: 0.813rem;
                 }
             }
         }
         .bottom-cta {
             margin-top: 32px;
+            #btn-load-more-results {
+                padding: 12px 22px 10px;
+                font-size: 0.875rem;
+            }
         }
     }
 }

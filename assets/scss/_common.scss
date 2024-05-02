@@ -87,10 +87,10 @@ ul, ol {
 }
 
 li {
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     padding-left: 6px;
     font-size: 0.875rem;
-    line-height: 142%;
+    line-height: 140%;
     &:last-child {
         margin-bottom: 0;
     }
@@ -312,6 +312,14 @@ section.post-title {
     }
     section.post-title {
         padding: 30px 0 0;
+        .container {
+            max-width: 900px;
+        }
+    }
+    .breadcrumb {
+        .breadcrumb-list {
+            max-width: 900px;
+        }
     }
 }
 
@@ -325,6 +333,13 @@ section.post-title {
     p {
         margin: 14px 0;
     }
+    ul, ol {
+        margin: 20px 0 26px;
+        padding-left: 24px;
+        li{
+            padding-left: 2px;
+        }
+    }
     .breadcrumb {
         .breadcrumb-list {
             li {
@@ -334,13 +349,10 @@ section.post-title {
     }
 }
 
+/********************** Mobile **********************/
 @media only screen and (max-width: 600px) {
     table {
-        min-width: auto;
-        tr {
-            th, td {
-                padding: 12px 14px 8px;
-            }
-        }
+        min-width: 100%;
     }
 }
+

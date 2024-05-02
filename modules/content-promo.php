@@ -71,7 +71,7 @@ if( get_row_layout() == 'content_promo' ):
                                     <div class="main-content"> 
                                         <div class="col-left">
                                             <?php if ($title): ?>
-                                                <h2 class="title"><?php echo $title; ?></h2>
+                                                <h2 class="title"><span><?php echo $title; ?></span></h2>
                                             <?php endif; ?>
 
                                             <?php if ($item['description']): ?>
@@ -118,7 +118,7 @@ if( get_row_layout() == 'content_promo' ):
                                 <?php if ($image && $image['url']): ?>
                                     <!-- Carousel image -->
                                     <div class="item-img">
-                                        <img class="main-img" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>" loading="lazy">
+                                        <img class="main-img" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>">
                                     </div><!-- .Carousel image -->
                                 <?php endif; ?>
                             </div>

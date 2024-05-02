@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
     // Call the function on page load
     dv_set_css_variable();
 
-    // resize event
+    // Resize event
     $(window).on('resize', function() {
         dv_set_css_variable();
     });
@@ -23,6 +23,22 @@ jQuery(document).ready(function ($) {
     $(window).on('load', function() {
         // Call the scroll events function
         dv_apply_all_scroll_events();
+    });
+
+    // Resize, Scroll & Load event
+    $(window).on('resize scroll load', function() {
+        // Active Content Promo when scroll
+        $("section.content-promo .carousel-wrapper").each(function() {
+            if ($(this).dv_is_element_in_viewport()) {
+                $(this).addClass('active')
+            }
+        });
+        // Active Footer banner when scroll
+        $("footer .footer-banner").each(function() {
+            if ($(this).dv_is_element_in_viewport()) {
+                $(this).addClass('active')
+            }
+        });
     });
 
     /**
@@ -62,6 +78,20 @@ jQuery(document).ready(function ($) {
         }
         
     }
+
+    /**
+     * Check the element in viewport
+     * 
+     */
+    $.fn.dv_is_element_in_viewport = function() {
+        let elementTop = $(this).offset().top;
+        let elementBottom = elementTop + $(this).outerHeight();
+    
+        let viewportTop = $(window).scrollTop();
+        let viewportBottom = viewportTop + $(window).height();
+    
+        return elementBottom > viewportTop && elementTop < viewportBottom;
+    };
 
     /**
      * Change status of aria-expanded attr
@@ -328,7 +358,7 @@ jQuery(document).ready(function ($) {
 
         donate_popup.toggleClass('show')
         donate_wrapper.css('margin-top', wrapper_margin +'px')
-        donate_wrapper.slideToggle(200)
+        donate_wrapper.slideDown(200)
         dv_aria_expanded_status(this_btn);
 
         setTimeout(function() {

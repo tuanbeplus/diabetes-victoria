@@ -3,6 +3,10 @@ section.main-content {
     background-color: var(--s-bg-color);
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);  
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
+    }
     @media(max-width: 768px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
@@ -16,6 +20,7 @@ section.main-content {
         .content-wrapper {
             width: 100%;
             background-color: #fff;
+            animation: content-slide-left 0.3s linear both;
             img {
                 display: block;
             }
@@ -62,6 +67,7 @@ section.main-content {
         .sidebar {
             max-width: 300px;
             width: 100%;
+            animation: sidebar-slide-right 0.4s linear both;
             .__heading {
                 margin: 0 0 20px;
                 font-size: 1.063rem;
@@ -188,6 +194,39 @@ section.main-content {
     }
 }
 
+@keyframes content-slide-left {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0.1;
+    }
+  
+    50% {
+        transform: translateX(-50%);
+        opacity: 0.5;
+    }
+  
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+@keyframes sidebar-slide-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0.1;
+    }
+  
+    50% {
+        transform: translateX(50%);
+        opacity: 0.5;
+    }
+  
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1200px) {
     section.main-content {
@@ -208,6 +247,7 @@ section.main-content {
 @media only screen and (max-width: 1024px) {
     section.main-content {
         .main-content-inner {
+            max-width: 900px;
             gap: 24px;
             .content-wrapper {
                 .__content {
@@ -252,6 +292,7 @@ section.main-content {
             .content-wrapper {
                 .__content {
                     .__title {
+                        margin-bottom: 24px;
                         font-size: 1.5rem;
                     }
                 }

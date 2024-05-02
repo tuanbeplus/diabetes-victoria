@@ -56,6 +56,13 @@ if( get_row_layout() == 'key_cards' ):
                                 </div>
                             <?php endif; ?>
                             <style>
+                                <?php 
+                                    $duration_str = '0.'.$index;
+                                    $duration = 0.4 + (float)$duration_str;
+                                ?>
+                                #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> {
+                                    animation-duration: <?php echo $duration.'s'; ?>;
+                                }
                                 #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .landing-page a {
                                     color: <?php echo $brand_color ?>!important;
                                 }

@@ -3,6 +3,7 @@
     background-color: var(--s-bg-color);
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
+    overflow: hidden;
     @media(max-width: 1024px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.75);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
@@ -12,8 +13,8 @@
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
     }
     .carousel-wrapper {
-        overflow-y: hidden;
         background-color: $primary_color;
+        animation: slide-right-animation 0.4s linear both;
         .carousel-item {
             min-height: 440px;
             &:not(:first-child) {
@@ -123,6 +124,8 @@
                 margin: 0;
                 padding: 0;
                 button {
+                    display: block;
+                    padding: 0;
                     width: 22px;
                     height: 22px;
                     color: transparent;
@@ -152,11 +155,25 @@
             right: 0;
         }
     }
+
+/* The slide right effect */
+@keyframes slide-right-animation {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(50%);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-/*************************** Laptop **************************/
-@media only screen and (max-width: 1440px) {
-    .hero-carousel {
+    /*************************** Laptop **************************/
+    @media only screen and (max-width: 1440px) {
         .carousel-wrapper {
             .carousel-item {
                 min-height: unset;
@@ -179,10 +196,8 @@
             }
         }
     }
-}
 
-@media only screen and (max-width: 1200px) {
-    .hero-carousel {
+    @media only screen and (max-width: 1200px) {
         .carousel-wrapper {
             .carousel-item {
                 padding-bottom: 16px;
@@ -206,11 +221,9 @@
             }
         }
     }
-}
 
-/*************************** Tablet **************************/
-@media only screen and (max-width: 1024px) {
-    .hero-carousel {
+    /*************************** Tablet **************************/
+    @media only screen and (max-width: 1024px) {
         .carousel-wrapper {
             padding-bottom: 30px;
             .carousel-item {
@@ -249,4 +262,82 @@
             }
         }
     }
+
+    @media only screen and (max-width: 768px) {
+        .carousel-wrapper {
+            padding-bottom: 24px;
+            .carousel-item {
+                padding-bottom: 0;
+                .item-inner {
+                    gap: 24px;
+                    .item-content {
+                        .title {
+                            font-size: 1.75rem;
+                        }
+                    }
+                    .item-img {
+                        img.main-img {
+                            max-width: 240px;
+                        }
+                        img.quote-shape {
+                            right: -50px;
+                            width: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /*************************** Mobile **************************/
+    @media only screen and (max-width: 600px) {
+        .carousel-wrapper {
+            .carousel-item {
+                .item-inner {
+                    flex-wrap: wrap-reverse;
+                    gap: 0;
+                    .item-content {
+                        .title {
+                            font-size: 1.5rem;
+                        }
+                        .group-cta {
+                            .primary-cta {
+                                padding: 10px 18px 8px;
+                            }
+                        }
+                    }
+                    .item-img {
+                        max-width: 100%;
+                        img.main-img {
+                            margin: auto;
+                            max-width: 280px;
+                        }
+                        img.quote-shape {
+                            right: 6px;
+                            width: 180px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        .carousel-wrapper {
+            .carousel-item {
+                .item-inner {
+                    .item-img {
+                        img.main-img {
+                            max-width: 240px;
+                        }
+                        img.quote-shape {
+                            top: 10px;
+                            width: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

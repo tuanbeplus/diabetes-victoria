@@ -2,6 +2,7 @@
 .content-promo {
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
+    overflow: hidden;
     @media(max-width: 1024px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.75);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
@@ -10,8 +11,16 @@
         padding-top: calc(var(--s-pd-top, 60px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
     }
+    
     .carousel-wrapper {
         background-color: var(--s-bg-color, $primary_color);
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 0.5s, transform 0.5s;
+        &.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
         .carousel-item {
             &:not(:first-child) {
                 display: none;
@@ -163,6 +172,8 @@
                 margin: 0;
                 padding: 0;
                 button {
+                    display: block;
+                    padding: 0;
                     width: 22px;
                     height: 22px;
                     color: transparent;
@@ -197,7 +208,6 @@
             overflow: hidden;
             .carousel-item {
                 .item-inner {
-                    gap: 60px;
                     .item-content {
                         margin-bottom: 40px;
                     }
@@ -213,17 +223,29 @@
             }
         }
     }
-}
 
-/*************************** Laptop **************************/
-@media only screen and (max-width: 1440px) {
-    .content-promo {
-        .carousel-item {
-            .item-inner {
-                gap: 50px;
-                .item-content {
-                    .main-content {
-                        gap: 40px;
+    /*************************** Laptop **************************/
+    @media only screen and (max-width: 1440px) {
+        .carousel-wrapper {
+            .carousel-item {
+                .item-inner {
+                    gap: 60px;
+                    .item-content {
+                        .main-content {
+                            gap: 60px;
+                        }
+                    }
+                }
+            }
+        }
+        &.carousel {
+            .carousel-wrapper {
+                .carousel-item {
+                    padding-bottom: 70px;
+                    .item-inner {
+                        .item-img {
+                            max-width: 500px;
+                        }
                     }
                 }
             }
@@ -232,7 +254,6 @@
             .carousel-wrapper {
                 .carousel-item {
                     .item-inner {
-                        gap: 40px;
                         .item-img {
                             max-width: calc(var(--s-img-width) * 0.8);
                             img.main-img {
@@ -244,16 +265,41 @@
             }
         }
     }
-}
 
-/*************************** Laptop **************************/
-@media only screen and (max-width: 1200px) {
-    .content-promo {
+    /*************************** Laptop **************************/
+    @media only screen and (max-width: 1200px) {
+        .carousel-wrapper {
+            .carousel-item {
+                padding-bottom: 82px;
+                .item-inner {
+                    gap: 50px;
+                    .item-content {
+                        .main-content {
+                            gap: 50px;
+                            .title {
+                                font-size: 2.188rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.carousel {
+            .carousel-wrapper {
+                .carousel-item {
+                    padding-bottom: 82px;
+                    .item-inner {
+                        .item-img {
+                            max-width: 400px;
+                        }
+                    }
+                }
+            }
+        }
         &.static {
             .carousel-wrapper {
                 .carousel-item {
                     .item-inner {
-                        gap: 40px;
                         .item-img {
                             max-width: calc(var(--s-img-width) * 0.6);
                             img.main-img {
@@ -265,19 +311,169 @@
             }
         }
     }
-}
 
-/*************************** Tablet **************************/
-@media only screen and (max-width: 1024px) {
-    .content-promo {
+    /*************************** Tablet **************************/
+    @media only screen and (max-width: 1024px) {
+        .carousel-wrapper {
+            .carousel-item {
+                padding-bottom: 0;
+                .item-inner {
+                    gap: 40px;
+                    .item-content {
+                        .landing-page {
+                            .cta-btn {
+                                font-size: 1.375rem;
+                                padding: 20px 32px 16px;
+                            }
+                        }
+                        .main-content {
+                            margin-top: 32px;
+                            flex-direction: column;
+                            gap: 32px;
+                            .title {
+                                font-size: 2rem;
+                            }
+                            .group-cta {
+                                .primary-cta {
+                                    padding: 12px 20px 10px;
+                                    font-size: 1rem;
+                                }
+                                .secondary-cta {
+                                    font-size: 1rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.carousel {
+            .carousel-wrapper {
+                .carousel-item {
+                    padding-bottom: 72px;
+                    .item-inner {
+                        .item-img {
+                            max-width: 360px;
+                        }
+                    }
+                }
+            }
+        }
         &.static {
             .carousel-wrapper {
                 .carousel-item {
                     .item-inner {
-                        gap: 40px;
+                        .item-img {
+                            max-width: calc(var(--s-img-width) * 0.4);
+                            img.main-img {
+                                max-width: calc(var(--s-img-width) * 0.4);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /*************************** Mobile **************************/
+    @media only screen and (max-width: 600px) {
+        .carousel-wrapper {
+            .carousel-item {
+                .item-inner {
+                    flex-wrap: wrap-reverse;
+                    gap: 24px;
+                    .item-content {
+                        .landing-page {
+                            .cta-btn {
+                                padding: 14px 22px 12px;
+                                font-size: 1.125rem;
+                            }
+                        }
+                        .main-content {
+                            margin-top: 24px;
+                            gap: 24px;
+                            .title {
+                                font-size: 1.5rem;
+                            }
+                            .group-cta {
+                                margin-top: 24px;
+                                .primary-cta {
+                                    padding: 10px 16px 8px;
+                                    font-size: 0.875rem;
+                                }
+                                .secondary-cta {
+                                    font-size: 0.875rem;
+                                }
+                            }
+                            .additional-content {
+                                h3 {
+                                    margin-bottom: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.carousel {
+            .carousel-wrapper {
+                .carousel-item {
+                    padding-bottom: 62px;
+                    .item-inner {
+                        .item-img {
+                            max-width: 100%;
+                            img.main-img {
+                                margin: auto;
+                                max-width: 300px;
+                            }
+                        }
+                    }
+                }
+                .slick-dots {
+                    bottom: 24px;
+                }
+            }
+        }
+        &.static {
+            .carousel-wrapper {
+                .carousel-item {
+                    .item-inner {
+                        .item-img {
+                            display: flex;
+                            max-width: 100%;
+                            img.main-img {
+                                margin: auto;
+                                max-width: 300px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        &.carousel {
+            .carousel-wrapper {
+                .carousel-item {
+                    .item-inner {
                         .item-img {
                             img.main-img {
-                                width: 100%;
+                                margin: auto;
+                                max-width: 240px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.static {
+            .carousel-wrapper {
+                .carousel-item {
+                    .item-inner {
+                        .item-img {
+                            img.main-img {
+                                margin: auto;
                             }
                         }
                     }

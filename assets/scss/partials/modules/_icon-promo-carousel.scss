@@ -98,7 +98,15 @@
                 }
             }
         }
+        @media(max-width: 1200px) {
+            .ipro-heading {
+                font-size: 2.188rem;
+            }
+        }
         @media(max-width: 1023.98px) {
+            .ipro-heading {
+                font-size: 2rem;
+            }
             .carousel-wrapper .slick-list {
                 max-width: 680px;
             }
@@ -114,6 +122,15 @@
                 .carousel-inner {
                     padding: 0 15px;
                 }
+            }
+        }
+        @media(max-width: 600px) {
+            .ipro-heading-wrap {
+                margin-bottom: 32px;
+                gap: 6px;
+            }
+            .ipro-heading {
+                font-size: 1.5rem;
             }
         }
     }
