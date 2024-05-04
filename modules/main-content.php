@@ -28,7 +28,7 @@ if( get_row_layout() == 'main_content' ):
         <section id="main-content-<?php echo $section_id; ?>" class="main-content">
             <div class="main-content-inner">
                 <!-- Content -->
-                <div class="content-wrapper">
+                <div class="content-wrapper" <?php if ($show_sidebar == true) echo 'style="max-width:660px;"' ?>>
                     <?php if (!empty($banner_image['url'])): ?>
                         <img class="__banner" src="<?php echo $banner_image['url']; ?>" alt="<?php echo $banner_image['alt']; ?>">
                     <?php endif; ?>

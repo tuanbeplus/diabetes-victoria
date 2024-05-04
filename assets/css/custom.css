@@ -21,8 +21,8 @@
 }
 @font-face {
   font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
-  src: url("/wp-content/themes/diabetes-victoria/assets/fonts/ITCAvantGardeGothicPro-Demi.otf") format("opentype");
-  font-weight: normal;
+  src: url("/wp-content/themes/diabetes-victoria/assets/fonts/ITCAvantGardeGothicPro-Demi-3.ttf") format("truetype");
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -269,7 +269,15 @@
   height: 0;
   overflow: hidden;
 }
-@media (max-width: 767.98px) {
+@media (max-width: 1024px) {
+  .faqs-section .container {
+    max-width: 900px;
+  }
+}
+@media (max-width: 768px) {
+  .faqs-section .container {
+    max-width: 700px;
+  }
   .faqs-section .faqs-wrapper .faqs-heading {
     font-size: 1.8rem;
   }
@@ -471,11 +479,22 @@
      object-fit: cover;
 }
 @media (max-width: 1200px) {
+  .media-slider-section .container {
+    max-width: 1100px;
+  }
   .media-slider-section .media-slider-wrapper .media-slider-heading {
     font-size: 2.188rem;
   }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 1024px) {
+  .media-slider-section .container {
+    max-width: 900px;
+  }
+}
+@media (max-width: 768px) {
+  .media-slider-section .container {
+    max-width: 700px;
+  }
   .media-slider-section .media-slider-wrapper .media-slider-heading {
     font-size: 1.8rem;
   }
@@ -628,11 +647,22 @@
   -webkit-box-orient: vertical;
 }
 @media (max-width: 1200px) {
+  .bespoke-slider-section .container {
+    max-width: 1100px;
+  }
   .bespoke-slider-section .bespoke-slider-wrapper .bespoke-slider-heading {
     font-size: 2.188rem;
   }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 1024px) {
+  .bespoke-slider-section .container {
+    max-width: 900px;
+  }
+}
+@media (max-width: 768px) {
+  .bespoke-slider-section .container {
+    max-width: 700px;
+  }
   .bespoke-slider-section .bespoke-slider-wrapper .bespoke-slider-heading {
     min-width: 200px;
     padding: 20px 26px 16px;
@@ -778,7 +808,10 @@
     max-width: 900px;
   }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
+  .contact-us-section .container {
+    max-width: 700px;
+  }
   .contact-us-section svg {
     top: -5%;
     max-width: 50%;

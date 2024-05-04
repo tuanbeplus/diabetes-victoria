@@ -34,6 +34,7 @@
                 justify-content: space-between;
                 gap: 80px;
                 .item-content {
+                    height: 100%;
                     color: #fff;
                     .main-content {
                         display: flex;
@@ -203,13 +204,24 @@
             right: 0;
         }
     }
+    &.carousel {
+        .carousel-wrapper {
+            .carousel-item {
+                .item-inner {
+                    .item-content {
+                        padding-bottom: 80px;
+                    }
+                }
+            }
+        }
+    }
     &.static {
         .carousel-wrapper {
             overflow: hidden;
             .carousel-item {
                 .item-inner {
                     .item-content {
-                        margin-bottom: 40px;
+                        padding-bottom: 40px;
                     }
                     .item-img {
                         width: 100%;
@@ -241,7 +253,6 @@
         &.carousel {
             .carousel-wrapper {
                 .carousel-item {
-                    padding-bottom: 70px;
                     .item-inner {
                         .item-img {
                             max-width: 500px;
@@ -287,8 +298,10 @@
         &.carousel {
             .carousel-wrapper {
                 .carousel-item {
-                    padding-bottom: 82px;
                     .item-inner {
+                        .item-content {
+                            padding-bottom: 82px;
+                        }
                         .item-img {
                             max-width: 400px;
                         }
@@ -350,8 +363,10 @@
         &.carousel {
             .carousel-wrapper {
                 .carousel-item {
-                    padding-bottom: 72px;
                     .item-inner {
+                        .item-content {
+                            padding-bottom: 72px;
+                        }
                         .item-img {
                             max-width: 360px;
                         }
@@ -418,8 +433,10 @@
         &.carousel {
             .carousel-wrapper {
                 .carousel-item {
-                    padding-bottom: 62px;
                     .item-inner {
+                        .item-content {
+                            padding-bottom: 62px;
+                        }
                         .item-img {
                             max-width: 100%;
                             img.main-img {

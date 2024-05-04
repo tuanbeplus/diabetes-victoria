@@ -15,13 +15,21 @@
     .carousel-wrapper {
         background-color: $primary_color;
         animation: slide-right-animation 0.4s linear both;
+        .slick-track {
+            display: flex;
+        }
         .carousel-item {
-            min-height: 440px;
+            height: auto;
             &:not(:first-child) {
                 display: none;
             }
             &.slick-slide {
                 display: block;
+            }
+            &.slick-active {
+                .item-inner .item-img img.quote-shape {
+                    visibility: visible;
+                }
             }
             .item-inner {
                 margin: 0 auto;
@@ -30,7 +38,8 @@
                 gap: 60px;
                 .item-content {
                     max-width: 760px;
-                    padding: 60px 0 20px;
+                    height: 100%;
+                    padding: 60px 0 110px;
                     color: #fff;
                     display: flex;
     
@@ -40,9 +49,18 @@
                         line-height: 120%;
                     }
                     .description {
-                        font-size: 0.875rem;
-                        line-height: 140%;
-                        color: #fff;
+                        margin-top: 24px;
+                        * {
+                            font-size: 1rem;
+                            line-height: 140%;
+                            color: #fff;
+                        }
+                        *:first-child {
+                            margin-top: 0;
+                        }
+                        *:last-child {
+                            margin-bottom: 0;
+                        }
                     }
                     .group-cta {
                         margin-top: 32px;
@@ -101,6 +119,7 @@
                         z-index: 2;
                     }
                     img.quote-shape {
+                        visibility: hidden;
                         position: absolute;
                         top: 20px;
                         right: -30%;
@@ -200,11 +219,10 @@
     @media only screen and (max-width: 1200px) {
         .carousel-wrapper {
             .carousel-item {
-                padding-bottom: 16px;
                 min-height: unset;
                 .item-inner {
                     .item-content {
-                        padding: 30px 0 20px;
+                        padding: 30px 0 80px;
                         .title {
                             font-size: 2.188rem;
                         }
@@ -225,11 +243,11 @@
     /*************************** Tablet **************************/
     @media only screen and (max-width: 1024px) {
         .carousel-wrapper {
-            padding-bottom: 30px;
             .carousel-item {
                 min-height: unset;
                 .item-inner {
                     .item-content {
+                        padding: 30px 0 70px;
                         max-width: 560px;
                         .title {
                             font-size: 2rem;
@@ -256,18 +274,14 @@
                 }
             }
             .slick-dots {
-                position: relative;
-                bottom: unset;
-                margin-top: 4px;
+                bottom: 24px;
             }
         }
     }
 
     @media only screen and (max-width: 768px) {
         .carousel-wrapper {
-            padding-bottom: 24px;
             .carousel-item {
-                padding-bottom: 0;
                 .item-inner {
                     gap: 24px;
                     .item-content {

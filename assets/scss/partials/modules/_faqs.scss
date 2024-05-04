@@ -97,13 +97,25 @@
           overflow: hidden;
         }
     }
-    @media(max-width: 767.98px) {
+  }  
+  @media(max-width: 1024px) {
+    .container {
+      max-width: 900px;
+    }
+  }
+  @media(max-width: 768px) {
+    .container {
+      max-width: 700px;
+    }
+    .faqs-wrapper {
       .faqs-heading {
         font-size: 1.8rem;
       }
     }
-    @media(max-width: 600px) {
+  }
+  @media(max-width: 600px) {
+    .faqs-wrapper {
       padding: 32px 20px;
     }
-  }  
+  }
 }

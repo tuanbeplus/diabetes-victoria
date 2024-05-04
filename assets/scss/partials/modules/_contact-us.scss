@@ -123,7 +123,10 @@
         }
     }
 
-    @media(max-width: 767.98px) {
+    @media(max-width: 768px) {
+        .container {
+            max-width: 700px; 
+        }
         svg {
             top: -5%;
             max-width: 50%;
@@ -137,6 +140,5 @@
                 font-size: 1.8rem;
             }
         }
-        
     }
 }

@@ -41,7 +41,7 @@ if( get_row_layout() == 'hero_carousel' ):
                                         <?php endif; ?>
 
                                         <?php if ($item['description']): ?>
-                                            <p class="description"><?php echo $item['description']; ?></p>
+                                            <div class="description"><?php echo $item['description']; ?></div>
                                         <?php endif; ?>
 
                                         <?php if ($primary_cta['visibility'] == true || $secondary_cta['visibility'] == true): ?>
@@ -117,7 +117,7 @@ if( get_row_layout() == 'hero_carousel' ):
         <?php
         // Style
         $bg_color = get_sub_field('background_color');
-        $bg_color = !empty($bg_color) ? $bg_color : '#019BC2';
+        $bg_color = !empty($bg_color) ? $bg_color : 'transparent';
         $pd_top = get_sub_field('padding_top');
         $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
         $pd_bottom = get_sub_field('padding_bottom');

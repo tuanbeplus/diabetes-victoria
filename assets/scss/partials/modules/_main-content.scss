@@ -289,6 +289,7 @@ section.main-content {
 @media only screen and (max-width: 768px) {
     section.main-content {
         .main-content-inner {
+            max-width: 700px;
             .content-wrapper {
                 .__content {
                     .__title {

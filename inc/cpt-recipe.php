@@ -34,7 +34,7 @@ function dv_recipe_register() {
 		'show_ui'         => true,
 		'capability_type' => 'post',
 		'hierarchical'    => false,
-		'menu_icon'       => $ctp_icon,
+		'menu_icon'       => 'dashicons-book',
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
 		'supports'        => array('title', 'thumbnail')
   	);
