@@ -344,7 +344,7 @@
                             flex-direction: column;
                             gap: 32px;
                             .title {
-                                font-size: 2rem;
+                                font-size: 1.875rem;
                             }
                             .group-cta {
                                 .primary-cta {
@@ -379,9 +379,25 @@
                 .carousel-item {
                     .item-inner {
                         .item-img {
+                            max-width: calc(var(--s-img-width) * 0.5);
+                            img.main-img {
+                                max-width: calc(var(--s-img-width) * 0.6);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        &.static {
+            .carousel-wrapper {
+                .carousel-item {
+                    .item-inner {
+                        .item-img {
                             max-width: calc(var(--s-img-width) * 0.4);
                             img.main-img {
-                                max-width: calc(var(--s-img-width) * 0.4);
+                                max-width: calc(var(--s-img-width) * 0.5);
                             }
                         }
                     }

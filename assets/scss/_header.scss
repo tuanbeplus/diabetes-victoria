@@ -330,8 +330,8 @@ nav#site-navigation {
                 margin-top: -6px;
             }
             &:hover{
-                .sub-menu {
-                    display: block;
+                > .sub-menu {
+                    display: block!important;
                 }
                 &::after {
                     transform: rotate(-180deg);
@@ -346,7 +346,6 @@ nav#site-navigation {
             transform: translateY(100%);
             bottom: 1px;
             background-color: $primary_color;
-            transition: all 0.3s;
             z-index: 10;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
         }
@@ -580,6 +579,7 @@ nav#site-navigation {
         box-shadow: 0px 10px 20px -25px rgba(0, 0, 0, 0.5);
     }
     #top-menu {
+        border-bottom: none;
         .top-menu-list {
             flex-wrap: wrap;
             justify-content: center;

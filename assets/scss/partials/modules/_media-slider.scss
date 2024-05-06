@@ -69,6 +69,11 @@
         .container {
             max-width: 900px;
         }
+        .media-slider-wrapper {
+            .media-slider-heading {
+                font-size: 1.875rem;
+            }
+        }
     }
     @media(max-width: 768px) {
         .container {

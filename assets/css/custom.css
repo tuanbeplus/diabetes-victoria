@@ -273,6 +273,9 @@
   .faqs-section .container {
     max-width: 900px;
   }
+  .faqs-section .faqs-wrapper .faqs-heading {
+    font-size: 1.875rem;
+  }
 }
 @media (max-width: 768px) {
   .faqs-section .container {
@@ -285,6 +288,9 @@
 @media (max-width: 600px) {
   .faqs-section .faqs-wrapper {
     padding: 32px 20px;
+  }
+  .faqs-section .faqs-wrapper .faqs-heading {
+    font-size: 1.5rem;
   }
 }
 
@@ -395,7 +401,7 @@
 }
 @media (max-width: 1023.98px) {
   .ipro-carousel-section .ipro-carousel-wrapper .ipro-heading {
-    font-size: 2rem;
+    font-size: 1.875rem;
   }
   .ipro-carousel-section .ipro-carousel-wrapper .carousel-wrapper .slick-list {
     max-width: 680px;
@@ -489,6 +495,9 @@
 @media (max-width: 1024px) {
   .media-slider-section .container {
     max-width: 900px;
+  }
+  .media-slider-section .media-slider-wrapper .media-slider-heading {
+    font-size: 1.875rem;
   }
 }
 @media (max-width: 768px) {
@@ -658,6 +667,9 @@
   .bespoke-slider-section .container {
     max-width: 900px;
   }
+  .bespoke-slider-section .bespoke-slider-wrapper .bespoke-slider-heading {
+    font-size: 1.875rem;
+  }
 }
 @media (max-width: 768px) {
   .bespoke-slider-section .container {
@@ -807,6 +819,9 @@
   .contact-us-section .container {
     max-width: 900px;
   }
+  .contact-us-section .ctu-wrapper .ctu-heading {
+    font-size: 1.875rem;
+  }
 }
 @media (max-width: 768px) {
   .contact-us-section .container {
@@ -822,5 +837,10 @@
   }
   .contact-us-section .ctu-wrapper .ctu-heading {
     font-size: 1.8rem;
+  }
+}
+@media (max-width: 600px) {
+  .contact-us-section .ctu-wrapper .ctu-heading {
+    font-size: 1.5rem;
   }
 }

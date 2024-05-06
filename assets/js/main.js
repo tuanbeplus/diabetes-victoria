@@ -436,4 +436,29 @@ jQuery(document).ready(function ($) {
         $(this).wrap('<div class="table-wrapper" role="region" tabindex="0"></div>');
     });
 
+    // 
+    $(document).on('focus', '#site-navigation li.menu-item a', function(e) {
+        let menuItem = $(this).closest('li.menu-item')
+        let subMenu = menuItem.find('.sub-menu')
+        subMenu.slideDown(200)
+    });
+
+    $(document).on('blur', '#site-navigation li.menu-item a', function(e) {
+        let menuItem = $(this).closest('ul#primary-menu-list > li.menu-item')
+        let subMenu = menuItem.find('.sub-menu')
+        // Check if sub-menu is the last sub-menu
+        let lastSubMenu = menuItem.find('.sub-menu').last();
+        let isLastSubMenu = subMenu.is(lastSubMenu);
+        // Check if $(this) is the last child of the last sub-menu
+        let isLastChild = $(this).is(lastSubMenu.find('a').last());
+
+        if (isLastSubMenu && isLastChild) {
+            // Find all sub menu
+            let allSubMenu = menuItem.find('.sub-menu')
+            allSubMenu.each(function(e) {
+                $(this).slideUp(200)
+            })
+        }
+    });
+
 })

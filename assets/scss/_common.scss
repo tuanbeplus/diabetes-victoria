@@ -284,14 +284,14 @@ section.post-title {
 /*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
     h1 {
-        font-size: 1.825rem;
+        font-size: 2rem;
     }
     h2 {
-        font-size: 1.425rem;
+        font-size: 1.625rem;
     }
     h3 {
         margin: 18px 0;
-        font-size: 1.125rem;
+        font-size: 1.5rem;
     }
     div.table-wrapper[role=region] {
         margin: 24px 0;
@@ -324,9 +324,12 @@ section.post-title {
 
 @media only screen and (max-width: 768px) {
     h1 {
-        font-size: 1.675rem;
+        font-size: 1.875rem;
     }
     h2 {
+        font-size: 1.5rem;
+    }
+    h3 {
         font-size: 1.25rem;
     }
     p {
@@ -359,6 +362,9 @@ section.post-title {
 
 /********************** Mobile **********************/
 @media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.725rem;
+    }
     table {
         min-width: 100%;
     }

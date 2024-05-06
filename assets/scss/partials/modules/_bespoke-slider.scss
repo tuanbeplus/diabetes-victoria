@@ -156,6 +156,11 @@
         .container {
             max-width: 900px; 
         }
+        .bespoke-slider-wrapper {
+            .bespoke-slider-heading {
+                font-size: 1.875rem;
+            }
+        }
     }
     @media(max-width: 768px) {
         .container {
