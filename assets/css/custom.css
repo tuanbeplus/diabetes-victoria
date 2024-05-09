@@ -199,12 +199,12 @@
   padding: 50px 30px;
 }
 .faqs-section .faqs-wrapper .faqs-heading {
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  margin-top: 0;
+  margin-bottom: 10px;
   font-size: 2.313rem;
   font-weight: normal;
   line-height: 1.3;
   color: var(--post-brand-color, #019BC2);
-  margin: 0;
 }
 .faqs-section .faqs-wrapper .accordion__item {
   border-bottom: 1px solid var(--post-brand-color, #019BC2);
@@ -257,6 +257,8 @@
   margin-bottom: 0;
 }
 .faqs-section .faqs-wrapper .accordion__content-inner img {
+  display: block;
+  margin-bottom: 20px;
   width: auto;
 }
 .faqs-section .faqs-wrapper .accordion__content-inner a {
@@ -290,6 +292,7 @@
     padding: 32px 20px;
   }
   .faqs-section .faqs-wrapper .faqs-heading {
+    margin-bottom: 2px;
     font-size: 1.5rem;
   }
 }

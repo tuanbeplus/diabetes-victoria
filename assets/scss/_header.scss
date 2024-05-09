@@ -290,9 +290,29 @@ header.site-header {
     line-height: 1;
     border: none;
     background-color: transparent;
+    span {
+        display: block;
+    }
+    .icon-bar {
+        animation: icon-bar-rotate 0.2s linear both;
+    }
+    .icon-close {
+        display: none;
+        padding: 0 2px;
+        animation: icon-close-rotate 0.2s linear both;
+    }
+    &.active {
+        .icon-bar {
+            display: none;
+        }
+        .icon-close {
+            display: block;
+        }
+    }
 }
 
 nav#site-navigation {
+    padding-bottom: 20px;
     ul#primary-menu-list {
         margin: 0;
         padding: 0;
@@ -306,7 +326,7 @@ nav#site-navigation {
             position: relative;
             gap: 8px;
             margin: 0;
-            padding: 10px 10px 18px;
+            padding: 10px;
             font-size: 1.094rem;
             line-height: 110%;
             list-style: none;
@@ -557,7 +577,7 @@ nav#site-navigation {
         }
     }
     .header-inner{
-        padding: 20px 0;
+        padding: 20px 0 16px;
     }
     #header-logo {
         img {
@@ -565,6 +585,7 @@ nav#site-navigation {
         }
     }
     nav#site-navigation {
+        padding-bottom: 12px;
         ul#primary-menu-list {
             li.menu-item {
                 font-size: 1rem;
@@ -589,12 +610,15 @@ nav#site-navigation {
                 border-bottom: 1px solid $primary_color;
             }
             #btn-member-login {
+                padding: 12px 30px 10px;
                 font-size: 1rem;
             }
             #btn-donate {
+                padding: 12px 60px 10px;
                 font-size: 1rem;
             }
             #btn-languages {
+                padding: 12px 30px 10px;
                 font-size: 1rem;
             }
         } 
@@ -616,13 +640,15 @@ nav#site-navigation {
         right: 0;
         left: 0;
         padding: 16px 20px 20px;
-        background-color: $dv_dark;
+        background-color: $primary_color;
+        border-top: 1px solid #99D6E9;
         animation: nav-slide-show 0.2s linear both;
         .primary-menu-container {
             max-width: 890px;
             margin: auto;
         }
         ul#primary-menu-list {
+            margin-bottom: 8px;
             flex-direction: column;
             li.menu-item {
                 a {
@@ -661,7 +687,7 @@ nav#site-navigation {
         #top-menu {
             display: block;
             border-bottom: none;
-            background-color: $dv_dark;
+            background-color: $primary_color;
             .top-menu-list {
                 display: flex;
                 .col {
@@ -675,6 +701,7 @@ nav#site-navigation {
                 .useful-links-list {
                     margin-bottom: 16px;
                     justify-content: center;
+                    row-gap: 16px;
                     li {
                         padding-top: 2px;
                         font-size: 0.875rem;
@@ -690,7 +717,7 @@ nav#site-navigation {
                     height: fit-content;
                 }
                 #btn-member-login {
-                    padding: 12px 22px;
+                    padding: 13px 22px 11px;
                     line-height: 1;
                     background-color: $dv_white;
                     height: fit-content;
@@ -700,7 +727,7 @@ nav#site-navigation {
                     height: fit-content;
                 }
                 #btn-donate {
-                    padding: 12px 22px;
+                    padding: 13px 22px 11px;
                     line-height: 1;
                     height: fit-content;
                 }
@@ -722,6 +749,16 @@ nav#site-navigation {
     }
     #btn-nav-bar {
         font-size: 26px;
+    }
+    nav#site-navigation {
+        .primary-menu-container {
+            max-width: 670px;
+        }
+        ul#primary-menu-list {
+            li.menu-item {
+                padding: 10px 0;
+            }
+        }
     }
     .search-common-wrapper {
         #btn-close-search {
@@ -788,7 +825,7 @@ nav#site-navigation {
         font-size: 24px;
     }
     .top-menu-mobile {
-        border-top: 1px solid $dv_white;
+        border-top: 1px solid #99D6E9;
         #top-menu {
             .top-menu-list {
                 .col:first-child {
@@ -796,7 +833,7 @@ nav#site-navigation {
                 }
                 .useful-links-list {
                     flex-direction: column;
-                    margin-bottom: 10px;
+                    margin: 10px 0;
                     padding-left: 4px;
                     row-gap: 20px;
                 }
@@ -839,5 +876,23 @@ nav#site-navigation {
     100% {
         visibility: visible;
         transform: translateX(0%);
+    }
+}
+
+@keyframes icon-bar-rotate {
+    0% {
+        transform: rotate(-45deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@keyframes icon-close-rotate {
+    0% {
+        transform: rotate(45deg);
+    }
+    100% {
+        transform: rotate(0);
     }
 }

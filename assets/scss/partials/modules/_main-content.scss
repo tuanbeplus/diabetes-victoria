@@ -17,6 +17,11 @@ section.main-content {
         padding: 0 15px;
         display: flex;
         gap: 66px;
+        &.has-sidebar {
+            .content-wrapper {
+                width: 66%;
+            }
+        }
         .content-wrapper {
             width: 100%;
             background-color: #fff;
@@ -50,6 +55,9 @@ section.main-content {
                         margin-left: auto;
                         margin-right: auto;
                     }
+                }
+                iframe {
+                    width: 100%!important;
                 }
                 .__cta {
                     display: block;
@@ -111,6 +119,9 @@ section.main-content {
                         font-size: 0.875rem;
                         font-family: $primary_font_bold;
                         color: #fff;
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
                         a {
                             color: #fff;
                         }
@@ -262,7 +273,7 @@ section.main-content {
                     padding: 20px;
                 }
                 .secondary-info {
-                    padding: 20px;
+                    padding: 10px 20px 20px;
                 }
                 .additional-info-boxes {
                     .aib-box {
@@ -275,21 +286,16 @@ section.main-content {
     }
 }
 
-@media only screen and (max-width: 840px) {
-    section.main-content {
-        .main-content-inner {
-            flex-wrap: wrap-reverse;
-            .sidebar {
-                max-width: 100%;
-            }
-        }
-    }
-}
-
 @media only screen and (max-width: 768px) {
     section.main-content {
         .main-content-inner {
+            flex-wrap: wrap-reverse;
             max-width: 700px;
+            &.has-sidebar {
+                .content-wrapper {
+                    width: 100%;
+                }
+            }
             .content-wrapper {
                 .__content {
                     .__title {
@@ -299,6 +305,7 @@ section.main-content {
                 }
             }
             .sidebar {
+                max-width: 100%;
                 .additional-info-boxes {
                     margin-top: 24px;
                 }

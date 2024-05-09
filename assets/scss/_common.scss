@@ -112,6 +112,12 @@ a {
     text-decoration: none;
 }
 
+br {
+    content: "";
+    display: block;
+    margin-top: 8px;
+}
+
 button {
     cursor: pointer;
 }
@@ -263,12 +269,12 @@ section.post-title {
 }
 
 /*************************** Laptop **************************/
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1440px) {
     .container {
         max-width: 1266px;
     }
     .breadcrumb {
-        padding: 18px 0 16px;
+        padding: 24px 0 20px;
     }
 }
 
@@ -291,7 +297,7 @@ section.post-title {
     }
     h3 {
         margin: 18px 0;
-        font-size: 1.5rem;
+        font-size: 1.275rem;
     }
     div.table-wrapper[role=region] {
         margin: 24px 0;
@@ -316,6 +322,7 @@ section.post-title {
         }
     }
     .breadcrumb {
+        padding: 20px 0 16px;
         .breadcrumb-list {
             max-width: 900px;
         }
@@ -354,7 +361,7 @@ section.post-title {
         .breadcrumb-list {
             max-width: 700px;
             li {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
             }
         }
     }
@@ -363,10 +370,13 @@ section.post-title {
 /********************** Mobile **********************/
 @media only screen and (max-width: 600px) {
     h1 {
-        font-size: 1.725rem;
+        font-size: 1.625rem;
     }
     table {
         min-width: 100%;
+    }
+    .breadcrumb {
+        padding: 18px 0 16px;
     }
 }
 

@@ -70,10 +70,11 @@
                         gap: 26px;
                         .primary-cta {
                             display: block;
+                            max-width: 300px;
                             padding: 14px 36px 12px;
                             font-size: 1.125rem;
                             font-family: $primary_font_bold;
-                            line-height: 1;
+                            line-height: 120%;
                             background-color: #fff;
                             border: 2px solid #fff;
                             transition: all 0.4s;
@@ -83,7 +84,7 @@
                             display: block;
                             font-size: 1.125rem;
                             font-family: $primary_font_bold;
-                            line-height: 1;
+                            line-height: 120%;
                             color: #fff;
                             border-bottom: 2px solid #fff;
                             &::after {
@@ -143,7 +144,6 @@
                 margin: 0;
                 padding: 0;
                 button {
-                    display: block;
                     padding: 0;
                     width: 22px;
                     height: 22px;

@@ -26,9 +26,9 @@ if( get_row_layout() == 'main_content' ):
     if (!empty($banner_image) || !empty($content_editor)):
         ?>
         <section id="main-content-<?php echo $section_id; ?>" class="main-content">
-            <div class="main-content-inner">
+            <div class="main-content-inner <?php if ($show_sidebar == true) echo 'has-sidebar'; ?>">
                 <!-- Content -->
-                <div class="content-wrapper" <?php if ($show_sidebar == true) echo 'style="max-width:660px;"' ?>>
+                <div class="content-wrapper">
                     <?php if (!empty($banner_image['url'])): ?>
                         <img class="__banner" src="<?php echo $banner_image['url']; ?>" alt="<?php echo $banner_image['alt']; ?>">
                     <?php endif; ?>
@@ -69,9 +69,11 @@ if( get_row_layout() == 'main_content' ):
                                 <div class="secondary-info">
                                     <h3 class="__heading"><?php echo $secondary_info['heading'] ?? ''; ?></h3>
                                     <ul class="sc-info-list" role="list">
-                                    <?php foreach ($sc_info_list as $item): ?>
+                                    <?php foreach ($sc_info_list as $item): 
+                                        $icon_url = !empty($item['icon']['url']) ? $item['icon']['url'] : '/wp-content/themes/diabetes-victoria/assets/imgs/arrow-up-right-from-square-solid.svg';
+                                        ?>
                                         <li>
-                                            <img class="__icon" src="<?php echo $item['icon']['url'] ?>" alt="<?php echo $item['icon']['alt'] ?>">
+                                            <img class="__icon" src="<?php echo $icon_url; ?>" alt="<?php echo $item['icon']['alt'] ?>">
                                             <div class="__info"><?php echo $item['info'] ?></div>
                                         </li>
                                     <?php endforeach; ?>

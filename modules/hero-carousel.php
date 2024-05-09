@@ -7,7 +7,7 @@
 if( get_row_layout() == 'hero_carousel' ):
     $carousel_options = get_sub_field('carousel_options');
     $carousel_list = get_sub_field('carousel_list');
-    $wrapper_id = rand(0, 999);
+    $section_id = rand(0, 999);
     $navigation = ($carousel_options['navigation']) ? 'true' : 'false';
     $dots       = ($carousel_options['dots']) ? 'true' : 'false';
     $autoplay   = ($carousel_options['autoplay']) ? 'true' : 'false';
@@ -16,8 +16,8 @@ if( get_row_layout() == 'hero_carousel' ):
     if(!empty($carousel_list)):
         ?>
         <!-- Carousel -->
-        <section class="hero-carousel carousel">
-            <div id="carousel-wrapper-<?php echo $wrapper_id; ?>" class="carousel-wrapper carousel-wrapper-<?php echo $wrapper_id; ?>">
+        <section id="hero-carousel-<?php echo $section_id; ?>" class="hero-carousel carousel">
+            <div class="carousel-wrapper carousel-wrapper-<?php echo $section_id; ?>">
                 <?php foreach ($carousel_list as $id => $row): 
                     $item = $row['carousel_item'] ?? '';
                     if (!empty($item)): 
@@ -71,23 +71,23 @@ if( get_row_layout() == 'hero_carousel' ):
                             </div>
                             <!-- Custom color options -->
                             <style>
-                                .carousel-item.item-<?php echo $id; ?> .carousel-content {
+                                #hero-carousel-<?php echo $section_id; ?> .carousel-item.item-<?php echo $id; ?> .carousel-content {
                                     color: <?php echo $text_color; ?>!important;
                                 }
-                                .carousel-item.item-<?php echo $id; ?> .group-cta .primary-cta {
+                                #hero-carousel-<?php echo $section_id; ?> .carousel-item.item-<?php echo $id; ?> .group-cta .primary-cta {
                                     color: <?php echo $background_color; ?>!important;
                                     background-color: <?php echo $text_color; ?>!important;
                                     border-color: <?php echo $text_color; ?>!important;
                                 }
-                                .carousel-item.item-<?php echo $id; ?> .group-cta .primary-cta:hover {
+                                #hero-carousel-<?php echo $section_id; ?> .carousel-item.item-<?php echo $id; ?> .group-cta .primary-cta:hover {
                                     color: <?php echo $text_color; ?>!important;
-                                    box-shadow: inset 300px 0 0 0 <?php echo $background_color; ?>!important;
+                                    box-shadow: inset 400px 0 0 0 <?php echo $background_color; ?>!important;
                                 }
-                                .carousel-item.item-<?php echo $id; ?> .group-cta .secondary-cta {
+                                #hero-carousel-<?php echo $section_id; ?> .carousel-item.item-<?php echo $id; ?> .group-cta .secondary-cta {
                                     color: <?php echo $text_color; ?>!important;
                                     border-color: <?php echo $text_color; ?>!important;
                                 }
-                                .carousel-item.item-<?php echo $id; ?> .group-cta .secondary-cta::after {
+                                #hero-carousel-<?php echo $section_id; ?> .carousel-item.item-<?php echo $id; ?> .group-cta .secondary-cta::after {
                                     background-color: <?php echo $text_color; ?>!important;
                                 }
                             </style><!-- .Custom color options -->
@@ -98,16 +98,17 @@ if( get_row_layout() == 'hero_carousel' ):
         </section><!-- .Carousel -->
         <script>
         jQuery(document).ready(function(){
-            jQuery('.carousel-wrapper-<?php echo $wrapper_id; ?>').slick({
+            jQuery('.carousel-wrapper-<?php echo $section_id; ?>').slick({
                 // Slick Slider options
                 infinite: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 accessibility: true,
-                autoplay: false,
-                autoplaySpeed: 2000,
+                speed: 800,
+                autoplay: <?php echo $autoplay; ?>,
+                autoplaySpeed: <?php echo $autoplay_speed.'000'; ?>,
                 arrows: false,
-                dots: true,
+                dots: <?php echo $dots; ?>,
                 dotsClass: 'slick-dots container',
                 pauseOnFocus: true,
                 pauseOnHover: true,
@@ -124,7 +125,7 @@ if( get_row_layout() == 'hero_carousel' ):
         $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
         
         echo '<style>
-                section.hero-carousel {
+                #hero-carousel-'. $section_id .' {
                     --s-bg-color: ' . $bg_color . ';
                     --s-pd-top: ' . $pd_top . ';
                     --s-pd-bottom: ' . $pd_bottom . ';

@@ -28,7 +28,7 @@ function dv_recipe_register() {
 		'not_found_in_trash' => esc_html__( 'No recipe(s) found in trash', 'diabetes-victoria' )
 	);
 
-  $args = array(
+  	$args = array(
 		'labels'          => $labels,
 		'public'          => true,
 		'show_ui'         => true,
@@ -36,7 +36,7 @@ function dv_recipe_register() {
 		'hierarchical'    => false,
 		'menu_icon'       => 'dashicons-book',
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
-		'supports'        => array('title', 'thumbnail')
+		'supports'        => array('title', 'thumbnail', 'author', 'comments', 'custom-fields')
   	);
 
   add_filter( 'enter_title_here',  'dv_recipe_change_default_title');
@@ -45,7 +45,10 @@ function dv_recipe_register() {
 }
 add_action('init', 'dv_recipe_register', 1);
 
-
+/**
+ * Register Recipe taxonomy
+ * 
+ */
 function dv_recipe_taxonomy() {
 
 	register_taxonomy(
@@ -74,7 +77,10 @@ function dv_recipe_taxonomy() {
 }
 add_action('init', 'dv_recipe_taxonomy', 1);
 
-
+/**
+ * Change recipe's title placeholder
+ * 
+ */
 function dv_recipe_change_default_title( $title ) {
 	$screen = get_current_screen();
 
@@ -84,23 +90,25 @@ function dv_recipe_change_default_title( $title ) {
 	return $title;
 }
 
-
-function dv_recipe_edit_columns( $recipe_columns ) {
-	$recipe_columns = array(
-		"cb"                     => "<input type=\"checkbox\" />",
-		"title"                  => esc_html__('Title', 'diabetes-victoria'),
-		"thumbnail"              => esc_html__('Thumbnail', 'diabetes-victoria'),
-		"recipe_categories" 			 => esc_html__('Categories', 'diabetes-victoria'),
-		"date"                   => esc_html__('Date', 'diabetes-victoria'),
-	);
-	return $recipe_columns;
+/**
+ * Add custom columns to Recipe table
+ * 
+ */
+function dv_custom_recipe_columns($columns)
+{
+	$columns['thumbnail'] = 'Thumbnail';
+	$columns['recipe_categories'] = 'Categories';
+	return $columns;
 }
-add_filter( 'manage_edit-recipe_columns', 'dv_recipe_edit_columns' );
+add_filter('manage_recipe_posts_columns', 'dv_custom_recipe_columns');
 
+/**
+ * Display value of custom colums at Recipe table
+ * 
+ */
 function dv_recipe_column_display( $recipe_columns, $post_id ) {
 
 	switch ( $recipe_columns ) {
-
 		// Display the thumbnail in the column view
 		case "thumbnail":
 			$width = (int) 64;

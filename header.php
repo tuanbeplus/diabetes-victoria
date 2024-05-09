@@ -49,7 +49,8 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 							</a>
 						</div>
 						<button id="btn-nav-bar">
-							<span><i class="fa-solid fa-bars"></i></span>
+							<span class="icon-bar"><i class="fa-solid fa-bars"></i></span>
+							<span class="icon-close"><i class="fa-solid fa-xmark"></i></span>
 						</button>
 					</div>
 				<?php endif; ?>

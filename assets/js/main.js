@@ -7,7 +7,6 @@ jQuery(document).ready(function ($) {
 
     // Call the function on page load
     dv_set_css_variable();
-    // dv_set_css_variable_carousel();
 
     // Resize event
     $(window).on('resize', function() {
@@ -129,9 +128,6 @@ jQuery(document).ready(function ($) {
                     tocs_wrapper.append(toc_item) // Add link to TOCs
                 })
             }
-            else {
-                main_content.find('.on-this-page').remove()
-            }
         }
     }
 
@@ -147,22 +143,6 @@ jQuery(document).ready(function ($) {
         // Set the CSS variable --header-height
         $('html').css('--header-height', header_height + 'px');
     }
-
-    /**
-     * Set css variable to Carousel
-     * 
-     */
-    function dv_set_css_variable_carousel() {
-        let hero_carousel = $('section.hero-carousel')
-        
-        hero_carousel.each(function(e) {
-            let section_height = $(this).height()
-            let carousel_height = section_height + 40;
-            // Set the CSS variable to section
-            $(this).css('--carousel-height', carousel_height + 'px')
-        })
-    }
-
 
     // Click to hide accessibility options
     $(document).on('click', '#pojo-a11y-toolbar .background-overlay', function(e){
@@ -263,6 +243,12 @@ jQuery(document).ready(function ($) {
     $(document).on('click', '#btn-nav-bar', function(e){
         e.preventDefault()
         let nav_mobile = $('header nav#site-navigation')
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active')
+        }
+        else {
+            $(this).addClass('active')
+        }
         nav_mobile.toggleClass('active')
     });
 

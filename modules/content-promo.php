@@ -12,8 +12,7 @@ if( get_row_layout() == 'content_promo' ):
     $arr_static_content = array($static_content);
     $carousel_options = get_sub_field('carousel_options');
     $carousel_list = get_sub_field('carousel_list');
-    $wrapper_id = rand(0, 999);
-    $navigation = ($carousel_options['navigation']) ? 'true' : 'false';
+    $section_id = rand(0, 999);
     $dots       = ($carousel_options['dots']) ? 'true' : 'false';
     $autoplay   = ($carousel_options['autoplay']) ? 'true' : 'false';
     $autoplay_speed = $carousel_options['autoplay_speed'] ?? '2000';
@@ -25,17 +24,13 @@ if( get_row_layout() == 'content_promo' ):
     else {
         $promo_data = $arr_static_content;
         $promo_class = 'static';
-    }
-
-    // Style
-    $bg_color = get_sub_field('background_color');
-    $bg_color = !empty($bg_color) ? $bg_color : '#019BC2';
+    }    
 
     if(!empty($promo_data)):
         ?>
         <!-- Content Promo -->
-        <section id="content-promo-<?php echo $wrapper_id; ?>" class="content-promo <?php echo $promo_class; ?>">
-            <div class="carousel-wrapper promo-carousel-<?php echo $wrapper_id; ?>">
+        <section id="content-promo-<?php echo $section_id; ?>" class="content-promo <?php echo $promo_class; ?>">
+            <div class="carousel-wrapper promo-carousel-<?php echo $section_id; ?>">
                 <?php foreach ($promo_data as $id => $row): 
                     if ($promo_options == 'carousel_layout') {
                         $item = $row['carousel_item'];
@@ -82,7 +77,7 @@ if( get_row_layout() == 'content_promo' ):
                                                 <div class="group-cta">
                                                     <?php if ($primary_cta['visibility'] == true): ?>
                                                         <a class="primary-cta" href="<?php echo $primary_cta['link']; ?>" role="button">
-                                                            <span><?php echo $primary_cta['text']; ?></span>
+                                                            <span><?php echo !empty($primary_cta['text']) ? $primary_cta['text'] : 'Learn more'; ?></span>
                                                         </a>
                                                     <?php endif; ?>
                                                     <?php if ($secondary_cta['visibility'] == true): ?>
@@ -124,35 +119,35 @@ if( get_row_layout() == 'content_promo' ):
                             </div>
                             <!-- Custom color options -->
                             <style>
-                                .content-promo .item-<?php echo $id; ?> .landing-page {
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .landing-page {
                                     border-top: 1px solid <?php echo $background_color.'3b'; ?>!important;
                                 }
-                                .content-promo .item-<?php echo $id; ?> .landing-page .cta-btn {
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .landing-page .cta-btn {
                                     color: <?php echo $background_color; ?>!important;
                                     background-color: <?php echo $cta_background_color; ?>!important;
                                     border-color: <?php echo $cta_background_color; ?>!important;
                                 }
-                                .content-promo .item-<?php echo $id; ?> .landing-page .cta-btn:hover {
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .landing-page .cta-btn:hover {
                                     color: <?php echo $cta_background_color; ?>!important;
-                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $bg_color; ?>!important;
+                                    box-shadow: inset 400px 0 0 0 <?php echo $background_color; ?>!important;
                                 }
-                                .content-promo .item-<?php echo $id; ?> .carousel-content {
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .carousel-content {
                                     color: <?php echo $text_color; ?>!important;
                                 }
-                                .content-promo .item-<?php echo $id; ?> .group-cta .primary-cta {
-                                    color: <?php echo ($background_color !== '') ? $background_color : $bg_color; ?>!important;
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .group-cta .primary-cta {
+                                    color: <?php echo $background_color; ?>!important;
                                     background-color: <?php echo $cta_background_color; ?>!important;
                                     border-color: <?php echo $cta_background_color; ?>!important;
                                 }
-                                .content-promo .item-<?php echo $id; ?> .group-cta .primary-cta:hover {
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .group-cta .primary-cta:hover {
                                     color: <?php echo $cta_background_color; ?>!important;
-                                    box-shadow: inset 300px 0 0 0 <?php echo ($background_color !== '') ? $background_color : $bg_color; ?>!important;
+                                    box-shadow: inset 400px 0 0 0 <?php echo $background_color; ?>!important;
                                 }
-                                .content-promo .item-<?php echo $id; ?> .group-cta .secondary-cta {
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .group-cta .secondary-cta {
                                     color: <?php echo $text_color; ?>!important;
                                     border-color: <?php echo $text_color; ?>!important;
                                 }
-                                .content-promo .item-<?php echo $id; ?> .group-cta .secondary-cta::after {
+                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .group-cta .secondary-cta::after {
                                     background-color: <?php echo $text_color; ?>!important;
                                 }
                             </style><!-- .Custom color options -->
@@ -164,16 +159,17 @@ if( get_row_layout() == 'content_promo' ):
         <?php if ($promo_options == 'carousel_layout'): ?>
             <script>
             jQuery(document).ready(function(){
-                jQuery('.promo-carousel-<?php echo $wrapper_id; ?>').slick({
+                jQuery('.promo-carousel-<?php echo $section_id; ?>').slick({
                     // Slick Slider options
                     infinite: false,
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     accessibility: true,
-                    autoplay: false,
-                    autoplaySpeed: 2000,
+                    speed: 800,
+                    autoplay: <?php echo $autoplay; ?>,
+                    autoplaySpeed: <?php echo $autoplay_speed.'000'; ?>,
                     arrows: false,
-                    dots: true,
+                    dots: <?php echo $dots; ?>,
                     dotsClass: 'slick-dots container',
                     pauseOnFocus: true,
                     pauseOnHover: true,
@@ -182,6 +178,8 @@ if( get_row_layout() == 'content_promo' ):
             </script>
         <?php endif;
         // Style
+        $bg_color = get_sub_field('background_color');
+        $bg_color = !empty($bg_color) ? $bg_color : 'transparent';
         $pd_top = get_sub_field('padding_top');
         $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
         $pd_bottom = get_sub_field('padding_bottom');
@@ -190,7 +188,7 @@ if( get_row_layout() == 'content_promo' ):
         $image_width = (isset($image_width) && $image_width !== '') ? $image_width . 'px' : '740px';
         
         echo '<style>
-                #content-promo-'. $wrapper_id .' {
+                #content-promo-'. $section_id .' {
                     --s-bg-color: ' . $bg_color . ';
                     --s-pd-top: ' . $pd_top . ';
                     --s-pd-bottom: ' . $pd_bottom . ';

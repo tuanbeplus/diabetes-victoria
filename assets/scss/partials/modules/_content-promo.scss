@@ -3,6 +3,7 @@
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
     overflow: hidden;
+    background-color: var(--s-bg-color, transparent);
     @media(max-width: 1024px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.75);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
@@ -13,15 +14,19 @@
     }
     
     .carousel-wrapper {
-        background-color: var(--s-bg-color, $primary_color);
         opacity: 0;
+        background-color: $primary_color;
         transform: translateX(100%);
         transition: opacity 0.5s, transform 0.5s;
         &.active {
             opacity: 1;
             transform: translateX(0);
         }
+        .slick-track {
+            display: flex;
+        }
         .carousel-item {
+            height: auto;
             &:not(:first-child) {
                 display: none;
             }
@@ -47,9 +52,10 @@
                     .landing-page {
                         .cta-btn {
                             display: inline-block;
+                            max-width: 400px;
                             padding: 26px 38px 22px;
                             font-size: 1.688rem;
-                            line-height: 1;
+                            line-height: 126%;
                             color: var(--s-bg-color, $primary_color);
                             background-color: #fff;
                             font-family: $primary_font_bold;
@@ -72,6 +78,10 @@
                         * {
                             color: #fff;
                         }
+                        a {
+                            text-decoration: underline;
+                            text-underline-offset: 2px;
+                        }
                     }
                     .group-cta {
                         margin-top: 32px;
@@ -81,10 +91,11 @@
                         gap: 26px;
                         .primary-cta {
                             display: block;
-                            padding: 12px 26px 10px;
-                            font-size: 1.125rem;
+                            max-width: 300px;
+                            padding: 12px 26px 8px;
+                            font-size: 1rem;
                             font-family: $primary_font_bold;
-                            line-height: 1;
+                            line-height: 120%;
                             color: var(--s-cta-color, $primary_color);
                             background-color: #fff;
                             border: 2px solid #fff;
@@ -96,9 +107,9 @@
                         .secondary-cta {
                             position: relative;
                             display: block;
-                            font-size: 1.125rem;
+                            font-size: 1rem;
                             font-family: $primary_font_bold;
-                            line-height: 1;
+                            line-height: 120%;
                             color: #fff;
                             border-bottom: 2px solid #fff;
                             &::after {
@@ -173,7 +184,6 @@
                 margin: 0;
                 padding: 0;
                 button {
-                    display: block;
                     padding: 0;
                     width: 22px;
                     height: 22px;
