@@ -2496,7 +2496,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   list-style: none;
   word-break: break-word;
   background-color: #fff;
-  border: 1px solid #f6f6f6;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
   animation: card-slide-down 0.4s linear both;
 }
 .key-cards .cards-list .card .card-img {
@@ -2808,7 +2808,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   padding: 0;
 }
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .additional-content ul li {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   padding: 0;
   list-style: none;
   font-size: 0.875rem;
@@ -3146,7 +3146,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   position: relative;
   list-style: none;
   background-color: #fff;
-  border: 1px solid #f6f6f6;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
   animation: card-zoom-out 0.3s linear;
 }

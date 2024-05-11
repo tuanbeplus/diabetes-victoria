@@ -37,12 +37,20 @@
             margin: 0;
         }
         .carousel-wrapper {
+            overflow: hidden;
             @extend .__carousel-navigation-style;
             .slick-list {
                 position: relative;
                 max-width: 1080px;
                 margin: 0 auto;
                 padding: 0 60px;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: opacity 0.5s, transform 0.5s;
+                &.active {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
                 &:before {
                     content: "";
                     position: absolute;

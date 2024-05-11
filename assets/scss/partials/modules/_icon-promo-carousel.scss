@@ -46,6 +46,7 @@
             margin-top: 10px;
         }
         .carousel-wrapper {
+            overflow: hidden;
             @extend .__carousel-navigation-style;
             .slick-arrow {
                 position: absolute;
@@ -60,6 +61,13 @@
             .slick-list {
                 max-width: 1080px;
                 margin: 0 auto;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: opacity 0.5s, transform 0.5s;
+                &.active {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
             .carousel-inner {
                 padding: 0 30px;

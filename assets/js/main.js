@@ -33,6 +33,24 @@ jQuery(document).ready(function ($) {
                 $(this).addClass('active')
             }
         });
+        // Active Icon Promo carousel when scroll
+        $(".ipro-carousel-section .slick-list").each(function() {
+            if ($(this).dv_is_element_in_viewport()) {
+                $(this).addClass('active')
+            }
+        });
+        // Active bespoke carousel when scroll
+        $(".bespoke-slider-section .slick-list").each(function() {
+            if ($(this).dv_is_element_in_viewport()) {
+                $(this).addClass('active')
+            }
+        });
+        // Active media slider when scroll
+        $(".media-slider-section .slick-list").each(function() {
+            if ($(this).dv_is_element_in_viewport()) {
+                $(this).addClass('active')
+            }
+        });
         // Active Footer banner when scroll
         $("footer .footer-banner").each(function() {
             if ($(this).dv_is_element_in_viewport()) {
