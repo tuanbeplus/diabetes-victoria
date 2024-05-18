@@ -126,15 +126,17 @@ function dv_clean_html_content_editor($html_string) {
 function dv_get_post_summary($post_id) {
 	// Get ACF page builder
 	$page_builder = get_field('page_builder');
+	$post_content = get_the_content($post_id);
 	$summary = '';
+	$summary .= $post_content;
 	foreach ($page_builder as $module) {
 		if ($module['acf_fc_layout'] == 'main_content') {
 			$summary .= $module['content_editor'];
 		}
 	}
-	$summary = wp_trim_words( $summary , 35, ' (...)' );
+	$trim_summary = wp_trim_words( $summary , 35, ' (...)' );
 
-	return $summary;
+	return $trim_summary;
 }
 
 /**

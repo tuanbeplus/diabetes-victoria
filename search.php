@@ -80,7 +80,7 @@ get_header();
 							</label>
 						</div>
 					</div>
-					<button id="btn-apply-sort" type="submit">Apply sort</button>
+					<button id="btn-apply-sort" type="submit">Apply Sort</button>
 					<button id="btn-close-sort-opts" type="button" title="Close sort options" aria-label="Close sort options">
 						<span><i class="fa-solid fa-xmark"></i></span>
 					</button>
@@ -100,7 +100,7 @@ get_header();
 			// Reset Post Data
 			wp_reset_postdata();
 		} else {
-			echo 'Results not found.';
+			echo '<h3 style="text-align:center;">Results not found.</h3>';
 		}
 	?>
 	</div>

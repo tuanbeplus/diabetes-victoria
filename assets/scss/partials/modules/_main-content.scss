@@ -11,6 +11,23 @@ section.main-content {
         padding-top: calc(var(--s-pd-top, 60px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
     }
+    &.recipe-info {
+        .main-content-inner {
+            .content-wrapper {
+                .__content {
+                    & > *:first-child {
+                        margin-top: 0;
+                    } 
+                    & > *:last-child {
+                        margin-bottom: 0;
+                    } 
+                    p {
+                        margin: 12px 0;
+                    }
+                }
+            }
+        }
+    }
     .main-content-inner {
         max-width: 1054px;
         margin: 0 auto;
@@ -31,6 +48,8 @@ section.main-content {
             }
             .__content {
                 padding: 38px 26px;
+                font-size: 0.875rem;
+                color: $dv_black;
                 .__title {
                     margin-bottom: 30px;
                     font-size: 2.313rem;

@@ -1964,7 +1964,7 @@ body nav#pojo-a11y-toolbar .pojo-a11y-toolbar-toggle #btn-toggle-accessibility-t
   width: 340px;
   font-size: 1.125rem;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  line-height: 140%;
+  line-height: 120%;
   border: none;
   border-radius: 0 54px 54px 0;
   color: var(--post-sub-brand-color, #007995);
@@ -3350,6 +3350,15 @@ section.main-content {
     padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
   }
 }
+section.main-content.recipe-info .main-content-inner .content-wrapper .__content > *:first-child {
+  margin-top: 0;
+}
+section.main-content.recipe-info .main-content-inner .content-wrapper .__content > *:last-child {
+  margin-bottom: 0;
+}
+section.main-content.recipe-info .main-content-inner .content-wrapper .__content p {
+  margin: 12px 0;
+}
 section.main-content .main-content-inner {
   max-width: 1054px;
   margin: 0 auto;
@@ -3370,6 +3379,8 @@ section.main-content .main-content-inner .content-wrapper img {
 }
 section.main-content .main-content-inner .content-wrapper .__content {
   padding: 38px 26px;
+  font-size: 0.875rem;
+  color: #223540;
 }
 section.main-content .main-content-inner .content-wrapper .__content .__title {
   margin-bottom: 30px;

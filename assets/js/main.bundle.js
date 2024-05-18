@@ -33,38 +33,31 @@ jQuery(document).ready(function ($) {
     dv_apply_all_scroll_events();
   });
 
-  // Resize, Scroll & Load event
+  // Event listener for resize, scroll, and load events on the window
   $(window).on('resize scroll load', function () {
-    // Active Content Promo when scroll
-    $("section.content-promo .carousel-wrapper").each(function () {
-      if ($(this).dv_is_element_in_viewport()) {
-        $(this).addClass('active');
-      }
-    });
-    // Active Icon Promo carousel when scroll
-    $(".ipro-carousel-section .slick-list").each(function () {
-      if ($(this).dv_is_element_in_viewport()) {
-        $(this).addClass('active');
-      }
-    });
-    // Active bespoke carousel when scroll
-    $(".bespoke-slider-section .slick-list").each(function () {
-      if ($(this).dv_is_element_in_viewport()) {
-        $(this).addClass('active');
-      }
-    });
-    // Active media slider when scroll
-    $(".media-slider-section .slick-list").each(function () {
-      if ($(this).dv_is_element_in_viewport()) {
-        $(this).addClass('active');
-      }
-    });
-    // Active Footer banner when scroll
-    $("footer .footer-banner").each(function () {
-      if ($(this).dv_is_element_in_viewport()) {
-        $(this).addClass('active');
-      }
-    });
+    // Function to activate elements in the viewport
+    function dv_activate_section_in_view(selector) {
+      $(selector).each(function () {
+        if ($(this).dv_is_element_in_viewport()) {
+          $(this).addClass('active');
+        }
+      });
+    }
+
+    // Activate content promo when scrolled into view
+    dv_activate_section_in_view("section.content-promo .carousel-wrapper");
+
+    // Activate icon promo carousel when scrolled into view
+    dv_activate_section_in_view(".ipro-carousel-section .slick-list");
+
+    // Activate bespoke carousel when scrolled into view
+    dv_activate_section_in_view(".bespoke-slider-section .slick-list");
+
+    // Activate media slider when scrolled into view
+    dv_activate_section_in_view(".media-slider-section .slick-list");
+
+    // Activate footer banner when scrolled into view
+    dv_activate_section_in_view("footer .footer-banner");
   });
 
   /**
@@ -131,19 +124,29 @@ jQuery(document).ready(function ($) {
    * 
    */
   function dv_tocs_item_generation() {
+    // Select the site content and main content sections
     var site_content = $('#content.site-content');
     var main_content = $('section.main-content');
+    // Select the TOC wrapper inside the main content
     var tocs_wrapper = main_content.find('#tocs');
     var counter = 0;
+
+    // Check if main content exists
     if (main_content.length > 0) {
-      all_h2_tags = site_content.find('h2');
+      // Find all <h2> tags within the site content, excluding those inside #main-content-sidebar
+      var all_h2_tags = site_content.find('h2').not('#main-content-sidebar h2');
+      // Check if there are any <h2> tags
       if (all_h2_tags.length > 0) {
-        all_h2_tags.each(function (e) {
+        // Iterate over each <h2> tag
+        all_h2_tags.each(function () {
           counter++;
           var h2_tag = $(this);
+          // Create a TOC item with a link to the corresponding <h2> tag
           var toc_item = '<li><a href="#heading2-item-' + counter + '">' + h2_tag.text() + '</a></li>';
-          h2_tag.attr('id', 'heading2-item-' + counter); // Add ID to h2
-          tocs_wrapper.append(toc_item); // Add link to TOCs
+          // Add an ID to the <h2> tag
+          h2_tag.attr('id', 'heading2-item-' + counter);
+          // Append the TOC item to the TOC wrapper
+          tocs_wrapper.append(toc_item);
         });
       }
     }
@@ -417,7 +420,7 @@ jQuery(document).ready(function ($) {
       e.preventDefault();
       var offset = $('header#masthead').outerHeight() + 40;
       $('html, body').stop().animate({
-        scrollTop: target.offset().top - offset
+        scrollTop: target.offset().top - 50
       }, 300);
     }
   });

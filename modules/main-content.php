@@ -51,7 +51,7 @@ if( get_row_layout() == 'main_content' ):
                     <div id="main-content-sidebar" class="sidebar">
                         <div class="sidebar-inner">
                             <div class="on-this-page">
-                                <h3 class="__heading"><?php echo $on_this_page['heading']; ?></h3>
+                                <h2 class="__heading"><?php echo $on_this_page['heading']; ?></h2>
                                 <?php if ($on_this_page_options == 'auto_tocs'): ?>
                                     <ul id="tocs" class="links-list" role="list"></ul>
                                 <?php endif; ?>
@@ -67,7 +67,7 @@ if( get_row_layout() == 'main_content' ):
                             </div>
                             <?php if ($sc_info_visibility == true && !empty($sc_info_list)): ?>
                                 <div class="secondary-info">
-                                    <h3 class="__heading"><?php echo $secondary_info['heading'] ?? ''; ?></h3>
+                                    <h2 class="__heading"><?php echo $secondary_info['heading'] ?? ''; ?></h2>
                                     <ul class="sc-info-list" role="list">
                                     <?php foreach ($sc_info_list as $item): 
                                         $icon_url = !empty($item['icon']['url']) ? $item['icon']['url'] : '/wp-content/themes/diabetes-victoria/assets/imgs/arrow-up-right-from-square-solid.svg';
@@ -84,7 +84,7 @@ if( get_row_layout() == 'main_content' ):
                                 <div class="additional-info-boxes">
                                 <?php foreach ($aib_list as $box): ?>
                                     <div class="aib-box">
-                                        <h3 class="__heading"><?php echo $box['heading'] ?? ''; ?></h3>
+                                        <h2 class="__heading"><?php echo $box['heading'] ?? ''; ?></h2>
                                         <div class="__content"><?php echo $box['content'] ?? ''; ?></div>
                                     </div>
                                 <?php endforeach; ?>

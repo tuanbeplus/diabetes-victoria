@@ -36,7 +36,7 @@ function dv_recipe_register() {
 		'hierarchical'    => false,
 		'menu_icon'       => 'dashicons-book',
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
-		'supports'        => array('title', 'thumbnail', 'author', 'comments', 'custom-fields')
+		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'comments', 'custom-fields')
   	);
 
   add_filter( 'enter_title_here',  'dv_recipe_change_default_title');

@@ -16,11 +16,11 @@ if( get_row_layout() == 'latest_posts' ):
     $load_more_cta = get_sub_field('load_more_cta');
 
     // Get posts
-    $posts = dv_get_latest_posts($post_type, $paged, $number_posts, $order_by);
+    $posts_list = dv_get_latest_posts($post_type, $paged, $number_posts, $order_by);
     $max_posts = dv_get_latest_posts($post_type, $paged, '-1', $order_by);
     $max_posts = is_array($max_posts) ? count($max_posts) : '';
 
-    if (!empty($posts)): ?>
+    if (!empty($posts_list)): ?>
         <!-- Latest Posts -->
         <section id="latest-posts-section-<?php echo $section_id ?>" class="latest-posts">
 
@@ -42,7 +42,7 @@ if( get_row_layout() == 'latest_posts' ):
                         </div>
                     <?php endif; ?>
                     <ul class="posts-list">
-                    <?php foreach ($posts as $post): ?>
+                    <?php foreach ($posts_list as $post): ?>
                         <li class="post post-<?php echo $post->ID; ?>">
                             <div class="__thumb">
                                 <?php if (!empty(get_the_post_thumbnail($post->ID))): ?>
