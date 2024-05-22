@@ -10,12 +10,9 @@
 get_header();
 ?>
 
-<input id="search-found-posts" type="hidden" name="search_found_posts" value="<?php echo (int) $wp_query->found_posts; ?>">
-<input id="search-orderby" type="hidden" name="search_orderby" value="<?php echo $_GET['orderby']; ?>">
-<input id="search-order" type="hidden" name="search_order" value="<?php echo $_GET['order']; ?>">
 <section class="search-results-wrapper">
 	<h1>Search results</h1>
-	<form role="search" method="get" class="search-results-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+	<form role="search" method="post" class="search-results-form" onsubmit="return false">
 		<div class="search-inner">
 			<label>
 				<input type="search" class="search-field-input" 
@@ -24,7 +21,7 @@ get_header();
 						value="<?php echo esc_attr( get_search_query() ); ?>" 
 						title="<?php _ex( 'Search for:', 'label' ); ?>">
 			</label>
-			<button type="submit" class="search-submit-btn">
+			<button id="btn-show-search-results" type="submit">
 				<span>Show results</span>
 			</button>
 		</div>
@@ -34,7 +31,7 @@ get_header();
 					Showing 
 					<span id="number-results-count"><?php echo (int) $wp_query->post_count; ?></span>
 					of 
-					<?php echo (int) $wp_query->found_posts; ?> 
+					<span id="number-all-results"><?php echo (int) $wp_query->found_posts; ?> </span>
 					results
 				</span>
 			</div>
@@ -52,7 +49,7 @@ get_header();
 							<label for="sort-date">
 								<input id="sort-date" type="radio" 
 									name="orderby" value="date" 
-									<?php if ($_GET['orderby'] == 'date') echo 'checked="checked"'; ?>>
+									<?php if ($_GET['orderby'] == 'date' || !isset($_GET['orderby']) || $_GET['orderby'] == '') echo 'checked="checked"'; ?>>
 								Date
 							</label>
 							<label for="sort-title">
@@ -75,7 +72,7 @@ get_header();
 							<label for="sort-desc">
 								<input id="sort-desc" type="radio" 
 									name="order" value="DESC" 
-									<?php if ($_GET['order'] == 'DESC') echo 'checked="checked"'; ?>>
+									<?php if ($_GET['order'] == 'DESC' || !isset($_GET['order']) || $_GET['order'] == '') echo 'checked="checked"'; ?>>
 								Descending
 							</label>
 						</div>
@@ -90,6 +87,9 @@ get_header();
 	</form>
 
 	<div id="search-results">
+		<div class="loading-wrapper">
+			<div class="dv-spinner"></div>
+		</div>
 	<?php 
 		if ( have_posts() ) {
 			// Start the Loop.

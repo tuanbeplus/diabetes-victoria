@@ -119,9 +119,6 @@ if( get_row_layout() == 'content_promo' ):
                             </div>
                             <!-- Custom color options -->
                             <style>
-                                #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .landing-page {
-                                    border-top: 1px solid <?php echo $background_color.'3b'; ?>!important;
-                                }
                                 #content-promo-<?php echo $section_id; ?> .item-<?php echo $id; ?> .landing-page .cta-btn {
                                     color: <?php echo $background_color; ?>!important;
                                     background-color: <?php echo $cta_background_color; ?>!important;

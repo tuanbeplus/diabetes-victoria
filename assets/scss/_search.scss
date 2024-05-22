@@ -244,7 +244,7 @@ form.search-form {
             }
             button[type=submit] {
                 width: fit-content;
-                padding: 22px 60px;
+                padding: 22px 60px 20px;
                 white-space: nowrap;
                 font-size: 1rem;
                 line-height: 1;
@@ -333,14 +333,19 @@ form.search-form {
                 }
                 #btn-apply-sort {
                     margin-top: 24px;
-                    padding: 4px 2px;
+                    padding: 8px 12px 6px;
                     font-size: 1rem;
                     line-height: 1;
-                    font-family: $primary_font_bold;
+                    font-family: $primary_font_demi;
                     color: #fff;
                     border: none;
-                    border-bottom: 2px solid #fff;
+                    border: 2px solid #fff;
                     background: none;
+                    transition: all 0.3s;
+                    &:hover {
+                        color: $primary_color;
+                        background-color: #fff;
+                    }
                 }
                 #btn-close-sort-opts {
                     position: absolute;
@@ -364,6 +369,24 @@ form.search-form {
         width: 100%;
         padding: 38px 30px;
         background-color: #fff;
+        &.loading {
+            .loading-wrapper {
+                display: flex;
+            }
+            .result-item {
+                display: none;
+            }
+        }
+        .loading-wrapper {
+            display: none;
+            justify-content: center;
+            .dv-spinner {
+                width: 32px;
+                height: 32px;
+                border: 4px #eee solid;
+                border-top: 4px $primary_color solid;
+            }
+        }
         .result-item {
             margin-bottom: 30px;
             &:last-child {

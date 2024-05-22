@@ -68,14 +68,13 @@ jQuery(document).ready(function ($) {
     // get Header height
     var header_height = $('header.site-header').height();
     // Sticky header
-    // if ($(window).scrollTop() > 10) {
-    //     $('header.site-header').addClass('sticky')
-    //     $('.site-content').css('margin-top', header_height+'px')
-    // }
-    // else {
-    //     $('header.site-header').removeClass('sticky')
-    //     $('.site-content').css('margin-top', '0')
-    // }
+    if ($(window).scrollTop() > 10) {
+      $('header.site-header').addClass('sticky');
+      $('.site-content').css('margin-top', header_height + 'px');
+    } else {
+      $('header.site-header').removeClass('sticky');
+      $('.site-content').css('margin-top', '0');
+    }
 
     // Show/hide scroll top button
     if ($(window).scrollTop() > 100) {
@@ -287,23 +286,74 @@ jQuery(document).ready(function ($) {
     sort_options.slideUp(200);
   });
 
+  // Ajax show search results
+  $(document).on('click', '#btn-show-search-results', function (e) {
+    e.preventDefault();
+    var btnLoadMore = $('#btn-load-more-results');
+    var formSearch = $('form.search-results-form');
+    var page = 1;
+    var keyWord = formSearch.find('input.search-field-input').val();
+    var searchOrderBy = formSearch.find('input[type=radio][name=orderby]:checked').val();
+    var searchOrder = formSearch.find('input[type=radio][name=order]:checked').val();
+    var countResults = formSearch.find('#number-results-count');
+    var numberAllResults = formSearch.find('#number-all-results');
+    var searchResults = $('#search-results');
+    $.ajax({
+      type: 'POST',
+      url: ajaxUrl,
+      data: {
+        'action': 'dv_query_search_results',
+        'key_word': keyWord,
+        'page': page,
+        'search_orderby': searchOrderBy,
+        'search_order': searchOrder
+      },
+      beforeSend: function beforeSend(xhr) {
+        searchResults.addClass('loading');
+      },
+      success: function success(response) {
+        searchResults.removeClass('loading');
+        btnLoadMore.show();
+        if (response.search_result && response.found_posts > 0) {
+          var results_html = '<div class="loading-wrapper"><div class="dv-spinner"></div></div>';
+          results_html += response.search_result;
+          searchResults.html(results_html);
+          btnLoadMore.data('next-page', 2);
+        } else {
+          searchResults.html('<h3 style="text-align:center;">Results not found.</h3>');
+        }
+        var resultItem = $('#search-results article.result-item');
+        countResults.text(resultItem.length);
+        numberAllResults.text(response.found_posts);
+        if (resultItem.length >= response.found_posts) {
+          btnLoadMore.hide();
+        }
+      }
+    });
+  });
+  // Ajax show search results
+  $(document).on('click', '#btn-apply-sort', function (e) {
+    e.preventDefault();
+    $('#btn-show-search-results').click();
+  });
+
   // Ajax Load more search results
   $(document).on('click', '#btn-load-more-results', function (e) {
     e.preventDefault();
     var btn = $(this);
+    btn.show();
     var formSearch = $('form.search-results-form');
     var page = btn.data('next-page');
     var keyWord = formSearch.find('input.search-field-input').val();
-    var searchFoundPosts = $('input#search-found-posts').val();
-    var searchOrderBy = $('input#search-orderby').val();
-    var searchOrder = $('input#search-order').val();
+    var searchOrderBy = formSearch.find('input[type=radio][name=orderby]:checked').val();
+    var searchOrder = formSearch.find('input[type=radio][name=order]:checked').val();
     var countResults = formSearch.find('#number-results-count');
     var searchResults = $('#search-results');
     $.ajax({
       type: 'POST',
       url: ajaxUrl,
       data: {
-        'action': 'dv_load_more_search_results',
+        'action': 'dv_query_search_results',
         'key_word': keyWord,
         'page': page,
         'search_orderby': searchOrderBy,
@@ -313,13 +363,13 @@ jQuery(document).ready(function ($) {
         btn.addClass('loading');
       },
       success: function success(response) {
-        searchResults.append(response);
+        searchResults.append(response.search_result);
         btn.data('next-page', page + 1);
         btn.removeClass('loading');
         var resultItem = $('#search-results article.result-item');
         countResults.text(resultItem.length);
-        if (resultItem.length >= searchFoundPosts) {
-          btn.remove();
+        if (resultItem.length >= response.found_posts) {
+          btn.hide();
         }
       }
     });
@@ -378,8 +428,7 @@ jQuery(document).ready(function ($) {
       input_field.focus();
     }, 200);
   });
-
-  // Close donate popup
+  // Click to Close donate popup
   $(document).on('click', '#btn-close-donate', function (e) {
     e.preventDefault();
     $(this).addClass('active');
@@ -389,7 +438,7 @@ jQuery(document).ready(function ($) {
     donate_wrapper.slideUp(200);
     $('#btn-donate').attr('aria-expanded', 'false');
   });
-  // Close donate popup
+  // Focus-out to Close donate popup
   $(document).on('blur', '#btn-close-donate', function (e) {
     e.preventDefault();
     $(this).addClass('active');
@@ -399,18 +448,38 @@ jQuery(document).ready(function ($) {
     donate_wrapper.slideUp(200);
     $('#btn-donate').attr('aria-expanded', 'false');
   });
-
   // Show donate popup
   $(document).on('click', '#donate-popup .donate-wrapper', function (e) {
     e.stopPropagation();
   });
-
   // Close donate popup
   $(document).on('click', '#donate-popup', function (e) {
     e.preventDefault();
     $(this).removeClass('show');
     $(this).find('.donate-wrapper').slideUp(200);
     $('#btn-donate').attr('aria-expanded', 'false');
+  });
+  // Checked or un-checked amount radio button
+  $(document).on('click', '#donate-popup input[type=radio][name=amount]', function (e) {
+    var btn_radio = $(this);
+    if (btn_radio.data('checked')) {
+      btn_radio.prop('checked', false);
+      btn_radio.data('checked', false);
+    } else {
+      $('#donate-popup input[type=radio][name=amount]').data('checked', false); // Uncheck all
+      btn_radio.data('checked', true); // Check the clicked one
+    }
+  });
+  // Disable options amount or custom amount
+  $(document).on('click', '#donate-popup #btn-continue-donate', function (e) {
+    var custom_amount = $('#donate-popup input#other-amount');
+    if (custom_amount.val() === '') {
+      // Disable custom amount
+      custom_amount.prop('disabled', true);
+    } else {
+      // Disable all amount radio button
+      $('#donate-popup input[type=radio][name=amount]').prop('disabled', true);
+    }
   });
 
   // Smooth scrolling to anchor links
@@ -420,7 +489,7 @@ jQuery(document).ready(function ($) {
       e.preventDefault();
       var offset = $('header#masthead').outerHeight() + 40;
       $('html, body').stop().animate({
-        scrollTop: target.offset().top - 50
+        scrollTop: target.offset().top - offset
       }, 300);
     }
   });

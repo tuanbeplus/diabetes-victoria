@@ -3,7 +3,7 @@
  * Ajax load more on Search page
  * 
  */
-function dv_load_more_search_results() {
+function dv_query_search_results() {
     $page = isset($_POST['page']) ? $_POST['page'] : '';
     $key_word = isset($_POST['key_word']) ? $_POST['key_word'] : '';
     $search_orderby = isset($_POST['search_orderby']) ? $_POST['search_orderby'] : '';
@@ -11,37 +11,60 @@ function dv_load_more_search_results() {
 
     // Custom query to fetch more search results based on the $query and $page.
     $args = array(
-        'post_type' => 'any',
         's' => $key_word,
+        'post_type' => 'any',
+        'post_status' => 'publish',
         'paged' => $page,
         'posts_per_page' => 6,
         'orderby' => $search_orderby,
         'order' => $search_order,
     );
-    $search_query = get_posts($args);
+    $search_query = new WP_Query($args);
+    $search_result = '';
 
-    foreach ($search_query as $post): 
-        // Get Post Summary
-        $summary = dv_get_post_summary($post->ID);
-        ?>
-        <article id="post-<?php echo $post->ID ?>" class="result-item">
-            <h2 class="__title">
-                <span><?php echo get_the_title($post->ID) ?></span>
-            </h2>
-            <a class="__link" href="<?php echo get_the_permalink($post->ID) ?>">
-                <span><?php echo get_the_permalink($post->ID) ?></span>
-            </a>
-            <div class="__summary"><?php echo $summary ?></div>
-        </article>
-    <?php
-    endforeach;
+    if ($search_query->have_posts()) {
+        while ($search_query->have_posts()) {
+            $search_query->the_post();
+            // Get Post Summary
+            $summary = dv_get_post_summary(get_the_ID());
+            $search_result .= 
+            '<article id="post-'.get_the_ID().'" class="result-item">
+                <h2 class="__title">
+                    <span>'.get_the_title().'</span>
+                </h2>
+                <a class="__link" href="'.get_the_permalink().'">
+                    <span>'.get_the_permalink().'</span>
+                </a>
+                <div class="__summary">'.$summary.'</div>
+            </article>';
+        }
+    }
 
+    $second_args = array(
+        's' => $key_word,
+        'post_type' => 'any',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'orderby' => $search_orderby,
+        'order' => $search_order,
+    );
+    $all_posts_query = new WP_Query($second_args);
+    // Get total number of search results
+    $total_posts = $all_posts_query->found_posts;
     // Reset Post Data
     wp_reset_postdata();
+
+    // Send response
+    wp_send_json(array(
+        'search_result' => $search_result,
+        'found_posts'   => $total_posts,
+        'args'          => $args, 
+        'paged'         => $page,
+    ));
     die;
 }
-add_action('wp_ajax_dv_load_more_search_results', 'dv_load_more_search_results');
-add_action('wp_ajax_nopriv_dv_load_more_search_results', 'dv_load_more_search_results');
+add_action('wp_ajax_dv_query_search_results', 'dv_query_search_results');
+add_action('wp_ajax_nopriv_dv_query_search_results', 'dv_query_search_results');
 
 
 /**

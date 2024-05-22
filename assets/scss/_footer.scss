@@ -36,7 +36,7 @@ footer.site-footer {
             width: 100%;
             transform: scale(0.1);
             border-radius: 100%;
-            transition: opacity 0.5s, transform 0.5s;
+            transition: opacity 1s, transform 1s;
         }
         &.active {
             img {
@@ -93,7 +93,7 @@ footer.site-footer {
         margin: 0;
         padding-bottom: 66px;
     }
-    .acknoledgement {
+    .acknowledgement {
         padding: 74px 0;
         background-color: var(--post-bg-color, $dv_background);
         color: $dv_black;
@@ -148,7 +148,7 @@ footer.site-footer {
         .copyright {
             padding-bottom: 40px;
         }
-        .acknoledgement {
+        .acknowledgement {
             padding: 40px 0;
         }
     }
@@ -161,6 +161,9 @@ footer.site-footer {
             justify-content: left;
             flex-wrap: wrap;
             gap: 40px;
+            .info {
+                max-width: 100%;
+            }
             .quick-links {
                 justify-content: left;
                 flex-wrap: wrap;

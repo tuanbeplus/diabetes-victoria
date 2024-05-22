@@ -60,14 +60,14 @@ jQuery(document).ready(function ($) {
         // get Header height
         var header_height = $('header.site-header').height();
         // Sticky header
-        // if ($(window).scrollTop() > 10) {
-        //     $('header.site-header').addClass('sticky')
-        //     $('.site-content').css('margin-top', header_height+'px')
-        // }
-        // else {
-        //     $('header.site-header').removeClass('sticky')
-        //     $('.site-content').css('margin-top', '0')
-        // }
+        if ($(window).scrollTop() > 10) {
+            $('header.site-header').addClass('sticky')
+            $('.site-content').css('margin-top', header_height+'px')
+        }
+        else {
+            $('header.site-header').removeClass('sticky')
+            $('.site-content').css('margin-top', '0')
+        }
 
         // Show/hide scroll top button
         if ($(window).scrollTop() > 100) {
@@ -292,16 +292,73 @@ jQuery(document).ready(function ($) {
         sort_options.slideUp(200);
     });
 
+    // Ajax show search results
+    $(document).on('click', '#btn-show-search-results', function(e){
+        e.preventDefault()
+        let btnLoadMore = $('#btn-load-more-results')
+        let formSearch = $('form.search-results-form')
+        let page = 1;
+        let keyWord = formSearch.find('input.search-field-input').val()
+        let searchOrderBy = formSearch.find('input[type=radio][name=orderby]:checked').val()
+        let searchOrder = formSearch.find('input[type=radio][name=order]:checked').val()
+        let countResults = formSearch.find('#number-results-count')
+        let numberAllResults = formSearch.find('#number-all-results')
+        let searchResults = $('#search-results')
+
+        $.ajax({
+            type: 'POST',
+            url: ajaxUrl,
+            data:{
+                'action'         : 'dv_query_search_results',
+                'key_word'       : keyWord,
+                'page'           : page,
+                'search_orderby' : searchOrderBy,
+                'search_order'   : searchOrder,
+            },
+            beforeSend : function ( xhr ) {
+                searchResults.addClass('loading')
+            },
+            success:function(response){
+                searchResults.removeClass('loading')
+                btnLoadMore.show();
+                
+                if (response.search_result && response.found_posts > 0) {
+                    let results_html = '<div class="loading-wrapper"><div class="dv-spinner"></div></div>';
+                    results_html += response.search_result;
+                    searchResults.html(results_html);
+                    btnLoadMore.data('next-page', 2);
+                }
+                else {
+                    searchResults.html('<h3 style="text-align:center;">Results not found.</h3>');
+                }
+
+                let resultItem = $('#search-results article.result-item')
+
+                countResults.text(resultItem.length)
+                numberAllResults.text(response.found_posts)
+
+                if (resultItem.length >= response.found_posts) {
+                    btnLoadMore.hide();
+                }
+            }
+        });
+    });
+    // Ajax show search results
+    $(document).on('click', '#btn-apply-sort', function(e){
+        e.preventDefault()
+        $('#btn-show-search-results').click();
+    });
+
     // Ajax Load more search results
     $(document).on('click', '#btn-load-more-results', function(e){
         e.preventDefault()
         let btn = $(this)
+        btn.show();
         let formSearch = $('form.search-results-form')
         let page = btn.data('next-page')
         let keyWord = formSearch.find('input.search-field-input').val()
-        let searchFoundPosts = $('input#search-found-posts').val()
-        let searchOrderBy = $('input#search-orderby').val()
-        let searchOrder = $('input#search-order').val()
+        let searchOrderBy = formSearch.find('input[type=radio][name=orderby]:checked').val()
+        let searchOrder = formSearch.find('input[type=radio][name=order]:checked').val()
         let countResults = formSearch.find('#number-results-count')
         let searchResults = $('#search-results')
 
@@ -309,7 +366,7 @@ jQuery(document).ready(function ($) {
             type: 'POST',
             url: ajaxUrl,
             data:{
-                'action'         : 'dv_load_more_search_results',
+                'action'         : 'dv_query_search_results',
                 'key_word'       : keyWord,
                 'page'           : page,
                 'search_orderby' : searchOrderBy,
@@ -319,13 +376,15 @@ jQuery(document).ready(function ($) {
                 btn.addClass('loading')
             },
             success:function(response){
-                searchResults.append(response)
+                searchResults.append(response.search_result)
                 btn.data('next-page', page + 1);
                 btn.removeClass('loading')
                 let resultItem = $('#search-results article.result-item')
+
                 countResults.text(resultItem.length)
-                if (resultItem.length >= searchFoundPosts) {
-                    btn.remove();
+
+                if (resultItem.length >= response.found_posts) {
+                    btn.hide();
                 }
             }
         });
@@ -387,8 +446,7 @@ jQuery(document).ready(function ($) {
             input_field.focus();
         }, 200);
     });
-
-    // Close donate popup
+    // Click to Close donate popup
     $(document).on('click', '#btn-close-donate', function(e){
         e.preventDefault()
         $(this).addClass('active')
@@ -399,7 +457,7 @@ jQuery(document).ready(function ($) {
         donate_wrapper.slideUp(200)
         $('#btn-donate').attr('aria-expanded', 'false');
     });
-    // Close donate popup
+    // Focus-out to Close donate popup
     $(document).on('blur', '#btn-close-donate', function(e){
         e.preventDefault()
         $(this).addClass('active')
@@ -410,18 +468,39 @@ jQuery(document).ready(function ($) {
         donate_wrapper.slideUp(200)
         $('#btn-donate').attr('aria-expanded', 'false');
     });
-
     // Show donate popup
     $(document).on('click', '#donate-popup .donate-wrapper', function(e){
         e.stopPropagation()
     });
-
     // Close donate popup
     $(document).on('click', '#donate-popup', function(e){
         e.preventDefault()
         $(this).removeClass('show')
         $(this).find('.donate-wrapper').slideUp(200)
         $('#btn-donate').attr('aria-expanded', 'false');
+    });
+    // Checked or un-checked amount radio button
+    $(document).on('click', '#donate-popup input[type=radio][name=amount]', function(e) {
+        let btn_radio = $(this);
+        if (btn_radio.data('checked')) {
+            btn_radio.prop('checked', false);
+            btn_radio.data('checked', false);
+        } else {
+            $('#donate-popup input[type=radio][name=amount]').data('checked', false); // Uncheck all
+            btn_radio.data('checked', true); // Check the clicked one
+        }
+    });
+    // Disable options amount or custom amount
+    $(document).on('click', '#donate-popup #btn-continue-donate', function(e) {
+        let custom_amount = $('#donate-popup input#other-amount')
+        if (custom_amount.val() === '') {
+            // Disable custom amount
+            custom_amount.prop('disabled', true);
+        }
+        else {
+            // Disable all amount radio button
+            $('#donate-popup input[type=radio][name=amount]').prop('disabled', true);
+        }
     });
 
     // Smooth scrolling to anchor links
@@ -431,7 +510,7 @@ jQuery(document).ready(function ($) {
             e.preventDefault();
             let offset = ($('header#masthead').outerHeight()) + 40; 
             $('html, body').stop().animate({
-                scrollTop: target.offset().top - 50
+                scrollTop: target.offset().top - offset
             }, 300);
         }
     });

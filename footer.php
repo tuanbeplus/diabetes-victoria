@@ -17,7 +17,7 @@ $certified_image = get_field('certified_image', 'option');
 $quick_links = get_field('quick_links', 'option');
 $footer_logo = get_field('footer_logo', 'option');
 $copyright = get_field('copyright', 'option');
-$acknoledgement = get_field('acknoledgement', 'option');
+$acknowledgement = get_field('acknowledgement', 'option');
 ?>
 			</main><!-- #main -->
 		</div><!-- #primary -->
@@ -91,18 +91,18 @@ $acknoledgement = get_field('acknoledgement', 'option');
 				<p class="copyright"><?php echo $copyright; ?></p><!-- #copyright -->
 			<?php endif; ?>
 		</div>
-		<?php if ($acknoledgement): ?>
-			<div class="acknoledgement">
+		<?php if ($acknowledgement): ?>
+			<div class="acknowledgement">
 				<div class="container">
 					<div class="ack-wrapper">
-						<?php if ($acknoledgement['content']['heading']): ?>
-							<h3 class="heading"><?php echo $acknoledgement['content']['heading']; ?></h3>
+						<?php if ($acknowledgement['content']['heading']): ?>
+							<h3 class="heading"><?php echo $acknowledgement['content']['heading']; ?></h3>
 						<?php endif; ?>
-						<?php if ($acknoledgement['content']['description']): ?>
-							<?php echo $acknoledgement['content']['description']; ?>
+						<?php if ($acknowledgement['content']['description']): ?>
+							<?php echo $acknowledgement['content']['description']; ?>
 						<?php endif; ?>
-						<?php if ($acknoledgement['flags']): ?>
-							<?php foreach ($acknoledgement['flags'] as $flag): ?>
+						<?php if ($acknowledgement['flags']): ?>
+							<?php foreach ($acknowledgement['flags'] as $flag): ?>
 								<?php if ($flag['flag_image']['url']): ?>
 									<img class="flag" src="<?php echo $flag['flag_image']['url']; ?>" alt="<?php echo $flag['flag_image']['alt'] ?? ''; ?>">
 								<?php endif; ?>
@@ -110,7 +110,7 @@ $acknoledgement = get_field('acknoledgement', 'option');
 						<?php endif; ?>
 					</div>
 				</div>
-			</div><!-- #acknoledgement -->
+			</div><!-- #acknowledgement -->
 		<?php endif; ?>
 	</footer><!-- #colophon -->
 

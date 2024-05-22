@@ -5,12 +5,17 @@
  */
 
 if( get_row_layout() == 'key_cards' ):
+	$title = get_sub_field('title');
+	$cards_per_row =  get_sub_field('cards_per_row');
     $cards_list = get_sub_field('cards_list');
     $section_id = rand(0, 999);
     if (!empty($cards_list)):
         ?>
         <section id="key-cards-section-<?php echo $section_id; ?>" class="key-cards">
             <div class="container">
+				<?php if (!empty($title)): ?>
+					<h2 class="title"><?php echo $title; ?></h2>
+				<?php endif; ?>
                 <ul class="cards-list">
                 <?php foreach ($cards_list as $index => $row): 
                     $card = $row['card'] ?? '';
@@ -25,7 +30,7 @@ if( get_row_layout() == 'key_cards' ):
                     $cta_link = $card['cta_link'] ?? '';
                     if (!empty($card)):
                         ?>
-                        <li id="card-<?php echo $index; ?>" class="card">
+                        <li id="card-<?php echo $index; ?>" class="card" <?php if ($cards_per_row == 2) echo 'style="max-width:540px;"';?> >
                             <div class="card-body">
                                 <div class="card-img">
                                     <img src="<?php echo $img_url; ?>" alt="<?php echo $img_alt; ?>" loading="lazy">
@@ -94,7 +99,6 @@ if( get_row_layout() == 'key_cards' ):
         $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '70px';
         $title_font_size =  get_sub_field('title_font_size');
         $title_font_size = (isset($title_font_size) && $title_font_size !== '') ? $title_font_size . 'rem' : '1.688rem';
-        $cards_per_row =  get_sub_field('cards_per_row');
         $cards_per_row = (isset($cards_per_row) && $cards_per_row !== '') ? $cards_per_row : '3';
         
         echo '<style>

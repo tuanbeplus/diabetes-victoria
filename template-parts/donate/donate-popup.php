@@ -28,7 +28,7 @@ $other_ways_link = $donate['other_ways_to_get_involved'];
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <input type="number" name="other_amount" id="other-amount" placeholder="Enter amount $">
+                        <input type="number" name="amount" id="other-amount" placeholder="Or enter an amount $">
                         <a id="btn-regular-gift" role="button" href="">Make it a regular gift</a>
                     </div>
                 </fieldset>

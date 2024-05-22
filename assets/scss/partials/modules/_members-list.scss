@@ -1,0 +1,74 @@
+// ================== Members List ===================
+.members-list-section {
+    padding-top: var(--s-pd-top, 60px);
+    padding-bottom: var(--s-pd-bottom, 60px);
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
+    }
+    @media(max-width: 768px) {
+        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
+    }
+    .members-list-wrapper {
+        margin: auto;
+        max-width: 1024px;
+        padding: 38px 24px;
+        background-color: var(--s-bg-color);
+        .title {
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 2.313rem;
+            color: $primary_color;
+        }
+        .members-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            .member {
+                padding: 40px 24px;
+                display: flex;
+                gap: 62px;
+                border-bottom: 1px solid #223540;
+                .__img {
+                    width: fit-content;
+                    img {
+                        width: 210px;
+                        height: 210px;
+                        object-fit: cover;
+                        border-radius: 100%;
+                    }
+                }
+                .__info {
+                    *:first-child {
+                        margin-top: 0;
+                    }
+                    .name {
+                        margin-bottom: 10px;
+                    }
+                    .qualifi {
+                        margin-top: 10px;
+                    }
+                    .desc {
+                        *:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+
+    }
+    @media only screen and (max-width: 1024px) {
+        
+    }
+    @media only screen and (max-width: 768px) {
+        
+    }
+    @media only screen and (max-width: 425px) {
+        
+    }
+}

@@ -12,13 +12,20 @@
         padding-top: calc(var(--s-pd-top, 70px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 70px) * 0.5);
     }
+
+    .title {
+        max-width: 1144px;
+        margin: 0 auto 40px;
+        font-size: 2.313rem;
+        color: $primary_color;
+    }
     .cards-list {
-        max-width: 1024px;
+        max-width: 1144px;
+	    gap: 62px;
         margin: auto;
         padding: 0;
         display: grid;
         grid-template-columns: repeat(var(--card-per-row), 1fr);
-        gap: 64px;
 
         .card {
             margin: 0;
@@ -35,7 +42,7 @@
             animation: card-slide-down 0.4s linear both;
             .card-img {
                 overflow: hidden;
-                height: 160px;
+                height: 350px;
                 img {
                     height: 100%;
                     object-fit: cover;
@@ -111,13 +118,46 @@
     }
 }
 
+/*************************** Laptop **************************/
+@media only screen and (max-width: 1440px) {
+	.key-cards {
+        .cards-list {
+            .card {
+                .card-img {
+                    height: 300px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1200px) {
+	.key-cards {
+        .title {
+            font-size: 2.188rem;
+        }
+        .cards-list {
+            .card {
+                .card-img {
+                    height: 260px;
+                }
+            }
+        }
+    }
+}
+
 /*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
     .key-cards {
+        .title {
+            font-size: 1.875rem;
+        }
         .cards-list {
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 32px;
             .card {
+                .card-img {
+                    height: 220px;
+                }
                 .card-content {
                     padding: 24px;
                     .landing-page {
@@ -139,9 +179,16 @@
 
 @media only screen and (max-width: 768px) {
     .key-cards {
+        .title {
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+        }
         .cards-list {
-            gap: 16px;
+            gap: 24px;
             .card {
+                .card-img {
+                    height: 200px;
+                }
                 .card-content {
                     padding: 16px;
                     .landing-page {

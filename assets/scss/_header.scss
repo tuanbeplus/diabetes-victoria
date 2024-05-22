@@ -29,6 +29,7 @@ header.site-header {
             color: $primary_color;
         }
         nav#site-navigation {
+            border: none; 
             ul#primary-menu-list {
                 li.menu-item {
                     a {
@@ -65,25 +66,28 @@ header.site-header {
 
 // Top menu
 #top-menu {
+    position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     height: auto;
     border-bottom: 2px solid $primary_color;
     background-color: $dv_white;
+    .container {
+        width: 100%;
+    }
     ul {
         margin: 0;
         padding: 0;
         list-style: none;
     }
     .top-menu-list {
-        position: relative;
         display: flex;
-        justify-content: right;
-        .col {
+        .col-right {
             display: flex;
-            justify-content: right;
+            position: absolute;
+            right: 0;
+            height: 100%;
         }
-
         li {
             margin: 0;
             padding: 0;
@@ -107,16 +111,11 @@ header.site-header {
                 transition: all 0.3s;
             }
         }
-        .useful-links {
-            justify-content: right;
-            height: 100%;
-            border-left: none;
-        }
         .useful-links-list {
             display: flex;
-            flex-wrap: wrap;
-            row-gap: 10px;
-            padding: 18px 76px 16px 16px;
+            row-gap: 6px;
+            height: 100%;
+            padding: 18px 16px 16px 0;
             li {
                 padding: 2px 8px 0;
                 border-right: 2px solid $primary_color;
@@ -212,12 +211,6 @@ header.site-header {
                     stroke: $dv_white;
                 }
             }
-            &.active {
-                background-color: $primary_color;
-                svg g {
-                    stroke: $dv_white;
-                }
-            }
         }
 
         #btn-donate {
@@ -230,9 +223,6 @@ header.site-header {
             background-color: $secondary_color;
             &:hover {
                 background-color: $primary_color;
-            }
-            &.active {
-                z-index: 100;
             }
         }
         
@@ -313,6 +303,7 @@ header.site-header {
 
 nav#site-navigation {
     padding-bottom: 20px;
+    border-bottom: 1px solid #99D6E9;
     ul#primary-menu-list {
         margin: 0;
         padding: 0;
@@ -322,13 +313,13 @@ nav#site-navigation {
         gap: 2px;
         li.menu-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             position: relative;
             gap: 8px;
             margin: 0;
             padding: 10px;
             font-size: 1.094rem;
-            line-height: 110%;
+            line-height: 120%;
             list-style: none;
             white-space: nowrap;
             font-family: $primary_font_bold;
@@ -347,7 +338,6 @@ nav#site-navigation {
                 background-size: contain;
                 background-position: center;
                 transition: all 0.2s;
-                margin-top: -6px;
             }
             &:hover{
                 > .sub-menu {
@@ -360,8 +350,9 @@ nav#site-navigation {
         }
         .sub-menu {
             display: none;
+            min-width: 220px;
             margin: 0;
-            padding: 6px 16px 0;
+            padding: 10px 16px;
             position: absolute;
             transform: translateY(100%);
             bottom: 1px;
@@ -541,18 +532,19 @@ nav#site-navigation {
     }
 }
 
-/*************************** Laptop **************************/
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1500px) {
     #top-menu {
         .top-menu-list {
+            // .col-right {
+            //     position: relative;
+            //     height: auto;
+            // }
             .useful-links-list {
-                padding: 16px 16px 14px 16px;
                 li {
-                    font-size: 0.8rem;
+                    font-size: 0.875rem;
                 }
             }
             #btn-phone {
-                padding: 12px 16px;
                 svg {
                     width: 16px;
                     height: 16px;
@@ -562,7 +554,6 @@ nav#site-navigation {
                 font-size: 1.125rem;
             }
             #btn-search {
-                padding: 12px 16px;
                 svg {
                     width: 16px;
                     height: 16px;
@@ -573,6 +564,35 @@ nav#site-navigation {
             }
             #btn-languages {
                 font-size: 1.125rem;
+            }
+        }
+    }
+}
+
+/*************************** Laptop **************************/
+@media only screen and (max-width: 1440px) {
+    #top-menu {
+        .top-menu-list {
+            .useful-links-list {
+                padding: 16px 16px 14px 0;
+                li {
+                    font-size: 0.8rem;
+                }
+            }
+            #btn-phone {
+                padding: 12px 16px;
+            }
+            #btn-member-login {
+                font-size: 1rem;
+            }
+            #btn-search {
+                padding: 12px 16px;
+            }
+            #btn-donate {
+                font-size: 1rem;
+            }
+            #btn-languages {
+                font-size: 1rem;
             }
         }
     }
@@ -593,6 +613,23 @@ nav#site-navigation {
         } 
     }
 }
+@media only screen and (max-width: 1340px) {
+    #top-menu {
+        .container {
+            padding-right: 0;
+        }
+        .top-menu-list {
+            .useful-links-list {
+                flex-wrap: wrap;
+                padding: 10px 16px 8px 0;
+            }
+            .col-right {
+                position: relative;
+                height: auto;
+            }
+        }
+    }
+}
 
 /*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
@@ -600,14 +637,14 @@ nav#site-navigation {
         box-shadow: 0px 10px 20px -25px rgba(0, 0, 0, 0.5);
     }
     #top-menu {
-        border-bottom: none;
         .top-menu-list {
             flex-wrap: wrap;
             justify-content: center;
-            .col {
-                width: 100%;
-                justify-content: center;
-                border-bottom: 1px solid $primary_color;
+            .useful-links-list {
+                padding: 16px;
+            }
+            .col-right {
+                border-top: 2px solid $primary_color;
             }
             #btn-member-login {
                 padding: 12px 30px 10px;
@@ -639,18 +676,21 @@ nav#site-navigation {
         position: absolute;
         right: 0;
         left: 0;
-        padding: 16px 20px 20px;
+        padding: 16px 0 40px;
         background-color: $primary_color;
         border-top: 1px solid #99D6E9;
         animation: nav-slide-show 0.2s linear both;
         .primary-menu-container {
             max-width: 890px;
             margin: auto;
+            padding: 0 17px;
         }
         ul#primary-menu-list {
-            margin-bottom: 8px;
             flex-direction: column;
             li.menu-item {
+                padding: 10px 0;
+                flex-direction: column;
+                border-bottom: 1px solid #99D6E9;
                 a {
                     color: $dv_white!important;
                 }
@@ -658,6 +698,20 @@ nav#site-navigation {
             li.menu-item-has-children {
                 &::after {
                     background-image: url("/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-white.svg")!important;
+                    position: absolute;
+                    right: 2px;
+                }
+            }
+            .sub-menu {
+                position: relative;
+                margin-left: 16px;
+                padding: 0 16px;
+                width: 100%;
+                box-shadow: none;
+                border-left: 1px solid #99D6E9;
+                transform: none;
+                li.menu-item {
+                    border: none;
                 }
             }
         }
@@ -688,28 +742,34 @@ nav#site-navigation {
             display: block;
             border-bottom: none;
             background-color: $primary_color;
+            .container {
+                padding: 0 18px;
+            }
             .top-menu-list {
                 display: flex;
-                .col {
-                    flex-wrap: wrap;
-                    gap: 12px;
-                    border-bottom: none;
-                }
+                justify-content: flex-start;
                 li {
                     border: none;
                 }
                 .useful-links-list {
-                    margin-bottom: 16px;
-                    justify-content: center;
-                    row-gap: 16px;
+                    margin: 10px 0;
+                    padding: 16px 0;
+                    justify-content: flex-start;
+                    gap: 16px;
                     li {
-                        padding-top: 2px;
+                        padding: 2px;
                         font-size: 0.875rem;
                         border-color: $dv_white;
                         a {
                             color: $dv_white;
                         }
                     }
+                }
+                .col-right {
+                    padding: 0 2px;
+                    gap: 10px;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
                 }
                 #btn-phone {
                     padding: 12px 16px;
@@ -752,12 +812,7 @@ nav#site-navigation {
     }
     nav#site-navigation {
         .primary-menu-container {
-            max-width: 670px;
-        }
-        ul#primary-menu-list {
-            li.menu-item {
-                padding: 10px 0;
-            }
+            max-width: 690px;
         }
     }
     .search-common-wrapper {
@@ -801,8 +856,16 @@ nav#site-navigation {
             padding: 60px 24px 40px;
             form {
                 .amount-options {
+                    gap: 20px;
                     .amounts-list {
-                        gap: 24px;
+                        gap: 20px;
+                    }
+                }
+                .form-footer {
+                    flex-direction: column-reverse;
+                    gap: 20px;
+                    #btn-continue-donate {
+                        width: fit-content;
                     }
                 }
             }
@@ -825,7 +888,6 @@ nav#site-navigation {
         font-size: 24px;
     }
     .top-menu-mobile {
-        border-top: 1px solid #99D6E9;
         #top-menu {
             .top-menu-list {
                 .col:first-child {
@@ -833,7 +895,6 @@ nav#site-navigation {
                 }
                 .useful-links-list {
                     flex-direction: column;
-                    margin: 10px 0;
                     padding-left: 4px;
                     row-gap: 20px;
                 }
