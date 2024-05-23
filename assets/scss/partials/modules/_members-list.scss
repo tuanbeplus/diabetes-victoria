@@ -1,14 +1,13 @@
 // ================== Members List ===================
 .members-list-section {
-    padding-top: var(--s-pd-top, 60px);
+    background-color: var(--s-bg-color, #fff);
+    padding-top: 0;
     padding-bottom: var(--s-pd-bottom, 60px);
     @media(max-width: 1024px) {
-        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
-        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
+        padding-bottom: 50px;
     }
     @media(max-width: 768px) {
-        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
-        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
+        padding-bottom: 40px;
     }
     .members-list-wrapper {
         margin: auto;
@@ -26,6 +25,7 @@
             padding: 0;
             list-style: none;
             .member {
+                margin: 0;
                 padding: 40px 24px;
                 display: flex;
                 gap: 62px;
@@ -60,15 +60,57 @@
     }
 
     @media only screen and (max-width: 1200px) {
-
+        .members-list-wrapper {
+            .title {
+                font-size: 2.188rem;
+            }
+        }
     }
     @media only screen and (max-width: 1024px) {
-        
+        .members-list-wrapper {
+            .title {
+                font-size: 1.875rem;
+            }
+            .members-list {
+                .member {
+                    padding: 32px 20px;
+                    gap: 40px;
+                    .__img {
+                        img {
+                            width: 180px;
+                            height: 180px;
+                        }
+                    }
+                }
+            }
+        }
     }
     @media only screen and (max-width: 768px) {
-        
+        .members-list-wrapper {
+            .title {
+                font-size: 1.5rem;
+            }
+        }
     }
-    @media only screen and (max-width: 425px) {
-        
+    @media only screen and (max-width: 640px) {
+        .members-list-wrapper {
+            .members-list {
+                .member {
+                    padding: 24px 0;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 24px;
+                    .__img {
+                        img {
+                            width: 140px;
+                            height: 140px;
+                        }
+                    }
+                    .__info {
+                        text-align: center;
+                    }
+                }
+            }
+        }
     }
 }

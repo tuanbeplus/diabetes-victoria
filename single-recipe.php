@@ -28,6 +28,23 @@ $type_of_recipe = get_field('type_of_recipe');
 </section>
 <section class="main-content recipe-info">
     <div class="main-content-inner has-sidebar">
+        <!-- Sidebar -->
+        <div id="main-content-sidebar" class="sidebar">
+            <div class="sidebar-inner">
+                <div class="on-this-page">
+                    <h2 class="__heading">On This Page</h2>
+                    <ul id="tocs" class="links-list" role="list"></ul>
+                </div>
+                <!-- <div class="additional-info-boxes">
+                    <div class="aib-box">
+                        <h2 class="__heading">More Recipes:</h2>
+                        <div class="__content">
+                            
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div><!-- .Sidebar -->
         <!-- Content -->
         <div class="content-wrapper">
             <img class="__banner" src="<?php echo $feature_img_url; ?>" alt="<?php echo $feature_img_alt; ?>">
@@ -52,23 +69,6 @@ $type_of_recipe = get_field('type_of_recipe');
                 <?php endif; ?>
             </div>
         </div><!-- .Content -->
-        <!-- Sidebar -->
-        <div id="main-content-sidebar" class="sidebar">
-            <div class="sidebar-inner">
-                <div class="on-this-page">
-                    <h2 class="__heading">On This Page</h2>
-                    <ul id="tocs" class="links-list" role="list"></ul>
-                </div>
-                <!-- <div class="additional-info-boxes">
-                    <div class="aib-box">
-                        <h2 class="__heading">More Recipes:</h2>
-                        <div class="__content">
-                            
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-        </div><!-- .Sidebar -->
     </div>
 </section>
 <?php if (!empty($post_content)): ?>

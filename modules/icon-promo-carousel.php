@@ -18,13 +18,24 @@ if (empty($heading) && empty($list_item)) {
     return;
 }
 
+// Carousel options
+$rows = get_sub_field('rows');
+$rows = ($rows !== '') ? $rows : 1;
+$items_per_row = get_sub_field('items_per_row');
+$items_per_row = ($items_per_row !== '') ? intval($items_per_row) : 3;
+$autoplay = get_sub_field('autoplay');
+$autoplay = ($autoplay !== '') ? $autoplay : 'false';
+$autoplay_speed = get_sub_field('autoplay_speed');
+$autoplay_speed = ($autoplay_speed !== '') ? intval($autoplay_speed.'000') : 5000;
+
 $carousel_data = array();
 $carousel_data['infinite'] = false;
-$carousel_data['slidesToShow'] = 3;
+$carousel_data['rows'] = $rows;
+$carousel_data['slidesToShow'] = $items_per_row;
 $carousel_data['slidesToScroll'] = 3;
 $carousel_data['accessibility'] = true;
-$carousel_data['autoplay'] = false;
-$carousel_data['autoplaySpeed'] = 2000;
+$carousel_data['autoplay'] = $autoplay;
+$carousel_data['autoplaySpeed'] = $autoplay_speed;
 $carousel_data['arrows'] = true;
 $carousel_data['dots'] = true;
 $carousel_data['dotsClass'] = 'slick-dots-custom';
@@ -32,14 +43,14 @@ $carousel_data['pauseOnFocus'] = true;
 $carousel_data['pauseOnHover'] = true;
 $carousel_data['responsive'] = array(
     array(
-        'breakpoint' => 1023,
+        'breakpoint' => 1024,
         'settings' => array(
             'slidesToShow' => 2,
             'slidesToScroll' => 2
         )
     ),
     array(
-        'breakpoint' => 767,
+        'breakpoint' => 768,
         'settings' => array(
             'slidesToShow' => 1,
             'slidesToScroll' => 1
@@ -70,15 +81,17 @@ $carousel_json = json_encode($carousel_data);
 
             <?php if(!empty($list_item)) { ?>
                 <div class="carousel-wrapper js-carousel" data-carousel="<?php echo esc_attr($carousel_json); ?>">
-                    <?php foreach ($list_item as $key => $item) {?>
+                    <?php foreach ($list_item as $key => $item) {
+                        $icon_url = !empty($item['icon']['url']) ? $item['icon']['url'] : DV_IMG_DIR .'file-icon.svg';
+                        $icon_alt = !empty($item['icon']['title']) ? $item['icon']['title'] : 'File Icon';
+                        ?>
                         <div class="carousel-item">
                             <div class="carousel-inner">
                                 <div class="ipro-item">
-                                    <?php if(!empty($item['icon'])) { ?>
+                                    <?php if(!empty($icon_url)) { ?>
                                         <div class="ipro-item--icon">
-                                            <img src="<?php echo esc_url($item['icon']['url']); ?>" alt="<?php echo esc_attr($item['icon']['title']); ?>"/>
+                                            <img src="<?php echo esc_url($icon_url); ?>" alt="<?php echo esc_attr($icon_alt); ?>"/>
                                         </div>
-                                        
                                     <?php } ?>
 
                                     <?php if(!empty($item['content'])) { ?>

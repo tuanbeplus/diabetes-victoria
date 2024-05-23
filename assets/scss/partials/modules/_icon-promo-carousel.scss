@@ -3,12 +3,12 @@
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
     @media(max-width: 1024px) {
-        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
-        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
-    @media(max-width: 767.98px) {
-        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
-        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
+    @media(max-width: 768px) {
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 }
 
@@ -50,14 +50,14 @@
             @extend .__carousel-navigation-style;
             .slick-arrow {
                 position: absolute;
-                top: 150px;
+                top: 50%;
+                transform: translateY(-50%);
                 left: 0;
                 &.slick-next {
                     left: auto;
                     right: 0;
                 }
             }
-    
             .slick-list {
                 max-width: 1080px;
                 margin: 0 auto;
@@ -67,6 +67,12 @@
                 &.active {
                     opacity: 1;
                     transform: translateX(0);
+                }
+                .slick-slide {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: 40px;
                 }
             }
             .carousel-inner {

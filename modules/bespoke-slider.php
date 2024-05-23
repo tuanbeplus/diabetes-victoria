@@ -37,7 +37,7 @@ $carousel_data['responsive'] = array(
         )
     ),
     array(
-        'breakpoint' => 1023,
+        'breakpoint' => 1024,
         'settings' => array(
             'slidesToShow' => 5,
             'slidesToScroll' => 5
@@ -121,7 +121,7 @@ $carousel_json = json_encode($carousel_data);
 $bg_color = get_sub_field('background_color');
 $bg_color = !empty($bg_color) ? $bg_color : '#223540';
 $pd_top = get_sub_field('padding_top');
-$pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
+$pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '0';
 $pd_bottom = get_sub_field('padding_bottom');
 $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
 

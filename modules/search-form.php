@@ -50,7 +50,7 @@ if( get_row_layout() == 'search_form' ):
     $bg_color = get_sub_field('background_color');
     $bg_color = !empty($bg_color) ? $bg_color : '#fff';
     $pd_top = get_sub_field('padding_top');
-    $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
+    $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '100px';
     $pd_bottom = get_sub_field('padding_bottom');
     $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '100px';
     

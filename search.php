@@ -104,16 +104,15 @@ get_header();
 		}
 	?>
 	</div>
-	<?php if ($wp_query->found_posts > $wp_query->query_vars['posts_per_page']): ?>
 		<div class="bottom-cta">
-			<button id="btn-load-more-results" data-next-page="2">
+			<button id="btn-load-more-results" data-next-page="2"
+				<?php if ($wp_query->found_posts < $wp_query->query_vars['posts_per_page']) echo 'style="display:none;"';?>>
 				<span class="text">View more</span>
 				<div class="loading-wrapper">
 					<div class="dv-spinner"></div>
 				</div>
 			</button>
 		</div>
-	<?php endif; ?>
 </section>
 <?php
 get_footer();

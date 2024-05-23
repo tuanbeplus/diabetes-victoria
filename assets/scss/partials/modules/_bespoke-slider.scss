@@ -1,18 +1,17 @@
 .bespoke-slider-section {
     background: var(--s-bg-color, $dv_black);
-    padding-bottom: var(--s-pd-top, 90px);
+    padding-top: 0;
+    padding-bottom: var(--s-pd-bottom, 90px);
     .bespoke-slider-wrapper .bespoke-slider-heading-wrap {
         padding-bottom: var(--s-pd-bottom, 90px);
     }
-    @media(max-width: 767.98px) {
-        padding-bottom: calc(var(--s-pd-top, 90px) * 0.5);
-        
+    @media(max-width: 768px) {
+        padding-bottom: 50px;
         .bespoke-slider-wrapper .bespoke-slider-heading-wrap {
-            padding-bottom: calc(var(--s-pd-bottom, 90px) * 0.5);
+            padding-bottom: 50px;
         }
     }
 }
-
 .bespoke-slider-section {
     position: relative;
     .container {

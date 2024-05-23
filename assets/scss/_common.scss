@@ -241,7 +241,7 @@ section.error-404 {
 
 /* Post main title */
 section.post-title {
-    padding: 50px 0 0;
+    padding: 50px 0;
     .container {
         max-width: 1054px;
     }
@@ -249,6 +249,148 @@ section.post-title {
         margin: 0;
         max-width: 650px;
         color: var(--post-brand-color, $primary_color);
+    }
+}
+
+// Carousel common style
+.__carousel-navigation-style {
+    display: none;
+    position: relative;
+    padding: 0 85px;
+    .slick-arrow {
+        position: absolute;
+        top: calc(50% - 40px);
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        font-size: 0;
+        line-height: 0;
+        background: $primary_color;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        transform: translateY(-50%);
+        &:before {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            margin: 0 4px 0 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: none;
+            border-right: 22px solid #fff;
+        }
+        &.slick-next  {
+            left: auto;
+            right: 0;
+            &:before {
+                margin: 0 0 0 4px;
+                border-left: 22px solid #fff;
+                border-right: none;
+            }
+        }
+        &.slick-disabled {
+            opacity: 0.25;
+            cursor: default;
+        }
+    }
+    .slick-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        list-style: none;
+        margin: 50px 0 0;
+        padding: 0;
+        .slick-active {
+            button {
+                opacity: 1;
+                cursor: auto;
+            }
+        }
+        button {
+            font-size: 0;
+            line-height: 0;
+            width: 12px;
+            height: 12px;
+            background: $primary_color;
+            opacity: 0.25;
+            padding: 0;
+            border: none;
+            border-radius: 100px;
+        }
+    }
+    .slick-dots-custom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        margin: 50px 0 0;
+        padding: 0;
+        li {
+            margin: 0;
+            padding: 0;
+        }
+        .slick-active {
+            button {
+                display: block;
+                cursor: auto;
+            }
+        }
+        button {
+            font-family: $primary_font_bold;
+            font-size: 24px;
+            color: $primary_color;
+            background-color: transparent;
+            display: none;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+        }
+    }
+    @media(max-width: 1200px) {
+        .slick-arrow {
+            width: 60px;
+            height: 60px;
+        }
+    }
+    @media(max-width: 1023.98px) {
+        padding: 0 60px;
+        .slick-arrow {
+            width: 45px;
+            height: 45px;
+            &:before {
+                border-top-width: 12px;
+                border-bottom-width: 12px;
+                border-right-width: 18px;
+            }
+            &.slick-next {
+                &:before {
+                    border-left-width: 18px;
+                }
+            }
+        }
+    }
+    @media(max-width: 767.98px) {
+        padding: 0 50px;
+        .slick-arrow {
+            width: 35px;
+            height: 35px;
+            &:before {
+                border-top-width: 10px;
+                border-bottom-width: 10px;
+                border-right-width: 16px;
+            }
+            &.slick-next {
+                &:before {
+                    border-left-width: 16px;
+                }
+            }
+        }
     }
 }
 
@@ -316,7 +458,7 @@ section.post-title {
         max-width: 900px;
     }
     section.post-title {
-        padding: 30px 0 0;
+        padding: 30px 0;
         .container {
             max-width: 900px;
         }

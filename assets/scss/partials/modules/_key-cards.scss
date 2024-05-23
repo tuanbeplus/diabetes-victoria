@@ -1,18 +1,15 @@
 // Key Cards style
 .key-cards {
     background-color: var(--s-bg-color);
-    padding-top: var(--s-pd-top, 70px);
+    padding-top: 0;
     padding-bottom: var(--s-pd-bottom, 70px);
     overflow: hidden;
     @media(max-width: 1024px) {
-        padding-top: calc(var(--s-pd-top, 70px) * 0.75);
-        padding-bottom: calc(var(--s-pd-bottom, 70px) * 0.75);
+        padding-bottom: 50px;
     }
     @media(max-width: 768px) {
-        padding-top: calc(var(--s-pd-top, 70px) * 0.5);
-        padding-bottom: calc(var(--s-pd-bottom, 70px) * 0.5);
+        padding-bottom: 40px;
     }
-
     .title {
         max-width: 1144px;
         margin: 0 auto 40px;

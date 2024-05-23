@@ -1,15 +1,13 @@
 
 section.main-content {
     background-color: var(--s-bg-color);
-    padding-top: var(--s-pd-top, 60px);
+    padding-top: 0;
     padding-bottom: var(--s-pd-bottom, 60px);  
     @media(max-width: 1024px) {
-        padding-top: calc(var(--s-pd-top, 60px) * 0.75);
-        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.75);
+        padding-bottom: 50px;
     }
     @media(max-width: 768px) {
-        padding-top: calc(var(--s-pd-top, 60px) * 0.5);
-        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.5);
+        padding-bottom: 40px;
     }
     &.recipe-info {
         .main-content-inner {
@@ -33,6 +31,7 @@ section.main-content {
         margin: 0 auto;
         padding: 0 15px;
         display: flex;
+        flex-direction: row-reverse;
         gap: 66px;
         &.has-sidebar {
             .content-wrapper {
@@ -45,6 +44,20 @@ section.main-content {
             animation: content-slide-left 0.3s linear both;
             img {
                 display: block;
+            }
+            .wp-video {
+                width: 100%!important;
+                height: 390px;
+                .mejs-container {
+                    height: 390px!important;
+                    iframe {
+                        width: 100%!important;
+                        height: 390px!important;
+                    }
+                    video {
+                        height: 390px!important;
+                    }
+                }
             }
             .__content {
                 padding: 38px 26px;
@@ -257,7 +270,7 @@ section.main-content {
     }
 }
 
-/*************************** Laptop **************************/
+/************************ Laptop *************************/
 @media only screen and (max-width: 1200px) {
     section.main-content {
         .main-content-inner {
@@ -272,14 +285,25 @@ section.main-content {
         }
     }
 }
-
-/*************************** Tablet **************************/
+/************************ Tablet ************************/
 @media only screen and (max-width: 1024px) {
     section.main-content {
         .main-content-inner {
             max-width: 900px;
             gap: 24px;
             .content-wrapper {
+                .wp-video {
+                    height: 350px;
+                    .mejs-container {
+                        height: 350px!important;
+                        iframe {
+                            height: 350px!important;
+                        }
+                        video {
+                            height: 350px!important;
+                        }
+                    }
+                }
                 .__content {
                     padding: 26px 20px;
                     .__title {
@@ -308,7 +332,7 @@ section.main-content {
 @media only screen and (max-width: 768px) {
     section.main-content {
         .main-content-inner {
-            flex-wrap: wrap-reverse;
+            flex-wrap: wrap;
             max-width: 700px;
             &.has-sidebar {
                 .content-wrapper {
@@ -316,10 +340,26 @@ section.main-content {
                 }
             }
             .content-wrapper {
+                .wp-video {
+                    height: 320px;
+                    .mejs-container {
+                        height: 320px!important;
+                        iframe {
+                            height: 320px!important;
+                        }
+                        video {
+                            height: 320px!important;
+                        }
+                    }
+                }
                 .__content {
                     .__title {
                         margin-bottom: 24px;
                         font-size: 1.5rem;
+                    }
+                    .__cta {
+                        margin-top: 24px;
+                        padding: 10px 24px 8px;
                     }
                 }
             }
@@ -327,6 +367,28 @@ section.main-content {
                 max-width: 100%;
                 .additional-info-boxes {
                     margin-top: 24px;
+                }
+            }
+        }
+    }
+}
+
+/********************** Mobile ***********************/
+@media only screen and (max-width: 425px) {
+    section.main-content {
+        .main-content-inner {
+            .content-wrapper {
+                .wp-video {
+                    height: 260px;
+                    .mejs-container {
+                        height: 260px!important;
+                        iframe {
+                            height: 260px!important;
+                        }
+                        video {
+                            height: 260px!important;
+                        }
+                    }
                 }
             }
         }

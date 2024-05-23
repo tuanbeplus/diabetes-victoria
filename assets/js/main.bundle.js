@@ -62,7 +62,6 @@ jQuery(document).ready(function ($) {
 
   /**
    * Apply all scroll events on Site
-   * 
    */
   function dv_apply_all_scroll_events() {
     // get Header height
@@ -96,7 +95,6 @@ jQuery(document).ready(function ($) {
 
   /**
    * Check the element in viewport
-   * 
    */
   $.fn.dv_is_element_in_viewport = function () {
     var elementTop = $(this).offset().top;
@@ -108,7 +106,6 @@ jQuery(document).ready(function ($) {
 
   /**
    * Change status of aria-expanded attr
-   * 
    */
   function dv_aria_expanded_status(element) {
     if (element.attr('aria-expanded') == 'false') {
@@ -120,7 +117,6 @@ jQuery(document).ready(function ($) {
 
   /**
    * Sidebar: Table of contents item generation
-   * 
    */
   function dv_tocs_item_generation() {
     // Select the site content and main content sections
@@ -153,7 +149,6 @@ jQuery(document).ready(function ($) {
 
   /**
    * Set css variable to HTML tag
-   * 
    */
   function dv_set_css_variable() {
     var header_height = $('header.site-header').height();
@@ -163,6 +158,28 @@ jQuery(document).ready(function ($) {
     // Set the CSS variable --header-height
     $('html').css('--header-height', header_height + 'px');
   }
+
+  /**
+   * Set max height to all Icon Promo Carousel items
+   */
+  function dv_set_height_all_carousel_items() {
+    // Find all elements with the class 'ipro-item--content'
+    var item_content = $('.ipro-carousel-section .ipro-item--content');
+    var wrapper = item_content.closest('.ipro-carousel-section');
+    var elements = wrapper.find('.ipro-item--content');
+
+    // Iterate through these elements to find the maximum height
+    var maxHeight = 0;
+    elements.each(function () {
+      var currentHeight = $(this).outerHeight();
+      if (currentHeight > maxHeight) {
+        maxHeight = currentHeight;
+      }
+    });
+    // Set that maximum height to all elements
+    elements.height(maxHeight);
+  }
+  setTimeout(dv_set_height_all_carousel_items, 500);
 
   // Click to hide accessibility options
   $(document).on('click', '#pojo-a11y-toolbar .background-overlay', function (e) {

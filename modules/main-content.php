@@ -7,6 +7,8 @@
 if( get_row_layout() == 'main_content' ):
     // Content
     $section_id = rand(0, 999);
+    $media_options = get_sub_field('media_options');
+    $video_url = get_sub_field('video_url');
     $banner_image = get_sub_field('banner_image');
     $content_title = get_sub_field('content_title');
     $content_editor = get_sub_field('content_editor');
@@ -27,25 +29,6 @@ if( get_row_layout() == 'main_content' ):
         ?>
         <section id="main-content-<?php echo $section_id; ?>" class="main-content">
             <div class="main-content-inner <?php if ($show_sidebar == true) echo 'has-sidebar'; ?>">
-                <!-- Content -->
-                <div class="content-wrapper">
-                    <?php if (!empty($banner_image['url'])): ?>
-                        <img class="__banner" src="<?php echo $banner_image['url']; ?>" alt="<?php echo $banner_image['alt']; ?>">
-                    <?php endif; ?>
-                    <?php if (!empty($content_editor)): ?>
-                        <div class="__content">
-                            <?php if(!empty($content_title)) echo '<h2 class="__title">'.$content_title.'</h2>'; ?>
-
-                            <?php echo dv_clean_html_content_editor($content_editor); ?>
-
-                            <?php if ($bottom_cta['visibility'] == true && !empty($bottom_cta['link'])): ?>
-                                <a class="__cta" href="<?php echo $bottom_cta['link']; ?>" role="button">
-                                    <span><?php echo $bottom_cta['text']; ?></span>
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                    <?php endif; ?>
-                </div><!-- .Content -->
                 <?php if ($show_sidebar == true): ?>
                     <!-- Sidebar -->
                     <div id="main-content-sidebar" class="sidebar">
@@ -70,7 +53,7 @@ if( get_row_layout() == 'main_content' ):
                                     <h2 class="__heading"><?php echo $secondary_info['heading'] ?? ''; ?></h2>
                                     <ul class="sc-info-list" role="list">
                                     <?php foreach ($sc_info_list as $item): 
-                                        $icon_url = !empty($item['icon']['url']) ? $item['icon']['url'] : '/wp-content/themes/diabetes-victoria/assets/imgs/arrow-up-right-from-square-solid.svg';
+                                        $icon_url = !empty($item['icon']['url']) ? $item['icon']['url'] : DV_IMG_DIR .'arrow-up-right-from-square-solid.svg';
                                         ?>
                                         <li>
                                             <img class="__icon" src="<?php echo $icon_url; ?>" alt="<?php echo $item['icon']['alt'] ?>">
@@ -93,6 +76,30 @@ if( get_row_layout() == 'main_content' ):
                         </div>
                     </div><!-- .Sidebar -->
                 <?php endif; ?>
+                
+                <!-- Content -->
+                <div class="content-wrapper">
+                    <?php if ($media_options == 'image' && !empty($banner_image['url'])): ?>
+                        <img class="__banner" src="<?php echo $banner_image['url']; ?>" alt="<?php echo $banner_image['alt']; ?>">
+                    <?php endif; ?>
+
+                    <?php if($media_options == 'video' && !empty($video_url)) 
+                        echo do_shortcode( '[video src="'. $video_url .'"/]' ); ?>
+
+                    <?php if (!empty($content_editor)): ?>
+                        <div class="__content">
+                            <?php if(!empty($content_title)) echo '<h2 class="__title">'.$content_title.'</h2>'; ?>
+
+                            <?php echo dv_clean_html_content_editor($content_editor); ?>
+
+                            <?php if ($bottom_cta['visibility'] == true && !empty($bottom_cta['link'])): ?>
+                                <a class="__cta" href="<?php echo $bottom_cta['link']; ?>" role="button">
+                                    <span><?php echo $bottom_cta['text']; ?></span>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                </div><!-- .Content -->
             </div>
         </section>
         <?php
@@ -100,7 +107,7 @@ if( get_row_layout() == 'main_content' ):
         $bg_color = get_sub_field('background_color');
         $bg_color = !empty($bg_color) ? $bg_color : '';
         $pd_top = get_sub_field('padding_top');
-        $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '60px';
+        $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '0';
         $pd_bottom = get_sub_field('padding_bottom');
         $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
         

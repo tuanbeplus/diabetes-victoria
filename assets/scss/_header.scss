@@ -5,6 +5,13 @@ body.admin-bar {
         }
     }
 }
+body.home {
+    header {
+        nav#site-navigation {
+            border-bottom: 1px solid #99D6E9;
+        }
+    }
+}
 
 header.site-header {
     width: 100%;
@@ -303,7 +310,6 @@ header.site-header {
 
 nav#site-navigation {
     padding-bottom: 20px;
-    border-bottom: 1px solid #99D6E9;
     ul#primary-menu-list {
         margin: 0;
         padding: 0;
