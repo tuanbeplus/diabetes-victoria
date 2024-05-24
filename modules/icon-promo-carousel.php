@@ -45,6 +45,7 @@ $carousel_data['responsive'] = array(
     array(
         'breakpoint' => 1024,
         'settings' => array(
+            'rows'  => 1,
             'slidesToShow' => 2,
             'slidesToScroll' => 2
         )
@@ -52,6 +53,7 @@ $carousel_data['responsive'] = array(
     array(
         'breakpoint' => 768,
         'settings' => array(
+            'rows'  => 1,
             'slidesToShow' => 1,
             'slidesToScroll' => 1
         )
@@ -61,6 +63,7 @@ $carousel_data['responsive'] = array(
 $carousel_json = json_encode($carousel_data);
 
 ?>
+<!-- Icon Promo Carousel section -->
 <section id="ipro-carousel-section-<?php echo $section_id ?>" class="ipro-carousel-section">
     <div class="container">
         <div class="ipro-carousel-wrapper">
@@ -107,7 +110,7 @@ $carousel_json = json_encode($carousel_data);
             <?php } ?>
         </div>
     </div>
-</section>
+</section><!-- .Icon Promo Carousel section -->
 
 <?php 
 // Style

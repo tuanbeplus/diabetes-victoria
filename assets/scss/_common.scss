@@ -180,6 +180,13 @@ table {
     padding: 0 15px;
 }
 
+.post-archive {
+    padding-bottom: 80px;
+    .container {
+        max-width: 1054px;
+    }
+}
+
 .btn-small {
     padding: 10px 14px;
     width: fit-content;
@@ -206,12 +213,13 @@ section.error-404 {
 
 /* Site Breadcrumb */
 .breadcrumb {
-    padding: 28px 0 26px;
+    padding: 24px 0 22px;
     background-color: var(--post-brand-color, #99D6E9);
     .breadcrumb-list {
         max-width: 1054px;
         list-style: none;
         display: flex;
+        align-items: baseline;
         flex-wrap: wrap;
         gap: 6px;
         margin: 0 auto;
@@ -227,6 +235,8 @@ section.error-404 {
                 margin-top: 1px;
             }
             a {
+                display: block;
+                line-height: 1.5rem;
                 color: var(--post-sub-brand-color, $dv_dark);
                 text-decoration: underline;
                 text-underline-offset: 2px;
@@ -358,7 +368,7 @@ section.post-title {
             height: 60px;
         }
     }
-    @media(max-width: 1023.98px) {
+    @media(max-width: 1024px) {
         padding: 0 60px;
         .slick-arrow {
             width: 45px;
@@ -374,8 +384,11 @@ section.post-title {
                 }
             }
         }
+        .slick-dots-custom {
+            margin: 32px 0 0;
+        }
     }
-    @media(max-width: 767.98px) {
+    @media(max-width: 768px) {
         padding: 0 50px;
         .slick-arrow {
             width: 35px;
@@ -410,6 +423,65 @@ section.post-title {
 	to { transform: rotate(359deg); }
 }
 
+/* List Post Cards */
+.posts-list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 66px;
+    row-gap: 80px;
+    .post {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        list-style: none;
+        background-color: #fff;
+        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s;
+        animation: card-zoom-out 0.3s linear;
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px;
+            .__thumb img {
+                transform: scale(1.05);
+            }
+        }
+        .__thumb {
+            overflow: hidden;
+            height: 164px;
+            img {
+                display: block;
+                height: 100%;
+                object-fit: cover;
+                transition: all 0.3s;
+            }
+        }
+        .post-meta {
+            padding: 18px 26px 24px;
+        }
+        .__title {
+            font-size: 1.125rem;
+            line-height: 130%;
+            font-family: $primary_font_bold;
+            a {
+                display: block;
+                color: $dv_black;
+                transition: all 0.3s;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    border: 2px solid transparent;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
     .container {
@@ -426,6 +498,10 @@ section.post-title {
     }
     .container {
         max-width: 1100px;
+    }
+    .posts-list {
+        column-gap: 40px;
+        row-gap: 60px;
     }
 }
 
@@ -469,6 +545,13 @@ section.post-title {
             max-width: 900px;
         }
     }
+    .post-archive {
+        padding-bottom: 60px;
+    }
+    .posts-list {
+        column-gap: 30px;
+        row-gap: 50px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -507,6 +590,19 @@ section.post-title {
             }
         }
     }
+    .post-archive {
+        padding-bottom: 40px;
+    }
+    .posts-list {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 24px;
+        row-gap: 36px;
+        .post {
+            .post-meta {
+                padding: 16px;
+            }
+        }
+    }
 }
 
 /********************** Mobile **********************/
@@ -519,6 +615,15 @@ section.post-title {
     }
     .breadcrumb {
         padding: 18px 0 16px;
+    }
+    .posts-list {
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 24px;
+        .post {
+            .__title {
+                font-size: 1rem;
+            }
+        }
     }
 }
 

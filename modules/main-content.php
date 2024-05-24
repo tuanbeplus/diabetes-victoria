@@ -27,6 +27,7 @@ if( get_row_layout() == 'main_content' ):
 
     if (!empty($banner_image) || !empty($content_editor)):
         ?>
+        <!-- Main content with Sidebar section -->
         <section id="main-content-<?php echo $section_id; ?>" class="main-content">
             <div class="main-content-inner <?php if ($show_sidebar == true) echo 'has-sidebar'; ?>">
                 <?php if ($show_sidebar == true): ?>
@@ -101,7 +102,7 @@ if( get_row_layout() == 'main_content' ):
                     <?php endif; ?>
                 </div><!-- .Content -->
             </div>
-        </section>
+        </section><!--. Main content with Sidebar section -->
         <?php
         // Style
         $bg_color = get_sub_field('background_color');

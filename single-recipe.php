@@ -19,6 +19,11 @@ $preparation = get_field('preparation');
 $cooking_time = get_field('cooking_time');
 $serves = get_field('serves');
 $type_of_recipe = get_field('type_of_recipe');
+$recipe_cat = 'recipe_categories';
+$recipe_cat_terms = get_terms( array(
+    'taxonomy'   => $recipe_cat,
+    'hide_empty' => true,
+));
 ?>
 
 <section class="post-title">
@@ -35,14 +40,23 @@ $type_of_recipe = get_field('type_of_recipe');
                     <h2 class="__heading">On This Page</h2>
                     <ul id="tocs" class="links-list" role="list"></ul>
                 </div>
-                <!-- <div class="additional-info-boxes">
-                    <div class="aib-box">
-                        <h2 class="__heading">More Recipes:</h2>
-                        <div class="__content">
-                            
+                <?php if (!empty($recipe_cat_terms) && !is_wp_error($recipe_cat_terms)): ?>
+                    <div class="additional-info-boxes">
+                        <div class="aib-box">
+                            <h2 class="__heading">More Recipes:</h2>
+                            <div class="__content">
+                                <ul>
+                                <?php foreach ($recipe_cat_terms as $term): 
+                                    $term_link = get_term_link($term); ?>
+                                    <li>
+                                        <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div> -->
+                <?php endif; ?>
             </div>
         </div><!-- .Sidebar -->
         <!-- Content -->

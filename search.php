@@ -100,7 +100,7 @@ get_header();
 			// Reset Post Data
 			wp_reset_postdata();
 		} else {
-			echo '<h3 style="text-align:center;">Results not found.</h3>';
+			echo '<h3 style="text-align:center;">No results found.</h3>';
 		}
 	?>
 	</div>

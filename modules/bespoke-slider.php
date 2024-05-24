@@ -69,6 +69,7 @@ $carousel_data['responsive'] = array(
 $carousel_json = json_encode($carousel_data);
 
 ?>
+<!-- Bespoke Slider section -->
 <section id="bespoke-slider-section-<?php echo $section_id ?>" class="bespoke-slider-section">
     <div class="container">
         <div class="bespoke-slider-wrapper">
@@ -114,7 +115,7 @@ $carousel_json = json_encode($carousel_data);
             <?php } ?>
         </div>
     </div>
-</section>
+</section><!-- .Bespoke Slider section -->
 
 <?php 
 // Style

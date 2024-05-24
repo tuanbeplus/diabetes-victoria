@@ -577,6 +577,16 @@ nav#site-navigation {
 
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
+    header.site-header{
+        &.sticky {
+            #top-menu {
+                display: none;
+            }
+            nav.breadcrumb {
+                display: none;
+            }
+        }
+    }
     #top-menu {
         .top-menu-list {
             .useful-links-list {
@@ -738,6 +748,13 @@ nav#site-navigation {
 }
 
 @media only screen and (max-width: 768px) {
+    header.site-header{
+        &.sticky {
+            #top-menu {
+                display: flex;
+            }
+        }
+    }
     #top-menu {
         .top-menu-list {
             display: none;

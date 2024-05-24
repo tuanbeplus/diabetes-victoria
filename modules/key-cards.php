@@ -44,11 +44,11 @@ if( get_row_layout() == 'key_cards' ):
                                         </div>
                                     <?php endif; ?>
 
-                                    <?php if ($title): ?>
+                                    <?php if (!empty($title)): ?>
                                         <h2 class="card-title"><?php echo $title; ?></h2>
                                     <?php endif; ?>
 
-                                    <?php if ($description): ?>
+                                    <?php if (!empty($description)): ?>
                                         <div class="card-description"><?php echo $description; ?></div>
                                     <?php endif; ?>
                                 </div>

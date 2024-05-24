@@ -1,14 +1,16 @@
 // Key Cards style
 .key-cards {
-    background-color: var(--s-bg-color);
-    padding-top: 0;
-    padding-bottom: var(--s-pd-bottom, 70px);
     overflow: hidden;
+    background-color: var(--s-bg-color);
+    padding-top: var(--s-pd-top, 0);
+    padding-bottom: var(--s-pd-bottom, 60px);
     @media(max-width: 1024px) {
-        padding-bottom: 50px;
+        padding-top: calc(var(--s-pd-top, 0) * 0.8);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.8);
     }
     @media(max-width: 768px) {
-        padding-bottom: 40px;
+        padding-top: calc(var(--s-pd-top, 0) * 0.6);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.6);
     }
     .title {
         max-width: 1144px;

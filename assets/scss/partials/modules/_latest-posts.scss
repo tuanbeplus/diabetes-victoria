@@ -1,12 +1,14 @@
 .latest-posts {
     background-color: var(--s-bg-color);
-    padding-top: 0;
+    padding-top: var(--s-pd-top, 0);
     padding-bottom: var(--s-pd-bottom, 60px);
     @media(max-width: 1024px) {
-        padding-bottom: 50px;
+        padding-top: calc(var(--s-pd-top, 0) * 0.8);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.8);
     }
     @media(max-width: 768px) {
-        padding-bottom: 40px;
+        padding-top: calc(var(--s-pd-top, 0) * 0.6);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.6);
     }
     .posts-wrapper {
         max-width: 1024px;
@@ -86,63 +88,6 @@
                 }
             }
         }
-        .posts-list {
-            margin: 0;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            column-gap: 66px;
-            row-gap: 80px;
-            .post {
-                margin: 0;
-                padding: 0;
-                position: relative;
-                list-style: none;
-                background-color: #fff;
-                box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
-                transition: all 0.2s;
-                animation: card-zoom-out 0.3s linear;
-                &:hover {
-                    box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px;
-                    .__thumb img {
-                        transform: scale(1.05);
-                    }
-                }
-                .__thumb {
-                    overflow: hidden;
-                    height: 164px;
-                    img {
-                        display: block;
-                        height: 100%;
-                        object-fit: cover;
-                        transition: all 0.3s;
-                    }
-                }
-                .post-meta {
-                    padding: 18px 26px 24px;
-                }
-                .__title {
-                    font-size: 1.125rem;
-                    line-height: 130%;
-                    font-family: $primary_font_bold;
-                    a {
-                        display: block;
-                        color: $dv_black;
-                        transition: all 0.3s;
-                        &::before {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            border: 2px solid transparent;
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -161,10 +106,6 @@
             .heading {
                 font-size: 2.188rem;
             }
-            .posts-list {
-                column-gap: 40px;
-                row-gap: 60px;
-            }
         }
     }
 }
@@ -175,10 +116,6 @@
         .posts-wrapper {
             .heading {
                 font-size: 1.875rem;
-            }
-            .posts-list {
-                column-gap: 30px;
-                row-gap: 50px;
             }
         }
     }
@@ -195,15 +132,6 @@
             }
             .heading {
                 font-size: 1.5rem;
-            }
-            .posts-list {
-                column-gap: 24px;
-                row-gap: 36px;
-                .post {
-                    .post-meta {
-                        padding: 16px;
-                    }
-                }
             }
         }
     }
@@ -223,14 +151,6 @@
             .load-more-cta {
                 padding: 12px 20px 10px;
                 font-size: 0.875rem;
-            }
-            .posts-list {
-                row-gap: 24px;
-                .post {
-                    .__title {
-                        font-size: 1rem;
-                    }
-                }
             }
         }
     }

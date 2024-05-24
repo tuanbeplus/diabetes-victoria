@@ -181,6 +181,24 @@ jQuery(document).ready(function ($) {
   }
   setTimeout(dv_set_height_all_carousel_items, 500);
 
+  /**
+   * Update the param 's' in URL when search 
+   */
+  function dv_update_search_keyword_param_url(button) {
+    var form = button.closest('form');
+    var searchInput = form.find('input[type=search]').val(); // Get the search input value
+    var currentUrl = new URL(window.location.href); // Get the current URL
+
+    currentUrl.searchParams.set('s', searchInput); // Set or update the 's' parameter
+
+    history.pushState(null, '', currentUrl); // Update the URL without reloading the page
+
+    var breadcrumb_current = $('.breadcrumb li[aria-current=page] span');
+    if (breadcrumb_current.length > 0) {
+      breadcrumb_current.text('Search result for: ' + searchInput);
+    }
+  }
+
   // Click to hide accessibility options
   $(document).on('click', '#pojo-a11y-toolbar .background-overlay', function (e) {
     e.preventDefault();
@@ -315,6 +333,9 @@ jQuery(document).ready(function ($) {
     var countResults = formSearch.find('#number-results-count');
     var numberAllResults = formSearch.find('#number-all-results');
     var searchResults = $('#search-results');
+
+    // Update search keyword to param 's' on URL
+    dv_update_search_keyword_param_url($(this));
     $.ajax({
       type: 'POST',
       url: ajaxUrl,
@@ -337,7 +358,7 @@ jQuery(document).ready(function ($) {
           searchResults.html(results_html);
           btnLoadMore.data('next-page', 2);
         } else {
-          searchResults.html('<h3 style="text-align:center;">Results not found.</h3>');
+          searchResults.html('<h3 style="text-align:center;">No results found.</h3>');
         }
         var resultItem = $('#search-results article.result-item');
         countResults.text(resultItem.length);

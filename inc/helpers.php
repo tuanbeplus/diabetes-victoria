@@ -52,21 +52,17 @@ function dv_breadcrumb() {
         echo '<nav aria-label="Breadcrumbs" class="breadcrumb">';
         echo '	<ol class="breadcrumb-list">';
 		echo '		<li><a href="' . site_url() . '">Home</a></li> '.$arrow_right;
-		if ( is_category() || is_single() ) {
-			if ( is_single() ) {
-				$post_type = get_post_type_object(get_post_type());
-				$slug = $post_type->rewrite;
-				echo '<li><a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a></li>';
+		if ( is_archive() || is_category() || is_single() ) {
+			$post_type = get_post_type_object(get_post_type());
+			$slug = $post_type->rewrite;
+			echo '<li><a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a></li>';
+			if ( is_archive() ) {
 				echo $arrow_right;
-				// $categories = get_the_category($post->ID);
-				// if (isset($categories) && !empty($categories)) {
-				// 	$category_name = $categories[0]->name ?? '';
-				// 	if (!empty($category_name)) {
-				// 		echo '<li><span> ' . $category_name . '</span></li>';
-				// 		echo $arrow_right;
-				// 	}
-				// }
-                echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
+				the_archive_title('<li aria-current="page"><span>', '</span></li>');
+			}
+			if ( is_single() ) {
+				echo $arrow_right;
+				the_title('<li aria-current="page"><span>', '</span></li>');
 			}
 		} 
 		elseif ( is_page() ) {
