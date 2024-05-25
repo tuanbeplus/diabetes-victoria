@@ -1267,7 +1267,7 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     flex-direction: column;
   }
   nav#site-navigation ul#primary-menu-list li.menu-item {
-    padding: 10px 0;
+    padding: 12px 0;
     flex-direction: column;
     border-bottom: 1px solid #99D6E9;
   }
@@ -2970,20 +2970,15 @@ body .socials-share-wrapper .share-content .essb_links li a {
     padding: 16px;
   }
   .key-cards .cards-list .card .card-content .landing-page {
-    margin-bottom: 10px;
-  }
-  .key-cards .cards-list .card .card-content .landing-page a {
-    font-size: 1rem;
+    margin-bottom: 8px;
   }
   .key-cards .cards-list .card .card-content .card-title {
     margin-bottom: 10px;
-    font-size: 1.125rem;
   }
   .key-cards .cards-list .card .card-cta {
     padding: 0 16px 16px;
   }
   .key-cards .cards-list .card .card-cta a.cta-btn {
-    padding: 8px 12px 6px;
     font-size: 0.875rem;
   }
 }
@@ -2991,17 +2986,6 @@ body .socials-share-wrapper .share-content .essb_links li a {
 @media only screen and (max-width: 600px) {
   .key-cards .cards-list {
     flex-wrap: wrap;
-    row-gap: 24px;
-  }
-  .key-cards .cards-list .card .card-content .landing-page {
-    margin-bottom: 10px;
-  }
-  .key-cards .cards-list .card .card-content .landing-page a {
-    font-size: 1rem;
-  }
-  .key-cards .cards-list .card .card-content .card-title {
-    margin-bottom: 10px;
-    font-size: 1.125rem;
   }
 }
 @keyframes card-slide-down {
@@ -3648,6 +3632,25 @@ section.main-content.recipe-info .main-content-inner .content-wrapper .__content
 section.main-content.recipe-info .main-content-inner .content-wrapper .__content p {
   margin: 12px 0;
 }
+section.main-content.recipe-info .main-content-inner .sidebar .recipe-cats-list li {
+  margin-bottom: 8px;
+  color: #fff;
+}
+section.main-content.recipe-info .main-content-inner .sidebar .recipe-cats-list li a {
+  color: #fff;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
+section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info {
+  padding: 24px 30px;
+}
+section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info .recipe-cats-list li {
+  margin-bottom: 8px;
+  color: #fff;
+}
+section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info .recipe-cats-list li a {
+  color: #fff;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
 section.main-content .main-content-inner {
   max-width: 1054px;
   margin: 0 auto;
@@ -3661,6 +3664,8 @@ section.main-content .main-content-inner.has-sidebar .content-wrapper {
 }
 section.main-content .main-content-inner .content-wrapper {
   width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
   background-color: #fff;
   animation: content-slide-left 0.3s linear both;
 }
@@ -3739,7 +3744,7 @@ section.main-content .main-content-inner .sidebar .__heading {
 }
 section.main-content .main-content-inner .sidebar.sticky .sidebar-inner {
   position: sticky;
-  top: 40px;
+  top: var(--header-height);
 }
 section.main-content .main-content-inner .sidebar.sticky .sidebar-inner > *:first-child {
   margin-top: 0;
@@ -4924,6 +4929,10 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   }
   .contact-us-section .ctu-wrapper .ctu-heading {
     font-size: 1.8rem;
+  }
+  .contact-us-section .ctu-wrapper .ctu-button {
+    margin-top: 24px;
+    font-size: 0.875rem;
   }
 }
 @media (max-width: 600px) {

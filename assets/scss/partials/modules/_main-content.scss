@@ -26,6 +26,35 @@ section.main-content {
                     }
                 }
             }
+            .sidebar {
+                .recipe-cats-list {
+                    li {
+                        margin-bottom: 8px;
+                        color: #fff;
+                        a {
+                            color: #fff;
+                            font-family: $primary_font_bold;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.recipe-archive {
+        .main-content-inner .sidebar {
+            .secondary-info {
+                padding: 24px 30px;
+                .recipe-cats-list {
+                    li {
+                        margin-bottom: 8px;
+                        color: #fff;
+                        a {
+                            color: #fff;
+                            font-family: $primary_font_bold;
+                        }
+                    }
+                }
+            }
         }
     }
     .main-content-inner {
@@ -42,6 +71,7 @@ section.main-content {
         }
         .content-wrapper {
             width: 100%;
+            height: fit-content;
             background-color: #fff;
             animation: content-slide-left 0.3s linear both;
             img {
@@ -119,8 +149,7 @@ section.main-content {
             &.sticky {
                 .sidebar-inner {
                     position: sticky;
-                    // top: var(--header-height);
-                    top: 40px;
+                    top: var(--header-height);
                     & > *:first-child {
                         margin-top: 0;
                     }

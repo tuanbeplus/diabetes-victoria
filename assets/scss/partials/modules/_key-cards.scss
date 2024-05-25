@@ -191,20 +191,15 @@
                 .card-content {
                     padding: 16px;
                     .landing-page {
-                        margin-bottom: 10px;
-                        a {
-                            font-size: 1rem;
-                        }
+                        margin-bottom: 8px;
                     }
                     .card-title {
                         margin-bottom: 10px;
-                        font-size: 1.125rem;
                     }
                 }
                 .card-cta {
                     padding: 0 16px 16px;
                     a.cta-btn {
-                        padding: 8px 12px 6px;
                         font-size: 0.875rem;
                     }
                 }
@@ -218,21 +213,6 @@
     .key-cards {
         .cards-list {
             flex-wrap: wrap;
-            row-gap: 24px;
-            .card {
-                .card-content {
-                    .landing-page {
-                        margin-bottom: 10px;
-                        a {
-                            font-size: 1rem;
-                        }
-                    }
-                    .card-title {
-                        margin-bottom: 10px;
-                        font-size: 1.125rem;
-                    }
-                }
-            }
         }
     }
 }

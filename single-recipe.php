@@ -41,20 +41,16 @@ $recipe_cat_terms = get_terms( array(
                     <ul id="tocs" class="links-list" role="list"></ul>
                 </div>
                 <?php if (!empty($recipe_cat_terms) && !is_wp_error($recipe_cat_terms)): ?>
-                    <div class="additional-info-boxes">
-                        <div class="aib-box">
-                            <h2 class="__heading">More Recipes:</h2>
-                            <div class="__content">
-                                <ul>
-                                <?php foreach ($recipe_cat_terms as $term): 
-                                    $term_link = get_term_link($term); ?>
-                                    <li>
-                                        <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
-                                    </li>
-                                <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="secondary-info">
+                        <h2 class="__heading">More Recipes:</h2>
+                        <ul class="recipe-cats-list" role="list">
+                        <?php foreach ($recipe_cat_terms as $term): 
+                            $term_link = get_term_link($term); ?>
+                            <li>
+                                <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                        </ul>
                     </div>
                 <?php endif; ?>
             </div>
@@ -110,7 +106,7 @@ $max_posts = dv_get_latest_posts($post_type, $paged, '-1', $order_by);
 $max_posts = is_array($max_posts) ? count($max_posts) : '';
 ?>
 <?php if (!empty($posts_list)): ?>
-<!-- Latest Posts -->
+<!-- Latest Recipe -->
 <section class="latest-posts recipe" style="padding-top:0;">
     <input type="hidden" name="post_type" value="<?php echo $post_type ?>">
     <input type="hidden" name="number_posts" value="<?php echo $number_posts ?>">
@@ -157,7 +153,7 @@ $max_posts = is_array($max_posts) ? count($max_posts) : '';
             <?php endif; ?>
         </div>
     </div>
-</section><!-- .Latest Posts -->
+</section><!-- .Latest Recipe -->
 <?php endif; ?>
 
 <?php get_footer(); 
