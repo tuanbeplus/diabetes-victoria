@@ -17,6 +17,7 @@ $button_text = get_sub_field('button_text');
 $button_link = get_sub_field('button_link');
 
 ?>
+<!-- Contact us section -->
 <section id="contact-us-section-<?php echo $section_id; ?>" class="contact-us-section">
     <div class="container">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="574px" height="631px" viewBox="0 0 574 631" version="1.1">
@@ -66,7 +67,7 @@ $button_link = get_sub_field('button_link');
             </div>
         </div>
     </div>
-</section>
+</section><!-- .Contact us section -->
 
 <?php 
 $bg_color = get_sub_field('background_color');

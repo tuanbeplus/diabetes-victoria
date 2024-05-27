@@ -481,7 +481,7 @@ section.post-title h1 {
   .posts-list {
     -moz-column-gap: 40px;
          column-gap: 40px;
-    row-gap: 60px;
+    row-gap: 50px;
   }
 }
 /*************************** Tablet **************************/
@@ -526,7 +526,7 @@ section.post-title h1 {
   .posts-list {
     -moz-column-gap: 30px;
          column-gap: 30px;
-    row-gap: 50px;
+    row-gap: 40px;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -961,9 +961,20 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   bottom: 1px;
   background-color: #019BC2;
   z-index: 10;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  animation: menuDropDown 0.2s linear both;
 }
 
+@keyframes menuDropDown {
+  0% {
+    opacity: 0.8;
+    transform: translateY(90%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+}
 .donate-popup {
   display: none;
   position: fixed;
@@ -1287,6 +1298,7 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     box-shadow: none;
     border-left: 1px solid #99D6E9;
     transform: none;
+    animation: none;
   }
   nav#site-navigation ul#primary-menu-list .sub-menu li.menu-item {
     border: none;
@@ -1303,6 +1315,9 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
 @media only screen and (max-width: 768px) {
   header.site-header.sticky #top-menu {
     display: flex;
+  }
+  header.site-header.sticky .header-inner {
+    padding: 10px 0 12px;
   }
   #top-menu .top-menu-list {
     display: none;
@@ -2489,10 +2504,8 @@ body .socials-share-wrapper .share-content .essb_links li a {
 }
 .hero-carousel {
   overflow: hidden;
-  background-color: var(--s-bg-color);
   padding-top: var(--s-pd-top, 0);
   padding-bottom: var(--s-pd-bottom, 60px);
-  /* The slide right effect */
   /*************************** Laptop **************************/
   /*************************** Tablet **************************/
   /*************************** Mobile **************************/
@@ -2510,7 +2523,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   }
 }
 .hero-carousel .carousel-wrapper {
-  background-color: #019BC2;
+  background-color: var(--s-bg-color);
   animation: slide-right-animation 0.4s linear both;
 }
 .hero-carousel .carousel-wrapper .slick-track {
@@ -2667,20 +2680,6 @@ body .socials-share-wrapper .share-content .essb_links li a {
   transform: translateY(-50%);
   right: 0;
 }
-@keyframes slide-right-animation {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  50% {
-    transform: translateX(50%);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 @media only screen and (max-width: 1440px) {
   .hero-carousel .carousel-wrapper .carousel-item {
     min-height: unset;
@@ -2730,7 +2729,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
     margin-top: 24px;
   }
   .hero-carousel .carousel-wrapper .carousel-item .item-inner .item-content .group-cta .primary-cta {
-    padding: 12px 20px 10px;
+    padding: 10px 20px 8px;
     font-size: 1rem;
   }
   .hero-carousel .carousel-wrapper .carousel-item .item-inner .item-content .group-cta .secondary-cta {
@@ -2794,6 +2793,21 @@ body .socials-share-wrapper .share-content .essb_links li a {
   }
 }
 
+/* The slide right effect */
+@keyframes slide-right-animation {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 .key-cards {
   overflow: hidden;
   background-color: var(--s-bg-color);
@@ -3291,7 +3305,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   }
   .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .landing-page .cta-btn {
     font-size: 1.375rem;
-    padding: 20px 32px 16px;
+    padding: 18px 32px 14px;
   }
   .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .main-content {
     margin-top: 32px;
@@ -3302,7 +3316,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
     font-size: 1.875rem;
   }
   .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .main-content .group-cta .primary-cta {
-    padding: 12px 20px 10px;
+    padding: 10px 20px 8px;
     font-size: 1rem;
   }
   .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .main-content .group-cta .secondary-cta {
@@ -3500,6 +3514,9 @@ body .socials-share-wrapper .share-content .essb_links li a {
 }
 /*************************** Tablet **************************/
 @media only screen and (max-width: 1024px) {
+  .latest-posts .posts-wrapper .top {
+    margin-bottom: 32px;
+  }
   .latest-posts .posts-wrapper .heading {
     font-size: 1.875rem;
   }
@@ -3802,6 +3819,7 @@ section.main-content .main-content-inner .sidebar .secondary-info ul.sc-info-lis
   gap: 10px;
 }
 section.main-content .main-content-inner .sidebar .secondary-info ul.sc-info-list li img.__icon {
+  margin-top: 2px;
   display: block;
   width: 14px;
   height: 14px;
@@ -4145,6 +4163,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   border-bottom: 1px solid #223540;
 }
 .members-list-section .members-list-wrapper .members-list .member .__img {
+  display: flex;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -4191,6 +4210,9 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   }
 }
 @media only screen and (max-width: 640px) {
+  .members-list-section .members-list-wrapper {
+    padding: 30px 20px;
+  }
   .members-list-section .members-list-wrapper .members-list .member {
     padding: 24px 0;
     flex-wrap: wrap;
@@ -4795,7 +4817,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
     padding-bottom: 50px;
   }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
   .contact-us-section {
     padding-top: 40px;
     padding-bottom: 40px;
@@ -4868,7 +4890,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   color: var(--s-bg-color, #019BC2);
   background-color: #fff;
   margin-top: 50px;
-  padding: 10px 16px 8px;
+  padding: 10px 20px 8px;
   border: 2px solid transparent;
   transition: all 0.4s;
 }

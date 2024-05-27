@@ -11,6 +11,7 @@ if( get_row_layout() == 'single_column_content' ):
     $content_editor = get_sub_field('content_editor');
 
     if (!empty($content_editor)): ?>
+        <!-- Single Column Content section -->
         <section id="main-content-<?php echo $section_id; ?>" class="main-content">
             <div class="main-content-inner">
                 <!-- Content -->
@@ -21,7 +22,7 @@ if( get_row_layout() == 'single_column_content' ):
                     </div>
                 </div><!-- .Content -->
             </div>
-        </section>
+        </section><!-- .Single Column Content section -->
         <?php
         // Style
         $bg_color = get_sub_field('background_color');

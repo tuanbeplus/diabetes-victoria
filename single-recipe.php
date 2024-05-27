@@ -24,6 +24,19 @@ $recipe_cat_terms = get_terms( array(
     'taxonomy'   => $recipe_cat,
     'hide_empty' => true,
 ));
+
+// Post brand css variable
+$brand_color = get_field('brand_color');
+$brand_color = !empty($brand_color) ? $brand_color : '';
+$sub_brand_color = !empty($brand_color) ? '#fff' : '';
+$bg_color = get_field('background_color');
+$bg_color = !empty($bg_color) ? $bg_color : '';
+
+echo '<style> html {';
+    if (!empty($brand_color)) echo '--post-brand-color: '. $brand_color .';';
+    if (!empty($sub_brand_color)) echo '--post-sub-brand-color: '. $sub_brand_color .';';
+    if (!empty($bg_color)) echo '--post-bg-color: '. $bg_color .';';
+echo '} </style>';
 ?>
 
 <section class="post-title">

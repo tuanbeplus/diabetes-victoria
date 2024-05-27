@@ -28,7 +28,7 @@ if( get_row_layout() == 'content_promo' ):
 
     if(!empty($promo_data)):
         ?>
-        <!-- Content Promo -->
+        <!-- Content Promo section -->
         <section id="content-promo-<?php echo $section_id; ?>" class="content-promo <?php echo $promo_class; ?>">
             <div class="carousel-wrapper promo-carousel-<?php echo $section_id; ?>">
                 <?php foreach ($promo_data as $id => $row): 
@@ -152,7 +152,7 @@ if( get_row_layout() == 'content_promo' ):
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>
-        </section><!-- .Content Promo -->
+        </section><!-- .Content Promo section -->
         <?php if ($promo_options == 'carousel_layout'): ?>
             <script>
             jQuery(document).ready(function(){

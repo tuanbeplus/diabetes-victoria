@@ -21,7 +21,7 @@ if( get_row_layout() == 'latest_posts' ):
     $max_posts = is_array($max_posts) ? count($max_posts) : '';
 
     if (!empty($posts_list)): ?>
-        <!-- Latest Posts -->
+        <!-- Latest Posts section -->
         <section id="latest-posts-section-<?php echo $section_id ?>" class="latest-posts">
 
             <input type="hidden" name="post_type" value="<?php echo $post_type ?>">
@@ -74,7 +74,7 @@ if( get_row_layout() == 'latest_posts' ):
                     <?php endif; ?>
                 </div>
             </div>
-        </section><!-- .Latest Posts -->
+        </section><!-- .Latest Posts section -->
     <?php
     // Reset Post Data
     wp_reset_postdata();

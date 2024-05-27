@@ -15,8 +15,8 @@ $faqs = get_sub_field('faqs');
 if (empty($heading) && empty($faqs)) {
     return;
 }
-
 ?>
+<!-- FAQs section -->
 <section id="faqs-section-<?php echo $section_id ?>" class="faqs-section">
     <div class="container">
         <div class="faqs-wrapper">
@@ -48,7 +48,7 @@ if (empty($heading) && empty($faqs)) {
             <?php } ?>
         </div>
     </div>
-</section>
+</section><!-- .FAQs section -->
 
 <?php 
 // Style

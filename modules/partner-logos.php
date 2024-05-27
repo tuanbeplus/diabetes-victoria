@@ -10,6 +10,7 @@ if( get_row_layout() == 'partner_logos' ):
     $logos_list = get_sub_field('logos_list');
     
     if (!empty($logos_list)): ?>
+        <!-- Partner Logos section -->
         <section id="partner-logos-<?php echo $section_id; ?>" class="partner-logos">
             <div class="container">
                 <div class="logos">
@@ -31,7 +32,7 @@ if( get_row_layout() == 'partner_logos' ):
                 <?php endforeach; ?>
                 </div>
             </div>
-        </section>
+        </section><!-- .Partner Logos section -->
     <?php  
     // Style
     $bg_color = get_sub_field('background_color');

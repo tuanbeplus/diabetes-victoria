@@ -9,8 +9,8 @@ if( get_row_layout() == 'key_cards' ):
 	$cards_per_row =  get_sub_field('cards_per_row');
     $cards_list = get_sub_field('cards_list');
     $section_id = rand(0, 999);
-    if (!empty($cards_list)):
-        ?>
+    if (!empty($cards_list)): ?>
+        <!-- Key Cards section -->
         <section id="key-cards-section-<?php echo $section_id; ?>" class="key-cards">
             <div class="container">
 				<?php if (!empty($title)): ?>
@@ -88,7 +88,7 @@ if( get_row_layout() == 'key_cards' ):
                 <?php endforeach; ?>
                 </ul><!-- .Card list -->
             </div>
-        </section>
+        </section><!-- .Key Cards section -->
         <?php
         // Style
         $bg_color = get_sub_field('background_color');

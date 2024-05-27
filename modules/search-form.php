@@ -10,6 +10,7 @@ if( get_row_layout() == 'search_form' ):
     $suggestions = get_sub_field('suggestions');
     $section_id = rand(0, 999);
     ?>
+    <!-- Search Form section -->
     <section id="search-section-<?php echo $section_id; ?>" class="search-section">
         <div class="container">
             <h2 class="heading"><span><?php echo $heading; ?></span></h2>
@@ -44,7 +45,7 @@ if( get_row_layout() == 'search_form' ):
                 <?php endif; ?>
             </form>
         </div>
-    </section>
+    </section><!-- .Search Form section -->
     <?php
     // Style
     $bg_color = get_sub_field('background_color');

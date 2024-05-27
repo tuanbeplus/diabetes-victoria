@@ -32,6 +32,7 @@
                 gap: 62px;
                 border-bottom: 1px solid #223540;
                 .__img {
+                    display: flex;
                     width: fit-content;
                     img {
                         width: 210px;
@@ -95,6 +96,7 @@
     }
     @media only screen and (max-width: 640px) {
         .members-list-wrapper {
+            padding: 30px 20px;
             .members-list {
                 .member {
                     padding: 24px 0;

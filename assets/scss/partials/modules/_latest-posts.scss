@@ -114,6 +114,9 @@
 @media only screen and (max-width: 1024px) {
     .latest-posts {
         .posts-wrapper {
+            .top {
+                margin-bottom: 32px;
+            }
             .heading {
                 font-size: 1.875rem;
             }

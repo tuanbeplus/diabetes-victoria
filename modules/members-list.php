@@ -11,6 +11,7 @@ if( get_row_layout() == 'members_list' ):
     $members_list = get_sub_field('list');
     
     if (!empty($members_list)): ?>
+        <!-- Members List section -->
         <section id="members-list-<?php echo $section_id; ?>" class="members-list-section">
             <div class="container">
                 <div class="members-list-wrapper">
@@ -44,7 +45,7 @@ if( get_row_layout() == 'members_list' ):
                     </ul>
                 </div>
             </div>
-        </section>
+        </section><!-- .Members List section -->
     <?php  
     // Style
     $bg_color = get_sub_field('background_color');

@@ -6,7 +6,7 @@
         padding-top: 50px;
         padding-bottom: 50px;
     }
-    @media(max-width: 767.98px) {
+    @media(max-width: 768px) {
         padding-top: 40px;
         padding-bottom: 40px;
     }
@@ -76,7 +76,7 @@
             color: var(--s-bg-color, $primary_color);
             background-color: #fff;
             margin-top: 50px;
-            padding: 10px 16px 8px;
+            padding: 10px 20px 8px;
             border: 2px solid transparent;
             transition: all 0.4s;
             &:hover {

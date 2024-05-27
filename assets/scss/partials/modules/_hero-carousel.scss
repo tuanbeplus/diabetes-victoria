@@ -1,7 +1,6 @@
 // Carousel component
 .hero-carousel {
     overflow: hidden;
-    background-color: var(--s-bg-color);
     padding-top: var(--s-pd-top, 0);
     padding-bottom: var(--s-pd-bottom, 60px);
     @media(max-width: 1024px) {
@@ -13,7 +12,7 @@
         padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.6);
     }
     .carousel-wrapper {
-        background-color: $primary_color;
+        background-color: var(--s-bg-color);
         animation: slide-right-animation 0.4s linear both;
         .slick-track {
             display: flex;
@@ -176,22 +175,6 @@
         }
     }
 
-/* The slide right effect */
-@keyframes slide-right-animation {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    50% {
-        transform: translateX(50%);
-        opacity: 0.5;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
     /*************************** Laptop **************************/
     @media only screen and (max-width: 1440px) {
         .carousel-wrapper {
@@ -256,7 +239,7 @@
                         .group-cta {
                             margin-top: 24px;
                             .primary-cta {
-                                padding: 12px 20px 10px;
+                                padding: 10px 20px 8px;
                                 font-size: 1rem;
                             }
                             .secondary-cta {
@@ -354,5 +337,20 @@
             }
         }
     }
+}
 
+/* The slide right effect */
+@keyframes slide-right-animation {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(50%);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
