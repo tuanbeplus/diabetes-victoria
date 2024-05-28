@@ -1,7 +1,6 @@
 <?php 
 /**
  * Add file SVG type to WP upload media
- * 
  */
 function dv_custom_mime_types($mimes) {
     $mimes['svg'] = 'image/svg+xml';
@@ -11,7 +10,6 @@ add_filter('upload_mimes', 'dv_custom_mime_types');
 
 /**
  * Custom WP query on search page
- * 
  */
 function dv_custom_search_posts_per_page($query) {
   // Check if this is the search page and the main query

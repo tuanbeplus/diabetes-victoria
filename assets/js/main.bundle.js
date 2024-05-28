@@ -454,7 +454,11 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
     var this_btn = $(this);
     this_btn.addClass('active');
-    var wrapper_margin = this_btn.offset().top + this_btn.outerHeight();
+    var adminBar = $('#wpadminbar');
+    var wrapper_margin = this_btn.outerHeight();
+    if (adminBar.length > 0) {
+      wrapper_margin = wrapper_margin + adminBar.outerHeight();
+    }
     var donate_popup = $('#donate-popup');
     var donate_wrapper = donate_popup.find('.donate-wrapper');
     var input_field = donate_popup.find('input#other-amount');

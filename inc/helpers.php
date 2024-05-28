@@ -46,44 +46,45 @@ function dv_get_latest_posts($post_type, $paged, $number_posts, $order_by) {
  */
 function dv_breadcrumb() {
 	global $post;
-    $arrow_right = '<span class="arrow"> > </span>';
-	if ( ! is_front_page() ) {
-		if (is_404()) return;
-        echo '<nav aria-label="Breadcrumbs" class="breadcrumb">';
-        echo '	<ol class="breadcrumb-list">';
-		echo '		<li><a href="' . site_url() . '">Home</a></li> '.$arrow_right;
-		if ( is_archive() || is_category() || is_single() ) {
-			$post_type = get_post_type_object(get_post_type());
-			$slug = $post_type->rewrite;
-			echo '<li><a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a></li>';
-			if ( is_archive() ) {
-				echo $arrow_right;
-				the_archive_title('<li aria-current="page"><span>', '</span></li>');
-			}
-			if ( is_single() ) {
-				echo $arrow_right;
-				the_title('<li aria-current="page"><span>', '</span></li>');
-			}
-		} 
-		elseif ( is_page() ) {
-			if ( $post->post_parent ) {
-				$anc   = get_post_ancestors( $post->ID );
-				foreach ( $anc as $ancestor ) {
-					$output = '<li><a href="' . get_permalink( $ancestor ) . '" title="' . get_the_title( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li> '.$arrow_right;
-				}
-				echo $output;
-				echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
-			} else {
-				echo '<li aria-current="page"><span> ' . get_the_title() . '</span></li>';
-			}
-		}
-		elseif ( is_search() ) {
-			echo '<li aria-current="page"><span>Search result for: ' . esc_html(get_search_query()) . '</span></li>';
-		}
-		
-        echo '	</ol>';
-        echo '</nav>';
+	$arrow_right = '<span class="arrow"> &gt; </span>';
+	
+	if (is_front_page() || is_404()) {
+		return;
 	}
+	
+	echo '<nav aria-label="Breadcrumbs" class="breadcrumb">';
+	echo '  <ol class="breadcrumb-list">';
+	echo '    <li><a href="' . esc_url(home_url()) . '">Home</a></li>' . $arrow_right;
+	
+	if (is_archive()) {
+		$post_type = get_post_type_object(get_post_type());
+		if ($post_type) {
+			echo '<li><a href="' . esc_url(get_post_type_archive_link($post_type->name)) . '">' . esc_html($post_type->labels->singular_name) . '</a></li>' . $arrow_right;
+		}
+		the_archive_title('<li aria-current="page"><span>', '</span></li>');
+	} 
+	elseif (is_single()) {
+		$post_type = get_post_type_object(get_post_type());
+		if ($post_type) {
+			echo '<li><a href="' . esc_url(get_post_type_archive_link($post_type->name)) . '">' . esc_html($post_type->labels->singular_name) . '</a></li>' . $arrow_right;
+		}
+		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
+	} 
+	elseif (is_page()) {
+		if ($post->post_parent) {
+			$ancestors = array_reverse(get_post_ancestors($post->ID));
+			foreach ($ancestors as $ancestor) {
+				echo '    <li><a href="' . esc_url(get_permalink($ancestor)) . '">' . esc_html(get_the_title($ancestor)) . '</a></li>' . $arrow_right;
+			}
+		}
+		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
+	} 
+	elseif (is_search()) {
+		echo '<li aria-current="page"><span>Search results for: ' . esc_html(get_search_query()) . '</span></li>';
+	}
+	
+	echo '  </ol>';
+	echo '</nav>';
 }
 
 /**

@@ -471,7 +471,11 @@ jQuery(document).ready(function ($) {
         e.preventDefault()
         let this_btn = $(this) 
         this_btn.addClass('active')
-        let wrapper_margin = this_btn.offset().top + this_btn.outerHeight();
+        let adminBar = $('#wpadminbar')
+        let wrapper_margin = this_btn.outerHeight();
+        if (adminBar.length > 0) {
+            wrapper_margin = wrapper_margin + adminBar.outerHeight();
+        }
         let donate_popup = $('#donate-popup')
         let donate_wrapper = donate_popup.find('.donate-wrapper')
         let input_field = donate_popup.find('input#other-amount')

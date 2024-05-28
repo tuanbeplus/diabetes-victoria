@@ -207,17 +207,18 @@ body {
             bottom: 0;
             transform: translate(100%);
             z-index: 100;
-            width: 600px;
-            padding: 20px;
-            border-radius: 4px;
-            background-color: $dv_background;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            width: 560px;
+            padding: 32px;
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px;
             > h3 {
                 margin-top: 0;
                 float: left;
             }
             #btn-close-share {
-                float: right;
+                position: absolute;
+                right: 20px;
+                top: 20px;
                 transition: all 0.3s;
                 background-color: var(--post-brand-color, #007995);
             }
@@ -260,6 +261,12 @@ body {
                 }
             }
         }
+    }
+}
+@media only screen and (max-width: 768px) {
+    body .socials-share-wrapper .share-content {
+        width: 400px;
+        padding: 24px;
     }
 }
 
@@ -310,9 +317,11 @@ body {
             }
             .share-content {
                 right: -24px;
-                width: 240px;
-                padding: 16px;
+                width: 260px;
+                padding: 20px;
                 #btn-close-share {
+                    top: 16px;
+                    right: 16px;
                     padding: 8px 12px;
                     font-size: 18px;
                 }
