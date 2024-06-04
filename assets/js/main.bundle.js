@@ -84,11 +84,19 @@ jQuery(document).ready(function ($) {
 
     // Sticky sidebar
     if ($('#main-content-sidebar').length > 0) {
+      // get Header height
+      var offset_top = $('header.site-header').outerHeight();
+      var admin_bar = $('#wpadminbar');
+      if (admin_bar.length > 0) {
+        offset_top = offset_top + admin_bar.outerHeight();
+      }
       var sibar_scroll_offset = $('#main-content-sidebar').offset().top - $('#content.site-content').offset().top;
       if ($(window).scrollTop() > sibar_scroll_offset) {
         $('#main-content-sidebar').addClass('sticky');
+        $('#main-content-sidebar .sidebar-inner').css('top', offset_top + 'px');
       } else {
         $('#main-content-sidebar').removeClass('sticky');
+        $('#main-content-sidebar .sidebar-inner').css('top', 'unset');
       }
     }
   }

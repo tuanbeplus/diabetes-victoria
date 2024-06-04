@@ -78,12 +78,20 @@ jQuery(document).ready(function ($) {
 
         // Sticky sidebar
         if ($('#main-content-sidebar').length > 0) {
-            var sibar_scroll_offset = $('#main-content-sidebar').offset().top - $('#content.site-content').offset().top;
+            // get Header height
+            let offset_top = $('header.site-header').outerHeight();
+            let admin_bar = $('#wpadminbar');
+            if (admin_bar.length > 0) {
+                offset_top = offset_top + admin_bar.outerHeight();
+            }
+            let sibar_scroll_offset = $('#main-content-sidebar').offset().top - $('#content.site-content').offset().top;
             if ($(window).scrollTop() > sibar_scroll_offset) {
                 $('#main-content-sidebar').addClass('sticky')
+                $('#main-content-sidebar .sidebar-inner').css('top', offset_top+'px')
             }
             else {
                 $('#main-content-sidebar').removeClass('sticky')
+                $('#main-content-sidebar .sidebar-inner').css('top', 'unset')
             }
         }
     }

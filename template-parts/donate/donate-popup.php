@@ -1,6 +1,6 @@
 <?php
 /**
- * Displays the Global search popup
+ * Displays the Donate popup
  *
  */
 $donate = get_field('donate', 'option');

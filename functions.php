@@ -8,7 +8,6 @@
  */
 
 if ( ! function_exists( 'diabetes_victoria_styles' ) ) {
-
 	/**
 	 * Enqueue styles.
 	 *
@@ -17,19 +16,8 @@ if ( ! function_exists( 'diabetes_victoria_styles' ) ) {
 	 * @return void
 	 */
 	function diabetes_victoria_styles() {
-		// Register theme stylesheet.
-		$theme_version = wp_get_theme()->get( 'Version' );
-
-		$version_string = is_string( $theme_version ) ? $theme_version : false;
-		wp_register_style(
-			'diabetes-victoria-style',
-			get_template_directory_uri() . '/style.css',
-			array(),
-			$version_string
-		);
-
 		// Enqueue theme stylesheet.
-		wp_enqueue_style( 'diabetes-victoria-style' );
+		wp_enqueue_style( 'diabetes-victoria-style', get_template_directory_uri() . '/style.css?r=', DV_THEME_VER);
 	}
     add_action( 'wp_enqueue_scripts', 'diabetes_victoria_styles' );
 }

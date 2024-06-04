@@ -3,12 +3,12 @@
 $primary_color:   #019BC2;
 $secondary_color: #3F51B5;
 $tertiary_color:  #E9730C;
-$accent_color: #99D6E9;
-$dv_black: #223540;
-$dv_background: #F5FBFD;
-$dv_white: #ffffff;
-$dv_dark: #007995;
-$donate_color: #3F51B5;
+$accent_color:    #99D6E9;
+$dv_black:        #223540;
+$dv_background:   #F5FBFD;
+$dv_white:        #ffffff;
+$dv_dark:         #007995;
+$donate_color:    #3F51B5;
 
 // font variables
 $primary_font_light:  'ITC-Avant-Garde-Gothic-Pro_Light';
@@ -212,6 +212,11 @@ section.error-404 {
 }
 
 /* Site Breadcrumb */
+header.sticky {
+    .breadcrumb {
+        padding: 14px 0 12px;
+    }
+}
 .breadcrumb {
     padding: 24px 0 22px;
     background-color: var(--post-brand-color, #99D6E9);

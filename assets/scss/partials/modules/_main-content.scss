@@ -149,7 +149,6 @@ section.main-content {
             &.sticky {
                 .sidebar-inner {
                     position: sticky;
-                    top: var(--header-height);
                     & > *:first-child {
                         margin-top: 0;
                     }

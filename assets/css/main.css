@@ -192,6 +192,10 @@ section.error-404 h1 {
 }
 
 /* Site Breadcrumb */
+header.sticky .breadcrumb {
+  padding: 14px 0 12px;
+}
+
 .breadcrumb {
   padding: 24px 0 22px;
   background-color: var(--post-brand-color, #99D6E9);
@@ -649,16 +653,21 @@ header.site-header.sticky {
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
 }
-header.site-header.sticky #header-logo img.logo-full-color {
-  display: block;
+header.site-header.sticky .header-inner {
+  padding: 22px 0 16px;
 }
 header.site-header.sticky #header-logo img.logo-white-color {
   display: none;
+}
+header.site-header.sticky #header-logo img.logo-full-color {
+  display: block;
+  width: 132px;
 }
 header.site-header.sticky #btn-nav-bar {
   color: #019BC2;
 }
 header.site-header.sticky nav#site-navigation {
+  padding-bottom: 10px;
   border: none;
 }
 header.site-header.sticky nav#site-navigation ul#primary-menu-list li.menu-item a {
@@ -741,6 +750,9 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
   line-height: 1;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
   color: #019BC2;
+}
+#top-menu .top-menu-list .useful-links-list li:first-child {
+  padding-left: 2px;
 }
 #top-menu .top-menu-list .useful-links-list li:last-child {
   border-right: none;
@@ -870,8 +882,8 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
 }
 
 #header-logo img {
-  width: 100%;
-  max-width: 214px;
+  width: 214px;
+  max-width: 100%;
 }
 #header-logo img.logo-full-color {
   display: none;
@@ -918,6 +930,9 @@ nav#site-navigation ul#primary-menu-list {
   flex-wrap: wrap;
   gap: 2px;
 }
+nav#site-navigation ul#primary-menu-list > li.menu-item:first-child {
+  padding-left: 2px;
+}
 nav#site-navigation ul#primary-menu-list li.menu-item {
   display: flex;
   align-items: flex-start;
@@ -962,7 +977,7 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   background-color: #019BC2;
   z-index: 10;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  animation: menuDropDown 0.2s linear both;
+  animation: menuDropDown 0.3s linear both;
 }
 
 @keyframes menuDropDown {
@@ -1201,7 +1216,7 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     padding: 20px 0 16px;
   }
   #header-logo img {
-    max-width: 190px;
+    width: 190px;
   }
   nav#site-navigation {
     padding-bottom: 12px;
@@ -1227,6 +1242,9 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
 @media only screen and (max-width: 1024px) {
   header.site-header {
     box-shadow: 0px 10px 20px -25px rgba(0, 0, 0, 0.5);
+  }
+  header.site-header.sticky .header-inner {
+    padding: 12px 0 14px;
   }
   #top-menu .top-menu-list {
     flex-wrap: wrap;
@@ -1254,7 +1272,7 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     padding: 12px 0;
   }
   #header-logo img {
-    max-width: 150px;
+    width: 150px;
   }
   #btn-nav-bar {
     display: block;
@@ -1318,6 +1336,9 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   }
   header.site-header.sticky .header-inner {
     padding: 10px 0 12px;
+  }
+  header.site-header.sticky #header-logo img.logo-full-color {
+    width: 120px;
   }
   #top-menu .top-menu-list {
     display: none;
@@ -1391,7 +1412,7 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     padding: 10px 0;
   }
   #header-logo img {
-    max-width: 120px;
+    width: 120px;
   }
   #btn-nav-bar {
     font-size: 26px;
@@ -1445,9 +1466,12 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     font-size: 18px;
   }
 }
-@media only screen and (max-width: 400px) {
-  #header-logo {
-    max-width: 110px;
+@media only screen and (max-width: 425px) {
+  header.site-header.sticky #header-logo img.logo-full-color {
+    width: 110px;
+  }
+  #header-logo img {
+    width: 110px;
   }
   #btn-nav-bar {
     font-size: 24px;
@@ -3051,7 +3075,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   opacity: 0;
   background-color: #019BC2;
   transform: translateX(100%);
-  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.8s, transform 0.8s;
 }
 .content-promo .carousel-wrapper.active {
   opacity: 1;
@@ -3770,7 +3794,6 @@ section.main-content .main-content-inner .sidebar .__heading {
 }
 section.main-content .main-content-inner .sidebar.sticky .sidebar-inner {
   position: sticky;
-  top: var(--header-height);
 }
 section.main-content .main-content-inner .sidebar.sticky .sidebar-inner > *:first-child {
   margin-top: 0;
