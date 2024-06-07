@@ -52,6 +52,7 @@ get_header();
             get_template_part('modules/search-form');
             get_template_part('modules/members-list');
             get_template_part('modules/single-column-content');
+            get_template_part('modules/jotform-embed');
 
         endwhile;
 

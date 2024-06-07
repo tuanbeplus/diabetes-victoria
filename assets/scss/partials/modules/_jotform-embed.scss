@@ -1,0 +1,17 @@
+.jotform-form {
+    font-family: $primary_font_medium;
+    .form-header {
+        font-family: $primary_font_bold;
+    }
+    .form-subHeader {
+        font-family: $primary_font_demi;
+    }
+    .form-line {
+        .form-input-wide {
+            margin-top: 8px;
+        }
+    }
+    label {
+        font-family: $primary_font_demi;
+    }
+}

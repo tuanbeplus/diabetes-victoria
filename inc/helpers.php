@@ -74,7 +74,7 @@ function dv_breadcrumb() {
 		if ($post->post_parent) {
 			$ancestors = array_reverse(get_post_ancestors($post->ID));
 			foreach ($ancestors as $ancestor) {
-				echo '    <li><a href="' . esc_url(get_permalink($ancestor)) . '">' . esc_html(get_the_title($ancestor)) . '</a></li>' . $arrow_right;
+				echo '<li><a href="' . esc_url(get_permalink($ancestor)) . '">' . esc_html(get_the_title($ancestor)) . '</a></li>' . $arrow_right;
 			}
 		}
 		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
@@ -97,7 +97,7 @@ function dv_breadcrumb() {
  */
 function dv_clean_html_content_editor($html_string) {
     $clean_html = preg_replace_callback(
-        '/<(table|tbody|tr|th|td|p|ul|ol|script)([^>]*)>/',
+        '/<(table|tbody|tr|th|td|p|ul|ol|script|span)([^>]*)>/',
         function ($matches) {
             // For <script> tags, return an empty string to remove them completely
             if ($matches[1] === 'script') {

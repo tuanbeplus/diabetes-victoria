@@ -958,7 +958,7 @@ nav#site-navigation ul#primary-menu-list li.menu-item-has-children::after {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
 nav#site-navigation ul#primary-menu-list li.menu-item-has-children:hover > .sub-menu {
   display: block !important;
@@ -4258,6 +4258,22 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   .members-list-section .members-list-wrapper .members-list .member .__info {
     text-align: center;
   }
+}
+
+.jotform-form {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
+}
+.jotform-form .form-header {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
+.jotform-form .form-subHeader {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
+}
+.jotform-form .form-line .form-input-wide {
+  margin-top: 8px;
+}
+.jotform-form label {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
 }
 
 .faqs-section {
