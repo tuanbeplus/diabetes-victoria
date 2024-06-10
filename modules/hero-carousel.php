@@ -8,7 +8,6 @@ if( get_row_layout() == 'hero_carousel' ):
     $carousel_options = get_sub_field('carousel_options');
     $carousel_list = get_sub_field('carousel_list');
     $section_id = rand(0, 999);
-    $navigation = ($carousel_options['navigation']) ? 'true' : 'false';
     $dots       = ($carousel_options['dots']) ? 'true' : 'false';
     $autoplay   = ($carousel_options['autoplay']) ? 'true' : 'false';
     $autoplay_speed = $carousel_options['autoplay_speed'] ?? '2000';
@@ -20,7 +19,6 @@ if( get_row_layout() == 'hero_carousel' ):
                 <?php foreach ($carousel_list as $id => $row): 
                     $item = $row['carousel_item'] ?? '';
                     if (!empty($item)): 
-                        $label = $item['label'];
                         $title = $item['title'];
                         $image = $item['image'];
                         $text_color = !empty($item['text_color']) ? $item['text_color'] : '#fff';
@@ -28,7 +26,6 @@ if( get_row_layout() == 'hero_carousel' ):
                         $description = $item['description'];
                         $primary_cta = $item['primary_cta'];
                         $secondary_cta = $item['secondary_cta'];
-                        $additional_links = $item['additional_links'];
                         ?>
                         <div class="carousel-item item-<?php echo $id; ?>" style="background-color:<?php echo $background_color; ?>">
                             <div class="item-inner container">

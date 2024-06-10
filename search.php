@@ -55,7 +55,7 @@ get_header();
 							<label for="sort-title">
 								<input id="sort-title" type="radio" 
 									name="orderby" value="title"
-									<?php if ($_GET['orderby'] == 'title') echo 'checked="checked"'; ?>>
+									<?php if (isset($_GET['orderby']) && $_GET['orderby'] == 'title') echo 'checked="checked"'; ?>>
 								Title
 							</label>
 						</div>
@@ -66,7 +66,7 @@ get_header();
 							<label for="sort-asc">
 								<input id="sort-asc" type="radio" 
 									name="order" value="ASC"
-									<?php if ($_GET['order'] == 'ASC') echo 'checked="checked"'; ?>>
+									<?php if (isset($_GET['order']) && $_GET['order'] == 'ASC') echo 'checked="checked"'; ?>>
 								Ascending
 							</label>
 							<label for="sort-desc">
