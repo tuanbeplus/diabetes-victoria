@@ -88,6 +88,7 @@ get_header();
 
 	<div id="search-results">
 		<div class="loading-wrapper">
+			<p class="mess">Loading...</p>
 			<div class="dv-spinner"></div>
 		</div>
 	<?php 

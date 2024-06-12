@@ -126,6 +126,10 @@ label {
     cursor: pointer;
 }
 
+span {
+    word-break: auto-phrase;
+}
+
 img {
     width: 100%;
 }

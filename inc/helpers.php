@@ -59,14 +59,14 @@ function dv_breadcrumb() {
 	if (is_archive()) {
 		$post_type = get_post_type_object(get_post_type());
 		if ($post_type) {
-			echo '<li><a href="' . esc_url(get_post_type_archive_link($post_type->name)) . '">' . esc_html($post_type->labels->singular_name) . '</a></li>' . $arrow_right;
+			echo '<li><a href="' . home_url('/' . $post_type->name . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
 		}
 		the_archive_title('<li aria-current="page"><span>', '</span></li>');
 	} 
 	elseif (is_single()) {
 		$post_type = get_post_type_object(get_post_type());
 		if ($post_type) {
-			echo '<li><a href="' . esc_url(get_post_type_archive_link($post_type->name)) . '">' . esc_html($post_type->labels->singular_name) . '</a></li>' . $arrow_right;
+			echo '<li><a href="' . home_url('/' . $post_type->name . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
 		}
 		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
 	} 
@@ -86,6 +86,7 @@ function dv_breadcrumb() {
 	echo '  </ol>';
 	echo '</nav>';
 }
+
 
 /**
  * Remove attributes from tags in HTML string
@@ -155,3 +156,4 @@ function dv_wcag_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
     return $atts;
 }
 add_filter( 'nav_menu_link_attributes', 'dv_wcag_nav_menu_link_attributes', 10, 4 );
+

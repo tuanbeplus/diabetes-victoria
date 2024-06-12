@@ -108,6 +108,10 @@ label {
   cursor: pointer;
 }
 
+span {
+  word-break: auto-phrase;
+}
+
 img {
   width: 100%;
 }
@@ -1927,7 +1931,7 @@ form.search-form .form-suggest ul.suggest-list li a {
   /********************* Mobile ********************/
 }
 .search-results-wrapper h1 {
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   color: #019BC2;
 }
 .search-results-wrapper form.search-results-form {
@@ -2043,7 +2047,7 @@ form.search-form .form-suggest ul.suggest-list li a {
 }
 .search-results-wrapper form.search-results-form .search-result-info .sort-options #btn-apply-sort {
   margin-top: 24px;
-  padding: 8px 12px 6px;
+  padding: 10px 20px 8px;
   font-size: 1rem;
   line-height: 1;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
@@ -2085,6 +2089,12 @@ form.search-form .form-suggest ul.suggest-list li a {
 .search-results-wrapper #search-results .loading-wrapper {
   display: none;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.search-results-wrapper #search-results .loading-wrapper .mess {
+  margin: 0 0 10px;
+  font-size: 1rem;
 }
 .search-results-wrapper #search-results .loading-wrapper .dv-spinner {
   width: 32px;
@@ -2110,11 +2120,14 @@ form.search-form .form-suggest ul.suggest-list li a {
   color: #019BC2;
   text-decoration: underline;
   text-underline-offset: 2px;
-  word-break: break-word;
+  word-break: break-all;
   transition: all 0.3s;
 }
 .search-results-wrapper #search-results .result-item .__link:hover {
   color: #3F51B5;
+}
+.search-results-wrapper #search-results .result-item .__link * {
+  word-break: break-all;
 }
 .search-results-wrapper #search-results .result-item .__summary {
   font-size: 0.875rem;
@@ -2912,9 +2925,8 @@ body .socials-share-wrapper .share-content .essb_links li a {
   padding: 34px 26px;
 }
 .key-cards .cards-list .card .card-content .landing-page {
+  margin-top: 0;
   margin-bottom: 16px;
-}
-.key-cards .cards-list .card .card-content .landing-page a {
   position: relative;
   display: inline-block;
   font-size: 1.313rem;
@@ -2922,7 +2934,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   line-height: 124%;
   transition: all 0.3s;
 }
-.key-cards .cards-list .card .card-content .landing-page a:hover {
+.key-cards .cards-list .card .card-content .landing-page:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;
@@ -2992,11 +3004,11 @@ body .socials-share-wrapper .share-content .essb_links li a {
   .key-cards .cards-list .card .card-content {
     padding: 24px;
   }
-  .key-cards .cards-list .card .card-content .landing-page a {
+  .key-cards .cards-list .card .card-content .landing-page {
     font-size: 1.125rem;
   }
   .key-cards .cards-list .card .card-content .card-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
   .key-cards .cards-list .card .card-cta {
     padding: 0 24px 24px;
@@ -3757,6 +3769,7 @@ section.main-content .main-content-inner .content-wrapper .__content a {
   color: var(--post-brand-color, #019BC2);
   text-decoration: underline;
   text-underline-offset: 2px;
+  word-break: break-all;
 }
 section.main-content .main-content-inner .content-wrapper .__content img {
   margin: 30px 0;

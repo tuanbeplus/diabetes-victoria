@@ -134,20 +134,35 @@ jQuery(document).ready(function ($) {
     var tocs_wrapper = main_content.find('#tocs');
     var counter = 0;
 
-    // Check if main content exists
-    if (main_content.length > 0) {
+    // Check if TOC is exist
+    if (tocs_wrapper.length > 0) {
       // Find all <h2> tags within the site content, excluding those inside #main-content-sidebar
-      var all_h2_tags = site_content.find('h2').not('#main-content-sidebar h2');
+      var all_heading_tags = site_content.find('h2').not('#main-content-sidebar h2');
+      var key_cards = site_content.find('.key-cards .card');
+      if (key_cards.length > 0) {
+        key_cards.each(function () {
+          var card = $(this);
+          var landing_page = card.find('h3.landing-page');
+          var card_title = card.find('h3.card-title');
+          if (landing_page.length > 0 && card_title.length > 0) {
+            all_heading_tags = all_heading_tags.add(landing_page);
+          } else if (landing_page.length > 0) {
+            all_heading_tags = all_heading_tags.add(landing_page);
+          } else {
+            all_heading_tags = all_heading_tags.add(card_title);
+          }
+        });
+      }
       // Check if there are any <h2> tags
-      if (all_h2_tags.length > 0) {
+      if (all_heading_tags.length > 0) {
         // Iterate over each <h2> tag
-        all_h2_tags.each(function () {
+        all_heading_tags.each(function () {
           counter++;
-          var h2_tag = $(this);
+          var heading = $(this);
           // Create a TOC item with a link to the corresponding <h2> tag
-          var toc_item = '<li><a href="#heading2-item-' + counter + '">' + h2_tag.text() + '</a></li>';
+          var toc_item = '<li><a href="#heading2-item-' + counter + '">' + heading.text() + '</a></li>';
           // Add an ID to the <h2> tag
-          h2_tag.attr('id', 'heading2-item-' + counter);
+          heading.attr('id', 'heading2-item-' + counter);
           // Append the TOC item to the TOC wrapper
           tocs_wrapper.append(toc_item);
         });
@@ -329,9 +344,22 @@ jQuery(document).ready(function ($) {
     sort_options.slideUp(200);
   });
 
+  // Attach click event to the document
+  $(document).on('click', function (e) {
+    // Check if the click is outside the .sort-options element
+    if (!$(e.target).closest('.results-sort').length) {
+      $('#btn-open-sort').removeClass('active');
+      $('.results-sort .sort-options').slideUp(200);
+    }
+  });
+  // Prevent the popup from closing when clicking inside it
+  $(document).on('click', '.results-sort', function (e) {
+    e.stopPropagation();
+  });
+
   // Ajax show search results
   $(document).on('click', '#btn-show-search-results', function (e) {
-    e.preventDefault();
+    e.stopPropagation();
     var btnLoadMore = $('#btn-load-more-results');
     var formSearch = $('form.search-results-form');
     var page = 1;
@@ -361,7 +389,7 @@ jQuery(document).ready(function ($) {
         searchResults.removeClass('loading');
         btnLoadMore.show();
         if (response.search_result && response.found_posts > 0) {
-          var results_html = '<div class="loading-wrapper"><div class="dv-spinner"></div></div>';
+          var results_html = '<div class="loading-wrapper"><p class="mess">Loading...</p><div class="dv-spinner"></div></div>';
           results_html += response.search_result;
           searchResults.html(results_html);
           btnLoadMore.data('next-page', 2);
@@ -377,6 +405,7 @@ jQuery(document).ready(function ($) {
       }
     });
   });
+
   // Ajax show search results
   $(document).on('click', '#btn-apply-sort', function (e) {
     e.preventDefault();
@@ -537,7 +566,11 @@ jQuery(document).ready(function ($) {
     var target = $(this.getAttribute('href'));
     if (target.length) {
       e.preventDefault();
-      var offset = $('header#masthead').outerHeight() + 40;
+      var offset = $('header#masthead').outerHeight() + 24;
+      var admin_bar = $('#wpadminbar');
+      if (admin_bar.length > 0) {
+        offset = offset + admin_bar.outerHeight();
+      }
       $('html, body').stop().animate({
         scrollTop: target.offset().top - offset
       }, 300);
@@ -549,12 +582,14 @@ jQuery(document).ready(function ($) {
     $(this).wrap('<div class="table-wrapper" role="region" tabindex="0"></div>');
   });
 
-  // 
+  // Slide down Sub Menu on focus 
   $(document).on('focus', '#site-navigation li.menu-item a', function (e) {
     var menuItem = $(this).closest('li.menu-item');
     var subMenu = menuItem.find('.sub-menu');
     subMenu.slideDown(200);
   });
+
+  // Slide up Sub Menu on focus out
   $(document).on('blur', '#site-navigation li.menu-item a', function (e) {
     var menuItem = $(this).closest('ul#primary-menu-list > li.menu-item');
     var subMenu = menuItem.find('.sub-menu');

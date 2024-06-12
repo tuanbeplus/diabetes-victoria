@@ -37,15 +37,13 @@ if( get_row_layout() == 'key_cards' ):
                                 </div>
                                 <div class="card-content">
                                     <?php if (!empty($landing_page_link)): ?>
-                                        <div class="landing-page">
-                                            <a href="<?php echo $landing_page_link; ?>">
-                                                <span><?php echo $landing_page_name; ?></span>
-                                            </a>
-                                        </div>
+                                        <h3 class="landing-page">
+                                            <a href="<?php echo $landing_page_link; ?>"><?php echo $landing_page_name; ?></a>
+                                        </h3>
                                     <?php endif; ?>
 
                                     <?php if (!empty($title)): ?>
-                                        <h2 class="card-title"><?php echo $title; ?></h2>
+                                        <h3 class="card-title"><?php echo $title; ?></h3>
                                     <?php endif; ?>
 
                                     <?php if (!empty($description)): ?>
@@ -67,6 +65,9 @@ if( get_row_layout() == 'key_cards' ):
                                 ?>
                                 #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> {
                                     animation-duration: <?php echo $duration.'s'; ?>;
+                                }
+                                #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .landing-page {
+                                    color: <?php echo $brand_color ?>!important;
                                 }
                                 #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .landing-page a {
                                     color: <?php echo $brand_color ?>!important;

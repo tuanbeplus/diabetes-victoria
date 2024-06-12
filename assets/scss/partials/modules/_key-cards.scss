@@ -62,20 +62,20 @@
                 justify-content: start;
                 padding: 34px 26px;
                 .landing-page {
+                    margin-top: 0;
                     margin-bottom: 16px;
-                    a {
-                        position: relative;
-                        display: inline-block;
-                        font-size: 1.313rem;
-                        font-family: $primary_font_bold;
-                        line-height: 124%;
-                        transition: all 0.3s;
-                        &:hover {
-                            text-decoration: underline;
-                            text-underline-offset: 4px;
-                            text-decoration-thickness: 2px;
-                        }
+                    position: relative;
+                    display: inline-block;
+                    font-size: 1.313rem;
+                    font-family: $primary_font_bold;
+                    line-height: 124%;
+                    transition: all 0.3s;
+                    &:hover {
+                        text-decoration: underline;
+                        text-underline-offset: 4px;
+                        text-decoration-thickness: 2px;
                     }
+                    
                 }
                 .card-title {
                     margin-top: 0;
@@ -160,12 +160,10 @@
                 .card-content {
                     padding: 24px;
                     .landing-page {
-                        a {
-                            font-size: 1.125rem;
-                        }
+                        font-size: 1.125rem;
                     }
                     .card-title {
-                        font-size: 1.25rem;
+                        font-size: 1.5rem;
                     }
                 }
                 .card-cta {

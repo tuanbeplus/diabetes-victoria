@@ -38,12 +38,13 @@ echo '<style> html {';
     if (!empty($bg_color)) echo '--post-bg-color: '. $bg_color .';';
 echo '} </style>';
 ?>
-
+<!-- Recipe Title -->
 <section class="post-title">
     <div class="container">
         <h1><?php echo get_the_title(); ?></h1>
     </div>
-</section>
+</section><!-- .Recipe Title -->
+<!-- Recipe Info -->
 <section class="main-content recipe-info">
     <div class="main-content-inner has-sidebar">
         <!-- Sidebar -->
@@ -68,7 +69,6 @@ echo '} </style>';
                 <?php endif; ?>
             </div>
         </div><!-- .Sidebar -->
-        <!-- Content -->
         <div class="content-wrapper">
             <img class="__banner" src="<?php echo $feature_img_url; ?>" alt="<?php echo $feature_img_alt; ?>">
             <div class="__content">
@@ -91,21 +91,21 @@ echo '} </style>';
                     <p><b>Type of recipe</b>: <?php echo $type_of_recipe; ?></p>
                 <?php endif; ?>
             </div>
-        </div><!-- .Content -->
+        </div>
     </div>
-</section>
+</section><!-- .Recipe Info -->
 <?php if (!empty($post_content)): ?>
+<!-- Recipe Content -->
 <section class="main-content" style="padding-top:0;">
     <div class="main-content-inner">
-        <!-- Content -->
         <div class="content-wrapper">
             <div class="__content">
                 <h2 class="__title">Recipe</h2>
                 <?php echo dv_clean_html_content_editor($post_content); ?>
             </div>
-        </div><!-- .Content -->
+        </div>
     </div>
-</section>
+</section><!-- .Recipe Content -->
 <?php endif; ?>
 
 <?php 

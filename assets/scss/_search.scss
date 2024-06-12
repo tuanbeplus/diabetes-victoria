@@ -218,7 +218,7 @@ form.search-form {
     max-width: 1054px;
     width: 100%;
     h1 {
-        margin: 0 0 20px;
+        margin: 0 0 24px;
         color: $primary_color;
     }
     form.search-results-form {
@@ -332,7 +332,7 @@ form.search-form {
                 }
                 #btn-apply-sort {
                     margin-top: 24px;
-                    padding: 8px 12px 6px;
+                    padding: 10px 20px 8px;
                     font-size: 1rem;
                     line-height: 1;
                     font-family: $primary_font_demi;
@@ -379,6 +379,12 @@ form.search-form {
         .loading-wrapper {
             display: none;
             justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            .mess {
+                margin: 0 0 10px;
+                font-size: 1rem;
+            }
             .dv-spinner {
                 width: 32px;
                 height: 32px;
@@ -403,10 +409,13 @@ form.search-form {
                 color: $primary_color;
                 text-decoration: underline;
                 text-underline-offset: 2px;
-                word-break: break-word;
+                word-break: break-all;
                 transition: all 0.3s;
                 &:hover {
                     color: $secondary_color;
+                }
+                * {
+                    word-break: break-all;
                 }
             }
             .__summary {

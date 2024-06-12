@@ -111,6 +111,7 @@ section.main-content {
                     color: var(--post-brand-color, $primary_color);
                     text-decoration: underline;
                     text-underline-offset: 2px;
+                    word-break: break-all;
                 }
                 img {
                     margin: 30px 0;
