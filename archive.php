@@ -13,9 +13,14 @@ get_header();
 
 $description = get_the_archive_description();
 $cat_img_url = DV_IMG_DIR .'recipe-feature-img-default.jpeg';
-$recipe_cat = 'recipe_categories';
-$recipe_cat_terms = get_terms( array(
-    'taxonomy'   => $recipe_cat,
+$featured_image = get_field('featured_image', get_queried_object());
+if(!empty($featured_image)) {
+    $cat_img_url = $featured_image['url'];
+}
+
+$post_cat = is_post_type_archive('recipe') ? 'recipe_categories' : 'category';
+$post_cat_terms = get_terms( array(
+    'taxonomy'   => $post_cat,
     'hide_empty' => true,
 ));
 ?>
@@ -25,16 +30,18 @@ $recipe_cat_terms = get_terms( array(
         <?php the_archive_title( '<h1>', '</h1>' ); ?>
     </div>
 </section><!-- .Page Title -->
-<section class="main-content recipe-archive">
+<section class="main-content post-archive">
     <div class="main-content-inner has-sidebar">
         <!-- Sidebar -->
         <div id="main-content-sidebar" class="sidebar">
             <div class="sidebar-inner">
-                <?php if (!empty($recipe_cat_terms) && !is_wp_error($recipe_cat_terms)): ?>
+                <?php if (!empty($post_cat_terms) && !is_wp_error($post_cat_terms)): ?>
                     <div class="secondary-info">
-                        <h2 class="__heading">More Recipes:</h2>
-                        <ul class="recipe-cats-list" role="list">
-                        <?php foreach ($recipe_cat_terms as $term): 
+                        <h2 class="__heading">
+                            <?php echo is_post_type_archive('recipe') ? 'More Recipes:' : 'More Blog:'; ?>
+                        </h2>
+                        <ul class="post-cats-list" role="list">
+                        <?php foreach ($post_cat_terms as $term): 
                             $term_link = get_term_link($term); ?>
                             <li>
                                 <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
@@ -47,7 +54,7 @@ $recipe_cat_terms = get_terms( array(
         </div><!-- .Sidebar -->
         <!-- Content -->
         <div class="content-wrapper">
-            <img class="__banner" src="<?php echo $cat_img_url ?>" alt="Recipe Category Image">
+            <img class="__banner" src="<?php echo $cat_img_url ?>" alt="Post Category Image">
             <?php if ( !empty($description) ): ?>
                 <div class="__content archive-desc">
                     <?php echo wp_kses_post( wpautop( $description ) ); ?>
@@ -56,12 +63,14 @@ $recipe_cat_terms = get_terms( array(
         </div><!-- .Content -->
     </div>
 </section>
-<!-- Latest Recipes -->
+<!-- Latest Post -->
 <section class="latest-posts recipe" style="padding-top:0;">
     <div class="container">
         <div class="posts-wrapper">
             <div class="top">
-                <h2 class="heading">Latest Recipes</h2>
+                <h2 class="heading">
+                    <?php echo is_post_type_archive('recipe') ? 'Latest Recipes' : 'Latest Blog'; ?>
+                </h2>
             </div>
             <?php if ( have_posts() ) : ?>
                 <ul class="posts-list">
@@ -78,6 +87,6 @@ $recipe_cat_terms = get_terms( array(
             ?>
         </div>
     </div>
-</section><!-- .Latest Recipes -->
+</section><!-- .Latest Posts -->
 <?php
 get_footer();

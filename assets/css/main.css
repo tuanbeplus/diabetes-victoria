@@ -3685,30 +3685,38 @@ section.main-content {
     padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.6);
   }
 }
-section.main-content.recipe-info .main-content-inner .content-wrapper .__content > *:first-child {
+section.main-content.post-info .main-content-inner .content-wrapper .__content > *:first-child, section.main-content.recipe-info .main-content-inner .content-wrapper .__content > *:first-child {
   margin-top: 0;
 }
-section.main-content.recipe-info .main-content-inner .content-wrapper .__content > *:last-child {
+section.main-content.post-info .main-content-inner .content-wrapper .__content > *:last-child, section.main-content.recipe-info .main-content-inner .content-wrapper .__content > *:last-child {
   margin-bottom: 0;
 }
-section.main-content.recipe-info .main-content-inner .content-wrapper .__content p {
+section.main-content.post-info .main-content-inner .content-wrapper .__content p, section.main-content.recipe-info .main-content-inner .content-wrapper .__content p {
   margin: 12px 0;
 }
+section.main-content.post-info .main-content-inner .sidebar .post-cats-list li,
+section.main-content.post-info .main-content-inner .sidebar .recipe-cats-list li, section.main-content.recipe-info .main-content-inner .sidebar .post-cats-list li,
 section.main-content.recipe-info .main-content-inner .sidebar .recipe-cats-list li {
   margin-bottom: 8px;
   color: #fff;
 }
+section.main-content.post-info .main-content-inner .sidebar .post-cats-list li a,
+section.main-content.post-info .main-content-inner .sidebar .recipe-cats-list li a, section.main-content.recipe-info .main-content-inner .sidebar .post-cats-list li a,
 section.main-content.recipe-info .main-content-inner .sidebar .recipe-cats-list li a {
   color: #fff;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
 }
-section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info {
+section.main-content.post-archive .main-content-inner .sidebar .secondary-info, section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info {
   padding: 24px 30px;
 }
+section.main-content.post-archive .main-content-inner .sidebar .secondary-info .post-cats-list li,
+section.main-content.post-archive .main-content-inner .sidebar .secondary-info .recipe-cats-list li, section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info .post-cats-list li,
 section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info .recipe-cats-list li {
   margin-bottom: 8px;
   color: #fff;
 }
+section.main-content.post-archive .main-content-inner .sidebar .secondary-info .post-cats-list li a,
+section.main-content.post-archive .main-content-inner .sidebar .secondary-info .recipe-cats-list li a, section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info .post-cats-list li a,
 section.main-content.recipe-archive .main-content-inner .sidebar .secondary-info .recipe-cats-list li a {
   color: #fff;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
