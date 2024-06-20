@@ -59,14 +59,24 @@ function dv_breadcrumb() {
 	if (is_archive()) {
 		$post_type = get_post_type_object(get_post_type());
 		if ($post_type) {
-			echo '<li><a href="' . home_url('/' . $post_type->name . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			if ($post_type->name == 'post') {
+				echo '<li><a href="' . home_url('/blogs') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			}
+			else {
+				echo '<li><a href="' . home_url('/' . $post_type->name . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			}
 		}
 		the_archive_title('<li aria-current="page"><span>', '</span></li>');
 	} 
 	elseif (is_single()) {
 		$post_type = get_post_type_object(get_post_type());
 		if ($post_type) {
-			echo '<li><a href="' . home_url('/' . $post_type->name . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			if ($post_type->name == 'post') {
+				echo '<li><a href="' . home_url('/blogs') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			}
+			else {
+				echo '<li><a href="' . home_url('/' . $post_type->name . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			}
 		}
 		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
 	} 

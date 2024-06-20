@@ -6,7 +6,6 @@
 function dv_recipe_register() {
 
 	$cpt_slug = get_theme_mod('dv_recipe_slug');
-	$ctp_icon = DV_IMG_DIR . 'ctp-recipe-book-icon-2.png';
 
 	if(isset($cpt_slug) && $cpt_slug != ''){
 		$cpt_slug = $cpt_slug;

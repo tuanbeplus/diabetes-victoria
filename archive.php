@@ -18,11 +18,15 @@ if(!empty($featured_image)) {
     $cat_img_url = $featured_image['url'];
 }
 
-$post_cat = is_post_type_archive('recipe') ? 'recipe_categories' : 'category';
+$post_type = get_post_type_object(get_post_type());
+$post_type_label = $post_type->label ?? 'Posts';
+
+$post_cat = ($post_type->name == 'recipe') ? 'recipe_categories' : 'category';
 $post_cat_terms = get_terms( array(
     'taxonomy'   => $post_cat,
     'hide_empty' => true,
 ));
+
 ?>
 <!-- Page Title -->
 <section class="post-title">
@@ -38,7 +42,7 @@ $post_cat_terms = get_terms( array(
                 <?php if (!empty($post_cat_terms) && !is_wp_error($post_cat_terms)): ?>
                     <div class="secondary-info">
                         <h2 class="__heading">
-                            <?php echo is_post_type_archive('recipe') ? 'More Recipes:' : 'More Blog:'; ?>
+                            <?php echo 'More '. $post_type_label; ?>
                         </h2>
                         <ul class="post-cats-list" role="list">
                         <?php foreach ($post_cat_terms as $term): 
@@ -54,7 +58,7 @@ $post_cat_terms = get_terms( array(
         </div><!-- .Sidebar -->
         <!-- Content -->
         <div class="content-wrapper">
-            <img class="__banner" src="<?php echo $cat_img_url ?>" alt="Post Category Image">
+            <img class="__banner" src="<?php echo $cat_img_url ?>" alt="Category Feature Image">
             <?php if ( !empty($description) ): ?>
                 <div class="__content archive-desc">
                     <?php echo wp_kses_post( wpautop( $description ) ); ?>
@@ -69,7 +73,7 @@ $post_cat_terms = get_terms( array(
         <div class="posts-wrapper">
             <div class="top">
                 <h2 class="heading">
-                    <?php echo is_post_type_archive('recipe') ? 'Latest Recipes' : 'Latest Blog'; ?>
+                    <?php echo 'Latest '. $post_type_label; ?>
                 </h2>
             </div>
             <?php if ( have_posts() ) : ?>

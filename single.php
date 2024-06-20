@@ -13,13 +13,14 @@ $feature_img_alt = get_post_meta($feature_img_id, '_wp_attachment_image_alt', tr
 $feature_img_alt = !empty($feature_img_id) ? $feature_img_alt : $feature_img_alt_default;
 $post_content = get_the_content();
 
-
-
 $post_cat = is_singular('recipe') ? 'recipe_categories' : 'category';
 $post_cat_terms = get_terms( array(
     'taxonomy'   => $post_cat,
     'hide_empty' => true,
 ));
+
+$post_type = get_post_type_object(get_post_type());
+$post_type_label = $post_type->label ?? 'Posts';
 
 // Post brand css variable
 $brand_color = get_field('brand_color');
@@ -54,7 +55,7 @@ echo '} </style>';
                 <?php if (!empty($post_cat_terms) && !is_wp_error($post_cat_terms)): ?>
                     <div class="secondary-info">
                         <h2 class="__heading">
-                            <?php echo is_singular('recipe') ? 'More Posts' : 'More Blog'; ?>
+                            <?php echo 'More '. $post_type_label; ?>
                         </h2>
                         <ul class="recipe-cats-list" role="list">
                         <?php foreach ($post_cat_terms as $term): 
@@ -74,7 +75,7 @@ echo '} </style>';
             
             <div class="__content">
                 <?php
-                    if(is_singular('recipe')) {
+                    if (is_singular('recipe')) {
                         // Post info
                         $organisation = get_field('organisation');
                         $preparation = get_field('preparation');
@@ -120,7 +121,7 @@ echo '} </style>';
         <div class="content-wrapper">
             <div class="__content">
                 <h2 class="__title">
-                    <?php echo is_singular('recipe') ? 'Post' : 'Blog'; ?>
+                    <?php echo is_singular('recipe') ? 'Recipe' : 'Blog'; ?>
                 </h2>
                 <?php echo dv_clean_html_content_editor($post_content); ?>
             </div>
@@ -130,19 +131,19 @@ echo '} </style>';
 <?php endif; ?>
 
 <?php 
-// Latest Post
-$post_type = is_singular('recipe') ? 'recipe' : 'post';
+// Latest Posts
+$post_type_name = isset($post_type->name) ? $post_type->name : 'post';
 $paged = 1;
 $number_posts = 6;
 $order_by = 'DESC';
-$posts_list = dv_get_latest_posts($post_type, $paged, $number_posts, $order_by);
-$max_posts = dv_get_latest_posts($post_type, $paged, '-1', $order_by);
+$posts_list = dv_get_latest_posts($post_type_name, $paged, $number_posts, $order_by);
+$max_posts = dv_get_latest_posts($post_type_name, $paged, '-1', $order_by);
 $max_posts = is_array($max_posts) ? count($max_posts) : '';
 ?>
 <?php if (!empty($posts_list)): ?>
-<!-- Latest Post -->
+<!-- Latest Posts -->
 <section class="latest-posts post" style="padding-top:0;">
-    <input type="hidden" name="post_type" value="<?php echo $post_type ?>">
+    <input type="hidden" name="post_type" value="<?php echo $post_type_name ?>">
     <input type="hidden" name="number_posts" value="<?php echo $number_posts ?>">
     <input type="hidden" name="order_by" value="<?php echo $order_by ?>">
     <input type="hidden" name="max_posts" value="<?php echo $max_posts ?>">
@@ -150,9 +151,9 @@ $max_posts = is_array($max_posts) ? count($max_posts) : '';
         <div class="posts-wrapper">
             <div class="top">
                 <h2 class="heading">
-                    <?php echo is_singular('recipe') ? 'Latest Posts' : 'Latest Blog'; ?>
+                    <?php echo 'Latest '. $post_type_label; ?>
                 </h2>
-                <a class="top-cta-btn" href="<?php echo is_singular('recipe') ? '/recipe' : '/news-research'; ?>">
+                <a class="top-cta-btn" href="<?php echo is_singular('post') ? '/blogs' : '/'.$post_type->name; ?>">
                     <span>View all</span>
                 </a>
             </div>

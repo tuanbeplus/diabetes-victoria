@@ -25,8 +25,17 @@ add_action('pre_get_posts', 'dv_custom_search_posts_per_page');
  */
 add_action( 'init', function() {
     remove_post_type_support( 'page', 'editor' );
-    // remove_post_type_support( 'post', 'editor' );
 }, 99);
+
+/**
+ * Customize the Post
+ */
+add_filter('register_post_type_args', function ($args, $post_type) {
+    if ($post_type === 'post') {
+        $args['labels']['name'] = 'Blogs';
+    }
+    return $args;
+}, 10, 2);
 
 /**
  * Strip HTML tag attr on save post
