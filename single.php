@@ -13,11 +13,23 @@ $feature_img_alt = get_post_meta($feature_img_id, '_wp_attachment_image_alt', tr
 $feature_img_alt = !empty($feature_img_id) ? $feature_img_alt : $feature_img_alt_default;
 $post_content = get_the_content();
 
-$post_cat = is_singular('recipe') ? 'recipe_categories' : 'category';
-$post_cat_terms = get_terms( array(
-    'taxonomy'   => $post_cat,
-    'hide_empty' => true,
-));
+// merge all term of taxonomy register for post type
+$taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
+$post_terms = array();
+if( !empty( $taxonomies ) ){
+    foreach ($taxonomies as $tax_key => $taxonomy) {
+        $cat_terms = get_terms( array(
+            'taxonomy'   => $tax_key,
+            'hide_empty' => true,
+        ));
+
+        if( !empty($cat_terms) && !is_wp_error($cat_terms) ){
+            foreach ($cat_terms as $key => $term) {
+                $post_terms[] = $term;
+            }
+        }
+    }
+}
 
 $post_type = get_post_type_object(get_post_type());
 $post_type_label = $post_type->label ?? 'Posts';
@@ -52,13 +64,13 @@ echo '} </style>';
                     <h2 class="__heading">On This Page</h2>
                     <ul id="tocs" class="links-list" role="list"></ul>
                 </div>
-                <?php if (!empty($post_cat_terms) && !is_wp_error($post_cat_terms)): ?>
+                <?php if (!empty($post_terms)): ?>
                     <div class="secondary-info">
                         <h2 class="__heading">
                             <?php echo 'More '. $post_type_label; ?>
                         </h2>
                         <ul class="recipe-cats-list" role="list">
-                        <?php foreach ($post_cat_terms as $term): 
+                        <?php foreach ($post_terms as $term): 
                             $term_link = get_term_link($term); ?>
                             <li>
                                 <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>

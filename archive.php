@@ -11,6 +11,15 @@
 
 get_header();
 
+// Get current taxonomy
+$queried_object = get_queried_object();
+$taxonomy = !empty( $queried_object )? $queried_object->taxonomy : 'category';
+
+$post_cat_terms = get_terms( array(
+    'taxonomy'   => $taxonomy,
+    'hide_empty' => true,
+));
+
 $description = get_the_archive_description();
 $cat_img_url = DV_IMG_DIR .'recipe-feature-img-default.jpeg';
 $featured_image = get_field('featured_image', get_queried_object());
@@ -20,12 +29,6 @@ if(!empty($featured_image)) {
 
 $post_type = get_post_type_object(get_post_type());
 $post_type_label = $post_type->label ?? 'Posts';
-
-$post_cat = ($post_type->name == 'recipe') ? 'recipe_categories' : 'category';
-$post_cat_terms = get_terms( array(
-    'taxonomy'   => $post_cat,
-    'hide_empty' => true,
-));
 
 ?>
 <!-- Page Title -->

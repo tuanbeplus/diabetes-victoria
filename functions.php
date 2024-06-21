@@ -94,6 +94,11 @@ if ( ! function_exists( 'diabetes_victoria_theme_setup' ) ) {
 }
 
 /**
+ * Custom Post Type
+ */
+require get_template_directory() . '/inc/custom-post-type.php';
+
+/**
  * CPT Recipe
  */
 require get_template_directory() . '/inc/cpt-recipe.php';
