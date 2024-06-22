@@ -30,6 +30,20 @@ if(!empty($featured_image)) {
 $post_type = get_post_type_object(get_post_type());
 $post_type_label = $post_type->label ?? 'Posts';
 
+$args = array(
+    'post_type' => get_post_type(),
+    'post_status' => 'publish',
+    'posts_per_page' => -1,
+    'tax_query' => array(
+        array(
+            'taxonomy' => $taxonomy,
+            'field' => 'term_id',
+            'terms' => $queried_object->term_id,
+        ),
+    )
+);
+$posts_query = new WP_Query($args);
+
 ?>
 <!-- Page Title -->
 <section class="post-title">
@@ -79,9 +93,9 @@ $post_type_label = $post_type->label ?? 'Posts';
                     <?php echo 'Latest '. $post_type_label; ?>
                 </h2>
             </div>
-            <?php if ( have_posts() ) : ?>
+            <?php if ( $posts_query->have_posts() ) : ?>
                 <ul class="posts-list">
-                <?php while ( have_posts() ) : the_post(); ?>
+                <?php while ( $posts_query->have_posts() ) : $posts_query->the_post(); ?>
                     <?php get_template_part( 'template-parts/post/post-card' ); ?>
                 <?php endwhile; ?>
                 </ul>

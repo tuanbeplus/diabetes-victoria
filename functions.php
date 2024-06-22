@@ -123,3 +123,7 @@ require get_template_directory() . '/inc/helpers.php';
  */
 require get_template_directory() . '/inc/ajax.php';
 
+/**
+ * DV functions
+ */
+require get_template_directory() . '/inc/dv-functions.php';

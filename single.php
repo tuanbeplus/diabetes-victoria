@@ -133,7 +133,7 @@ echo '} </style>';
         <div class="content-wrapper">
             <div class="__content">
                 <h2 class="__title">
-                    <?php echo is_singular('recipe') ? 'Recipe' : 'Blog'; ?>
+                    <?php echo is_singular('post') ? 'Blog' : ucfirst(get_post_type()); ?>
                 </h2>
                 <?php echo dv_clean_html_content_editor($post_content); ?>
             </div>

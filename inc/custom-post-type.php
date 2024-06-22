@@ -64,3 +64,56 @@ function dv_resources_taxonomy() {
 
 }
 add_action('init', 'dv_resources_taxonomy', 0);
+
+/**
+ * Add custom columns to post type resource table
+ * 
+ */
+function dv_custom_post_typed_resource_columns($columns)
+{
+	unset( $columns['comments']);
+	unset($columns['date']);
+	$columns['thumbnail'] = __( 'Thumbnail', 'diabetes-victoria' );
+	$columns['resource_categories'] = __( 'Categories', 'diabetes-victoria' );
+	$columns['date'] = 'Date';
+
+	return $columns;
+}
+add_filter('manage_resource_posts_columns', 'dv_custom_post_typed_resource_columns');
+
+/**
+ * Display value of custom colums at post type table
+ * 
+ */
+function dv_post_type_resource_column_display( $recipe_columns, $post_id ) {
+
+	switch ( $recipe_columns ) {
+		// Display the thumbnail in the column view
+		case "thumbnail":
+			$width = (int) 64;
+			$height = (int) 64;
+			$thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
+
+			// Display the featured image in the column view if possible
+			if ( $thumbnail_id ) {
+				$thumb = wp_get_attachment_image( $thumbnail_id, array($width, $height), true );
+			}
+			if ( isset( $thumb ) ) {
+				echo $thumb; // No need to escape
+			} else {
+				echo esc_html__('None', 'diabetes-victoria');
+			}
+			break;
+
+		// Display the recipe tags in the column view
+		case "resource_categories":
+
+		if ( $category_list = get_the_term_list( $post_id, 'resource_categories', '', ', ', '' ) ) {
+			echo $category_list; // No need to escape
+		} else {
+			echo esc_html__('None', 'diabetes-victoria');
+		}
+		break;
+	}
+}
+add_action( 'manage_resource_posts_custom_column', 'dv_post_type_resource_column_display', 10, 2 );

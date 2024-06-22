@@ -2,6 +2,7 @@
 /**
  * Define theme path
  */
+define('DV_SCRIPT_SUFFIX', 'false' ); // 'true' or 'false' type string
 define('DV_THEME_VER', rand());
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
@@ -26,7 +27,7 @@ function dv_enqueue_scripts()
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.css?r=' . DV_THEME_VER);
 
     // Main script
-	wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main.bundle.js', array(), DV_THEME_VER, true);
+	wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main'.dv_suffix().'.js', array(), DV_THEME_VER, true);
 	wp_enqueue_script('custom-script', get_template_directory_uri() . '/assets/js/custom.js', array(), DV_THEME_VER, true);
     
     // Localize admin ajax
