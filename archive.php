@@ -21,7 +21,15 @@ $post_cat_terms = get_terms( array(
 ));
 
 $description = get_the_archive_description();
-$cat_img_url = DV_IMG_DIR .'recipe-feature-img-default.jpeg';
+$cat_img_url = DV_IMG_DIR .'card-img-placeholder.png';
+if( get_post_type() == 'recipe' ){
+    $cat_img_url = DV_IMG_DIR .'recipe-feature-img-default.jpeg';
+}
+if( get_post_type() == 'resource' ){
+    if( $queried_object->slug == 'podcasts'){
+        $cat_img_url = DV_IMG_DIR .'resource-feature-img-default.png';
+    }
+}
 $featured_image = get_field('featured_image', get_queried_object());
 if(!empty($featured_image)) {
     $cat_img_url = $featured_image['url'];

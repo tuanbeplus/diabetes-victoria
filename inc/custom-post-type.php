@@ -33,7 +33,7 @@ function dv_resources_register() {
 		'show_ui'         => true,
 		'capability_type' => 'post',
 		'hierarchical'    => false,
-		'menu_icon'       => 'dashicons-book',
+		'menu_icon'       => 'dashicons-archive',
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
 		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'comments', 'custom-fields')
   	);
