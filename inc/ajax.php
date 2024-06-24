@@ -109,8 +109,6 @@ function dv_load_more_latest_posts() {
                         <img src="<?php echo DV_IMG_DIR .'card-img-placeholder.png'; ?>" 
                             alt="<?php echo $feature_img_alt_default ?>">
                     <?php endif;?>
-                    <!-- <img src="<?php //echo DV_IMG_DIR .'card-img-placeholder.png'; ?>" 
-                        alt="People holding a banner have the message that we are here to help you."> -->
                 <?php endif; ?>
             </div>
             <div class="post-meta">
