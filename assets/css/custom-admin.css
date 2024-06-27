@@ -8,9 +8,3 @@
 .layout[data-layout=main_content] .acf-field[data-name=content_editor] .acf-editor-wrap iframe {
     height: 500px!important;
 }
-
-/* CPT Recipe icon */
-#adminmenu .wp-has-submenu .menu-icon-recipe .wp-menu-image img {
-    margin-left: 3px;
-    margin-top: -3px;
-}

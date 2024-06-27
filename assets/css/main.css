@@ -470,6 +470,11 @@ section.post-title h1 {
   cursor: pointer;
 }
 
+/* Custom Embed PDF style */
+.pdfembed-iframe {
+  border: 3px solid var(--post-brand-color, #019BC2) !important;
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
   .container {
@@ -3839,6 +3844,22 @@ section.main-content .main-content-inner .sidebar .on-this-page > *:last-child {
 }
 section.main-content .main-content-inner .sidebar .on-this-page .__heading {
   color: #fff;
+}
+section.main-content .main-content-inner .sidebar .on-this-page #tocs {
+  max-height: 280px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+section.main-content .main-content-inner .sidebar .on-this-page #tocs::-webkit-scrollbar {
+  width: 6px;
+}
+section.main-content .main-content-inner .sidebar .on-this-page #tocs::-webkit-scrollbar-track {
+  background: #6fc0d4;
+  border-radius: 4px;
+}
+section.main-content .main-content-inner .sidebar .on-this-page #tocs::-webkit-scrollbar-thumb {
+  background: #e5e5e5;
+  border-radius: 4px;
 }
 section.main-content .main-content-inner .sidebar .on-this-page ul.links-list li {
   margin-bottom: 8px;

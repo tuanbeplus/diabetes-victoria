@@ -491,6 +491,11 @@ section.post-title {
     }
 }
 
+/* Custom Embed PDF style */
+.pdfembed-iframe{
+    border: 3px solid var(--post-brand-color, #019BC2) !important;
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
     .container {

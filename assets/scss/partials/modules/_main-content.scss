@@ -179,6 +179,22 @@ section.main-content {
                 .__heading {
                     color: #fff;
                 }
+                #tocs {
+                    max-height: 280px;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    &::-webkit-scrollbar {
+                        width: 6px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background: #6fc0d4;
+                        border-radius: 4px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background: #e5e5e5;
+                        border-radius: 4px;
+                    }
+                }
                 ul.links-list {
                     li {
                         margin-bottom: 8px;
