@@ -61,17 +61,17 @@ function dv_recipe_taxonomy() {
 		)
 	);
 
-	register_taxonomy(
-        'recipe_tag',
-        'recipe',
-        array(
-            'hierarchical'  => false,
-            'label'         => __( 'Tags', 'diabetes-victoria' ),
-            'singular_name' => __( 'Tag', 'diabetes-victoria' ),
-            'rewrite'       => true,
-            'query_var'     => true
-        )
-    );
+	// register_taxonomy(
+    //     'recipe_tag',
+    //     'recipe',
+    //     array(
+    //         'hierarchical'  => false,
+    //         'label'         => __( 'Tags', 'diabetes-victoria' ),
+    //         'singular_name' => __( 'Tag', 'diabetes-victoria' ),
+    //         'rewrite'       => true,
+    //         'query_var'     => true
+    //     )
+    // );
 
 }
 add_action('init', 'dv_recipe_taxonomy', 1);

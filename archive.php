@@ -21,19 +21,9 @@ $post_cat_terms = get_terms( array(
 ));
 
 $description = get_the_archive_description();
-$cat_img_url = DV_IMG_DIR .'card-img-placeholder.png';
-if( get_post_type() == 'recipe' ){
-    $cat_img_url = DV_IMG_DIR .'recipe-feature-img-default.jpeg';
-}
-if( get_post_type() == 'resource' ){
-    if( $queried_object->slug == 'podcasts'){
-        $cat_img_url = DV_IMG_DIR .'resource-feature-img-default.png';
-    }
-}
 $featured_image = get_field('featured_image', get_queried_object());
-if(!empty($featured_image)) {
-    $cat_img_url = $featured_image['url'];
-}
+$cat_img_url = $featured_image['url'] ?? '';
+$cat_img_alt = $featured_image['alt'] ?? '';
 
 $post_type = get_post_type_object(get_post_type());
 $post_type_label = $post_type->label ?? 'Posts';
@@ -83,7 +73,11 @@ $posts_query = new WP_Query($args);
         </div><!-- .Sidebar -->
         <!-- Content -->
         <div class="content-wrapper">
-            <img class="__banner" src="<?php echo $cat_img_url ?>" alt="Category Feature Image">
+            <?php if (!empty($cat_img_url)): ?>
+                <img class="__banner" src="<?php echo $cat_img_url ?>" alt="<?php echo $cat_img_alt ?>">
+            <?php else: ?>
+                <?php dv_the_post_thumbnail_default($post->ID) ?>
+            <?php endif; ?>
             <?php if ( !empty($description) ): ?>
                 <div class="__content archive-desc">
                     <?php echo wp_kses_post( wpautop( $description ) ); ?>

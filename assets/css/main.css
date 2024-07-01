@@ -936,7 +936,6 @@ nav#site-navigation ul#primary-menu-list {
   padding: 0;
   display: flex;
   justify-content: left;
-  flex-wrap: wrap;
   gap: 2px;
 }
 nav#site-navigation ul#primary-menu-list > li.menu-item:first-child {
@@ -1229,6 +1228,9 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   }
   nav#site-navigation {
     padding-bottom: 12px;
+  }
+  nav#site-navigation ul#primary-menu-list {
+    flex-wrap: wrap;
   }
   nav#site-navigation ul#primary-menu-list li.menu-item {
     font-size: 1rem;

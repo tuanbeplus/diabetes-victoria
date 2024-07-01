@@ -71,7 +71,7 @@ add_action('init', 'dv_resources_taxonomy', 0);
  */
 function dv_custom_post_typed_resource_columns($columns)
 {
-	unset( $columns['comments']);
+	unset($columns['comments']);
 	unset($columns['date']);
 	$columns['thumbnail'] = __( 'Thumbnail', 'diabetes-victoria' );
 	$columns['resource_categories'] = __( 'Categories', 'diabetes-victoria' );

@@ -323,7 +323,6 @@ nav#site-navigation {
         padding: 0;
         display: flex;
         justify-content: left;
-        flex-wrap: wrap;
         gap: 2px;
         > li.menu-item:first-child{
             padding-left: 2px;
@@ -642,6 +641,7 @@ nav#site-navigation {
     nav#site-navigation {
         padding-bottom: 12px;
         ul#primary-menu-list {
+            flex-wrap: wrap;
             li.menu-item {
                 font-size: 1rem;
             }

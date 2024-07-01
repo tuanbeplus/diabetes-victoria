@@ -75,3 +75,39 @@ function dv_strip_html_attributes_on_save($post_id) {
 }
 add_action('save_post', 'dv_strip_html_attributes_on_save');
 
+/**
+ * Add custom columns to Blogs table
+ */
+function dv_custom_blog_columns($columns)
+{
+	$columns['thumbnail'] = 'Thumbnail';
+	return $columns;
+}
+add_filter('manage_post_posts_columns', 'dv_custom_blog_columns');
+
+/**
+ * Display value of custom colums at Blogs table
+ */
+function dv_blog_columns_display( $blog_columns, $post_id ) {
+
+	switch ( $blog_columns ) {
+		// Display the thumbnail in the column view
+		case "thumbnail":
+			$width = (int) 64;
+			$height = (int) 64;
+			$thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
+
+			// Display the featured image in the column view if possible
+			if ( $thumbnail_id ) {
+				$thumb = wp_get_attachment_image( $thumbnail_id, array($width, $height), true );
+			}
+			if ( isset( $thumb ) ) {
+				echo $thumb; // No need to escape
+			} else {
+				echo esc_html__('None', 'diabetes-victoria');
+			}
+		break;
+	}
+}
+add_action( 'manage_post_posts_custom_column', 'dv_blog_columns_display', 10, 2 );
+

@@ -4,7 +4,7 @@
  * 
  * @param $icon_file_name   File name
  * 
- * @return content file svg
+ * @return Content file svg
  * 
  */
 function dv_get_icon_svg($icon_file_name) {
@@ -103,7 +103,7 @@ function dv_breadcrumb() {
  * 
  * @param string $html_string    HTML string
  *
- * @return string Clean HTML string
+ * @return String Clean HTML string
  * 
  */
 function dv_clean_html_content_editor($html_string) {
@@ -128,7 +128,7 @@ function dv_clean_html_content_editor($html_string) {
  * 
  * @param string $post_id    Post ID
  *
- * @return string the Summary
+ * @return String the Summary
  * 
  */
 function dv_get_post_summary($post_id) {
@@ -167,3 +167,43 @@ function dv_wcag_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
 }
 add_filter( 'nav_menu_link_attributes', 'dv_wcag_nav_menu_link_attributes', 10, 4 );
 
+/**
+ * The thumbnail used for the post card doesn't have a thumbnail
+ * 
+ * @param string/int	Post ID
+ * 
+ * @return Html Thumbnail Image
+ *
+ */
+function dv_the_post_thumbnail_default($post_id) {
+	// Recipes
+	if (get_post_type($post_id) == 'recipe') {
+		echo '<img src="'.DV_IMG_DIR .'recipe-feature-img.png"
+			alt="A man and woman sitting down to eat at a table set with a variety of dishes.">';
+	}
+	// Resources
+	elseif (get_post_type($post_id) == 'resource') {
+		$the_terms = get_the_terms($post_id, 'resource_categories');
+		$terms_slug = array();
+		if ($the_terms && ! is_wp_error( $the_terms )) {
+			foreach ( $the_terms as $term ) {
+				$terms_slug[] = $term->slug;
+			}
+		}
+		// Podcasts
+		if (in_array('podcasts', $terms_slug)) {
+			echo '<img src="'.DV_IMG_DIR .'DVic-podcast.png" 
+			alt="The official logo of the Diabetes Life Podcast">';
+		}
+		// Other Resources
+		else {
+			echo '<img src="'. DV_IMG_DIR .'card-img-placeholder.png" 
+				alt="A group of people stand together, smiling, holding a large speech bubble sign that reads We are here to help you! with the Diabetes Victoria logo on it">';
+		}
+	}
+	// Blogs
+	else {
+		echo '<img src="'.DV_IMG_DIR .'card-img-placeholder.png" 
+			alt="A group of people stand together, smiling, holding a large speech bubble sign that reads We are here to help you! with the Diabetes Victoria logo on it">';
+	}
+}

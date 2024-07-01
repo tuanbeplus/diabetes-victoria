@@ -5,28 +5,9 @@
  */
 get_header();
 $post_id = get_the_ID();
-$feature_img_default = DV_IMG_DIR .'card-img-placeholder.png';
-if( get_post_type() == 'recipe' ){
-    $feature_img_default = DV_IMG_DIR .'recipe-feature-img-default.jpeg';
-}
-if( get_post_type() == 'resource' ){
-    $the_terms = get_the_terms( $post->ID, 'resource_categories' );
-    $terms_slug = array();
-    if( $the_terms && ! is_wp_error( $the_terms ) ){
-        foreach ( $the_terms as $term ) {
-            $terms_slug[] = $term->slug;
-        }
-    }
-    if( in_array( 'podcasts', $terms_slug ) ): 
-        $feature_img_default = DV_IMG_DIR .'resource-feature-img-default.png';
-    endif; 
-}
 $feature_img_url = get_the_post_thumbnail_url($post_id, 'full');
-$feature_img_url = !empty($feature_img_url) ? $feature_img_url : $feature_img_default;
 $feature_img_id = get_post_thumbnail_id();
-$feature_img_alt_default = 'Fresh herbs and spices arranged on a black background, adding vibrant colors and flavors to culinary creations.';
 $feature_img_alt = get_post_meta($feature_img_id, '_wp_attachment_image_alt', true);
-$feature_img_alt = !empty($feature_img_id) ? $feature_img_alt : $feature_img_alt_default;
 $post_content = get_the_content();
 
 // merge all term of taxonomy register for post type
@@ -99,7 +80,11 @@ echo '} </style>';
         </div><!-- .Sidebar -->
 
         <div class="content-wrapper">
-            <img class="__banner" src="<?php echo $feature_img_url; ?>" alt="<?php echo $feature_img_alt; ?>">
+            <?php if (!empty($feature_img_url)): ?>
+                <img class="__banner" src="<?php echo $feature_img_url; ?>" alt="<?php echo $feature_img_alt; ?>">
+            <?php else: ?>
+                <?php dv_the_post_thumbnail_default($post_id) ?>
+            <?php endif; ?>
             
             <?php if( 
                 !empty( get_field('post_description') ) || 
@@ -198,32 +183,9 @@ $max_posts = is_array($max_posts) ? count($max_posts) : '';
                 <li class="post post-<?php echo $post->ID; ?>">
                     <div class="__thumb">
                         <?php if (!empty(get_the_post_thumbnail($post->ID))): ?>
-                            <?php echo get_the_post_thumbnail($post->ID, 'full'); ?>
+                            <?php echo get_the_post_thumbnail($post->ID, 'medium_large'); ?>
                         <?php else: ?>
-                            <?php if( get_post_type() == 'recipe' ): ?>
-                                <img src="<?php echo DV_IMG_DIR .'recipe-feature-img-default.jpeg'; ?>" 
-                                    alt="<?php echo $feature_img_alt_default ?>">
-                            <?php elseif( get_post_type() == 'resource' ): ?>
-                                <?php 
-                                $the_terms = get_the_terms( $post->ID, 'resource_categories' );
-                                $terms_slug = array();
-                                if( $the_terms && ! is_wp_error( $the_terms ) ){
-                                    foreach ( $the_terms as $term ) {
-                                        $terms_slug[] = $term->slug;
-                                    }
-                                }
-                                ?>
-                                <?php if( in_array( 'podcasts', $terms_slug ) ): ?>
-                                    <img src="<?php echo DV_IMG_DIR .'resource-feature-img-default.png'; ?>" 
-                                    alt="<?php echo $feature_img_alt_default ?>">
-                                <?php else: ?>
-                                    <img src="<?php echo DV_IMG_DIR .'card-img-placeholder.png'; ?>" 
-                                    alt="<?php echo $feature_img_alt_default ?>">
-                                <?php endif; ?>
-                            <?php else: ?>
-                                <img src="<?php echo DV_IMG_DIR .'card-img-placeholder.png'; ?>" 
-                                    alt="<?php echo $feature_img_alt_default ?>">
-                            <?php endif;?>
+                            <?php dv_the_post_thumbnail_default($post->ID) ?>
                         <?php endif; ?>
                     </div>
                     <div class="post-meta">
