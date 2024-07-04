@@ -15,6 +15,7 @@ if( get_row_layout() == 'main_content' ):
     $bottom_cta = get_sub_field('bottom_cta');
     $sidebar = get_sub_field('sidebar');
     $show_sidebar = $sidebar['show_sidebar'];
+    $in_this_section = $sidebar['in_this_section'];
     $on_this_page = $sidebar['on_this_page'];
     $on_this_page_options = $on_this_page['options'];
     $custom_links = $on_this_page['custom_links'];
@@ -24,6 +25,7 @@ if( get_row_layout() == 'main_content' ):
     $additional_info_boxes = $sidebar['additional_info_boxes'];
     $aib_visibility = $additional_info_boxes['visibility'];
     $aib_list = $additional_info_boxes['info_boxes'];
+    $child_pages = dv_get_direct_child_posts_from_parent(get_post_type(),get_the_ID());
 
     if (!empty($banner_image) || !empty($content_editor)):
         ?>
@@ -34,6 +36,21 @@ if( get_row_layout() == 'main_content' ):
                     <!-- Sidebar -->
                     <div id="main-content-sidebar" class="sidebar">
                         <div class="sidebar-inner">
+                            <?php if ( $in_this_section == true && !empty($child_pages) ): ?>
+                                <div class="in-this-section">
+                                    <h2 class="__heading">In This Section</h2>
+                                    <ul class="child-pages-list" role="list">
+                                        <li><?php echo get_the_title() ?></li>
+                                    <?php foreach ($child_pages as $page): ?>
+                                        <li>
+                                            <a href="<?php echo get_the_permalink($page->ID) ?>" target="_blank">
+                                                <?php echo $page->post_title ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             <div class="on-this-page">
                                 <h2 class="__heading"><?php echo $on_this_page['heading']; ?></h2>
                                 <?php if ($on_this_page_options == 'auto_tocs'): ?>

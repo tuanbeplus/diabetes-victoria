@@ -167,6 +167,27 @@ section.main-content {
                 text-decoration: underline;
                 text-underline-offset: 2px;
             }
+            .in-this-section {
+                margin-bottom: 32px;
+                padding: 32px 30px;
+                background-color: var(--post-brand-color, #99D6E9);
+                .__heading {
+                    color: var(--post-sub-brand-color, #007995);
+                    border-color: var(--post-sub-brand-color, #007995);;
+                }
+                ul {
+                    margin: 0;
+                    li {
+                        padding: 0;
+                        color: var(--post-sub-brand-color, #007995);
+                        font-family: $primary_font_bold;
+                    }
+                    a {
+                        color: var(--post-sub-brand-color, #007995);
+                        font-family: $primary_font_bold;
+                    }
+                }
+            }
             .on-this-page {
                 padding: 32px 30px;
                 background-color: var(--post-brand-color, $primary_color);
@@ -364,6 +385,10 @@ section.main-content {
                 }
             }
             .sidebar {
+                .in-this-section {
+                    margin-bottom: 24px;
+                    padding: 20px;
+                }
                 .on-this-page {
                     padding: 20px;
                 }

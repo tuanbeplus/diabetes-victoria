@@ -108,14 +108,9 @@ function dv_breadcrumb() {
  */
 function dv_clean_html_content_editor($html_string) {
     $clean_html = preg_replace_callback(
-        '/<(table|tbody|tr|th|td|p|ul|ol|script|span)([^>]*)>/',
+        '/<(table|tbody|tr|th|td|p|ul|ol|span)([^>]*)>/',
         function ($matches) {
-            // For <script> tags, return an empty string to remove them completely
-            if ($matches[1] === 'script') {
-                return '';
-            } else {
-                return "<{$matches[1]}>";
-            }
+            return "<{$matches[1]}>";
         },
         $html_string
     );
@@ -206,4 +201,29 @@ function dv_the_post_thumbnail_default($post_id) {
 		echo '<img src="'.DV_IMG_DIR .'card-img-placeholder.png" 
 			alt="A group of people stand together, smiling, holding a large speech bubble sign that reads We are here to help you! with the Diabetes Victoria logo on it">';
 	}
+}
+
+/**
+ * Get all publish child posts form their parent
+ * 
+ * @param string $post_type 	Post type (e.g., 'post', 'page', 'custom_post_type').
+ * @param int|string $post_id 	Parent post ID.
+ * 
+ * @return Array Array of WP_Post objects representing the child posts.
+ *
+ */
+function dv_get_direct_child_posts_from_parent($post_type ,$post_id) {
+	$args = array(
+		'post_type'      => $post_type,
+		'posts_per_page' => -1,
+		'post_status'	 => 'publish',
+		'post_parent'    => $post_id, 
+		'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+	);
+	
+	$child_posts = get_posts($args);
+	wp_reset_postdata(); 
+
+	return $child_posts;
 }
