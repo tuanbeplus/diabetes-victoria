@@ -43,5 +43,4 @@ $other_ways_link = $donate['other_ways_to_get_involved'];
             <span class="close-icon"><i class="fa-solid fa-xmark"></i></span>
         </button>
     </div>
-    <div class="donate-overlay"></div>
 </div><!-- .Donate popup -->

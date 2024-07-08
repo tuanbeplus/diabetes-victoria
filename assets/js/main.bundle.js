@@ -262,6 +262,7 @@ jQuery(document).ready(function ($) {
     });
   });
 
+  // ------------------ Search Popup ------------------
   // Click to open Search popup
   $(document).on('click', '#btn-search', function (e) {
     e.preventDefault();
@@ -312,6 +313,7 @@ jQuery(document).ready(function ($) {
   $(document).on('click', '.global-search-wrapper form', function (e) {
     e.stopPropagation();
   });
+  // ------------------ /Search Popup ------------------
 
   // Open Nav mobile
   $(document).on('click', '#btn-nav-bar', function (e) {
@@ -486,6 +488,7 @@ jQuery(document).ready(function ($) {
     });
   });
 
+  // ------------------ Donate Popup ------------------
   // Show donate popup
   $(document).on('click', '#btn-donate', function (e) {
     e.preventDefault();
@@ -507,36 +510,19 @@ jQuery(document).ready(function ($) {
       input_field.focus();
     }, 200);
   });
-  // Click to Close donate popup
-  $(document).on('click', '#btn-close-donate', function (e) {
+  // Click & Focus-out to Close Donate popup
+  $(document).on('click blur', '#btn-close-donate', function (e) {
     e.preventDefault();
-    $(this).addClass('active');
-    var donate_popup = $('#donate-popup');
-    var donate_wrapper = donate_popup.find('.donate-wrapper');
-    donate_popup.removeClass('show');
-    donate_wrapper.slideUp(200);
-    $('#btn-donate').attr('aria-expanded', 'false');
+    dv_close_donate_popup();
   });
-  // Focus-out to Close donate popup
-  $(document).on('blur', '#btn-close-donate', function (e) {
-    e.preventDefault();
-    $(this).addClass('active');
-    var donate_popup = $('#donate-popup');
-    var donate_wrapper = donate_popup.find('.donate-wrapper');
-    donate_popup.removeClass('show');
-    donate_wrapper.slideUp(200);
-    $('#btn-donate').attr('aria-expanded', 'false');
-  });
-  // Show donate popup
-  $(document).on('click', '#donate-popup .donate-wrapper', function (e) {
-    e.stopPropagation();
-  });
-  // Close donate popup
+  // Click outside to close Donate popup
   $(document).on('click', '#donate-popup', function (e) {
     e.preventDefault();
-    $(this).removeClass('show');
-    $(this).find('.donate-wrapper').slideUp(200);
-    $('#btn-donate').attr('aria-expanded', 'false');
+    dv_close_donate_popup();
+  });
+  // Stop propagation for Donate wrapper
+  $(document).on('click', '#donate-popup .donate-wrapper', function (e) {
+    e.stopPropagation();
   });
   // Checked or un-checked amount radio button
   $(document).on('click', '#donate-popup input[type=radio][name=amount]', function (e) {
@@ -560,6 +546,72 @@ jQuery(document).ready(function ($) {
       $('#donate-popup input[type=radio][name=amount]').prop('disabled', true);
     }
   });
+  /**
+   * Close the Donate Popup
+   */
+  function dv_close_donate_popup() {
+    var donate_popup = $('#donate-popup');
+    var donate_wrapper = donate_popup.find('.donate-wrapper');
+    donate_popup.addClass('closing');
+    donate_wrapper.slideUp(200);
+    setTimeout(function () {
+      donate_popup.removeClass('show');
+      $('#btn-donate').attr('aria-expanded', 'false');
+      donate_popup.removeClass('closing');
+    }, 200);
+  }
+  // ------------------ /Donate Popup ------------------
+
+  // ------------------ Members Login Popup ------------------
+  // Click to show Members Login Area
+  $(document).on('click', '#btn-member-login', function (e) {
+    e.preventDefault();
+    var this_btn = $(this);
+    var adminBar = $('#wpadminbar');
+    var wrapper_margin = this_btn.outerHeight();
+    if (adminBar.length > 0) {
+      wrapper_margin = wrapper_margin + adminBar.outerHeight();
+    }
+    var login_popup = $('#members-login-area');
+    var login_wrapper = login_popup.find('.login-wrapper');
+    var input_field = login_popup.find('input#user_login');
+    login_popup.addClass('show');
+    login_wrapper.css('margin-top', wrapper_margin + 'px');
+    login_wrapper.slideDown(300);
+    dv_aria_expanded_status(this_btn);
+    setTimeout(function () {
+      input_field.focus();
+    }, 200);
+  });
+  // Click & Focus-out to Close Members Login Area
+  $(document).on('click blur', '#btn-close-login-popup', function (e) {
+    e.preventDefault();
+    dv_close_members_login_popup();
+  });
+  // Click outside to close Members Login Area
+  $(document).on('click', '#members-login-area', function (e) {
+    e.preventDefault();
+    dv_close_members_login_popup();
+  });
+  // Show propagation login wrapper
+  $(document).on('click', '#members-login-area .login-wrapper', function (e) {
+    e.stopPropagation();
+  });
+  /**
+   * Close Members Login Area Popup
+   */
+  function dv_close_members_login_popup() {
+    var login_popup = $('#members-login-area');
+    var login_wrapper = login_popup.find('.login-wrapper');
+    login_popup.addClass('closing');
+    login_wrapper.slideUp(200);
+    setTimeout(function () {
+      login_popup.removeClass('show');
+      $('#btn-member-login').attr('aria-expanded', 'false');
+      login_popup.removeClass('closing');
+    }, 200);
+  }
+  // ------------------ /Members Login Popup ------------------
 
   // Smooth scrolling to anchor links
   $(document).on('click', 'a[href^="#"]', function (e) {
@@ -604,6 +656,13 @@ jQuery(document).ready(function ($) {
       allSubMenu.each(function (e) {
         $(this).slideUp(200);
       });
+    }
+  });
+
+  // Members Confirm Logout
+  $(document).on('click', '.members-logout-link', function (event) {
+    if (!confirm('Are you sure you want to log out?')) {
+      event.preventDefault();
     }
   });
 });

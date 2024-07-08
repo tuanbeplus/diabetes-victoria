@@ -32,7 +32,7 @@ $languages    = get_field('languages', 'option');
                     </a>
                 </li>
                 <li class="member-login">
-                    <button id="btn-member-login" role="button">
+                    <button id="btn-member-login" aria-expanded="false" aria-controls="members-login-area">
                         <span><?php echo $member_login['button_text'] ?? ''; ?></span>
                     </button>
                 </li>

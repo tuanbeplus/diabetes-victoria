@@ -89,9 +89,26 @@ if ( ! function_exists( 'diabetes_victoria_theme_setup' ) ) {
 		// Add support for editor styles.
 		add_theme_support( 'editor-styles' );
 
+		// Add support for Widgets.
+		add_theme_support( 'widgets' );
+
 	}
 	add_action( 'after_setup_theme', 'diabetes_victoria_theme_setup' );
 }
+
+function dv_theme_widgets_init() {
+    // Register sidebar widget area
+    register_sidebar( array(
+        'name'          => __( 'In Your Language' ),
+        'id'            => 'languages-widget',
+        'description'   => 'Add widgets here to appear in Language module.',
+        // 'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        // 'after_widget'  => '</div>',
+        // 'before_title'  => '<h2 class="widget-title">',
+        // 'after_title'   => '</h2>',
+    ) );
+}
+add_action( 'widgets_init', 'dv_theme_widgets_init' );
 
 /**
  * Custom Post Type

@@ -48,6 +48,19 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 								<img class="logo-full-color" src="<?php echo $logo_full_color['url'] ?? ''; ?>" alt="<?php echo $logo_full_color['alt'] ?? ''; ?>">
 							</a>
 						</div>
+						<?php if ( is_user_logged_in() ): 
+							// Get the current user object
+							$current_user = wp_get_current_user();
+							// Get the user's first name and last name
+							$first_name = get_user_meta( $current_user->ID, 'first_name', true );
+							$last_name = get_user_meta( $current_user->ID, 'last_name', true );
+							?>
+							<div class="users-action">
+								<span><?php echo esc_html($first_name).' '.esc_html($last_name) ?></span>
+								<a href="#">My Profile</a>
+								<a class="members-logout-link" href="<?php echo esc_url( wp_logout_url(home_url()) ); ?>">Logout</a>
+							</div>
+						<?php endif; ?>
 						<button id="btn-nav-bar">
 							<span class="icon-bar"><i class="fa-solid fa-bars"></i></span>
 							<span class="icon-close"><i class="fa-solid fa-xmark"></i></span>
@@ -68,9 +81,11 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 		</button><!-- #button scroll to top -->
 	</div>
 	
-	<?php get_template_part( 'template-parts/search/search-popup' ); ?>
+	<?php get_template_part( 'template-parts/header/search-popup' ); ?>
 
-	<?php get_template_part( 'template-parts/donate/donate-popup' ); ?>
+	<?php get_template_part( 'template-parts/header/donate-popup' ); ?>
+
+	<?php get_template_part( 'template-parts/header/login-popup' ); ?>
 			
 	<div id="content" class="site-content">
 		<div id="primary" class="content-area">

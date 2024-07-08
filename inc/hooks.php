@@ -111,3 +111,20 @@ function dv_blog_columns_display( $blog_columns, $post_id ) {
 }
 add_action( 'manage_post_posts_custom_column', 'dv_blog_columns_display', 10, 2 );
 
+
+function dv_add_member_role() {
+    add_role(
+        'dv_member',
+        __('Diabetes Victoria Member'),
+    );
+}
+add_action('init', 'dv_add_member_role');
+
+function dv_hide_admin_bar_for_member_role($show) {
+    if (current_user_can('dv_member')) {
+        return false;
+    }
+    return $show;
+}
+add_filter('show_admin_bar', 'dv_hide_admin_bar_for_member_role');
+
