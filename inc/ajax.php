@@ -104,3 +104,34 @@ function dv_load_more_latest_posts() {
 }
 add_action('wp_ajax_dv_load_more_latest_posts', 'dv_load_more_latest_posts');
 add_action('wp_ajax_nopriv_dv_load_more_latest_posts', 'dv_load_more_latest_posts');
+
+
+/**
+ * Ajax user profile update
+ * 
+ */
+function dv_user_profile_update() {
+    $user_id = get_current_user_id();
+
+    $fname = isset($_POST['user_fname']) ? $_POST['user_fname'] : '';
+    $lname = isset($_POST['user_lname']) ? $_POST['user_lname'] : '';
+    $email = isset($_POST['user_email']) ? $_POST['user_email'] : '';
+    $url = isset($_POST['user_url']) ? $_POST['user_url'] : '';
+    $desc = isset($_POST['user_desc']) ? $_POST['user_desc'] : '';
+
+    update_user_meta( $user_id, 'first_name', $fname );
+    update_user_meta( $user_id, 'last_name', $lname );
+    update_user_meta( $user_id, 'description', $desc );
+
+    wp_update_user( array( 
+        'ID' => $user_id, 
+        'user_email' => $email,
+        'user_url' => $url 
+    ) );
+
+    wp_send_json_success('succes');
+    
+    die;
+}
+add_action('wp_ajax_dv_user_profile_update', 'dv_user_profile_update');
+add_action('wp_ajax_nopriv_dv_user_profile_update', 'dv_user_profile_update');

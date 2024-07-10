@@ -1,0 +1,110 @@
+.user-profile-section {
+    max-width: 1024px;
+    margin: 0 auto;
+    background-color: var(--s-bg-color);
+    padding-top: var(--s-pd-top, 0);
+    padding-bottom: var(--s-pd-bottom, 60px);
+    @media(max-width: 1024px) {
+        padding-top: calc(var(--s-pd-top, 0) * 0.8);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.8);
+    }
+    @media(max-width: 768px) {
+        padding-top: calc(var(--s-pd-top, 0) * 0.6);
+        padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.6);
+    }
+    .container {
+        max-width: 782px;
+    }
+    .user-profile-wrap {
+        max-width: 782px;
+    }
+    .user-info {
+        margin-bottom: 60px;
+        h2 {
+            margin-top: 0;
+        }
+    }
+    .user-profile {
+        .user-profile-form {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            background-color: #99D6E9;
+            padding: 52px 40px;
+            overflow: hidden;
+            border-radius: 5px;
+            &.loading {
+                .loading-wrapper {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            .loading-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                visibility: hidden;
+                z-index: 9;
+                transition: all .3s;
+            }
+            label {
+                font-size: 1em;
+                font-weight: 500;
+                display: block;
+                margin-bottom: 5px;
+            }
+            input, select, textarea {
+                font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
+                font-size: 1em;
+                display: block;
+                min-width: 100%;
+                height: 2.5em;
+                padding: .425em .625em;
+                color: #2c3345;
+                background-color: #F5FBFD;
+                border: 1px solid #b8bdc9;
+                border-radius: 4px;
+            }
+            textarea {
+                height: 8em;
+            }
+            input[type="submit"] {
+                font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+                color: #fff;
+                background-color: #019BC2;
+                border-color: #019BC2;
+                &:hover {
+                    background-color: #0090b4;
+                    border-color: #0090b4;
+                }  
+            }
+        }
+    }
+    .user-message {
+        h2 {
+            margin-top: 0;
+        }
+        button {
+            font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+            font-size: 1em;
+            height: 2.5em;
+            padding: .425em .625em;
+            color: #fff;
+            background-color: #019BC2;
+            border: 1px solid #019BC2;
+            border-radius: 4px;
+            &:hover {
+                background-color: #0090b4;
+                border-color: #0090b4;
+            }  
+        }
+    }
+}

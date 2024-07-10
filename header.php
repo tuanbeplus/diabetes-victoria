@@ -49,15 +49,15 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 							</a>
 						</div>
 						<?php if ( is_user_logged_in() ): 
-							// Get the current user object
 							$current_user = wp_get_current_user();
-							// Get the user's first name and last name
 							$first_name = get_user_meta( $current_user->ID, 'first_name', true );
 							$last_name = get_user_meta( $current_user->ID, 'last_name', true );
+							$display_name = esc_html($first_name).' '.esc_html($last_name);
+							
 							?>
 							<div class="users-action">
-								<span><?php echo esc_html($first_name).' '.esc_html($last_name) ?></span>
-								<a href="#">My Profile</a>
+								<span><?php echo $display_name; ?></span>
+								<a href="/user-profile">My Profile</a>
 								<a class="members-logout-link" href="<?php echo esc_url( wp_logout_url(home_url()) ); ?>">Logout</a>
 							</div>
 						<?php endif; ?>

@@ -5224,3 +5224,112 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
     font-size: 1.5rem;
   }
 }
+
+.user-profile-section {
+  max-width: 1024px;
+  margin: 0 auto;
+  background-color: var(--s-bg-color);
+  padding-top: var(--s-pd-top, 0);
+  padding-bottom: var(--s-pd-bottom, 60px);
+}
+@media (max-width: 1024px) {
+  .user-profile-section {
+    padding-top: calc(var(--s-pd-top, 0) * 0.8);
+    padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.8);
+  }
+}
+@media (max-width: 768px) {
+  .user-profile-section {
+    padding-top: calc(var(--s-pd-top, 0) * 0.6);
+    padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.6);
+  }
+}
+.user-profile-section .container {
+  max-width: 782px;
+}
+.user-profile-section .user-profile-wrap {
+  max-width: 782px;
+}
+.user-profile-section .user-info {
+  margin-bottom: 60px;
+}
+.user-profile-section .user-info h2 {
+  margin-top: 0;
+}
+.user-profile-section .user-profile .user-profile-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #99D6E9;
+  padding: 52px 40px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.user-profile-section .user-profile .user-profile-form.loading .loading-wrapper {
+  opacity: 1;
+  visibility: visible;
+}
+.user-profile-section .user-profile .user-profile-form .loading-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 9;
+  transition: all 0.3s;
+}
+.user-profile-section .user-profile .user-profile-form label {
+  font-size: 1em;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5px;
+}
+.user-profile-section .user-profile .user-profile-form input, .user-profile-section .user-profile .user-profile-form select, .user-profile-section .user-profile .user-profile-form textarea {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
+  font-size: 1em;
+  display: block;
+  min-width: 100%;
+  height: 2.5em;
+  padding: 0.425em 0.625em;
+  color: #2c3345;
+  background-color: #F5FBFD;
+  border: 1px solid #b8bdc9;
+  border-radius: 4px;
+}
+.user-profile-section .user-profile .user-profile-form textarea {
+  height: 8em;
+}
+.user-profile-section .user-profile .user-profile-form input[type=submit] {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  background-color: #019BC2;
+  border-color: #019BC2;
+}
+.user-profile-section .user-profile .user-profile-form input[type=submit]:hover {
+  background-color: #0090b4;
+  border-color: #0090b4;
+}
+.user-profile-section .user-message h2 {
+  margin-top: 0;
+}
+.user-profile-section .user-message button {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  font-size: 1em;
+  height: 2.5em;
+  padding: 0.425em 0.625em;
+  color: #fff;
+  background-color: #019BC2;
+  border: 1px solid #019BC2;
+  border-radius: 4px;
+}
+.user-profile-section .user-message button:hover {
+  background-color: #0090b4;
+  border-color: #0090b4;
+}

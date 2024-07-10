@@ -90,10 +90,65 @@
         });
     }
 
+    // User Profile
+    function DV_User_Profile() {
+        if($('.user-profile-form').length == 0) {
+            return;
+        }
+
+        $('.user-profile-form').submit(function(){
+            var param_out = [],
+                param_in = $(this).serialize().split('&');
+
+
+            var param_ajax = {
+                action: 'dv_user_profile_update',
+            };
+
+            param_ajax['user_fname'] = $(this).find('#user_fname').val();
+            param_ajax['user_lname'] = $(this).find('#user_lname').val();
+            param_ajax['user_email'] = $(this).find('#user_email').val();
+            param_ajax['user_url'] = $(this).find('#user_url').val();
+            param_ajax['user_desc'] = $(this).find('#user_desc').val();
+        
+            // console.log(param_ajax);
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: ajax_object.ajax_url,
+                data: param_ajax,
+                context: this,
+                beforeSend: function(){
+                  $('.user-profile-form').addClass('loading');
+                },
+                success: function(response) {
+                  if(response.success) {
+                    // console.log(response.data);
+      
+                    setTimeout(function() {
+                        $('.user-profile-form').removeClass('loading');
+
+                    }, 500);
+
+                  } else {
+                    console.log('error');
+                  }
+                },
+                error: function( jqXHR, textStatus, errorThrown ){
+                  console.log( 'The following error occured: ' + textStatus, errorThrown );
+                }
+            });
+
+            return false;
+        });
+    }
+
     jQuery(document).ready(function ($) {
         DV_Accordion();
         DV_Carousel();
         DV_Carousel_Dots_Custom();
+        DV_User_Profile();
     
     });
 

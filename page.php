@@ -53,6 +53,7 @@ get_header();
             get_template_part('modules/members-list');
             get_template_part('modules/single-column-content');
             get_template_part('modules/jotform-embed');
+            get_template_part('modules/user-profile');
 
         endwhile;
 
