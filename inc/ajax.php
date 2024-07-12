@@ -135,3 +135,38 @@ function dv_user_profile_update() {
 }
 add_action('wp_ajax_dv_user_profile_update', 'dv_user_profile_update');
 add_action('wp_ajax_nopriv_dv_user_profile_update', 'dv_user_profile_update');
+
+/**
+ * Ajax WP Members Login
+ * 
+ */
+function dv_member_login_ajax() {
+    // First check the nonce, if it fails the function will break
+    check_ajax_referer('ajax-login-nonce', 'security');
+    // Nonce is checked, get the POST data and sign user on
+    $info = array();
+    $info['user_login'] = $_POST['log'];
+    $info['user_password'] = $_POST['pwd'];
+    $info['remember'] = true;
+
+    $user_signon = wp_signon($info, false);
+    
+    if (is_wp_error($user_signon)) {
+        return wp_send_json(
+            array(
+                'status' => 'failed',
+                'message' => 'Invalid username or password.'
+            )
+        );
+    } else {
+        return wp_send_json(
+            array(
+                'status' => 'success', 
+                'message' => 'Login successful, redirecting...'
+            )
+        );
+    }
+    die();
+}
+add_action('wp_ajax_nopriv_dv_member_login_ajax', 'dv_member_login_ajax');
+add_action('wp_ajax_dv_member_login_ajaxn', 'dv_member_login_ajax');

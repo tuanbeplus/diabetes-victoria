@@ -50,10 +50,7 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 						</div>
 						<?php if ( is_user_logged_in() ): 
 							$current_user = wp_get_current_user();
-							$first_name = get_user_meta( $current_user->ID, 'first_name', true );
-							$last_name = get_user_meta( $current_user->ID, 'last_name', true );
-							$display_name = esc_html($first_name).' '.esc_html($last_name);
-							
+							$display_name = esc_html($current_user->data->display_name);
 							?>
 							<div class="users-action">
 								<span><?php echo $display_name; ?></span>

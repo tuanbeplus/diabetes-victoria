@@ -128,3 +128,21 @@ function dv_hide_admin_bar_for_member_role($show) {
 }
 add_filter('show_admin_bar', 'dv_hide_admin_bar_for_member_role');
 
+function dv_custom_wp_login_logo() { 
+    ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url("<?php echo DV_IMG_DIR ?>dv-logo-full-color.png");
+            width:190px;
+            background-size: 190px;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <?php 
+}
+add_action('login_enqueue_scripts', 'dv_custom_wp_login_logo');
+
+function dv_custom_wp_login_logo_url() {
+    return home_url();
+}
+add_filter('login_headerurl', 'dv_custom_wp_login_logo_url');

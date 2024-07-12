@@ -907,6 +907,43 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+@media only screen and (max-width: 1024px) {
+  .header-inner .users-action {
+    display: none;
+  }
+}
+
+.user-action-mobile {
+  display: none;
+  width: 100%;
+  margin-top: 32px;
+  justify-content: center;
+}
+.user-action-mobile * {
+  padding: 2px 10px 0 8px;
+  font-size: 1rem;
+  line-height: 1;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  border-right: 2px solid #fff;
+}
+.user-action-mobile *:last-child {
+  border: none;
+}
+.user-action-mobile a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@media only screen and (max-width: 1024px) {
+  .user-action-mobile {
+    display: flex;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .user-action-mobile * {
+    font-size: 0.875rem;
+  }
+}
 
 #header-logo img {
   width: 214px;
@@ -1031,9 +1068,6 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
 .donate-popup.show {
   display: block;
 }
-.donate-popup.show .donate-wrapper {
-  display: block;
-}
 .donate-popup.closing {
   background-color: transparent;
 }
@@ -1043,7 +1077,6 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   margin: 80px auto 0;
   padding: 70px 40px 60px;
   background-color: #3F51B5;
-  animation: dv-slide-down 0.2s linear both;
 }
 .donate-popup .donate-wrapper p {
   margin-top: 0;
@@ -1209,11 +1242,11 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   background-color: transparent;
 }
 .login-popup .login-wrapper {
+  display: none;
   position: relative;
   margin: 80px auto 0;
   padding: 60px 40px;
   background-color: #019BC2;
-  animation: dv-slide-down 0.2s linear both;
 }
 .login-popup .login-form {
   max-width: 460px;
@@ -1237,6 +1270,24 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
 .login-popup .login-form a {
   font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
   text-decoration: underline;
+}
+.login-popup .login-form #login-message {
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: all 0.3s;
+  padding: 8px 0 4px;
+}
+.login-popup .login-form #login-message.success {
+  padding: 8px 12px 4px;
+  color: #223540;
+  background-color: aliceblue;
+  border-left: 3px solid #00c900;
+}
+.login-popup .login-form #login-message.failed {
+  padding: 8px 12px 4px;
+  color: #223540;
+  background-color: aliceblue;
+  border-left: 3px solid red;
 }
 .login-popup .login-form form {
   margin: 40px 0;
@@ -1262,7 +1313,8 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   display: flex;
   justify-content: right;
 }
-.login-popup .login-form form .login-submit input[type=submit] {
+.login-popup .login-form form .login-submit button[type=submit], .login-popup .login-form form .login-submit input[type=submit] {
+  position: relative;
   padding: 10px 40px 6px;
   font-size: 1rem;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
@@ -1271,9 +1323,15 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   background-color: #fff;
   transition: all 0.2s;
 }
-.login-popup .login-form form .login-submit input[type=submit]:hover {
+.login-popup .login-form form .login-submit button[type=submit]:hover, .login-popup .login-form form .login-submit input[type=submit]:hover {
   color: #fff;
   background-color: #019BC2;
+}
+.login-popup .login-form form .login-submit .dv-spinner {
+  display: none;
+  position: absolute;
+  left: -45px;
+  top: 4px;
 }
 .login-popup #btn-close-login-popup {
   position: absolute;
@@ -5251,7 +5309,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   max-width: 782px;
 }
 .user-profile-section .user-info {
-  margin-bottom: 60px;
+  margin-bottom: 32px;
 }
 .user-profile-section .user-info h2 {
   margin-top: 0;
@@ -5297,7 +5355,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   display: block;
   min-width: 100%;
   height: 2.5em;
-  padding: 0.425em 0.625em;
+  padding: 12px 12px 8px;
   color: #2c3345;
   background-color: #F5FBFD;
   border: 1px solid #b8bdc9;

@@ -636,6 +636,45 @@ jQuery(document).ready(function ($) {
             login_popup.removeClass('closing')
         }, 200);
     }
+    // Handle WP Members Login Ajax
+    $(document).on('click', 'form#member_login_form button[type=submit]', function(e) {
+        let form = $(this).closest('form#member_login_form')
+        let userLogin = form.find('#user_login').val()
+        let userPass = form.find('#user_pass').val()
+        let security = form.find('#security').val()
+        let spinner = form.find('.dv-spinner')
+        let message = $('#login-message')
+        $.ajax({
+            type: 'POST',
+            url: ajaxUrl,
+            data:{
+                'action'  : 'dv_member_login_ajax',
+                'log'     : userLogin,
+                'pwd'     : userPass,
+                'security': security
+            },
+            beforeSend : function ( xhr ) {
+                message.removeClass()
+                spinner.show()
+            },
+            success:function(response){
+                spinner.hide()
+                message.css('opacity', '0')
+                        .css('opacity', '1')
+                        .addClass(response.status)
+                        .html(response.message);
+                if(response.status == 'success') {
+                    window.location.href = '/';
+                }
+            }
+        });
+    });
+    // Members Confirm Logout
+    $(document).on('click', '.members-logout-link', function(event) {
+        if (!confirm('Are you sure you want to log out?')) {
+            event.preventDefault();
+        }
+    });
     // ------------------ /Members Login Popup ------------------
 
     // Smooth scrolling to anchor links
@@ -682,13 +721,6 @@ jQuery(document).ready(function ($) {
             allSubMenu.each(function(e) {
                 $(this).slideUp(200)
             })
-        }
-    });
-
-    // Members Confirm Logout
-    $(document).on('click', '.members-logout-link', function(event) {
-        if (!confirm('Are you sure you want to log out?')) {
-            event.preventDefault();
         }
     });
 
