@@ -266,7 +266,7 @@ section.post-title h1 {
   height: 70px;
   font-size: 0;
   line-height: 0;
-  background: #019BC2;
+  background: var(--post-brand-color, #019BC2);
   padding: 0;
   border: none;
   border-radius: 0;
@@ -339,7 +339,7 @@ section.post-title h1 {
 .__carousel-navigation-style .slick-dots-custom button, .bespoke-slider-section .bespoke-slider-wrapper .carousel-wrapper .slick-dots-custom button, .media-slider-section .media-slider-wrapper .carousel-wrapper .slick-dots-custom button, .ipro-carousel-section .ipro-carousel-wrapper .carousel-wrapper .slick-dots-custom button {
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
   font-size: 24px;
-  color: #019BC2;
+  color: var(--post-brand-color, #019BC2);
   background-color: transparent;
   display: none;
   padding: 0;
@@ -473,6 +473,37 @@ section.post-title h1 {
 /* Custom Embed PDF style */
 .pdfembed-iframe {
   border: 3px solid var(--post-brand-color, #019BC2) !important;
+}
+
+/* Style content from WP visual editor */
+.dv-editor-content > *:first-child {
+  margin-top: 0;
+}
+.dv-editor-content > *:last-child {
+  margin-bottom: 0;
+}
+.dv-editor-content a {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
+  color: var(--post-brand-color, #019BC2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+}
+.dv-editor-content img {
+  display: block;
+  width: auto;
+}
+.dv-editor-content img.alignleft {
+  margin: 0 auto 0 0;
+}
+.dv-editor-content img.aligncenter {
+  margin: auto;
+}
+.dv-editor-content img.alignright {
+  margin: 0 0 0 auto;
+}
+.dv-editor-content iframe {
+  width: 100% !important;
 }
 
 /*************************** Laptop **************************/
@@ -3086,7 +3117,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   max-width: 1144px;
   margin: 0 auto 40px;
   font-size: 2.313rem;
-  color: #019BC2;
+  color: var(--post-brand-color, #019BC2);
 }
 .key-cards .cards-list {
   max-width: 1144px;
@@ -4584,6 +4615,9 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   line-height: 1.3;
   color: var(--post-brand-color, #019BC2);
 }
+.faqs-section .faqs-wrapper .faqs-desc {
+  margin: 30px 0;
+}
 .faqs-section .faqs-wrapper .accordion__item {
   border-bottom: 1px solid var(--post-brand-color, #019BC2);
 }
@@ -4713,7 +4747,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   font-size: 2.313rem;
   font-weight: normal;
   line-height: 1.3;
-  color: #019BC2;
+  color: var(--post-brand-color, #019BC2);
   max-width: 568px;
   margin: 0;
 }
@@ -4764,7 +4798,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
 .ipro-carousel-section .ipro-carousel-wrapper .carousel-wrapper .ipro-item--icon {
   position: relative;
   padding-bottom: 100%;
-  background: #99D6E9;
+  background: var(--post-bg-color, #99D6E9);
   overflow: hidden;
   margin-bottom: 30px;
   border-radius: 100%;

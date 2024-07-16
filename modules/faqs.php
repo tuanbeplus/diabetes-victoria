@@ -10,6 +10,7 @@ if( get_row_layout() != 'faqs' ) {
 
 $section_id = rand(0, 999);
 $heading = get_sub_field('heading');
+$description = get_sub_field('description');
 $faqs = get_sub_field('faqs');
 
 if (empty($heading) && empty($faqs)) {
@@ -26,6 +27,12 @@ if (empty($heading) && empty($faqs)) {
                 </h2>
             <?php } ?>
 
+            <?php if (!empty($description)): ?>
+                <div class="faqs-desc dv-editor-content">
+                    <?php echo $description; ?>
+                </div>
+            <?php endif; ?>
+
             <?php if(!empty($faqs)) { ?>
                 <div class="accordion js-accordion" role="tablist" aria-live="polite" data-behavior="accordion">
                     <?php foreach($faqs as $key => $item) { ?>
@@ -39,7 +46,7 @@ if (empty($heading) && empty($faqs)) {
 
                             <div id="<?php echo 'panel' . $key; ?>" class="accordion__content" role="tabpanel" aria-hidden="true" aria-labelledby="tab5" data-binding="expand-accordion-container">
                                 <div class="accordion__content-inner">
-                                <?php echo $item['content']; ?>
+                                    <?php echo $item['content']; ?>
                                 </div>
                             </div> 
                         </div>
@@ -53,7 +60,7 @@ if (empty($heading) && empty($faqs)) {
 <?php 
 // Style
 $bg_color = get_sub_field('background_color');
-$bg_color = !empty($bg_color) ? $bg_color : '#F5FBFD';
+$bg_color = !empty($bg_color) ? $bg_color : 'var(--post-bg-color, #F5FBFD)';
 $pd_top = get_sub_field('padding_top');
 $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '0';
 $pd_bottom = get_sub_field('padding_bottom');

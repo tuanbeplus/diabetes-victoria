@@ -287,7 +287,7 @@ section.post-title {
         height: 70px;
         font-size: 0;
         line-height: 0;
-        background: $primary_color;
+        background: var(--post-brand-color, $primary_color);
         padding: 0;
         border: none;
         border-radius: 0;
@@ -363,7 +363,7 @@ section.post-title {
         button {
             font-family: $primary_font_bold;
             font-size: 24px;
-            color: $primary_color;
+            color: var(--post-brand-color, $primary_color);
             background-color: transparent;
             display: none;
             padding: 0;
@@ -494,6 +494,39 @@ section.post-title {
 /* Custom Embed PDF style */
 .pdfembed-iframe{
     border: 3px solid var(--post-brand-color, #019BC2) !important;
+}
+
+/* Style content from WP visual editor */
+.dv-editor-content {
+    & > *:first-child {
+        margin-top: 0;
+    } 
+    & > *:last-child {
+        margin-bottom: 0;
+    } 
+    a {
+        font-family: $primary_font_medium;
+        color: var(--post-brand-color, $primary_color);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        word-break: break-all;
+    }
+    img {
+        display: block;
+        width: auto;
+        &.alignleft {
+          margin: 0 auto 0 0;
+        }
+        &.aligncenter {
+          margin: auto;
+        }
+        &.alignright {
+          margin: 0 0 0 auto;
+        }
+    }
+    iframe {
+        width: 100%!important;
+    }
 }
 
 /*************************** Laptop **************************/

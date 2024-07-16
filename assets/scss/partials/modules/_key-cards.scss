@@ -16,7 +16,7 @@
         max-width: 1144px;
         margin: 0 auto 40px;
         font-size: 2.313rem;
-        color: $primary_color;
+        color: var(--post-brand-color, $primary_color);
     }
     .cards-list {
         max-width: 1144px;

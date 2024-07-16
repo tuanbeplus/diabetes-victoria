@@ -52,7 +52,7 @@ $content = get_sub_field('content');
                         <input type="text" id="user_email" name="user_email" value="<?php echo esc_attr($user->user_email); ?>" required>
                     </div>
 
-                    <div class="form-field url">
+                    <div class="form-field url" style="display:none;">
                         <label>Website</label>
                         <input type="text" id="user_url" name="user_url" value="<?php echo esc_attr($user->user_url); ?>">
                     </div>

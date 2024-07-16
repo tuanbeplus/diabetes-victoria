@@ -43,7 +43,7 @@ if( get_row_layout() == 'main_content' ):
                                         <li><?php echo get_the_title() ?></li>
                                     <?php foreach ($child_pages as $page): ?>
                                         <li>
-                                            <a href="<?php echo get_the_permalink($page->ID) ?>" target="_blank">
+                                            <a href="<?php echo get_the_permalink($page->ID) ?>">
                                                 <?php echo $page->post_title ?>
                                             </a>
                                         </li>

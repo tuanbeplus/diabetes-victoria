@@ -32,7 +32,7 @@
             font-size: 2.313rem;
             font-weight: normal;
             line-height: 1.3;
-            color: $primary_color;
+            color: var(--post-brand-color, $primary_color);
             max-width: 568px;
             margin: 0;
         }
@@ -82,7 +82,7 @@
                 &--icon {
                     position: relative;
                     padding-bottom: 100%;
-                    background: $accent_color;
+                    background: var(--post-bg-color, $accent_color);
                     overflow: hidden;
                     margin-bottom: 30px;
                     border-radius: 100%;
