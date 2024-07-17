@@ -58,6 +58,7 @@ jQuery(document).ready(function ($) {
 
     // Activate footer banner when scrolled into view
     dv_activate_section_in_view("footer .footer-banner");
+    dv_set_css_variable();
   });
 
   /**
@@ -138,7 +139,7 @@ jQuery(document).ready(function ($) {
     if (tocs_wrapper.length > 0) {
       // Find all <h2> tags within the site content, excluding those inside #main-content-sidebar
       var all_heading_tags = site_content.find('h2').not('#main-content-sidebar h2');
-      var key_cards = site_content.find('.key-cards .card');
+      var key_cards = site_content.find('.key-cards .card').not('.key-cards.hide_in_TOC .card');
       if (key_cards.length > 0) {
         key_cards.each(function () {
           var card = $(this);
@@ -175,9 +176,6 @@ jQuery(document).ready(function ($) {
    */
   function dv_set_css_variable() {
     var header_height = $('header.site-header').height();
-    if ($('body').hasClass('admin-bar')) {
-      header_height = header_height + 32;
-    }
     // Set the CSS variable --header-height
     $('html').css('--header-height', header_height + 'px');
   }

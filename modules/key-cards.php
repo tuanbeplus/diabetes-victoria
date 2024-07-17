@@ -7,11 +7,17 @@
 if( get_row_layout() == 'key_cards' ):
 	$title = get_sub_field('title');
 	$cards_per_row =  get_sub_field('cards_per_row');
+    $hide_in_toc = get_sub_field('hide_in_table_of_contents');
     $cards_list = get_sub_field('cards_list');
     $section_id = rand(0, 999);
+    $section_class = '';
+    if ($hide_in_toc == true) {
+        $section_class = 'hide_in_TOC';
+    }
+
     if (!empty($cards_list)): ?>
         <!-- Key Cards section -->
-        <section id="key-cards-section-<?php echo $section_id; ?>" class="key-cards">
+        <section id="key-cards-section-<?php echo $section_id ?>" class="key-cards <?php echo $section_class ?>">
             <div class="container">
 				<?php if (!empty($title)): ?>
 					<h2 class="title"><?php echo $title; ?></h2>

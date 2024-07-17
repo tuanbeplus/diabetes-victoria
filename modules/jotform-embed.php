@@ -31,15 +31,12 @@ $bg_color = !empty($bg_color) ? $bg_color : '#F5FBFD';
 $pd_top = get_sub_field('padding_top');
 $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '0';
 $pd_bottom = get_sub_field('padding_bottom');
-$pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
+$pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '80px';
 
 echo '<style>
         #form-embed-section-'. $section_id .' {
             --s-bg-color: ' . $bg_color . ';
             --s-pd-top: ' . $pd_top . ';
             --s-pd-bottom: ' . $pd_bottom . ';
-        }
-        body section.post-title {
-            padding-bottom: 0;
         }
     </style>';

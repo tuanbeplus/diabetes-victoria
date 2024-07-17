@@ -1,0 +1,196 @@
+// =============== Donate popup ===============
+.donate-popup {
+    display: none;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.8);
+    &.show {
+        display: block;
+    }
+    &.closing {
+        background-color: transparent;
+    }
+    .donate-wrapper {
+        display: none;
+        position: relative;
+        margin: 80px auto 0;
+        padding: 70px 40px 60px;
+        background-color: $donate_color;
+        p {
+            margin-top: 0;
+            color: #fff;
+            font-size: 1rem;
+            a {
+                color: #fff;
+                text-decoration: underline;
+                font-family: $primary_font_demi;
+            }
+        }
+        #btn-close-donate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            padding: 0;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-family: $primary_font_bold;
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: all 0.2s;
+            &:hover {
+                .close-icon {
+                    background-color: #fff;
+                }
+            }
+            .close-icon {
+                margin-left: 6px;
+                width: 38px;
+                height: 35px;
+                padding: 6px;
+                font-size: 22px;
+                line-height: 1;
+                background-color: #99D6E9;
+                color: $donate_color;
+            }
+        }
+        form {
+            margin: auto;
+            max-width: 1200px;
+            fieldset {
+                margin: 0;
+                padding: 0;
+                border: none;
+                legend {
+                    margin-bottom: 20px;
+                    color: #fff;
+                    font-size: 1rem;
+                }
+            }
+            .amount-options {
+                margin-bottom: 26px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 28px;
+                .amounts-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 36px;
+                    label {
+                        min-width: 120px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 10px 24px 8px;
+                        font-size: 1rem;
+                        line-height: 1;
+                        font-family: $primary_font_bold;
+                        color: #fff;
+                        background-color: transparent;
+                        border: 2px solid #fff;
+                        transition: all 0.3s;
+                        &:focus-within {
+                            color: $donate_color;
+                            background-color: #fff;
+                        }
+                    }
+                    input[type=radio] {
+                        display: none;
+                    }
+                    input[type="radio"]:checked + label {
+                        color: $donate_color;
+                        background-color: #fff;
+                    }
+                }
+                input#other-amount {
+                    width: 100%;
+                    max-width: 292px;
+                    height: 38px;
+                    padding: 10px 12px 8px;
+                    font-size: 1rem;
+                    color: #fff;
+                    border: 2px solid #fff;
+                    background-color: #4F9BCE;
+                    font-family: $primary_font_bold;
+                    &::placeholder {
+                        font-family: $primary_font_medium;
+                        color: #fff;
+                    }
+                }
+                #btn-regular-gift {
+                    display: inline-block;
+                    padding: 10px 26px 8px;
+                    font-size: 1rem;
+                    line-height: 1;
+                    font-family: $primary_font_bold;
+                    color: #fff;
+                    border: 2px solid #fff;
+                    background-color: $donate_color;
+                    transition: all 0.2s;
+                    &:hover {
+                        color: $donate_color;
+                        background-color: #fff;
+                    }
+                }
+            }
+            .form-footer {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                #btn-continue-donate {
+                    padding: 10px 22px 8px;
+                    font-size: 1rem;
+                    line-height: 1;
+                    font-family: $primary_font_bold;
+                    color: $donate_color;
+                    border: 2px solid #fff;
+                    background-color: #fff;
+                    transition: all 0.3s;
+                    &:hover {
+                        color: #fff;
+                        background-color: $donate_color;
+                    }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .donate-wrapper {
+            padding: 60px 24px 40px;
+            form {
+                .amount-options {
+                    gap: 20px;
+                    .amounts-list {
+                        gap: 20px;
+                    }
+                }
+                .form-footer {
+                    flex-direction: column-reverse;
+                    gap: 20px;
+                    #btn-continue-donate {
+                        width: fit-content;
+                    }
+                }
+            }
+            #btn-close-donate {
+                .close-icon {
+                    width: 32px;
+                    height: 30px;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}

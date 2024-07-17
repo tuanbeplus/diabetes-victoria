@@ -6,6 +6,7 @@
 
 body {
   margin: 0;
+  margin-top: var(--header-height);
   padding: 0;
   position: relative;
   letter-spacing: 0.2px;
@@ -506,6 +507,25 @@ section.post-title h1 {
   width: 100% !important;
 }
 
+/* Style JotForm Embed Warpper */
+.form-embed-section {
+  background-color: var(--s-bg-color);
+  padding-top: var(--s-pd-top, 0);
+  padding-bottom: var(--s-pd-bottom, 80px);
+}
+@media (max-width: 1024px) {
+  .form-embed-section {
+    padding-top: calc(var(--s-pd-top, 0) * 0.8);
+    padding-bottom: calc(var(--s-pd-bottom, 80px) * 0.8);
+  }
+}
+@media (max-width: 768px) {
+  .form-embed-section {
+    padding-top: calc(var(--s-pd-top, 0) * 0.6);
+    padding-bottom: calc(var(--s-pd-bottom, 80px) * 0.6);
+  }
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
   .container {
@@ -672,7 +692,7 @@ section.post-title h1 {
   font-style: normal;
   font-display: swap;
 }
-body.admin-bar header.site-header.sticky {
+body.admin-bar header.site-header {
   top: 32px;
 }
 
@@ -682,14 +702,13 @@ body.home header nav#site-navigation {
 
 header.site-header {
   width: 100%;
-  position: relative;
+  position: fixed;
+  top: 0;
   z-index: 10;
   background-color: #019BC2;
   animation: dv-slide-down 0.3s linear both;
 }
 header.site-header.sticky {
-  position: fixed;
-  top: 0;
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
 }
@@ -1084,325 +1103,6 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     transform: translateY(100%);
   }
 }
-.donate-popup {
-  display: none;
-  position: fixed;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-.donate-popup.show {
-  display: block;
-}
-.donate-popup.closing {
-  background-color: transparent;
-}
-.donate-popup .donate-wrapper {
-  display: none;
-  position: relative;
-  margin: 80px auto 0;
-  padding: 70px 40px 60px;
-  background-color: #3F51B5;
-}
-.donate-popup .donate-wrapper p {
-  margin-top: 0;
-  color: #fff;
-  font-size: 1rem;
-}
-.donate-popup .donate-wrapper p a {
-  color: #fff;
-  text-decoration: underline;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
-}
-.donate-popup .donate-wrapper #btn-close-donate {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  padding: 0;
-  align-items: center;
-  gap: 6px;
-  border: none;
-  background: none;
-  font-size: 1rem;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: all 0.2s;
-}
-.donate-popup .donate-wrapper #btn-close-donate:hover .close-icon {
-  background-color: #fff;
-}
-.donate-popup .donate-wrapper #btn-close-donate .close-icon {
-  margin-left: 6px;
-  width: 38px;
-  height: 35px;
-  padding: 6px;
-  font-size: 22px;
-  line-height: 1;
-  background-color: #99D6E9;
-  color: #3F51B5;
-}
-.donate-popup .donate-wrapper form {
-  margin: auto;
-  max-width: 1200px;
-}
-.donate-popup .donate-wrapper form fieldset {
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-.donate-popup .donate-wrapper form fieldset legend {
-  margin-bottom: 20px;
-  color: #fff;
-  font-size: 1rem;
-}
-.donate-popup .donate-wrapper form .amount-options {
-  margin-bottom: 26px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 28px;
-}
-.donate-popup .donate-wrapper form .amount-options .amounts-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 36px;
-}
-.donate-popup .donate-wrapper form .amount-options .amounts-list label {
-  min-width: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 24px 8px;
-  font-size: 1rem;
-  line-height: 1;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  color: #fff;
-  background-color: transparent;
-  border: 2px solid #fff;
-  transition: all 0.3s;
-}
-.donate-popup .donate-wrapper form .amount-options .amounts-list label:focus-within {
-  color: #3F51B5;
-  background-color: #fff;
-}
-.donate-popup .donate-wrapper form .amount-options .amounts-list input[type=radio] {
-  display: none;
-}
-.donate-popup .donate-wrapper form .amount-options .amounts-list input[type=radio]:checked + label {
-  color: #3F51B5;
-  background-color: #fff;
-}
-.donate-popup .donate-wrapper form .amount-options input#other-amount {
-  width: 100%;
-  max-width: 292px;
-  height: 38px;
-  padding: 10px 12px 8px;
-  font-size: 1rem;
-  color: #fff;
-  border: 2px solid #fff;
-  background-color: #4F9BCE;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-}
-.donate-popup .donate-wrapper form .amount-options input#other-amount::-moz-placeholder {
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
-  color: #fff;
-}
-.donate-popup .donate-wrapper form .amount-options input#other-amount::placeholder {
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
-  color: #fff;
-}
-.donate-popup .donate-wrapper form .amount-options #btn-regular-gift {
-  display: inline-block;
-  padding: 10px 26px 8px;
-  font-size: 1rem;
-  line-height: 1;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  color: #fff;
-  border: 2px solid #fff;
-  background-color: #3F51B5;
-  transition: all 0.2s;
-}
-.donate-popup .donate-wrapper form .amount-options #btn-regular-gift:hover {
-  color: #3F51B5;
-  background-color: #fff;
-}
-.donate-popup .donate-wrapper form .form-footer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.donate-popup .donate-wrapper form .form-footer #btn-continue-donate {
-  padding: 10px 22px 8px;
-  font-size: 1rem;
-  line-height: 1;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  color: #3F51B5;
-  border: 2px solid #fff;
-  background-color: #fff;
-  transition: all 0.3s;
-}
-.donate-popup .donate-wrapper form .form-footer #btn-continue-donate:hover {
-  color: #fff;
-  background-color: #3F51B5;
-}
-
-.login-popup {
-  display: none;
-  position: fixed;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-.login-popup.show {
-  display: block;
-}
-.login-popup.closing {
-  background-color: transparent;
-}
-.login-popup .login-wrapper {
-  display: none;
-  position: relative;
-  margin: 80px auto 0;
-  padding: 60px 40px;
-  background-color: #019BC2;
-}
-.login-popup .login-form {
-  max-width: 460px;
-  margin: auto;
-}
-.login-popup .login-form * {
-  color: #fff;
-}
-.login-popup .login-form *:first-child {
-  margin-top: 0;
-}
-.login-popup .login-form *:last-child {
-  margin-bottom: 0;
-}
-.login-popup .login-form h2 {
-  margin: 0 0 16px;
-}
-.login-popup .login-form p {
-  margin: 16px 0;
-}
-.login-popup .login-form a {
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
-  text-decoration: underline;
-}
-.login-popup .login-form #login-message {
-  width: -moz-fit-content;
-  width: fit-content;
-  transition: all 0.3s;
-  padding: 8px 0 4px;
-}
-.login-popup .login-form #login-message.success {
-  padding: 8px 12px 4px;
-  color: #223540;
-  background-color: aliceblue;
-  border-left: 3px solid #00c900;
-}
-.login-popup .login-form #login-message.failed {
-  padding: 8px 12px 4px;
-  color: #223540;
-  background-color: aliceblue;
-  border-left: 3px solid red;
-}
-.login-popup .login-form form {
-  margin: 40px 0;
-  max-width: 360px;
-}
-.login-popup .login-form form label {
-  margin-bottom: 6px;
-  display: block;
-}
-.login-popup .login-form form input[type=text], .login-popup .login-form form input[type=email], .login-popup .login-form form input[type=password] {
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 1rem;
-  border: 2px solid #fff;
-  color: #223540;
-  box-shadow: inset 3px 3px 3px 0px #d8e2f2;
-}
-.login-popup .login-form form .login-password {
-  margin-top: 20px;
-}
-.login-popup .login-form form .login-submit {
-  margin-top: 24px;
-  display: flex;
-  justify-content: right;
-}
-.login-popup .login-form form .login-submit button[type=submit], .login-popup .login-form form .login-submit input[type=submit] {
-  position: relative;
-  padding: 10px 40px 6px;
-  font-size: 1rem;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  color: #019BC2;
-  border: 2px solid #fff;
-  background-color: #fff;
-  transition: all 0.2s;
-}
-.login-popup .login-form form .login-submit button[type=submit]:hover, .login-popup .login-form form .login-submit input[type=submit]:hover {
-  color: #fff;
-  background-color: #019BC2;
-}
-.login-popup .login-form form .login-submit .dv-spinner {
-  display: none;
-  position: absolute;
-  left: -45px;
-  top: 4px;
-}
-.login-popup #btn-close-login-popup {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  display: flex;
-  padding: 0;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  background: none;
-  font-size: 1rem;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.login-popup #btn-close-login-popup .close-icon {
-  width: 38px;
-  height: 35px;
-  padding: 6px;
-  font-size: 22px;
-  line-height: 1;
-  background-color: #fff;
-  color: #019BC2;
-}
-@media only screen and (max-width: 1024px) {
-  .login-popup .login-wrapper {
-    padding: 40px 24px;
-  }
-  .login-popup .login-wrapper .login-form form {
-    margin: 30px 0;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .login-popup .login-wrapper {
-    padding: 80px 24px 40px;
-  }
-}
-
 @media only screen and (max-width: 1500px) {
   #top-menu .top-menu-list .useful-links-list li {
     font-size: 0.875rem;
@@ -1688,28 +1388,6 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   .search-common-wrapper #btn-close-search {
     right: 20px;
   }
-  .donate-popup .donate-wrapper {
-    padding: 60px 24px 40px;
-  }
-  .donate-popup .donate-wrapper form .amount-options {
-    gap: 20px;
-  }
-  .donate-popup .donate-wrapper form .amount-options .amounts-list {
-    gap: 20px;
-  }
-  .donate-popup .donate-wrapper form .form-footer {
-    flex-direction: column-reverse;
-    gap: 20px;
-  }
-  .donate-popup .donate-wrapper form .form-footer #btn-continue-donate {
-    width: -moz-fit-content;
-    width: fit-content;
-  }
-  .donate-popup .donate-wrapper #btn-close-donate .close-icon {
-    width: 32px;
-    height: 30px;
-    font-size: 18px;
-  }
 }
 @media only screen and (max-width: 425px) {
   header.site-header.sticky #header-logo img.logo-full-color {
@@ -1965,202 +1643,6 @@ footer.site-footer .acknowledgement img.flag {
   }
   footer.site-footer .footer-wrapper .quick-links {
     gap: 30px;
-  }
-}
-.global-search-wrapper {
-  display: none;
-  position: fixed;
-  z-index: 10000;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  background-color: rgba(255, 255, 255, 0.95);
-  /*********************** Tablet ********************/
-  /********************** Mobile ********************/
-}
-.global-search-wrapper.active {
-  display: block;
-}
-.global-search-wrapper .container {
-  width: 100%;
-  position: relative;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column-reverse;
-}
-.global-search-wrapper .search-header {
-  margin-top: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.global-search-wrapper .search-header img.site-logo {
-  width: 206px;
-}
-.global-search-wrapper form.search-form {
-  margin: 20vh auto auto;
-  animation: search-slide-down 0.2s linear both;
-}
-.global-search-wrapper #btn-close-search {
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  color: #019BC2;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.global-search-wrapper #btn-close-search .close-icon {
-  margin-top: -4px;
-  width: 40px;
-  height: 38px;
-  padding: 10px 12px;
-  background-color: #019BC2;
-}
-@media only screen and (max-width: 1024px) {
-  .global-search-wrapper .search-header img.site-logo {
-    width: 150px;
-  }
-  .global-search-wrapper form.search-form {
-    margin: 10vh auto auto;
-  }
-  .global-search-wrapper form.search-form input[type=search] {
-    padding: 16px 20px 14px;
-    font-size: 1rem;
-  }
-  .global-search-wrapper form.search-form button.search-submit-btn {
-    padding: 12px 20px;
-  }
-  .global-search-wrapper #btn-close-search {
-    font-size: 1rem;
-  }
-  .global-search-wrapper #btn-close-search .close-icon {
-    width: 36px;
-    height: 34px;
-    padding: 8px;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .global-search-wrapper .search-header {
-    margin-top: 60px;
-  }
-  .global-search-wrapper .search-header img.site-logo {
-    width: 120px;
-  }
-  .global-search-wrapper form.search-form input[type=search] {
-    padding: 14px 16px 12px;
-    font-size: 1rem;
-  }
-  .global-search-wrapper form.search-form button.search-submit-btn {
-    padding: 10px 16px;
-  }
-  .global-search-wrapper form.search-form button.search-submit-btn .search-icon {
-    width: 18px;
-    height: 18px;
-  }
-  .global-search-wrapper form.search-form button.search-submit-btn .search-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-form.search-form {
-  max-width: 960px;
-  width: 100%;
-}
-form.search-form .form-wrapper {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border: 2px solid #019BC2;
-  border-radius: 4px;
-}
-form.search-form label {
-  width: 100%;
-}
-form.search-form input[type=search] {
-  min-height: 38px;
-  width: 100%;
-  padding: 20px 36px 18px;
-  font-size: 1.125rem;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  letter-spacing: 0.6px;
-  color: #019BC2;
-  border: 2px solid #fff;
-}
-form.search-form input[type=search]::-moz-placeholder {
-  color: #019BC2;
-}
-form.search-form input[type=search]::placeholder {
-  color: #019BC2;
-}
-form.search-form button.search-submit-btn {
-  padding: 20px 22px;
-  line-height: 1;
-  border: none;
-  background: none;
-}
-form.search-form button.search-submit-btn .search-icon {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-}
-form.search-form .form-suggest {
-  display: flex;
-  gap: 6px;
-}
-form.search-form .form-suggest ul.suggest-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  gap: 4px;
-}
-form.search-form .form-suggest ul.suggest-list li {
-  font-size: 0.875rem;
-}
-form.search-form .form-suggest ul.suggest-list li a {
-  color: #019BC2;
-  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-@media only screen and (max-width: 768px) {
-  form.search-form input[type=search] {
-    font-size: 1rem;
-  }
-  form.search-form input[type=submit] {
-    font-size: 1rem;
-  }
-}
-@media only screen and (max-width: 400px) {
-  form.search-form input[type=search] {
-    padding: 10px;
-  }
-  form.search-form input[type=submit] {
-    padding: 10px 24px;
-  }
-}
-@keyframes search-slide-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-200%);
-  }
-  50% {
-    opacity: 0.5;
-    transform: translateY(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 .search-results-wrapper {
@@ -5424,4 +4906,543 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
 .user-profile-section .user-message button:hover {
   background-color: #0090b4;
   border-color: #0090b4;
+}
+
+.donate-popup {
+  display: none;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.donate-popup.show {
+  display: block;
+}
+.donate-popup.closing {
+  background-color: transparent;
+}
+.donate-popup .donate-wrapper {
+  display: none;
+  position: relative;
+  margin: 80px auto 0;
+  padding: 70px 40px 60px;
+  background-color: #3F51B5;
+}
+.donate-popup .donate-wrapper p {
+  margin-top: 0;
+  color: #fff;
+  font-size: 1rem;
+}
+.donate-popup .donate-wrapper p a {
+  color: #fff;
+  text-decoration: underline;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
+}
+.donate-popup .donate-wrapper #btn-close-donate {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: all 0.2s;
+}
+.donate-popup .donate-wrapper #btn-close-donate:hover .close-icon {
+  background-color: #fff;
+}
+.donate-popup .donate-wrapper #btn-close-donate .close-icon {
+  margin-left: 6px;
+  width: 38px;
+  height: 35px;
+  padding: 6px;
+  font-size: 22px;
+  line-height: 1;
+  background-color: #99D6E9;
+  color: #3F51B5;
+}
+.donate-popup .donate-wrapper form {
+  margin: auto;
+  max-width: 1200px;
+}
+.donate-popup .donate-wrapper form fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.donate-popup .donate-wrapper form fieldset legend {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 1rem;
+}
+.donate-popup .donate-wrapper form .amount-options {
+  margin-bottom: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 28px;
+}
+.donate-popup .donate-wrapper form .amount-options .amounts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+}
+.donate-popup .donate-wrapper form .amount-options .amounts-list label {
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px 8px;
+  font-size: 1rem;
+  line-height: 1;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid #fff;
+  transition: all 0.3s;
+}
+.donate-popup .donate-wrapper form .amount-options .amounts-list label:focus-within {
+  color: #3F51B5;
+  background-color: #fff;
+}
+.donate-popup .donate-wrapper form .amount-options .amounts-list input[type=radio] {
+  display: none;
+}
+.donate-popup .donate-wrapper form .amount-options .amounts-list input[type=radio]:checked + label {
+  color: #3F51B5;
+  background-color: #fff;
+}
+.donate-popup .donate-wrapper form .amount-options input#other-amount {
+  width: 100%;
+  max-width: 292px;
+  height: 38px;
+  padding: 10px 12px 8px;
+  font-size: 1rem;
+  color: #fff;
+  border: 2px solid #fff;
+  background-color: #4F9BCE;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
+.donate-popup .donate-wrapper form .amount-options input#other-amount::-moz-placeholder {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
+  color: #fff;
+}
+.donate-popup .donate-wrapper form .amount-options input#other-amount::placeholder {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Medium";
+  color: #fff;
+}
+.donate-popup .donate-wrapper form .amount-options #btn-regular-gift {
+  display: inline-block;
+  padding: 10px 26px 8px;
+  font-size: 1rem;
+  line-height: 1;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  border: 2px solid #fff;
+  background-color: #3F51B5;
+  transition: all 0.2s;
+}
+.donate-popup .donate-wrapper form .amount-options #btn-regular-gift:hover {
+  color: #3F51B5;
+  background-color: #fff;
+}
+.donate-popup .donate-wrapper form .form-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.donate-popup .donate-wrapper form .form-footer #btn-continue-donate {
+  padding: 10px 22px 8px;
+  font-size: 1rem;
+  line-height: 1;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #3F51B5;
+  border: 2px solid #fff;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+.donate-popup .donate-wrapper form .form-footer #btn-continue-donate:hover {
+  color: #fff;
+  background-color: #3F51B5;
+}
+@media only screen and (max-width: 600px) {
+  .donate-popup .donate-wrapper {
+    padding: 60px 24px 40px;
+  }
+  .donate-popup .donate-wrapper form .amount-options {
+    gap: 20px;
+  }
+  .donate-popup .donate-wrapper form .amount-options .amounts-list {
+    gap: 20px;
+  }
+  .donate-popup .donate-wrapper form .form-footer {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+  .donate-popup .donate-wrapper form .form-footer #btn-continue-donate {
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .donate-popup .donate-wrapper #btn-close-donate .close-icon {
+    width: 32px;
+    height: 30px;
+    font-size: 18px;
+  }
+}
+
+.global-search-wrapper {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  /*********************** Tablet ********************/
+  /********************** Mobile ********************/
+}
+.global-search-wrapper.active {
+  display: block;
+}
+.global-search-wrapper .container {
+  width: 100%;
+  position: relative;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.global-search-wrapper .search-header {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.global-search-wrapper .search-header img.site-logo {
+  width: 206px;
+}
+.global-search-wrapper form.search-form {
+  margin: 20vh auto auto;
+  animation: search-slide-down 0.2s linear both;
+}
+.global-search-wrapper #btn-close-search {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #019BC2;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.global-search-wrapper #btn-close-search .close-icon {
+  margin-top: -4px;
+  width: 40px;
+  height: 38px;
+  padding: 10px 12px;
+  background-color: #019BC2;
+}
+@media only screen and (max-width: 1024px) {
+  .global-search-wrapper .search-header img.site-logo {
+    width: 150px;
+  }
+  .global-search-wrapper form.search-form {
+    margin: 10vh auto auto;
+  }
+  .global-search-wrapper form.search-form input[type=search] {
+    padding: 16px 20px 14px;
+    font-size: 1rem;
+  }
+  .global-search-wrapper form.search-form button.search-submit-btn {
+    padding: 12px 20px;
+  }
+  .global-search-wrapper #btn-close-search {
+    font-size: 1rem;
+  }
+  .global-search-wrapper #btn-close-search .close-icon {
+    width: 36px;
+    height: 34px;
+    padding: 8px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .global-search-wrapper .search-header {
+    margin-top: 60px;
+  }
+  .global-search-wrapper .search-header img.site-logo {
+    width: 120px;
+  }
+  .global-search-wrapper form.search-form input[type=search] {
+    padding: 14px 16px 12px;
+    font-size: 1rem;
+  }
+  .global-search-wrapper form.search-form button.search-submit-btn {
+    padding: 10px 16px;
+  }
+  .global-search-wrapper form.search-form button.search-submit-btn .search-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .global-search-wrapper form.search-form button.search-submit-btn .search-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+form.search-form {
+  max-width: 960px;
+  width: 100%;
+}
+form.search-form .form-wrapper {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #019BC2;
+  border-radius: 4px;
+}
+form.search-form label {
+  width: 100%;
+}
+form.search-form input[type=search] {
+  min-height: 38px;
+  width: 100%;
+  padding: 20px 36px 18px;
+  font-size: 1.125rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  letter-spacing: 0.6px;
+  color: #019BC2;
+  border: 2px solid #fff;
+}
+form.search-form input[type=search]::-moz-placeholder {
+  color: #019BC2;
+}
+form.search-form input[type=search]::placeholder {
+  color: #019BC2;
+}
+form.search-form button.search-submit-btn {
+  padding: 20px 22px;
+  line-height: 1;
+  border: none;
+  background: none;
+}
+form.search-form button.search-submit-btn .search-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+form.search-form .form-suggest {
+  display: flex;
+  gap: 6px;
+}
+form.search-form .form-suggest ul.suggest-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 4px;
+}
+form.search-form .form-suggest ul.suggest-list li {
+  font-size: 0.875rem;
+}
+form.search-form .form-suggest ul.suggest-list li a {
+  color: #019BC2;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media only screen and (max-width: 768px) {
+  form.search-form input[type=search] {
+    font-size: 1rem;
+  }
+  form.search-form input[type=submit] {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 400px) {
+  form.search-form input[type=search] {
+    padding: 10px;
+  }
+  form.search-form input[type=submit] {
+    padding: 10px 24px;
+  }
+}
+@keyframes search-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.login-popup {
+  display: none;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.login-popup.show {
+  display: block;
+}
+.login-popup.closing {
+  background-color: transparent;
+}
+.login-popup .login-wrapper {
+  display: none;
+  position: relative;
+  margin: 80px auto 0;
+  padding: 60px 40px;
+  background-color: #019BC2;
+}
+.login-popup .login-form {
+  max-width: 460px;
+  margin: auto;
+}
+.login-popup .login-form * {
+  color: #fff;
+}
+.login-popup .login-form *:first-child {
+  margin-top: 0;
+}
+.login-popup .login-form *:last-child {
+  margin-bottom: 0;
+}
+.login-popup .login-form h2 {
+  margin: 0 0 16px;
+}
+.login-popup .login-form p {
+  margin: 16px 0;
+}
+.login-popup .login-form a {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
+  text-decoration: underline;
+}
+.login-popup .login-form #login-message {
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: all 0.3s;
+  padding: 8px 0 4px;
+}
+.login-popup .login-form #login-message.success {
+  padding: 8px 12px 4px;
+  color: #223540;
+  background-color: aliceblue;
+  border-left: 3px solid #00c900;
+}
+.login-popup .login-form #login-message.failed {
+  padding: 8px 12px 4px;
+  color: #223540;
+  background-color: aliceblue;
+  border-left: 3px solid red;
+}
+.login-popup .login-form form {
+  margin: 40px 0;
+  max-width: 360px;
+}
+.login-popup .login-form form label {
+  margin-bottom: 6px;
+  display: block;
+}
+.login-popup .login-form form input[type=text], .login-popup .login-form form input[type=email], .login-popup .login-form form input[type=password] {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 2px solid #fff;
+  color: #223540;
+  box-shadow: inset 3px 3px 3px 0px #d8e2f2;
+}
+.login-popup .login-form form .login-password {
+  margin-top: 20px;
+}
+.login-popup .login-form form .login-submit {
+  margin-top: 24px;
+  display: flex;
+  justify-content: right;
+}
+.login-popup .login-form form .login-submit button[type=submit], .login-popup .login-form form .login-submit input[type=submit] {
+  position: relative;
+  padding: 10px 40px 6px;
+  font-size: 1rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #019BC2;
+  border: 2px solid #fff;
+  background-color: #fff;
+  transition: all 0.2s;
+}
+.login-popup .login-form form .login-submit button[type=submit]:hover, .login-popup .login-form form .login-submit input[type=submit]:hover {
+  color: #fff;
+  background-color: #019BC2;
+}
+.login-popup .login-form form .login-submit .dv-spinner {
+  display: none;
+  position: absolute;
+  left: -45px;
+  top: 4px;
+}
+.login-popup #btn-close-login-popup {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.login-popup #btn-close-login-popup .close-icon {
+  width: 38px;
+  height: 35px;
+  padding: 6px;
+  font-size: 22px;
+  line-height: 1;
+  background-color: #fff;
+  color: #019BC2;
+}
+@media only screen and (max-width: 1024px) {
+  .login-popup .login-wrapper {
+    padding: 40px 24px;
+  }
+  .login-popup .login-wrapper .login-form form {
+    margin: 30px 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .login-popup .login-wrapper {
+    padding: 80px 24px 40px;
+  }
 }
