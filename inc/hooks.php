@@ -128,6 +128,9 @@ function dv_hide_admin_bar_for_member_role($show) {
 }
 add_filter('show_admin_bar', 'dv_hide_admin_bar_for_member_role');
 
+/**
+ * Customize WP admin login logo
+ */
 function dv_custom_wp_login_logo() { 
     ?>
     <style type="text/css">
@@ -142,6 +145,9 @@ function dv_custom_wp_login_logo() {
 }
 add_action('login_enqueue_scripts', 'dv_custom_wp_login_logo');
 
+/**
+ * Chnage WP admin login logo URL
+ */
 function dv_custom_wp_login_logo_url() {
     return home_url();
 }

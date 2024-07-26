@@ -15,10 +15,22 @@ get_header();
 $queried_object = get_queried_object();
 $taxonomy = !empty( $queried_object )? $queried_object->taxonomy : 'category';
 
-$post_cat_terms = get_terms( array(
+$post_terms = get_terms( array(
     'taxonomy'   => $taxonomy,
     'hide_empty' => true,
 ));
+$post_cat_terms = array();
+$child_terms = array();
+if( !empty($post_terms) && !is_wp_error($post_terms) ){
+    foreach ($post_terms as $term) {
+        if ($term->parent == 0) {
+            $post_cat_terms[] = $term;
+        }
+        else {
+            $child_terms[$term->parent][] = $term;
+        }
+    }
+}
 
 $description = get_the_archive_description();
 $featured_image = get_field('featured_image', get_queried_object());
@@ -64,6 +76,17 @@ $posts_query = new WP_Query($args);
                             $term_link = get_term_link($term); ?>
                             <li>
                                 <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
+                                <?php if (isset($child_terms[$term->term_id]) && !empty($child_terms[$term->term_id])): ?>
+                                    <ul class="child-terms">
+                                    <?php foreach ($child_terms[$term->term_id] as $child_term): ?>
+                                        <li>
+                                            <a href="<?php echo esc_url(get_term_link($child_term)); ?>">
+                                                <?php echo $child_term->name ?? ''; ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
                             </li>
                         <?php endforeach; ?>
                         </ul>

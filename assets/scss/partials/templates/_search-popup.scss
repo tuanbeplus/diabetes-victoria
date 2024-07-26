@@ -53,6 +53,24 @@
             background-color: $primary_color;
         }
     }
+    /*********************** Laptop ********************/
+    @media only screen and (max-width: 1440px) {
+        .search-header {
+            img.site-logo {
+                width: 150px;
+            }
+        }
+        form.search-form {
+            max-width: 800px;
+            input[type=search] {
+                padding: 16px 16px 14px;
+                font-size: 1rem;
+            }
+            button.search-submit-btn {
+                padding: 16px;
+            }
+        }
+    }
     /*********************** Tablet ********************/
     @media only screen and (max-width: 1024px) {
         .search-header {
@@ -64,7 +82,6 @@
             margin: 10vh auto auto;
             input[type=search] {
                 padding: 16px 20px 14px;
-                font-size: 1rem;
             }
             button.search-submit-btn {
                 padding: 12px 20px;

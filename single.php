@@ -13,6 +13,7 @@ $post_content = get_the_content();
 // merge all term of taxonomy register for post type
 $taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
 $post_terms = array();
+$child_terms = array();
 if( !empty( $taxonomies ) ){
     foreach ($taxonomies as $tax_key => $taxonomy) {
         $cat_terms = get_terms( array(
@@ -22,7 +23,12 @@ if( !empty( $taxonomies ) ){
 
         if( !empty($cat_terms) && !is_wp_error($cat_terms) ){
             foreach ($cat_terms as $key => $term) {
-                $post_terms[] = $term;
+                if ($term->parent == 0) {
+                    $post_terms[] = $term;
+                }
+                else {
+                    $child_terms[$term->parent][] = $term;
+                }
             }
         }
     }
@@ -71,6 +77,17 @@ echo '} </style>';
                             $term_link = get_term_link($term); ?>
                             <li>
                                 <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
+                                <?php if (isset($child_terms[$term->term_id]) && !empty($child_terms[$term->term_id])): ?>
+                                    <ul class="child-terms">
+                                    <?php foreach ($child_terms[$term->term_id] as $child_term): ?>
+                                        <li>
+                                            <a href="<?php echo esc_url(get_term_link($child_term)); ?>">
+                                                <?php echo $child_term->name ?? ''; ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
                             </li>
                         <?php endforeach; ?>
                         </ul>

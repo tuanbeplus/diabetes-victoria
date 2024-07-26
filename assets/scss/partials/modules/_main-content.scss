@@ -66,6 +66,7 @@ section.main-content {
         margin: 0 auto;
         padding: 0 15px;
         display: flex;
+        justify-content: space-between;
         flex-direction: row-reverse;
         gap: 66px;
         &.has-sidebar {
@@ -344,7 +345,7 @@ section.main-content {
 }
 
 /************************ Laptop *************************/
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1440px) {
     section.main-content {
         .main-content-inner {
             gap: 30px;
@@ -352,6 +353,9 @@ section.main-content {
                 .__content {
                     .__title {
                         font-size: 2rem;
+                    }
+                    h2 {
+                        font-size: 1.875rem;
                     }
                 }
             }

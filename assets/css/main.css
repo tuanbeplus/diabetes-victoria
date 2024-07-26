@@ -528,17 +528,22 @@ section.post-title h1 {
 
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
+  h1 {
+    font-size: 2.125rem;
+  }
   .container {
     max-width: 1266px;
   }
   .breadcrumb {
     padding: 24px 0 20px;
   }
+  .posts-list {
+    -moz-column-gap: 50px;
+         column-gap: 50px;
+    row-gap: 60px;
+  }
 }
 @media only screen and (max-width: 1200px) {
-  h1 {
-    font-size: 2.125rem;
-  }
   .container {
     max-width: 1100px;
   }
@@ -957,6 +962,11 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+@media only screen and (max-width: 1440px) {
+  .header-inner .users-action * {
+    font-size: 0.875rem;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .header-inner .users-action {
     display: none;
@@ -1130,6 +1140,9 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   header.site-header.sticky #top-menu {
     display: none;
   }
+  header.site-header.sticky .header-inner {
+    padding: 16px 0 10px;
+  }
   header.site-header.sticky nav.breadcrumb {
     display: none;
   }
@@ -1155,19 +1168,23 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     font-size: 1rem;
   }
   .header-inner {
-    padding: 20px 0 16px;
+    padding: 16px 0 10px;
   }
   #header-logo img {
-    width: 190px;
+    width: 132px;
   }
   nav#site-navigation {
-    padding-bottom: 12px;
+    padding-bottom: 8px;
   }
   nav#site-navigation ul#primary-menu-list {
     flex-wrap: wrap;
   }
   nav#site-navigation ul#primary-menu-list li.menu-item {
-    font-size: 1rem;
+    font-size: 0.938rem;
+  }
+  nav#site-navigation ul#primary-menu-list li.menu-item-has-children::after {
+    width: 15px;
+    height: 14px;
   }
 }
 @media only screen and (max-width: 1340px) {
@@ -3275,9 +3292,9 @@ body .socials-share-wrapper .share-content .essb_links li a {
     transform: scale(1);
   }
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1440px) {
   .latest-posts .posts-wrapper .heading {
-    font-size: 2.188rem;
+    font-size: 2rem;
   }
 }
 /*************************** Tablet **************************/
@@ -3449,6 +3466,7 @@ section.main-content .main-content-inner {
   margin: 0 auto;
   padding: 0 15px;
   display: flex;
+  justify-content: space-between;
   flex-direction: row-reverse;
   gap: 66px;
 }
@@ -3713,12 +3731,15 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   }
 }
 /************************ Laptop *************************/
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1440px) {
   section.main-content .main-content-inner {
     gap: 30px;
   }
   section.main-content .main-content-inner .content-wrapper .__content .__title {
     font-size: 2rem;
+  }
+  section.main-content .main-content-inner .content-wrapper .__content h2 {
+    font-size: 1.875rem;
   }
 }
 /************************ Tablet ************************/
@@ -5112,6 +5133,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   bottom: 0;
   margin: auto;
   background-color: rgba(255, 255, 255, 0.95);
+  /*********************** Laptop ********************/
   /*********************** Tablet ********************/
   /********************** Mobile ********************/
 }
@@ -5158,6 +5180,21 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   padding: 10px 12px;
   background-color: #019BC2;
 }
+@media only screen and (max-width: 1440px) {
+  .global-search-wrapper .search-header img.site-logo {
+    width: 150px;
+  }
+  .global-search-wrapper form.search-form {
+    max-width: 800px;
+  }
+  .global-search-wrapper form.search-form input[type=search] {
+    padding: 16px 16px 14px;
+    font-size: 1rem;
+  }
+  .global-search-wrapper form.search-form button.search-submit-btn {
+    padding: 16px;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .global-search-wrapper .search-header img.site-logo {
     width: 150px;
@@ -5167,7 +5204,6 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   }
   .global-search-wrapper form.search-form input[type=search] {
     padding: 16px 20px 14px;
-    font-size: 1rem;
   }
   .global-search-wrapper form.search-form button.search-submit-btn {
     padding: 12px 20px;

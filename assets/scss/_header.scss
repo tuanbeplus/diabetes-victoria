@@ -290,6 +290,11 @@ header.site-header {
             text-decoration: underline;
             text-underline-offset: 2px;
         }
+        @media only screen and (max-width: 1440px) {
+            * {
+                font-size: 0.875rem;
+            }
+        }
         @media only screen and (max-width: 1024px) {
             display: none;
         }
@@ -484,6 +489,9 @@ nav#site-navigation {
             #top-menu {
                 display: none;
             }
+            .header-inner{
+                padding: 16px 0 10px;
+            }
             nav.breadcrumb {
                 display: none;
             }
@@ -515,19 +523,23 @@ nav#site-navigation {
         }
     }
     .header-inner{
-        padding: 20px 0 16px;
+        padding: 16px 0 10px;
     }
     #header-logo {
         img {
-            width: 190px;
+            width: 132px;
         }
     }
     nav#site-navigation {
-        padding-bottom: 12px;
+        padding-bottom: 8px;
         ul#primary-menu-list {
             flex-wrap: wrap;
             li.menu-item {
-                font-size: 1rem;
+                font-size: 0.938rem;
+            }
+            li.menu-item-has-children::after {
+                width: 15px;
+                height: 14px;
             }
         } 
     }

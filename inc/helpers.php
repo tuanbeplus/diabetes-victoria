@@ -121,7 +121,7 @@ function dv_clean_html_content_editor($html_string) {
 /**
  * Get the Summary from content of Post, Page, Custom post type
  * 
- * @param string $post_id    Post ID
+ * @param string/int $post_id    Post ID
  *
  * @return String the Summary
  * 

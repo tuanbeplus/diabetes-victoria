@@ -591,7 +591,7 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
     dv_close_members_login_popup();
   });
-  // Show propagation login wrapper
+  // Stop propagation login wrapper
   $(document).on('click', '#members-login-area .login-wrapper', function (e) {
     e.stopPropagation();
   });
