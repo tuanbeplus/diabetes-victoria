@@ -397,6 +397,18 @@ nav#site-navigation {
             list-style: none;
             white-space: nowrap;
             font-family: $primary_font_bold;
+            &.current_page_item {
+                > a {
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                }
+            }
+            &.current-menu-item {
+                > a {
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                }
+            }
             a {
                 color: $dv_white;
             }

@@ -83,7 +83,7 @@ function dv_load_more_latest_posts() {
         <li class="post post-<?php echo $post->ID; ?>">
             <div class="__thumb">
                 <?php if (!empty(get_the_post_thumbnail($post->ID))): ?>
-                    <?php echo get_the_post_thumbnail($post->ID, 'medium_large'); ?>
+                    <?php echo get_the_post_thumbnail($post->ID, 'medium_large', array('loading' => 'eager')); ?>
                 <?php else: ?>
                     <?php dv_the_post_thumbnail_default($post->ID) ?>
                 <?php endif; ?>

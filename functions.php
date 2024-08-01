@@ -111,16 +111,6 @@ function dv_theme_widgets_init() {
 add_action( 'widgets_init', 'dv_theme_widgets_init' );
 
 /**
- * Custom Post Type
- */
-require get_template_directory() . '/inc/custom-post-type.php';
-
-/**
- * CPT Recipe
- */
-require get_template_directory() . '/inc/cpt-recipe.php';
-
-/**
  * Custom static functions
  */
 require get_template_directory() . '/inc/statics.php';
@@ -144,3 +134,18 @@ require get_template_directory() . '/inc/ajax.php';
  * DV functions
  */
 require get_template_directory() . '/inc/dv-functions.php';
+
+/**
+ * CPT Public Recipes
+ */
+require get_template_directory() . '/inc/custom-post-types/recipes.php';
+
+/**
+ * CPT Member Recipes
+ */
+require get_template_directory() . '/inc/custom-post-types/member-recipes.php';
+
+/**
+ * CPT Member Articles
+ */
+require get_template_directory() . '/inc/custom-post-types/member-articles.php';

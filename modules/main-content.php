@@ -108,7 +108,7 @@ if( get_row_layout() == 'main_content' ):
                         <div class="__content">
                             <?php if(!empty($content_title)) echo '<h2 class="__title">'.$content_title.'</h2>'; ?>
 
-                            <?php echo dv_clean_html_content_editor($content_editor); ?>
+                            <?php echo $content_editor; ?>
 
                             <?php if ($bottom_cta['visibility'] == true && !empty($bottom_cta['link'])): ?>
                                 <a class="__cta" href="<?php echo $bottom_cta['link']; ?>" role="button">

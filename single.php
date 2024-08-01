@@ -36,6 +36,9 @@ if( !empty( $taxonomies ) ){
 
 $post_type = get_post_type_object(get_post_type());
 $post_type_label = $post_type->label ?? 'Posts';
+if ($post_type == 'recipe') {
+    $post_type_label = 'Recipes';
+} 
 
 // Post brand css variable
 $brand_color = get_field('brand_color');
@@ -159,9 +162,14 @@ echo '} </style>';
         <div class="content-wrapper">
             <div class="__content">
                 <h2 class="__title">
-                    <?php echo is_singular('post') ? 'Blog' : ucfirst(get_post_type()); ?>
+                    <?php if (is_singular('recipe') || is_singular('member_recipes')) {
+                            echo 'Recipe';
+                        }
+                        else {
+                            echo 'Article';
+                        } ?>
                 </h2>
-                <?php echo do_shortcode(dv_clean_html_content_editor($post_content)); ?>
+                <?php echo do_shortcode($post_content); ?>
             </div>
         </div>
     </div>

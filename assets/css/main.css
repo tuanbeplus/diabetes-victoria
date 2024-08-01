@@ -132,12 +132,23 @@ div.table-wrapper[role=region] {
 }
 
 table {
-  min-width: 500px;
   font-size: 0.875rem;
   line-height: 140%;
   border: 3px solid;
   border-color: #223540;
   border-collapse: collapse;
+}
+table.aligncenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.alignright {
+  margin-left: auto;
+  margin-right: 0;
+}
+table.alignleft {
+  margin-left: 0;
+  margin-right: auto;
 }
 table tr:first-child {
   border-bottom: 3px solid;
@@ -149,11 +160,9 @@ table tr th, table tr td {
   max-width: 300px;
   padding: 14px 16px 10px;
   border: 1px solid;
-  text-align: right;
 }
 table tr th:first-child, table tr td:first-child {
   min-width: 150px;
-  text-align: left;
 }
 
 .container {
@@ -434,7 +443,7 @@ section.post-title h1 {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px;
 }
 .posts-list .post:hover .__thumb img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 .posts-list .post .__thumb {
   overflow: hidden;
@@ -445,7 +454,7 @@ section.post-title h1 {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 .posts-list .post .post-meta {
   padding: 18px 26px 24px;
@@ -655,11 +664,15 @@ section.post-title h1 {
     padding: 18px 0 16px;
   }
   .posts-list {
-    grid-template-columns: repeat(1, 1fr);
     row-gap: 24px;
   }
   .posts-list .post .__title {
     font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .posts-list {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 @font-face {
@@ -1068,6 +1081,14 @@ nav#site-navigation ul#primary-menu-list li.menu-item {
   list-style: none;
   white-space: nowrap;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
+nav#site-navigation ul#primary-menu-list li.menu-item.current_page_item > a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+nav#site-navigation ul#primary-menu-list li.menu-item.current-menu-item > a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 nav#site-navigation ul#primary-menu-list li.menu-item a {
   color: #ffffff;
@@ -2648,7 +2669,7 @@ body .socials-share-wrapper .share-content .essb_links li a {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  transition: all 0.3s;
+  transition: all 0.6s;
 }
 .key-cards .cards-list .card .card-img img:hover {
   transform: scale(1.1);
@@ -2707,8 +2728,9 @@ body .socials-share-wrapper .share-content .essb_links li a {
   display: inline-block;
   padding: 10px 20px 8px;
   font-size: 1rem;
-  line-height: 1;
+  line-height: 120%;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  text-align: center;
   color: #fff;
   background-color: #019BC2;
   border: 2px solid transparent;
@@ -2717,6 +2739,9 @@ body .socials-share-wrapper .share-content .essb_links li a {
 
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
+  .key-cards .cards-list {
+    gap: 50px;
+  }
   .key-cards .cards-list .card .card-img {
     height: 300px;
   }
@@ -2724,6 +2749,9 @@ body .socials-share-wrapper .share-content .essb_links li a {
 @media only screen and (max-width: 1200px) {
   .key-cards .title {
     font-size: 2.188rem;
+  }
+  .key-cards .cards-list {
+    gap: 40px;
   }
   .key-cards .cards-list .card .card-img {
     height: 260px;
@@ -3542,6 +3570,10 @@ section.main-content .main-content-inner .content-wrapper .__content .__cta {
   text-decoration: none;
   font-size: 1rem;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  transition: all 0.3s;
+}
+section.main-content .main-content-inner .content-wrapper .__content .__cta:hover {
+  background-color: #007995;
 }
 section.main-content .main-content-inner .sidebar {
   max-width: 300px;

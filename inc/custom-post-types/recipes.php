@@ -10,19 +10,19 @@ function dv_recipe_register() {
 	if(isset($cpt_slug) && $cpt_slug != ''){
 		$cpt_slug = $cpt_slug;
 	} else {
-		$cpt_slug = 'recipe';
+		$cpt_slug = 'recipes';
 	}
 
 	$labels = array(
-		'name'               => esc_html__( 'Recipes', 'diabetes-victoria' ),
-		'singular_name'      => esc_html__( 'Recipe', 'diabetes-victoria' ),
+		'name'               => esc_html__( 'Public Recipes', 'diabetes-victoria' ),
+		'singular_name'      => esc_html__( 'Public Recipe', 'diabetes-victoria' ),
 		'add_new'            => esc_html__( 'Add New', 'diabetes-victoria' ),
-		'add_new_item'       => esc_html__( 'Add New Recipe', 'diabetes-victoria' ),
-		'all_items'          => esc_html__( 'All Recipes', 'diabetes-victoria' ),
+		'add_new_item'       => esc_html__( 'Add New Public Recipe', 'diabetes-victoria' ),
+		'all_items'          => esc_html__( 'All Public Recipes', 'diabetes-victoria' ),
 		'edit_item'          => esc_html__( 'Edit Recipe', 'diabetes-victoria' ),
-		'new_item'           => esc_html__( 'Add New Recipe', 'diabetes-victoria' ),
+		'new_item'           => esc_html__( 'Add New Public Recipe', 'diabetes-victoria' ),
 		'view_item'          => esc_html__( 'View Item', 'diabetes-victoria' ),
-		'search_items'       => esc_html__( 'Search Recipes', 'diabetes-victoria' ),
+		'search_items'       => esc_html__( 'Search Public Recipes', 'diabetes-victoria' ),
 		'not_found'          => esc_html__( 'No recipe(s) found', 'diabetes-victoria' ),
 		'not_found_in_trash' => esc_html__( 'No recipe(s) found in trash', 'diabetes-victoria' )
 	);
@@ -37,8 +37,6 @@ function dv_recipe_register() {
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
 		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'comments', 'custom-fields')
   	);
-
-  add_filter( 'enter_title_here',  'dv_recipe_change_default_title');
 
   register_post_type( 'recipe' , $args );
 }
@@ -75,19 +73,6 @@ function dv_recipe_taxonomy() {
 
 }
 add_action('init', 'dv_recipe_taxonomy', 1);
-
-/**
- * Change recipe's title placeholder
- * 
- */
-function dv_recipe_change_default_title( $title ) {
-	$screen = get_current_screen();
-
-	if ( 'recipe' == $screen->post_type )
-		$title = esc_html__( "Enter the recipe's name here", 'diabetes-victoria' );
-
-	return $title;
-}
 
 /**
  * Add custom columns to Recipe table

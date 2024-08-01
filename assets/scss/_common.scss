@@ -153,12 +153,23 @@ div.table-wrapper[role=region] {
 }
 
 table {
-    min-width: 500px;
     font-size: 0.875rem;
     line-height: 140%;
     border: 3px solid;
     border-color: $dv_black;
     border-collapse: collapse;
+    &.aligncenter {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    &.alignright {
+        margin-left: auto;
+        margin-right: 0;
+    }
+    &.alignleft {
+        margin-left: 0;
+        margin-right: auto;
+    }
     tr {
         &:first-child {
             border-bottom: 3px solid;
@@ -170,10 +181,8 @@ table {
             max-width: 300px;
             padding: 14px 16px 10px;
             border: 1px solid;
-            text-align: right;
             &:first-child {
                 min-width: 150px;
-                text-align: left;
             }
         }
     }
@@ -453,7 +462,7 @@ section.post-title {
         &:hover {
             box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px;
             .__thumb img {
-                transform: scale(1.05);
+                transform: scale(1.06);
             }
         }
         .__thumb {
@@ -463,7 +472,7 @@ section.post-title {
                 display: block;
                 height: 100%;
                 object-fit: cover;
-                transition: all 0.3s;
+                transition: all 0.5s;
             }
         }
         .post-meta {
@@ -683,13 +692,17 @@ section.post-title {
         padding: 18px 0 16px;
     }
     .posts-list {
-        grid-template-columns: repeat(1, 1fr);
         row-gap: 24px;
         .post {
             .__title {
                 font-size: 1rem;
             }
         }
+    }
+}
+@media only screen and (max-width: 500px) {
+    .posts-list {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 

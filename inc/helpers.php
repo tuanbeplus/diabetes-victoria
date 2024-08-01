@@ -107,15 +107,15 @@ function dv_breadcrumb() {
  * 
  */
 function dv_clean_html_content_editor($html_string) {
-    $clean_html = preg_replace_callback(
-        '/<(table|tbody|tr|th|td|p|ul|ol|span)([^>]*)>/',
-        function ($matches) {
-            return "<{$matches[1]}>";
-        },
-        $html_string
-    );
-
-    return $clean_html;
+//     $clean_html = preg_replace_callback(
+//         '/<(table|tbody|tr|th|td|p|ul|ol|span)([^>]*)>/',
+//         function ($matches) {
+//             return "<{$matches[1]}>";
+//         },
+//         $html_string
+//     );
+	
+    return $html_string;
 }
 
 /**

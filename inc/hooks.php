@@ -32,7 +32,24 @@ add_action( 'init', function() {
  */
 add_filter('register_post_type_args', function ($args, $post_type) {
     if ($post_type === 'post') {
-        $args['labels']['name'] = 'Blogs';
+        $args['labels']['name']               = 'Public Articles';
+        $args['labels']['singular_name']      = 'Article';
+        $args['labels']['add_new']            = 'Add New';
+        $args['labels']['add_new_item']       = 'Add New Article';
+        $args['labels']['edit_item']          = 'Edit Article';
+        $args['labels']['new_item']           = 'New Article';
+        $args['labels']['view_item']          = 'View Article';
+        $args['labels']['search_items']       = 'Search Articles';
+        $args['labels']['not_found']          = 'No articles found';
+        $args['labels']['not_found_in_trash'] = 'No articles found in Trash';
+        $args['labels']['all_items']          = 'All Articles';
+        $args['labels']['archives']           = 'Article Archives';
+        $args['labels']['insert_into_item']   = 'Insert into article';
+        $args['labels']['uploaded_to_this_item'] = 'Uploaded to this article';
+        $args['labels']['filter_items_list']  = 'Filter articles list';
+        $args['labels']['items_list_navigation'] = 'Articles list navigation';
+        $args['labels']['items_list']         = 'Articles list';
+        $args['menu_position'] = 7;
     }
     return $args;
 }, 10, 2);
@@ -73,7 +90,7 @@ function dv_strip_html_attributes_on_save($post_id) {
         add_action('save_post', 'dv_strip_html_attributes_on_save'); // Re-hook the function
     }
 }
-add_action('save_post', 'dv_strip_html_attributes_on_save');
+//add_action('save_post', 'dv_strip_html_attributes_on_save');
 
 /**
  * Add custom columns to Blogs table

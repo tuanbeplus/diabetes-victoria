@@ -87,7 +87,7 @@ if( get_row_layout() == 'key_cards' ):
                                 }
                                 #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .card-cta a:hover {
                                     color: <?php echo $brand_color; ?>!important;
-                                    box-shadow: inset 200px 0 0 0 #fff!important;
+                                    box-shadow: inset 400px 0 0 0 #fff!important;
                                 }
                             </style><!-- .Custom brand color -->
                         </li><!-- .Card -->

@@ -45,7 +45,7 @@
                 img {
                     height: 100%;
                     object-fit: cover;
-                    transition: all 0.3s;
+                    transition: all 0.6s;
                 }
                 img:hover {
                     transform: scale(1.1);
@@ -105,8 +105,9 @@
                     display: inline-block;
                     padding: 10px 20px 8px;
                     font-size: 1rem;
-                    line-height: 1;
+                    line-height: 120%;
                     font-family: $primary_font_bold;
+                    text-align: center;
                     color: #fff;
                     background-color: $primary_color;
                     border: 2px solid transparent;
@@ -121,6 +122,7 @@
 @media only screen and (max-width: 1440px) {
 	.key-cards {
         .cards-list {
+            gap: 50px;
             .card {
                 .card-img {
                     height: 300px;
@@ -135,6 +137,7 @@
             font-size: 2.188rem;
         }
         .cards-list {
+            gap: 40px;
             .card {
                 .card-img {
                     height: 260px;

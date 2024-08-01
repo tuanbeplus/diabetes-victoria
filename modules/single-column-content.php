@@ -18,7 +18,7 @@ if( get_row_layout() == 'single_column_content' ):
                 <div class="content-wrapper">
                     <div class="__content">
                         <?php if(!empty($title)) echo '<h2 class="__title">'.$title.'</h2>'; ?>
-                        <?php echo dv_clean_html_content_editor($content_editor); ?>
+                        <?php echo $content_editor; ?>
                     </div>
                 </div><!-- .Content -->
             </div>

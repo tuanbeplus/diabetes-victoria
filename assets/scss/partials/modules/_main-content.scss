@@ -139,6 +139,10 @@ section.main-content {
                     text-decoration: none;
                     font-size: 1rem;
                     font-family: $primary_font_bold;
+                    transition: all 0.3s;
+                    &:hover {
+                        background-color: $dv_dark;
+                    }
                 }
             }
         }
