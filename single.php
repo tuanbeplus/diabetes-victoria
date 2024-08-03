@@ -105,26 +105,25 @@ echo '} </style>';
             <?php else: ?>
                 <?php dv_the_post_thumbnail_default($post_id) ?>
             <?php endif; ?>
-            
-            <?php if( 
-                !empty( get_field('post_description') ) || 
-                !empty( get_field('organisation') ) || 
-                !empty( get_field('preparation') ) || 
-                !empty( get_field('cooking_time') ) || 
-                !empty( get_field('serves') ) || 
-                !empty( get_field('type_of_recipe') )
-            ): ?>
-            <div class="__content">
-                <?php
-                    if (is_singular('recipe')) {
-                        // Post info
-                        $organisation = get_field('organisation');
-                        $preparation = get_field('preparation');
-                        $cooking_time = get_field('cooking_time');
-                        $serves = get_field('serves');
-                        $type_of_recipe = get_field('type_of_recipe');
+            <?php
+            // Post info
+            $post_description = get_field('post_description');
+            $organisation = get_field('organisation');
+            $preparation = get_field('preparation');
+            $cooking_time = get_field('cooking_time');
+            $serves = get_field('serves');
+            $type_of_recipe = get_field('type_of_recipe');
 
-                        ?>
+            if( !empty($post_description) 
+                || !empty($organisation['org_name']) 
+                || !empty($organisation['org_link']) 
+                || !empty($preparation) 
+                || !empty($cooking_time) 
+                || !empty($serves) 
+                || !empty($type_of_recipe) 
+            ): ?>
+                <div class="__content">
+                    <?php if (is_singular('recipe') || is_singular('member_recipes')): ?>
                         <?php if (!empty($organisation['org_name'])): ?>
                             <p>
                                 <b>Organisation</b>: 
@@ -143,13 +142,9 @@ echo '} </style>';
                         <?php if (!empty($type_of_recipe)): ?>
                             <p><b>Type of recipe</b>: <?php echo $type_of_recipe; ?></p>
                         <?php endif; ?>
-                        <?php
-                    } else {
-                        $post_description = get_field('post_description');
-                        echo $post_description;
-                    }
-                ?>
-            </div>
+                    <?php else: echo $post_description; ?>
+                    <?php endif; ?>
+                </div>
             <?php endif; ?>
         </div>
     </div>

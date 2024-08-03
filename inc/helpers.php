@@ -171,14 +171,15 @@ add_filter( 'nav_menu_link_attributes', 'dv_wcag_nav_menu_link_attributes', 10, 
  *
  */
 function dv_the_post_thumbnail_default($post_id) {
-	// Recipes
-	if (get_post_type($post_id) == 'recipe') {
+	$post_type = get_post_type($post_id);
+	// Recipes & Member Recipes
+	if ($post_type == 'recipe' || $post_type == 'member_recipes') {
 		echo '<img src="'.DV_IMG_DIR .'recipe-feature-img.png"
 			alt="A man and woman sitting down to eat at a table set with a variety of dishes.">';
 	}
-	// Resources
-	elseif (get_post_type($post_id) == 'resource') {
-		$the_terms = get_the_terms($post_id, 'resource_categories');
+	// Articles
+	elseif ($post_type == 'post') {
+		$the_terms = get_the_terms($post_id, 'category');
 		$terms_slug = array();
 		if ($the_terms && ! is_wp_error( $the_terms )) {
 			foreach ( $the_terms as $term ) {
@@ -196,7 +197,6 @@ function dv_the_post_thumbnail_default($post_id) {
 				alt="A group of people stand together, smiling, holding a large speech bubble sign that reads We are here to help you! with the Diabetes Victoria logo on it">';
 		}
 	}
-	// Blogs
 	else {
 		echo '<img src="'.DV_IMG_DIR .'card-img-placeholder.png" 
 			alt="A group of people stand together, smiling, holding a large speech bubble sign that reads We are here to help you! with the Diabetes Victoria logo on it">';

@@ -210,7 +210,7 @@ body {
             width: 560px;
             padding: 32px;
             background-color: #fff;
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 30px;
             > h3 {
                 margin-top: 0;
                 float: left;
@@ -230,7 +230,45 @@ body {
                     }
                 }
             }
-        }    
+        }
+        .sharedaddy {
+            .sd-block {
+                margin-bottom: 0;
+                .sd-content {
+                    > ul {
+                        display: none;
+                    }
+                    .share-customize-link {
+                        display: none;
+                    }
+                    .sharing-hidden .inner{
+                        display: block!important;
+                        position: relative!important;
+                        border: none;
+                        box-shadow: none;
+                        margin: 0;
+                        padding: 8px 0 0;
+                        &::before, &::after {
+                            display: none;
+                        }
+                        ul li {
+                            margin: 0 12px 12px 0;
+                            a.sd-button {
+                                padding: 8px 12px 4px 12px;
+                                border-radius: 0;
+                                font-size: 0.875rem;
+                                font-family: $primary_font_medium;
+                                &::before {
+                                    margin-top: -3px;
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
     }
 }
 

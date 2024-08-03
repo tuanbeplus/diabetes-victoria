@@ -496,6 +496,12 @@ section.post-title {
                     border: 2px solid transparent;
                     cursor: pointer;
                 }
+                &:focus {
+                    outline: none;
+                    &::before {
+                        outline: -webkit-focus-ring-color auto 1px;
+                    }
+                }
             }
         }
     }

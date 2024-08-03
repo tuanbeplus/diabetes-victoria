@@ -444,7 +444,8 @@ section.main-content {
                     }
                     .__cta {
                         margin-top: 24px;
-                        padding: 10px 24px 8px;
+                        padding: 10px 22px 8px;
+                        font-size: 0.875rem;
                     }
                 }
             }
@@ -459,10 +460,15 @@ section.main-content {
 }
 
 /********************** Mobile ***********************/
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 430px) {
     section.main-content {
         .main-content-inner {
             .content-wrapper {
+                .__content {
+                    iframe {
+                        height: 200px!important;
+                    }
+                }
                 .wp-video {
                     height: 260px;
                     .mejs-container {

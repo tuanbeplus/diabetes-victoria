@@ -326,11 +326,14 @@ jQuery(document).ready(function ($) {
     $(document).on('click', '#btn-nav-bar', function(e){
         e.preventDefault()
         let nav_mobile = $('header nav#site-navigation')
+        let site_tools = $('#pojo-a11y-toolbar')
         if ($(this).hasClass('active')) {
             $(this).removeClass('active')
+            site_tools.show()
         }
         else {
             $(this).addClass('active')
+            site_tools.hide()
         }
         nav_mobile.toggleClass('active')
     });
