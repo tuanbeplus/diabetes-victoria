@@ -1,0 +1,82 @@
+// Single Post Type
+.author-profile-section {
+    padding-bottom: 60px;
+    .author-profile-wrapper {
+        display: flex;
+        gap: 50px;
+        width: 100%;
+        max-width: 1024px;
+        margin: auto;
+        padding: 40px;
+        background-color: #fff;
+        .profile-picture {
+            img {
+                width: 200px;
+                height: 200px;
+                border-radius: 100%;
+                object-fit: cover;
+            }
+        }
+        .info {
+            *:first-child {
+                margin-top: 0;
+            }
+            *:last-child {
+                margin-bottom: 0;
+            }
+            .__name {
+                margin-bottom: 14px;
+            }
+            .__qualifi {
+                margin-top: 14px;
+                font-family: $primary_font_demi;
+            }
+            .__bio {
+                *:last-child {
+                    margin-bottom: 0;
+                }
+                a {
+                    font-family: $primary_font_demi;
+                    color: var(--post-brand-color, #019BC2);
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        .author-profile-wrapper {
+            gap: 40px;
+            .profile-picture {
+                img {
+                    width: 160px;
+                    height: 160px;
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 600px) {
+        padding-bottom: 40px;
+        .author-profile-wrapper {
+            padding: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            text-align: center;
+            .profile-picture {
+                img {
+                    width: 120px;
+                    height: 120px;
+                }
+            }
+            .info {
+                .__name {
+                    font-size: 1.125rem;
+                }
+                .__bio {
+                    text-align: justify;
+                }
+            }
+        }
+    }
+}

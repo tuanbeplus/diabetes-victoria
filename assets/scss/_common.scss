@@ -477,6 +477,21 @@ section.post-title {
         }
         .post-meta {
             padding: 18px 26px 24px;
+            .__meta {
+                margin-bottom: 14px;
+                display: flex;
+                justify-content: space-between;
+                gap: 16px;
+                .term {
+                    text-align: right;
+                    font-family: $primary_font_demi;
+                    color: var(--post-brand-color, #019BC2);
+                }
+                .date {
+                    white-space: nowrap;
+                    color: #555;
+                }
+            }
         }
         .__title {
             font-size: 1.125rem;

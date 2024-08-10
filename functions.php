@@ -96,20 +96,6 @@ if ( ! function_exists( 'diabetes_victoria_theme_setup' ) ) {
 	add_action( 'after_setup_theme', 'diabetes_victoria_theme_setup' );
 }
 
-function dv_theme_widgets_init() {
-    // Register sidebar widget area
-    register_sidebar( array(
-        'name'          => __( 'In Your Language' ),
-        'id'            => 'languages-widget',
-        'description'   => 'Add widgets here to appear in Language module.',
-        // 'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        // 'after_widget'  => '</div>',
-        // 'before_title'  => '<h2 class="widget-title">',
-        // 'after_title'   => '</h2>',
-    ) );
-}
-add_action( 'widgets_init', 'dv_theme_widgets_init' );
-
 /**
  * Custom static functions
  */
@@ -136,7 +122,7 @@ require get_template_directory() . '/inc/ajax.php';
 require get_template_directory() . '/inc/dv-functions.php';
 
 /**
- * CPT Public Recipes
+ * CPT Recipes
  */
 require get_template_directory() . '/inc/custom-post-types/recipes.php';
 

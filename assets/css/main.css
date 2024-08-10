@@ -459,6 +459,21 @@ section.post-title h1 {
 .posts-list .post .post-meta {
   padding: 18px 26px 24px;
 }
+.posts-list .post .post-meta .__meta {
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.posts-list .post .post-meta .__meta .term {
+  text-align: right;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
+  color: var(--post-brand-color, #019BC2);
+}
+.posts-list .post .post-meta .__meta .date {
+  white-space: nowrap;
+  color: #555;
+}
 .posts-list .post .__title {
   font-size: 1.125rem;
   line-height: 130%;
@@ -967,14 +982,14 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
   justify-content: space-between;
   align-items: center;
 }
-.header-inner .users-action * {
+.header-inner .users-action > * {
   padding: 2px 10px 0 8px;
   font-size: 1rem;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
   color: #fff;
   border-right: 2px solid #fff;
 }
-.header-inner .users-action *:last-child {
+.header-inner .users-action > *:last-child {
   border: none;
 }
 .header-inner .users-action a {
@@ -2352,6 +2367,79 @@ body .socials-share-wrapper .sharedaddy .sd-block .sd-content .sharing-hidden .i
     left: -244px;
   }
 }
+.author-profile-section {
+  padding-bottom: 60px;
+}
+.author-profile-section .author-profile-wrapper {
+  display: flex;
+  gap: 50px;
+  width: 100%;
+  max-width: 1024px;
+  margin: auto;
+  padding: 40px;
+  background-color: #fff;
+}
+.author-profile-section .author-profile-wrapper .profile-picture img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.author-profile-section .author-profile-wrapper .info *:first-child {
+  margin-top: 0;
+}
+.author-profile-section .author-profile-wrapper .info *:last-child {
+  margin-bottom: 0;
+}
+.author-profile-section .author-profile-wrapper .info .__name {
+  margin-bottom: 14px;
+}
+.author-profile-section .author-profile-wrapper .info .__qualifi {
+  margin-top: 14px;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
+}
+.author-profile-section .author-profile-wrapper .info .__bio *:last-child {
+  margin-bottom: 0;
+}
+.author-profile-section .author-profile-wrapper .info .__bio a {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
+  color: var(--post-brand-color, #019BC2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@media only screen and (max-width: 1024px) {
+  .author-profile-section .author-profile-wrapper {
+    gap: 40px;
+  }
+  .author-profile-section .author-profile-wrapper .profile-picture img {
+    width: 160px;
+    height: 160px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .author-profile-section {
+    padding-bottom: 40px;
+  }
+  .author-profile-section .author-profile-wrapper {
+    padding: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+  }
+  .author-profile-section .author-profile-wrapper .profile-picture img {
+    width: 120px;
+    height: 120px;
+  }
+  .author-profile-section .author-profile-wrapper .info .__name {
+    font-size: 1.125rem;
+  }
+  .author-profile-section .author-profile-wrapper .info .__bio {
+    text-align: justify;
+  }
+}
+
 .hero-carousel {
   overflow: hidden;
   padding-top: var(--s-pd-top, 0);
@@ -3277,6 +3365,17 @@ body .socials-share-wrapper .sharedaddy .sd-block .sd-content .sharing-hidden .i
     padding-bottom: calc(var(--s-pd-bottom, 60px) * 0.6);
   }
 }
+.latest-posts.has-sidebar .container {
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+.latest-posts.has-sidebar .container .posts-wrapper .posts-list {
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  row-gap: 50px;
+}
 .latest-posts .posts-wrapper {
   max-width: 1024px;
   margin: 0 auto;
@@ -3629,6 +3728,32 @@ section.main-content .main-content-inner .sidebar .__heading {
   padding-bottom: 10px;
   border-bottom: 1px solid #fff;
 }
+section.main-content .main-content-inner .sidebar .__heading button {
+  margin: 0;
+  padding: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.063rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  border: none;
+  background-color: transparent;
+}
+section.main-content .main-content-inner .sidebar .__heading button.active .icon-chevron-down {
+  transform: rotate(-180deg);
+}
+section.main-content .main-content-inner .sidebar .__heading button .icon-chevron-down {
+  width: 15px;
+  height: 15px;
+  display: block;
+  transition: all 0.3s;
+}
+section.main-content .main-content-inner .sidebar .__heading button .icon-chevron-down svg {
+  width: 15px;
+  height: 15px;
+}
 section.main-content .main-content-inner .sidebar.sticky .sidebar-inner {
   position: sticky;
 }
@@ -3638,6 +3763,9 @@ section.main-content .main-content-inner .sidebar.sticky .sidebar-inner > *:firs
 section.main-content .main-content-inner .sidebar ul {
   margin: 16px 0;
   padding-left: 16px;
+}
+section.main-content .main-content-inner .sidebar ul.categories-list {
+  display: none;
 }
 section.main-content .main-content-inner .sidebar a {
   text-decoration: underline;
@@ -3709,6 +3837,15 @@ section.main-content .main-content-inner .sidebar .on-this-page ul.links-list li
 section.main-content .main-content-inner .sidebar .secondary-info {
   padding: 10px 30px 32px;
   background-color: var(--post-brand-color, #019BC2);
+}
+section.main-content .main-content-inner .sidebar .secondary-info.archive-categories ul li {
+  color: #fff;
+}
+section.main-content .main-content-inner .sidebar .secondary-info.archive-categories ul li a {
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 section.main-content .main-content-inner .sidebar .secondary-info .__heading {
   color: #fff;
@@ -5559,5 +5696,102 @@ form.search-form .form-suggest ul.suggest-list li a {
 @media only screen and (max-width: 768px) {
   .login-popup .login-wrapper {
     padding: 80px 24px 40px;
+  }
+}
+
+.contact-phones-popup {
+  display: none;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.contact-phones-popup.show {
+  display: block;
+}
+.contact-phones-popup.closing {
+  background-color: transparent;
+}
+.contact-phones-popup .contact-phones-wrapper {
+  display: none;
+  position: relative;
+  margin: 80px auto 0;
+  padding: 60px 40px;
+  background-color: #019BC2;
+}
+.contact-phones-popup .contact-phones-wrapper .inner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+}
+.contact-phones-popup .contact-phones-wrapper .inner * {
+  color: #fff;
+}
+.contact-phones-popup .contact-phones-wrapper .inner h2 {
+  margin-top: 0;
+}
+.contact-phones-popup .contact-phones-wrapper .inner .contacts-list {
+  margin: 0;
+  padding: 0;
+}
+.contact-phones-popup .contact-phones-wrapper .inner .contacts-list li {
+  margin-bottom: 22px;
+  padding: 0;
+  list-style: none;
+}
+.contact-phones-popup .contact-phones-wrapper .inner .contacts-list li .contact-name {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+}
+.contact-phones-popup .contact-phones-wrapper .inner .contacts-list li .contact-phone {
+  margin: 0;
+}
+.contact-phones-popup .contact-phones-wrapper .inner .contacts-list li .contact-phone a {
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.contact-phones-popup .contact-phones-wrapper .inner .contacts-list *:last-child {
+  margin-bottom: 0;
+}
+.contact-phones-popup .contact-phones-wrapper #btn-close-contacts-popup {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.contact-phones-popup .contact-phones-wrapper #btn-close-contacts-popup .close-icon {
+  width: 38px;
+  height: 35px;
+  padding: 6px;
+  font-size: 22px;
+  line-height: 1;
+  background-color: #fff;
+  color: #019BC2;
+}
+@media only screen and (max-width: 550px) {
+  .contact-phones-popup .contact-phones-wrapper {
+    padding: 80px 24px 40px;
+  }
+  .contact-phones-popup .contact-phones-wrapper .inner {
+    gap: 30px;
   }
 }

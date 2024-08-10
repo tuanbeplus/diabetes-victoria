@@ -5,11 +5,12 @@
  * @package WordPress
  */
 
-$useful_links = get_field('useful_links', 'option');
-$phone_number = get_field('phone_number', 'option');
-$member_login = get_field('member_login', 'option');
-$donate       = get_field('donate', 'option');
-$languages    = get_field('languages', 'option');
+$useful_links       = get_field('useful_links', 'option');
+$phone_number       = get_field('phone_number', 'option');
+$member_login       = get_field('member_login', 'option');
+$member_logged_in   = get_field('member_logged_in', 'option');
+$donate             = get_field('donate', 'option');
+$languages          = get_field('languages', 'option');
 ?>
 
 <div id="top-menu">
@@ -26,19 +27,22 @@ $languages    = get_field('languages', 'option');
             <?php endif; ?>
             <div class="col-right">
                 <li class="phone">
-                    <a id="btn-phone" href="tel:<?php echo $phone_number ?? ''; ?>" 
-                        title="Contact Phone" aria-label="Contact Phone" role="button">
+                    <button id="btn-phone" title="Contact Phones" aria-label="Contact Phones"
+                        aria-expanded="false" aria-controls="contact-phones-area">
                         <?php echo dv_get_icon_svg('icon-phone-solid'); ?>
-                    </a>
+                    </button>
                 </li>
                 <li class="member-login">
-                    <button id="btn-member-login" aria-expanded="false" aria-controls="members-login-area">
-                        <?php if ( is_user_logged_in() ): ?>
-                            <span>My Membership</span>
-						<?php else: ?>
-                            <span><?php echo $member_login['button_text'] ?? ''; ?></span>
-						<?php endif; ?>
-                    </button>
+                    <?php if ( is_user_logged_in() ): ?>
+                        <a id="btn-member-login" href="<?php echo $member_logged_in['member_page'] ?? '/'; ?>" 
+                            class="is_logged_in" role="button">
+                            <span><?php echo $member_logged_in['button_text'] ?? 'My Membership'; ?></span>
+                        </a>
+                    <?php else: ?>
+                        <button id="btn-member-login" aria-expanded="false" aria-controls="members-login-area">
+                            <span><?php echo $member_login['button_text'] ?? 'Member Login'; ?></span>
+                        </button>
+                    <?php endif; ?>
                 </li>
                 <li class="search">
                     <button id="btn-search" title="Search" aria-label="Search"
@@ -48,12 +52,12 @@ $languages    = get_field('languages', 'option');
                 </li>
                 <li class="donate">
                     <button id="btn-donate" aria-expanded="false" aria-controls="donate-popup">
-                        <span><?php echo $donate['button_text'] ?? ''; ?></span>
+                        <span><?php echo $donate['button_text'] ?? 'Donate'; ?></span>
                     </button>
                 </li>
                 <li class="languages">
                     <a id="btn-languages" href="<?php echo $languages['languages_page'] ?? ''; ?>" role="button">
-                        <span><?php echo $languages['button_text'] ?? ''; ?></span>
+                        <span><?php echo $languages['button_text'] ?? 'Languages'; ?></span>
                         <?php echo dv_get_icon_svg('icon-languages'); ?>
                     </a>
                 </li>

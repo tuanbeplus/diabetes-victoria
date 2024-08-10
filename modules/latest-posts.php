@@ -9,15 +9,36 @@ if( get_row_layout() == 'latest_posts' ):
     $section_id = rand(0, 999);
     $heading = get_sub_field('heading');
     $post_type = get_sub_field('post_type');
+    $categories = get_sub_field('categories');
+    $tags = get_sub_field('tags');
     $paged = 1;
     $number_posts = get_sub_field('number_posts');
     $order_by = get_sub_field('order_by');
     $top_cta = get_sub_field('top_cta');
     $load_more_cta = get_sub_field('load_more_cta');
+    $post_meta = get_sub_field('post_meta');
 
-    // Get posts
-    $posts_list = dv_get_latest_posts($post_type, $paged, $number_posts, $order_by);
-    $max_posts = dv_get_latest_posts($post_type, $paged, '-1', $order_by);
+    // Get query posts
+    $query_args = array(
+		'post_type'      => $post_type,
+		'paged'          => $paged,
+		'posts_per_page' => $number_posts,
+		'order'          => $order_by,
+		'categories'     => $categories,
+		'tags'           => $tags,
+	);
+	$posts_list = dv_get_latest_posts($query_args);
+
+    // Get all posts
+    $max_posts_args = array(
+		'post_type'      => $post_type,
+		'paged'          => $paged,
+		'posts_per_page' => -1,
+		'order'          => $order_by,
+		'categories'     => $categories,
+		'tags'           => $tags,
+	);
+    $max_posts = dv_get_latest_posts($max_posts_args);
     $max_posts = is_array($max_posts) ? count($max_posts) : '';
 
     if (!empty($posts_list)): ?>
@@ -28,6 +49,9 @@ if( get_row_layout() == 'latest_posts' ):
             <input type="hidden" name="number_posts" value="<?php echo $number_posts ?>">
             <input type="hidden" name="order_by" value="<?php echo $order_by ?>">
             <input type="hidden" name="max_posts" value="<?php echo $max_posts ?>">
+            <input type="hidden" name="categories" value="<?php echo esc_attr(json_encode($categories)) ?>">
+            <input type="hidden" name="tags" value="<?php echo esc_attr(json_encode($tags)) ?>">
+            <input type="hidden" name="has_post_meta" value="<?php echo $post_meta ?>">
 
             <div class="container">
                 <div class="posts-wrapper">
@@ -52,6 +76,22 @@ if( get_row_layout() == 'latest_posts' ):
                                 <?php endif; ?>
                             </div>
                             <div class="post-meta">
+                                <?php if ($post_meta == true): 
+                                    // Get all taxonomies for the post type of the given post ID
+                                    $taxonomies = get_object_taxonomies($post_type, 'names');
+                                    foreach ($taxonomies as $taxonomy) {
+                                        if (isset($taxonomy) && !empty($taxonomy)) {
+                                            $terms = wp_get_post_terms($post->ID, $taxonomy);
+                                            if (isset($terms) && !empty($terms)) {
+                                                break;
+                                            }
+                                        }
+                                    } ?>
+                                    <div class="__meta">
+                                        <span class="date"><?php echo get_the_date('j F Y', $post->ID) ?? '' ?></span>
+                                        <span class="term"><?php echo $terms[0]->name ?? '' ?></span>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="__title">
                                     <a href="<?php echo get_the_permalink($post->ID); ?>">
                                         <span><?php echo $post->post_title; ?></span>

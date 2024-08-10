@@ -462,8 +462,21 @@ jQuery(document).ready(function ($) {
     var postType = sectionWrapper.find('input[name=post_type]').val();
     var numberPosts = sectionWrapper.find('input[name=number_posts]').val();
     var orderBy = sectionWrapper.find('input[name=order_by]').val();
+    var postCats = sectionWrapper.find('input[name=categories]').val();
+    var postTags = sectionWrapper.find('input[name=tags]').val();
     var maxPosts = sectionWrapper.find('input[name=max_posts]').val();
+    var hasPostMeta = sectionWrapper.find('input[name=has_post_meta]').val();
     var postList = sectionWrapper.find('ul.posts-list');
+
+    // Parse categories and tags, ensuring they are always arrays
+    postCats = JSON.parse(postCats || '[]');
+    if (!Array.isArray(postCats)) {
+      postCats = [];
+    }
+    postTags = JSON.parse(postTags || '[]');
+    if (!Array.isArray(postTags)) {
+      postTags = [];
+    }
     $.ajax({
       type: 'POST',
       url: ajaxUrl,
@@ -472,7 +485,10 @@ jQuery(document).ready(function ($) {
         'paged': paged,
         'post_type': postType,
         'number_posts': numberPosts,
-        'order_by': orderBy
+        'order_by': orderBy,
+        'categories': postCats,
+        'tags': postTags,
+        'has_post_meta': hasPostMeta
       },
       beforeSend: function beforeSend(xhr) {
         btn.addClass('loading');
@@ -568,6 +584,10 @@ jQuery(document).ready(function ($) {
   $(document).on('click', '#btn-member-login', function (e) {
     e.preventDefault();
     var this_btn = $(this);
+    if (this_btn.hasClass('is_logged_in')) {
+      window.location.href = this_btn.attr('href');
+      return;
+    }
     var adminBar = $('#wpadminbar');
     var wrapper_margin = this_btn.outerHeight();
     if (adminBar.length > 0) {
@@ -650,6 +670,57 @@ jQuery(document).ready(function ($) {
   });
   // ------------------ /Members Login Popup ------------------
 
+  // ------------------ Contact Phones Popup ------------------
+  // Click to show Contact Phones Area
+  $(document).on('click', '#btn-phone', function (e) {
+    e.preventDefault();
+    var this_btn = $(this);
+    var adminBar = $('#wpadminbar');
+    var wrapper_margin = this_btn.outerHeight();
+    if (adminBar.length > 0) {
+      wrapper_margin = wrapper_margin + adminBar.outerHeight();
+    }
+    var contacts_popup = $('#contact-phones-area');
+    var contacts_wrapper = contacts_popup.find('.contact-phones-wrapper');
+    var first_contact = contacts_wrapper.find('.contacts-list a').first();
+    contacts_popup.addClass('show');
+    contacts_wrapper.css('margin-top', wrapper_margin + 'px');
+    contacts_wrapper.slideDown(300);
+    dv_aria_expanded_status(this_btn);
+    setTimeout(function () {
+      first_contact.focus();
+    }, 200);
+  });
+  // Click & Focus-out to Close  Contact Phones Area
+  $(document).on('click blur', '#btn-close-contacts-popup', function (e) {
+    e.preventDefault();
+    dv_close_contact_phones_popup();
+  });
+  // Click outside to close Contact Phones Area
+  $(document).on('click', '#contact-phones-area', function (e) {
+    e.preventDefault();
+    dv_close_contact_phones_popup();
+  });
+  // Stop propagation login wrapper
+  $(document).on('click', '#contact-phones-area .contact-phones-wrapper', function (e) {
+    e.stopPropagation();
+  });
+  /**
+   * Close Contact Phones Area Popup
+   */
+  function dv_close_contact_phones_popup() {
+    var contacts_popup = $('#contact-phones-area');
+    var contacts_wrapper = contacts_popup.find('.contact-phones-wrapper');
+    contacts_popup.addClass('closing');
+    contacts_wrapper.slideUp(200);
+    setTimeout(function () {
+      contacts_popup.removeClass('show');
+      $('#btn-phone').attr('aria-expanded', 'false');
+      contacts_popup.removeClass('closing');
+    }, 200);
+  }
+  // ------------------ /Contact Phones Popup ------------------
+
   // Smooth scrolling to anchor links
   $(document).on('click', 'a[href^="#"]', function (e) {
     var target = $(this.getAttribute('href'));
@@ -670,6 +741,20 @@ jQuery(document).ready(function ($) {
   $('.main-content .content-wrapper table, .accordion__content-inner table, .dv-editor-content table').each(function () {
     if (!$(this).parent().hasClass('table-wrapper')) {
       $(this).wrap('<div class="table-wrapper" role="region" tabindex="0"></div>');
+    }
+  });
+
+  // Toggle Categories list at Sidebar
+  $(document).on('click', '.sidebar #btn-toggle-categories', function (e) {
+    e.preventDefault();
+    var sidebar = $(this).closest('.sidebar');
+    var catsList = sidebar.find('ul.categories-list');
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      catsList.slideUp(200);
+    } else {
+      $(this).addClass('active');
+      catsList.slideDown(200);
     }
   });
 

@@ -1,0 +1,96 @@
+.contact-phones-popup {
+    display: none;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.8);
+    &.show {
+        display: block;
+    }
+    &.closing {
+        background-color: transparent;
+    }
+    .contact-phones-wrapper {
+        display: none;
+        position: relative;
+        margin: 80px auto 0;
+        padding: 60px 40px;
+        background-color: $primary_color;
+        .inner {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 50px;
+            * {
+                color: #fff;
+            }
+            h2 {
+                margin-top: 0;
+            }
+            .contacts-list {
+                margin: 0;
+                padding: 0;
+                li {
+                    margin-bottom: 22px;
+                    padding: 0;
+                    list-style: none;
+                    .contact-name {
+                        margin-top: 0;
+                        margin-bottom: 8px;
+                        font-size: 1rem;
+                        font-family: $primary_font_bold;
+                    }
+                    .contact-phone {
+                        margin: 0;
+                        a {
+                            font-size: 0.9rem;
+                            text-decoration: underline;
+                            text-underline-offset: 2px;
+                        }
+                    }
+                }
+                *:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        #btn-close-contacts-popup {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            padding: 0;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-family: $primary_font_bold;
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            .close-icon {
+                width: 38px;
+                height: 35px;
+                padding: 6px;
+                font-size: 22px;
+                line-height: 1;
+                background-color: #fff;
+                color: $primary_color;
+            }
+        }
+    }
+    @media only screen and (max-width: 550px) {
+        .contact-phones-wrapper {
+            padding: 80px 24px 40px;
+            .inner {
+                gap: 30px;
+            }
+        }
+    }
+}

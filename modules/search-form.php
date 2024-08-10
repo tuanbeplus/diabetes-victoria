@@ -61,5 +61,8 @@ if( get_row_layout() == 'search_form' ):
                 --s-pd-top: ' . $pd_top . ';
                 --s-pd-bottom: ' . $pd_bottom . ';
             }
+			#search-section-'.$section_id.' form.search-form .form-wrapper{
+			   border: none;
+			}
         </style>';
 endif;

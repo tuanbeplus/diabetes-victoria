@@ -32,7 +32,8 @@ add_action( 'init', function() {
  */
 add_filter('register_post_type_args', function ($args, $post_type) {
     if ($post_type === 'post') {
-        $args['labels']['name']               = 'Public Articles';
+        // Labels
+        $args['labels']['name']               = 'Articles';
         $args['labels']['singular_name']      = 'Article';
         $args['labels']['add_new']            = 'Add New';
         $args['labels']['add_new_item']       = 'Add New Article';
@@ -49,7 +50,9 @@ add_filter('register_post_type_args', function ($args, $post_type) {
         $args['labels']['filter_items_list']  = 'Filter articles list';
         $args['labels']['items_list_navigation'] = 'Articles list navigation';
         $args['labels']['items_list']         = 'Articles list';
-        $args['menu_position'] = 7;
+
+        // Rewrite
+        $args['rewrite']['slug'] = 'articles';
     }
     return $args;
 }, 10, 2);

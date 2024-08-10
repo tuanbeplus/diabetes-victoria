@@ -19,23 +19,78 @@ function dv_get_icon_svg($icon_file_name) {
 /**
  * Get all publish posts, page, post type
  * 
- * @param $post_type      Post type
- * @param $number_posts   Number of post to show
- * @param $order_by       Ascending/Descending
+ * @param array $query_args   The arguments for the query.
  * 
- * @return Posts object
+ * @return array Posts object
  * 
  */
-function dv_get_latest_posts($post_type, $paged, $number_posts, $order_by) {
+function dv_get_latest_posts($query_args = array()) {
+    // Set default values
+    $post_type     = $query_args['post_type'] ?? 'post';
+    $paged         = $query_args['paged'] ?? 1;
+    $number_posts  = $query_args['posts_per_page'] ?? -1;
+    $order		   = $query_args['order'] ?? 'DESC';
+    $categories    = $query_args['categories'] ?? array();
+    $tags          = $query_args['tags'] ?? array();
+
+    // Base query arguments
     $args = array(
-		'post_type' => $post_type,
-		'paged' => $paged,
-		'posts_per_page' => $number_posts,
-		'post_status' => 'publish',
-		'orderby' => 'date',
-		'order' => $order_by,
-	);
-	$posts = get_posts($args);
+        'post_type'      => $post_type,
+        'paged'          => $paged,
+        'posts_per_page' => $number_posts,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => $order,
+        'tax_query'      => array(),
+    );
+
+    // // Taxonomy query based on post type
+    if ($post_type == 'post') {
+		if (!empty($categories)) {
+			$args['tax_query'][] = array(
+                'taxonomy' => 'category',
+                'field'    => 'term_id',
+                'terms'    => $categories,
+                'operator' => 'IN',
+                'include_children' => false,
+            );
+		}
+		if (!empty($tags)) {
+			$args['tax_query'][] = array(
+                'taxonomy' => 'post_tag',
+                'field'    => 'term_id',
+                'terms'    => $tags,
+                'operator' => 'IN',
+                'include_children' => false,
+            );
+		}
+    }
+	else {
+		$taxonomy_map = array(
+            'resource' 		 => 'resource_categories',
+            'recipe' 		 => 'recipe_categories',
+            'member_recipes' => 'member_recipe_cat'
+        );
+        $taxonomy_name = $taxonomy_map[$post_type] ?? '';
+
+        if (!empty($categories) && !empty($taxonomy_name)) {
+            $args['tax_query'][] = array(
+				'taxonomy' => $taxonomy_name,
+				'field'    => 'id',
+				'terms'    => $categories,
+				'operator' => 'IN',
+				'include_children' => false,
+			);
+        }
+    }
+
+    // Execute the query and return results
+    $posts = get_posts($args);
+
+    // Error handling (optional)
+    if (is_wp_error($posts)) {
+        return array(); // Return an empty array on error
+    }
 
     return $posts;
 }
@@ -71,11 +126,17 @@ function dv_breadcrumb() {
 	elseif (is_single()) {
 		$post_type = get_post_type_object(get_post_type());
 		if ($post_type) {
-			if ($post_type->name == 'post') {
-				echo '<li><a href="' . home_url('/blogs') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
-			}
-			else {
-				echo '<li><a href="' . home_url('/' . $post_type->name . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			echo '<li><a href="' . home_url('/' . $post_type->rewrite['slug'] . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
+			// Get all taxonomies for the post type of the given post ID
+			$taxonomies = get_object_taxonomies($post_type->name, 'names');
+			foreach ($taxonomies as $taxonomy) {
+				if (isset($taxonomy) && !empty($taxonomy)) {
+					$terms = wp_get_post_terms($post->ID, $taxonomy);
+					if (isset($terms) && !empty($terms)) {
+						echo '<li><a href="' . home_url('/' . $terms[0]->slug . '/') . '">' . esc_html($terms[0]->name) . '</a></li>' . $arrow_right;
+						break;
+					}
+				}
 			}
 		}
 		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
@@ -212,7 +273,8 @@ function dv_the_post_thumbnail_default($post_id) {
  * @return Array Array of WP_Post objects representing the child posts.
  *
  */
-function dv_get_direct_child_posts_from_parent($post_type ,$post_id) {
+function dv_get_direct_child_posts_from_parent($post_id) {
+	$post_type = get_post_type($post_id);
 	$args = array(
 		'post_type'      => $post_type,
 		'posts_per_page' => -1,
@@ -226,4 +288,35 @@ function dv_get_direct_child_posts_from_parent($post_type ,$post_id) {
 	wp_reset_postdata(); 
 
 	return $child_posts;
+}
+
+// ------------------------------
+// function generateRandomString($length) {
+//     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+//     $charactersLength = strlen($characters);
+//     $randomString = '';
+//     for ($i = 0; $i < $length; $i++) {
+//         $randomString .= $characters[random_int(0, $charactersLength - 1)];
+//     }
+//     return $randomString;
+// }
+
+// function base64UrlEncode($data) {
+//     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+// }
+
+// function generateCodeChallenge($codeVerifier) {
+//     return base64UrlEncode(hash('sha256', $codeVerifier, true));
+// }
+
+// // Generate code verifier and code challenge
+// $codeVerifier = generateRandomString(128);
+// $codeChallenge = generateCodeChallenge($codeVerifier);
+
+// Output the values
+if ($_GET['test'] == 'test') {
+    echo "<pre>";
+	// echo "Code Challenge: " . htmlspecialchars($codeChallenge, ENT_QUOTES, 'UTF-8') . "<br>";
+    // echo "Code Verifier: " . htmlspecialchars($codeVerifier, ENT_QUOTES, 'UTF-8') . "<br>";
+echo "</pre>";
 }

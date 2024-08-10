@@ -12,23 +12,31 @@
 get_header();
 
 // Get current taxonomy
-$queried_object = get_queried_object();
-$taxonomy = !empty( $queried_object )? $queried_object->taxonomy : 'category';
+$current_term_obj = get_queried_object();
+$taxonomy_name = !empty( $current_term_obj )? $current_term_obj->taxonomy : 'category';
+$taxonomy_object = get_taxonomy($taxonomy_name);
 
+// Get all terms data
 $post_terms = get_terms( array(
-    'taxonomy'   => $taxonomy,
+    'taxonomy'   => $taxonomy_name,
     'hide_empty' => true,
 ));
-$post_cat_terms = array();
-$child_terms = array();
-if( !empty($post_terms) && !is_wp_error($post_terms) ){
-    foreach ($post_terms as $term) {
-        if ($term->parent == 0) {
-            $post_cat_terms[] = $term;
-        }
-        else {
-            $child_terms[$term->parent][] = $term;
-        }
+
+if (get_post_type() == 'post') {
+    $blogs_obj = get_term(96, 'category'); // Get Blog category object
+    $impact_hub_obj = get_term(119, 'category'); // Get Impact Hub category object
+
+    $tags_related_blogs = get_field('related_article_tags', $blogs_obj);
+    $tags_related_impact_hub = get_field('related_article_tags', $impact_hub_obj);
+
+    if (in_array($current_term_obj, $tags_related_blogs) && in_array($current_term_obj, $tags_related_impact_hub)) {
+        $post_terms = array_unique(array_merge($tags_related_blogs, $tags_related_impact_hub));
+    }
+    elseif (in_array($current_term_obj, $tags_related_blogs)) {
+        $post_terms = $tags_related_blogs;
+    }
+    elseif (in_array($current_term_obj, $tags_related_impact_hub)) {
+        $post_terms = $tags_related_impact_hub;
     }
 }
 
@@ -38,7 +46,7 @@ $cat_img_url = $featured_image['url'] ?? '';
 $cat_img_alt = $featured_image['alt'] ?? '';
 
 $post_type = get_post_type_object(get_post_type());
-$post_type_label = $post_type->label ?? 'Posts';
+$post_type_label = $post_type->label ?? 'Article';
 
 $args = array(
     'post_type' => get_post_type(),
@@ -46,9 +54,9 @@ $args = array(
     'posts_per_page' => -1,
     'tax_query' => array(
         array(
-            'taxonomy' => $taxonomy,
+            'taxonomy' => $taxonomy_name,
             'field' => 'term_id',
-            'terms' => $queried_object->term_id,
+            'terms' => $current_term_obj->term_id,
         ),
     )
 );
@@ -66,27 +74,17 @@ $posts_query = new WP_Query($args);
         <!-- Sidebar -->
         <div id="main-content-sidebar" class="sidebar">
             <div class="sidebar-inner">
-                <?php if (!empty($post_cat_terms) && !is_wp_error($post_cat_terms)): ?>
+                <?php if (!empty($post_terms) && !is_wp_error($post_terms)): ?>
                     <div class="secondary-info">
                         <h2 class="__heading">
-                            <?php echo 'More '. $post_type_label; ?>
+                            <?php echo 'More '. $taxonomy_object->label ?? ''; ?>
                         </h2>
                         <ul class="post-cats-list" role="list">
-                        <?php foreach ($post_cat_terms as $term): 
-                            $term_link = get_term_link($term); ?>
+                        <?php foreach ($post_terms as $term): ?>
                             <li>
-                                <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
-                                <?php if (isset($child_terms[$term->term_id]) && !empty($child_terms[$term->term_id])): ?>
-                                    <ul class="child-terms">
-                                    <?php foreach ($child_terms[$term->term_id] as $child_term): ?>
-                                        <li>
-                                            <a href="<?php echo esc_url(get_term_link($child_term)); ?>">
-                                                <?php echo $child_term->name ?? ''; ?>
-                                            </a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                    </ul>
-                                <?php endif; ?>
+                                <a href="<?php echo get_term_link($term) ?>">
+                                    <?php echo $term->name ?? ''; ?>
+                                </a>
                             </li>
                         <?php endforeach; ?>
                         </ul>
@@ -110,29 +108,27 @@ $posts_query = new WP_Query($args);
     </div>
 </section>
 <!-- Latest Post -->
-<section class="latest-posts recipe" style="padding-top:0;">
-    <div class="container">
-        <div class="posts-wrapper">
-            <div class="top">
-                <h2 class="heading">
-                    <?php echo 'Latest '. $post_type_label; ?>
-                </h2>
-            </div>
-            <?php if ( $posts_query->have_posts() ) : ?>
+<?php if ( $posts_query->have_posts() ) : ?>
+    <section class="latest-posts recipe" style="padding-top:0;">
+        <div class="container">
+            <div class="posts-wrapper">
+                <div class="top">
+                    <h2 class="heading">
+                        <?php echo 'Latest '. $post_type_label; ?>
+                    </h2>
+                </div>
                 <ul class="posts-list">
                 <?php while ( $posts_query->have_posts() ) : $posts_query->the_post(); ?>
                     <?php get_template_part( 'template-parts/post/post-card' ); ?>
                 <?php endwhile; ?>
                 </ul>
-            <?php else : ?>
-                <?php get_template_part( 'template-parts/content/content-none' ); ?>
-            <?php endif; ?>
-            <?php 
-                // Reset Post Data
-                wp_reset_postdata();
-            ?>
+            </div>
         </div>
-    </div>
-</section><!-- .Latest Posts -->
+    </section><!-- .Latest Posts -->
+<?php endif; ?>
+<?php 
+    // Reset Post Data
+    wp_reset_postdata();
+?>
 <?php
 get_footer();

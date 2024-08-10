@@ -9,36 +9,34 @@ $feature_img_url = get_the_post_thumbnail_url($post_id, 'full');
 $feature_img_id = get_post_thumbnail_id();
 $feature_img_alt = get_post_meta($feature_img_id, '_wp_attachment_image_alt', true);
 $post_content = get_the_content();
-
-// merge all term of taxonomy register for post type
-$taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
+$post_type = get_post_type_object(get_post_type());
+$taxonomies = get_object_taxonomies(get_post_type(), 'names');
 $post_terms = array();
-$child_terms = array();
-if( !empty( $taxonomies ) ){
-    foreach ($taxonomies as $tax_key => $taxonomy) {
-        $cat_terms = get_terms( array(
-            'taxonomy'   => $tax_key,
-            'hide_empty' => true,
-        ));
+$all_post_terms = array();
 
-        if( !empty($cat_terms) && !is_wp_error($cat_terms) ){
-            foreach ($cat_terms as $key => $term) {
-                if ($term->parent == 0) {
+if (!empty($taxonomies)) {
+    foreach ($taxonomies as $taxonomy) {
+        if (isset($taxonomy) && !empty($taxonomy)) {
+            $terms = wp_get_post_terms($post_id, $taxonomy);
+            $all_tax_terms = get_terms( array(
+                'taxonomy'   => $taxonomy,
+                'hide_empty' => true,
+            ));
+            if (isset($terms) && !empty($terms)) {
+                foreach ($terms as $term) {
                     $post_terms[] = $term;
                 }
-                else {
-                    $child_terms[$term->parent][] = $term;
+            }
+            if (isset($all_tax_terms) && !empty($all_tax_terms)) {
+                foreach ($all_tax_terms as $term) {
+                    $all_post_terms[] = $term;
                 }
             }
+            // Only get first taxonomy
+            break;
         }
     }
 }
-
-$post_type = get_post_type_object(get_post_type());
-$post_type_label = $post_type->label ?? 'Posts';
-if ($post_type == 'recipe') {
-    $post_type_label = 'Recipes';
-} 
 
 // Post brand css variable
 $brand_color = get_field('brand_color');
@@ -56,7 +54,21 @@ echo '} </style>';
 <!-- Post Title -->
 <section class="post-title">
     <div class="container">
-        <h1><?php echo get_the_title(); ?></h1>
+        <h1>
+        <?php 
+            if (isset($post_terms[0]) && !empty($post_terms[0])) {
+                if ($post_terms[0]->term_id == '93' || $post_terms[0]->term_id == '99' || $post_terms[0]->term_id == '98') {
+                    echo $post_terms[0]->name .' - '. get_the_date('j F Y');
+                }    
+                else {
+                    echo get_the_title(); 
+                }
+            }
+            else {
+                echo get_the_title(); 
+            }
+        ?>
+        </h1>
     </div>
 </section><!-- .Post Title -->
 
@@ -70,29 +82,48 @@ echo '} </style>';
                     <h2 class="__heading">On This Page</h2>
                     <ul id="tocs" class="links-list" role="list"></ul>
                 </div>
-                <?php if (!empty($post_terms)): ?>
+                <?php if (isset($all_post_terms) && !empty($all_post_terms)): ?>
                     <div class="secondary-info">
-                        <h2 class="__heading">
-                            <?php echo 'More '. $post_type_label; ?>
+                        <h2 class="__heading" style="padding:0;">
+                            <button id="btn-toggle-categories">
+                                <?php
+                                if ($post_terms[0]->term_id == '96' || $post_terms[0]->term_id == '119') {
+                                   echo 'More '. $post_terms[0]->name ?? '';
+                                }
+                                else {
+                                    echo 'More Categories';
+                                } ?>
+                                <span class="icon-chevron-down">
+                                    <?php echo dv_get_icon_svg('icon-chevron-down-white') ?>
+                                </span>
+                            </button>
                         </h2>
-                        <ul class="recipe-cats-list" role="list">
-                        <?php foreach ($post_terms as $term): 
-                            $term_link = get_term_link($term); ?>
-                            <li>
-                                <a href="<?php echo esc_url($term_link); ?>"><?php echo $term->name ?? ''; ?></a>
-                                <?php if (isset($child_terms[$term->term_id]) && !empty($child_terms[$term->term_id])): ?>
-                                    <ul class="child-terms">
-                                    <?php foreach ($child_terms[$term->term_id] as $child_term): ?>
+                        <ul class="recipe-cats-list categories-list" role="list">
+                        <?php if ($post_terms[0]->term_id == '96' || $post_terms[0]->term_id == '119'):
+                            $related_article_tags =  get_field('related_article_tags', $post_terms[0]); ?>
+                            <?php if (!empty($related_article_tags)): ?>
+                                <?php foreach ($related_article_tags as $tag): ?>
+                                    <li>
+                                        <a href="<?php echo esc_url(get_term_link($tag)); ?>"><?php echo $tag->name ?? ''; ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php foreach ($all_post_terms as $term): 
+                                if ($post_type->name == 'post'):
+                                    $show_in_sidebar = get_field('show_in_the_public_article_sidebar', $term);
+                                    if ($show_in_sidebar == true): ?>
                                         <li>
-                                            <a href="<?php echo esc_url(get_term_link($child_term)); ?>">
-                                                <?php echo $child_term->name ?? ''; ?>
-                                            </a>
+                                            <a href="<?php echo esc_url(get_term_link($term)); ?>"><?php echo $term->name ?? ''; ?></a>
                                         </li>
-                                    <?php endforeach; ?>
-                                    </ul>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <li>
+                                        <a href="<?php echo esc_url(get_term_link($term)); ?>"><?php echo $term->name ?? ''; ?></a>
+                                    </li>
                                 <?php endif; ?>
-                            </li>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                         </ul>
                     </div>
                 <?php endif; ?>
@@ -121,6 +152,7 @@ echo '} </style>';
                 || !empty($cooking_time) 
                 || !empty($serves) 
                 || !empty($type_of_recipe) 
+                || !empty(get_the_title())
             ): ?>
                 <div class="__content">
                     <?php if (is_singular('recipe') || is_singular('member_recipes')): ?>
@@ -142,7 +174,15 @@ echo '} </style>';
                         <?php if (!empty($type_of_recipe)): ?>
                             <p><b>Type of recipe</b>: <?php echo $type_of_recipe; ?></p>
                         <?php endif; ?>
-                    <?php else: echo $post_description; ?>
+                    <?php else: ?>
+                    <?php 
+                        if (isset($post_terms[0]) && !empty($post_terms[0])) {
+                            if ($post_terms[0]->term_id == '93' || $post_terms[0]->term_id == '99' || $post_terms[0]->term_id == '98') {
+                                the_title('<h2 class="__title">', '</h2>'); 
+                            }
+                        }
+                        echo $post_description;
+                    ?>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
@@ -156,19 +196,51 @@ echo '} </style>';
     <div class="main-content-inner">
         <div class="content-wrapper">
             <div class="__content">
-                <h2 class="__title">
-                    <?php if (is_singular('recipe') || is_singular('member_recipes')) {
-                            echo 'Recipe';
-                        }
-                        else {
-                            echo 'Article';
-                        } ?>
-                </h2>
+                <?php if ($post_type->name == 'recipe' || $post_type->name == 'member_recipes'): ?>
+                    <h2 class="__title">Recipe</h2>
+                <?php endif; ?>
                 <?php echo do_shortcode($post_content); ?>
             </div>
         </div>
     </div>
-</section><!-- .Post Content -->
+</section>
+<!-- .Post Content -->
+<?php endif; ?>
+
+<!-- Author Profile -->
+<?php 
+$author_info = get_field('author_info');
+$profile_picture = $author_info['infomations']['profile_picture'] ?? array();
+$picture_url = $profile_picture['url'] ?? DV_IMG_DIR .'user-placeholder.jpeg';
+$picture_alt = $profile_picture['alt'] ?? 'Author Picture Placeholder';
+$author_name = $author_info['infomations']['name'] ?? '';
+$author_qualifi = $author_info['infomations']['qualifications'] ?? '';
+$author_bio = $author_info['biographical'] ?? '';
+// echo "<pre>";
+// print_r($author_info);
+// echo "</pre>";
+?>
+<?php if (!empty($author_info) && !empty($author_info['infomations'])): ?>
+    <section class="author-profile-section">
+        <div class="container">
+            <div class="author-profile-wrapper">
+                <div class="profile-picture">
+                    <img src="<?php echo $picture_url ?>" alt="<?php echo $picture_alt ?>">
+                </div>
+                <div class="info">
+                    <?php if (!empty($author_name)): ?>
+                        <h3 class="__name"><?php echo $author_name ?></h3>
+                    <?php endif; ?>
+                    <?php if (!empty($author_qualifi)): ?>
+                        <p class="__qualifi"><?php echo $author_qualifi ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($author_bio)): ?>
+                        <div class="__bio"><?php echo $author_bio ?></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </section><!-- .Author Profile -->
 <?php endif; ?>
 
 <?php 
@@ -177,8 +249,26 @@ $post_type_name = isset($post_type->name) ? $post_type->name : 'post';
 $paged = 1;
 $number_posts = 6;
 $order_by = 'DESC';
-$posts_list = dv_get_latest_posts($post_type_name, $paged, $number_posts, $order_by);
-$max_posts = dv_get_latest_posts($post_type_name, $paged, '-1', $order_by);
+$categories = array($post_terms[0]->term_id);
+// Get query posts
+$query_args = array(
+    'post_type'      => $post_type_name,
+    'paged'          => $paged,
+    'posts_per_page' => $number_posts,
+    'order'          => $order_by,
+    'categories'     => $categories,
+);
+$posts_list = dv_get_latest_posts($query_args);
+
+// Get query posts
+$query_all_args = array(
+    'post_type'      => $post_type_name,
+    'paged'          => $paged,
+    'posts_per_page' => -1,
+    'order'          => $order_by,
+    'categories'     => $categories,
+);
+$max_posts = dv_get_latest_posts($query_all_args);
 $max_posts = is_array($max_posts) ? count($max_posts) : '';
 ?>
 <?php if (!empty($posts_list)): ?>
@@ -188,13 +278,31 @@ $max_posts = is_array($max_posts) ? count($max_posts) : '';
     <input type="hidden" name="number_posts" value="<?php echo $number_posts ?>">
     <input type="hidden" name="order_by" value="<?php echo $order_by ?>">
     <input type="hidden" name="max_posts" value="<?php echo $max_posts ?>">
+    <input type="hidden" name="categories" value="<?php echo esc_attr(json_encode($categories)) ?>">
+    <input type="hidden" name="tags" value="">
+
     <div class="container">
         <div class="posts-wrapper">
             <div class="top">
                 <h2 class="heading">
-                    <?php echo 'Latest '. $post_type_label; ?>
+                    <?php 
+                    if (isset($post_terms[0]->name) && isset($post_type_name)) {
+                        if ($post_type_name == 'recipe' || $post_type_name == 'member_recipes') {
+                            echo 'Latest '. $post_terms[0]->name .' Recipes';
+                        }
+                        elseif ($post_type_name == 'post' || $post_type_name == 'resource') {
+                            echo 'Latest '. $post_terms[0]->name .' Articles';
+                        }
+                        else {
+                            echo 'Latest Posts';
+                        }
+                    }
+                    else {
+                        echo 'Latest Posts';
+                    }
+                    ?>
                 </h2>
-                <a class="top-cta-btn" href="<?php echo is_singular('post') ? '/blogs' : '/'.$post_type->name; ?>">
+                <a class="top-cta-btn" href="<?php echo get_term_link($post_terms[0]) ?>">
                     <span>View all</span>
                 </a>
             </div>

@@ -11,6 +11,7 @@ $form_args = array(
     'remember'       => false,
 );
 ?>
+<!-- Member login popup -->
 <div id="members-login-area" class="login-popup">
     <div class="login-wrapper">
         <div class="login-form">
@@ -54,4 +55,4 @@ $form_args = array(
             <span class="close-icon"><i class="fa-solid fa-xmark"></i></span>
         </button>
     </div>
-</div>
+</div><!-- .Member login popup -->

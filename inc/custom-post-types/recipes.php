@@ -14,15 +14,15 @@ function dv_recipe_register() {
 	}
 
 	$labels = array(
-		'name'               => esc_html__( 'Public Recipes', 'diabetes-victoria' ),
-		'singular_name'      => esc_html__( 'Public Recipe', 'diabetes-victoria' ),
+		'name'               => esc_html__( 'Recipes', 'diabetes-victoria' ),
+		'singular_name'      => esc_html__( 'Recipe', 'diabetes-victoria' ),
 		'add_new'            => esc_html__( 'Add New', 'diabetes-victoria' ),
-		'add_new_item'       => esc_html__( 'Add New Public Recipe', 'diabetes-victoria' ),
-		'all_items'          => esc_html__( 'All Public Recipes', 'diabetes-victoria' ),
+		'add_new_item'       => esc_html__( 'Add New Recipe', 'diabetes-victoria' ),
+		'all_items'          => esc_html__( 'All Recipes', 'diabetes-victoria' ),
 		'edit_item'          => esc_html__( 'Edit Recipe', 'diabetes-victoria' ),
-		'new_item'           => esc_html__( 'Add New Public Recipe', 'diabetes-victoria' ),
+		'new_item'           => esc_html__( 'Add New Recipe', 'diabetes-victoria' ),
 		'view_item'          => esc_html__( 'View Item', 'diabetes-victoria' ),
-		'search_items'       => esc_html__( 'Search Public Recipes', 'diabetes-victoria' ),
+		'search_items'       => esc_html__( 'Search Recipes', 'diabetes-victoria' ),
 		'not_found'          => esc_html__( 'No recipe(s) found', 'diabetes-victoria' ),
 		'not_found_in_trash' => esc_html__( 'No recipe(s) found in trash', 'diabetes-victoria' )
 	);

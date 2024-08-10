@@ -72,12 +72,25 @@ add_action('wp_ajax_nopriv_dv_query_search_results', 'dv_query_search_results');
  * 
  */
 function dv_load_more_latest_posts() {
-    $post_type = isset($_POST['post_type']) ? $_POST['post_type'] : '';
-    $paged = isset($_POST['paged']) ? $_POST['paged'] : '';
-    $number_posts = isset($_POST['number_posts']) ? $_POST['number_posts'] : '';
-    $order_by = isset($_POST['order_by']) ? $_POST['order_by'] : '';
+    $post_type      = isset($_POST['post_type']) ? $_POST['post_type'] : '';
+    $paged          = isset($_POST['paged']) ? $_POST['paged'] : '';
+    $number_posts   = isset($_POST['number_posts']) ? $_POST['number_posts'] : '';
+    $order_by       = isset($_POST['order_by']) ? $_POST['order_by'] : '';
+    $categories     = !empty($_POST['categories']) ? $_POST['categories'] : array();
+    $tags           = !empty($_POST['tags']) ? $_POST['tags'] : array();
+    $has_post_meta  = isset($_POST['has_post_meta']) ? $_POST['has_post_meta'] : '';
+
+    // Get query posts
+    $query_args = array(
+        'post_type'      => $post_type,
+        'paged'          => $paged,
+        'posts_per_page' => $number_posts,
+        'order'          => $order_by,
+        'categories'     => $categories,
+		'tags'           => $tags,
+    );
     // Get posts
-    $posts = dv_get_latest_posts($post_type, $paged, $number_posts, $order_by);
+    $posts = dv_get_latest_posts($query_args);
     foreach ($posts as $post):
         ?>
         <li class="post post-<?php echo $post->ID; ?>">
@@ -89,6 +102,22 @@ function dv_load_more_latest_posts() {
                 <?php endif; ?>
             </div>
             <div class="post-meta">
+                <?php if ($has_post_meta == true): 
+                    // Get all taxonomies for the post type of the given post ID
+                    $taxonomies = get_object_taxonomies($post_type, 'names');
+                    foreach ($taxonomies as $taxonomy) {
+                        if (isset($taxonomy) && !empty($taxonomy)) {
+                            $terms = wp_get_post_terms($post->ID, $taxonomy);
+                            if (isset($terms) && !empty($terms)) {
+                                break;
+                            }
+                        }
+                    } ?>
+                    <div class="__meta">
+                        <span class="date"><?php echo get_the_date('j F Y', $post->ID) ?? '' ?></span>
+                        <span class="term"><?php echo $terms[0]->name ?? '' ?></span>
+                    </div>
+                <?php endif; ?>
                 <div class="__title">
                     <a href="<?php echo get_the_permalink($post->ID); ?>">
                         <span><?php echo $post->post_title; ?></span>

@@ -6,6 +6,7 @@
 $donate = get_field('donate', 'option');
 $donate_page = $donate['donate_page'];
 $amount_options = $donate['amount_options'];
+$regular_gift_link = $donate['make_it_a_regular_gift'];
 $other_ways_link = $donate['other_ways_to_get_involved'];
 ?>
 <!-- Donate popup -->
@@ -29,7 +30,9 @@ $other_ways_link = $donate['other_ways_to_get_involved'];
                             <?php endif; ?>
                         </div>
                         <input type="number" name="amount" id="other-amount" placeholder="Or enter an amount $">
-                        <a id="btn-regular-gift" role="button" href="">Make it a regular gift</a>
+                        <a id="btn-regular-gift" role="button" href="<?php echo $regular_gift_link; ?>">
+                            Make it a regular gift
+                        </a>
                     </div>
                 </fieldset>
                 <div class="form-footer">

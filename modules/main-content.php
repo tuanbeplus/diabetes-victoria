@@ -16,16 +16,23 @@ if( get_row_layout() == 'main_content' ):
     $sidebar = get_sub_field('sidebar');
     $show_sidebar = $sidebar['show_sidebar'];
     $in_this_section = $sidebar['in_this_section'];
+    $custom_parent_page_id = $sidebar['custom_parent_page'];
     $on_this_page = $sidebar['on_this_page'];
     $on_this_page_options = $on_this_page['options'];
     $custom_links = $on_this_page['custom_links'];
     $secondary_info = $sidebar['secondary_info'];
     $sc_info_visibility = $secondary_info['visibility'];
+    $sc_info_type = $secondary_info['info_type'];
     $sc_info_list = $secondary_info['info_list'];
+    $sc_post_type = $secondary_info['post_type'];
     $additional_info_boxes = $sidebar['additional_info_boxes'];
     $aib_visibility = $additional_info_boxes['visibility'];
     $aib_list = $additional_info_boxes['info_boxes'];
-    $child_pages = dv_get_direct_child_posts_from_parent(get_post_type(),get_the_ID());
+    $parent_page_id = get_the_ID();
+    if (isset($custom_parent_page_id) && !empty($custom_parent_page_id)) {
+        $parent_page_id = $custom_parent_page_id;
+    }
+    $child_pages = dv_get_direct_child_posts_from_parent($parent_page_id);
 
     if (!empty($banner_image) || !empty($content_editor)):
         ?>
@@ -37,19 +44,33 @@ if( get_row_layout() == 'main_content' ):
                     <div id="main-content-sidebar" class="sidebar">
                         <div class="sidebar-inner">
                             <?php if ( $in_this_section == true && !empty($child_pages) ): ?>
+                                <!-- In This Section -->
                                 <div class="in-this-section">
                                     <h2 class="__heading">In This Section</h2>
                                     <ul class="child-pages-list" role="list">
-                                        <li><?php echo get_the_title() ?></li>
+                                        <li>
+                                            <?php if ($parent_page_id == get_the_ID()): ?>
+                                                <?php echo get_the_title($parent_page_id) ?>
+                                            <?php else: ?>
+                                                <a href="<?php echo get_the_permalink($parent_page_id) ?>">
+                                                    <?php echo get_the_title($parent_page_id) ?>
+                                                </a>
+                                            <?php endif; ?>
+                                        </li>
                                     <?php foreach ($child_pages as $page): ?>
                                         <li>
+                                        <?php if ($page->ID == get_the_ID()): ?>
+                                            <?php echo $page->post_title ?>
+                                        <?php else: ?>
                                             <a href="<?php echo get_the_permalink($page->ID) ?>">
                                                 <?php echo $page->post_title ?>
                                             </a>
+                                        <?php endif; ?>
                                         </li>
                                     <?php endforeach; ?>
                                     </ul>
                                 </div>
+                                <!-- /In This Section -->
                             <?php endif; ?>
                             <div class="on-this-page">
                                 <h2 class="__heading"><?php echo $on_this_page['heading']; ?></h2>
@@ -66,7 +87,7 @@ if( get_row_layout() == 'main_content' ):
                                     </ul>
                                 <?php endif; ?>
                             </div>
-                            <?php if ($sc_info_visibility == true && !empty($sc_info_list)): ?>
+                            <?php if ($sc_info_visibility == true && $sc_info_type == 'custom_info' && !empty($sc_info_list)): ?>
                                 <div class="secondary-info">
                                     <h2 class="__heading"><?php echo $secondary_info['heading'] ?? ''; ?></h2>
                                     <ul class="sc-info-list" role="list">
@@ -79,6 +100,33 @@ if( get_row_layout() == 'main_content' ):
                                         </li>
                                     <?php endforeach; ?>
                                     </ul>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($sc_info_visibility == true && $sc_info_type == 'categories' && !empty($sc_post_type)): ?>
+                                <div class="secondary-info archive-categories">
+                                    <?php
+                                        $all_taxonomies = get_object_taxonomies($sc_post_type, 'objects');
+                                        foreach ($all_taxonomies as $taxonomy): ?>
+                                        <?php if (isset($taxonomy->name) && $taxonomy->name != 'post_tag'): 
+                                            $all_tax_terms = get_terms( array(
+                                                'taxonomy'   => $taxonomy->name,
+                                                'hide_empty' => true,
+                                            ));
+                                            if (!empty($all_tax_terms)):
+                                            ?>
+                                                <h2 class="__heading"><?php echo 'More '. $taxonomy->label ?? ''; ?></h2>
+                                                <ul role="list">
+                                                <?php foreach ($all_tax_terms as $term): ?>
+                                                    <li>
+                                                        <a href="<?php echo esc_url(get_term_link($term)) ?? '' ?>">
+                                                            <?php echo $term->name ?? '' ?>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                                </ul>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
                             <?php if ($aib_visibility == true && !empty($aib_list)): ?>

@@ -16,6 +16,8 @@ $wrapper_classes .= has_nav_menu( 'primary' ) ? ' has-menu' : '';
 $site_logo = get_field('site_logo', 'option') ?? '';
 $logo_white_color = $site_logo['logo_white_color'] ?? '';
 $logo_full_color = $site_logo['logo_full_color'] ?? '';
+$right_text_align = get_field('enable_rtl', get_the_ID());
+$is_right_text_align = $right_text_align ? $right_text_align : false;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -54,8 +56,10 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 							?>
 							<div class="users-action">
 								<span><?php echo $display_name; ?></span>
-								<a href="/user-profile">My Profile</a>
-								<a class="members-logout-link" href="<?php echo esc_url( wp_logout_url(home_url()) ); ?>">Logout</a>
+								<a href="/user-profile"><span>My Profile</span></a>
+								<a class="members-logout-link" href="<?php echo esc_url( wp_logout_url(home_url()) ); ?>">
+									<span>Logout</span>
+								</a>
 							</div>
 						<?php endif; ?>
 						<button id="btn-nav-bar">
@@ -77,13 +81,15 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 			<?php echo dv_get_icon_svg('icon-chevron-down-blu'); ?>
 		</button><!-- #button scroll to top -->
 	</div>
+
+	<?php get_template_part( 'template-parts/header/contact-phones-popup' ); ?>
+
+	<?php get_template_part( 'template-parts/header/login-popup' ); ?>
 	
 	<?php get_template_part( 'template-parts/header/search-popup' ); ?>
 
 	<?php get_template_part( 'template-parts/header/donate-popup' ); ?>
 
-	<?php get_template_part( 'template-parts/header/login-popup' ); ?>
-			
 	<div id="content" class="site-content">
 		<div id="primary" class="content-area">
-			<main id="main" class="site-main">
+			<main id="main" class="site-main" <?php echo $is_right_text_align ? 'dir="rtl"' : ''; ?> >
