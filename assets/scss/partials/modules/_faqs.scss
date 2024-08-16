@@ -94,6 +94,7 @@
             color: var(--post-brand-color, $primary_color);
             text-decoration: underline;
             text-underline-offset: 2px;
+            white-space: nowrap;
           }
         }
         &__content {

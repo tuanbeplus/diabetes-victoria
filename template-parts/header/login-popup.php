@@ -10,6 +10,9 @@ $form_args = array(
     'redirect'       => home_url('/?action=member-login'), 
     'remember'       => false,
 );
+$member_login = get_field('member_login', 'option');
+$membership_page = $member_login['membership_page'] ?? '';
+$online_help_page = $member_login['online_help_page'] ?? '';
 ?>
 <!-- Member login popup -->
 <div id="members-login-area" class="login-popup">
@@ -19,8 +22,8 @@ $form_args = array(
                 <h2>My Membership</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <?php else: ?>
-                <h2>Member Area Login</h2>
-                <p id="login-message">Please login to enjoy your exclusive member area!</p>
+                <h2>Member Hub Login</h2>
+                <p id="login-message">Please login to enjoy your exclusive member hub!</p>
                 <!-- WP Login Form -->
                 <form id="member_login_form" onsubmit="return false" method="POST">
                     <p class="login-user">
@@ -42,12 +45,22 @@ $form_args = array(
                 </form>
                 <!-- /WP Login Form -->
                 <p>
-                    <a class="forgot-password" href="<?php echo esc_url( wp_lostpassword_url() ); ?>">Forgot your password?</a>
-                    &nbsp;
-                    <a href="#">First time logging in?</a>
+                    <a class="forgot-password" href="<?php echo esc_url( wp_lostpassword_url() ); ?>">
+                        Forgot your password?
+                    </a>
                 </p>
-                <p>Not a member? <a href="#">JOIN NOW</a> to access exclusive member benefits!</p>
-                <p>Having trouble? Visit our <a href="#">Online Help</a> section</p>
+                <p>Not a member? 
+                    <a href="<?php echo $membership_page['link'] ?? '/get-involved/membership'; ?>">
+                        <?php echo $membership_page['text'] ?? 'JOIN NOW'; ?>
+                    </a> 
+                    to access exclusive member benefits!
+                </p>
+                <p>Having trouble? Visit our 
+                    <a href="<?php echo $online_help_page['link'] ?? '/online-help'; ?>">
+                        <?php echo $online_help_page['text'] ?? 'Online Help'; ?>
+                    </a> 
+                    section
+                </p>
             <?php endif; ?>
         </div>
         <button id="btn-close-login-popup">

@@ -135,3 +135,8 @@ require get_template_directory() . '/inc/custom-post-types/member-recipes.php';
  * CPT Member Articles
  */
 require get_template_directory() . '/inc/custom-post-types/member-articles.php';
+
+/**
+ * Salesforce auth login functions
+ */
+require get_template_directory() . '/inc/salesforce-auth-login.php';

@@ -9,6 +9,19 @@ function dv_custom_mime_types($mimes) {
 add_filter('upload_mimes', 'dv_custom_mime_types');
 
 /**
+ * Google Analytics
+ */
+function dv_google_analytics() {
+    $ga4 = get_field('google_analytics_4', 'option');
+
+    if(!empty($ga4)) {
+        echo $ga4;
+    }
+    
+}
+add_action('wp_head', 'dv_google_analytics', 1);
+
+/**
  * Custom WP query on search page
  */
 function dv_custom_search_posts_per_page($query) {
@@ -166,7 +179,7 @@ function dv_custom_wp_login_logo() {
 add_action('login_enqueue_scripts', 'dv_custom_wp_login_logo');
 
 /**
- * Chnage WP admin login logo URL
+ * Change WP admin login logo URL
  */
 function dv_custom_wp_login_logo_url() {
     return home_url();

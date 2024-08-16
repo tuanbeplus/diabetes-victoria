@@ -510,6 +510,8 @@ jQuery(document).ready(function ($) {
   $(document).on('click', '#btn-donate', function (e) {
     e.preventDefault();
     var this_btn = $(this);
+    window.location.href = this_btn.attr('href');
+    return;
     this_btn.addClass('active');
     var adminBar = $('#wpadminbar');
     var wrapper_margin = this_btn.outerHeight();
@@ -757,32 +759,6 @@ jQuery(document).ready(function ($) {
       catsList.slideDown(200);
     }
   });
-
-  // // Slide down Sub Menu on focus 
-  // $(document).on('focus', '#site-navigation li.menu-item a', function(e) {
-  //     let menuItem = $(this).closest('li.menu-item')
-  //     let subMenu = menuItem.find('.sub-menu')
-  //     subMenu.slideDown(200)
-  // });
-
-  // // Slide up Sub Menu on focus out
-  // $(document).on('blur', '#site-navigation li.menu-item a', function(e) {
-  //     let menuItem = $(this).closest('ul#primary-menu-list > li.menu-item')
-  //     let subMenu = menuItem.find('.sub-menu')
-  //     // Check if sub-menu is the last sub-menu
-  //     let lastSubMenu = menuItem.find('.sub-menu').last();
-  //     let isLastSubMenu = subMenu.is(lastSubMenu);
-  //     // Check if $(this) is the last child of the last sub-menu
-  //     let isLastChild = $(this).is(lastSubMenu.find('a').last());
-
-  //     if (isLastSubMenu && isLastChild) {
-  //         // Find all sub menu
-  //         let allSubMenu = menuItem.find('.sub-menu')
-  //         allSubMenu.each(function(e) {
-  //             $(this).slideUp(200)
-  //         })
-  //     }
-  // });
 });
 
 /***/ }),

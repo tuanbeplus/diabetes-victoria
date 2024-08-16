@@ -216,11 +216,8 @@ $picture_alt = $profile_picture['alt'] ?? 'Author Picture Placeholder';
 $author_name = $author_info['infomations']['name'] ?? '';
 $author_qualifi = $author_info['infomations']['qualifications'] ?? '';
 $author_bio = $author_info['biographical'] ?? '';
-// echo "<pre>";
-// print_r($author_info);
-// echo "</pre>";
 ?>
-<?php if (!empty($author_info) && !empty($author_info['infomations'])): ?>
+<?php if (!empty($profile_picture) || !empty($author_name)): ?>
     <section class="author-profile-section">
         <div class="container">
             <div class="author-profile-wrapper">

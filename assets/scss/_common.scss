@@ -575,6 +575,35 @@ section.post-title {
     }
 }
 
+// Member login loading white overlay
+.member-login-overlay {
+    display: none;
+    opacity: 0.9;
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #fff;
+    .spinner-logging {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        svg {
+            width: 140px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .spinner-logging {
+            svg {
+                width: 110px;
+            }
+        }
+    }
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
     h1 {

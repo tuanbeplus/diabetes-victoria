@@ -289,34 +289,3 @@ function dv_get_direct_child_posts_from_parent($post_id) {
 
 	return $child_posts;
 }
-
-// ------------------------------
-// function generateRandomString($length) {
-//     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
-//     $charactersLength = strlen($characters);
-//     $randomString = '';
-//     for ($i = 0; $i < $length; $i++) {
-//         $randomString .= $characters[random_int(0, $charactersLength - 1)];
-//     }
-//     return $randomString;
-// }
-
-// function base64UrlEncode($data) {
-//     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
-// }
-
-// function generateCodeChallenge($codeVerifier) {
-//     return base64UrlEncode(hash('sha256', $codeVerifier, true));
-// }
-
-// // Generate code verifier and code challenge
-// $codeVerifier = generateRandomString(128);
-// $codeChallenge = generateCodeChallenge($codeVerifier);
-
-// Output the values
-if ($_GET['test'] == 'test') {
-    echo "<pre>";
-	// echo "Code Challenge: " . htmlspecialchars($codeChallenge, ENT_QUOTES, 'UTF-8') . "<br>";
-    // echo "Code Verifier: " . htmlspecialchars($codeVerifier, ENT_QUOTES, 'UTF-8') . "<br>";
-echo "</pre>";
-}

@@ -93,6 +93,7 @@
                     a {
                         font-family: $primary_font_demi;
                         text-decoration: underline;
+                        white-space: nowrap;
                     }
                 }
                 > *:last-child {

@@ -60,6 +60,9 @@
                         *:last-child {
                             margin-bottom: 0;
                         }
+                        a {
+                            white-space: nowrap;
+                        }
                     }
                     .group-cta {
                         margin-top: 32px;

@@ -24,7 +24,8 @@ if( get_row_layout() == 'main_content' ):
     $sc_info_visibility = $secondary_info['visibility'];
     $sc_info_type = $secondary_info['info_type'];
     $sc_info_list = $secondary_info['info_list'];
-    $sc_post_type = $secondary_info['post_type'];
+    $sc_taxonomy = $secondary_info['taxonomy'];
+    $sc_related_category = $secondary_info['related_to_articles_category'];
     $additional_info_boxes = $sidebar['additional_info_boxes'];
     $aib_visibility = $additional_info_boxes['visibility'];
     $aib_list = $additional_info_boxes['info_boxes'];
@@ -102,32 +103,31 @@ if( get_row_layout() == 'main_content' ):
                                     </ul>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($sc_info_visibility == true && $sc_info_type == 'categories' && !empty($sc_post_type)): ?>
-                                <div class="secondary-info archive-categories">
-                                    <?php
-                                        $all_taxonomies = get_object_taxonomies($sc_post_type, 'objects');
-                                        foreach ($all_taxonomies as $taxonomy): ?>
-                                        <?php if (isset($taxonomy->name) && $taxonomy->name != 'post_tag'): 
-                                            $all_tax_terms = get_terms( array(
-                                                'taxonomy'   => $taxonomy->name,
-                                                'hide_empty' => true,
-                                            ));
-                                            if (!empty($all_tax_terms)):
-                                            ?>
-                                                <h2 class="__heading"><?php echo 'More '. $taxonomy->label ?? ''; ?></h2>
-                                                <ul role="list">
-                                                <?php foreach ($all_tax_terms as $term): ?>
-                                                    <li>
-                                                        <a href="<?php echo esc_url(get_term_link($term)) ?? '' ?>">
-                                                            <?php echo $term->name ?? '' ?>
-                                                        </a>
-                                                    </li>
-                                                <?php endforeach; ?>
-                                                </ul>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </div>
+                            <?php if ($sc_info_visibility == true && $sc_info_type == 'taxonomy' && !empty($sc_taxonomy)): 
+                                $all_tax_terms = array();
+                                if ($sc_taxonomy == 'post_tag' && !empty($sc_related_category)) {
+                                    $all_tax_terms = get_field('related_article_tags', $sc_related_category);
+                                }
+                                else {
+                                    $all_tax_terms = get_terms( array(
+                                        'taxonomy'   => $sc_taxonomy,
+                                        'hide_empty' => true,
+                                    ));
+                                }
+                                if (!empty($all_tax_terms)): ?>
+                                    <div class="secondary-info archive-categories">
+                                        <h2 class="__heading"><?php echo $secondary_info['heading'] ?? ''; ?></h2>
+                                        <ul role="list">
+                                        <?php foreach ($all_tax_terms as $term): ?>
+                                            <li>
+                                                <a href="<?php echo esc_url(get_term_link($term)) ?? '' ?>">
+                                                    <?php echo $term->name ?? '' ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
                             <?php endif; ?>
                             <?php if ($aib_visibility == true && !empty($aib_list)): ?>
                                 <div class="additional-info-boxes">

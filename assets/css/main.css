@@ -556,6 +556,32 @@ section.post-title h1 {
   }
 }
 
+.member-login-overlay {
+  display: none;
+  opacity: 0.9;
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #fff;
+}
+.member-login-overlay .spinner-logging {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.member-login-overlay .spinner-logging svg {
+  width: 140px;
+}
+@media only screen and (max-width: 768px) {
+  .member-login-overlay .spinner-logging svg {
+    width: 110px;
+  }
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
   h1 {
@@ -941,6 +967,8 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
   stroke: #ffffff;
 }
 #top-menu .top-menu-list #btn-donate {
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding: 12px 70px;
@@ -2407,6 +2435,7 @@ body .socials-share-wrapper .sharedaddy .sd-block .sd-content .sharing-hidden .i
   color: var(--post-brand-color, #019BC2);
   text-decoration: underline;
   text-underline-offset: 2px;
+  white-space: nowrap;
 }
 @media only screen and (max-width: 1024px) {
   .author-profile-section .author-profile-wrapper {
@@ -2510,6 +2539,9 @@ body .socials-share-wrapper .sharedaddy .sd-block .sd-content .sharing-hidden .i
 }
 .hero-carousel .carousel-wrapper .carousel-item .item-inner .item-content .description *:last-child {
   margin-bottom: 0;
+}
+.hero-carousel .carousel-wrapper .carousel-item .item-inner .item-content .description a {
+  white-space: nowrap;
 }
 .hero-carousel .carousel-wrapper .carousel-item .item-inner .item-content .group-cta {
   margin-top: 32px;
@@ -2848,6 +2880,7 @@ body .socials-share-wrapper .sharedaddy .sd-block .sd-content .sharing-hidden .i
 .key-cards .cards-list .card .card-content .card-description a {
   font-family: "ITC-Avant-Garde-Gothic-Pro_Demi";
   text-decoration: underline;
+  white-space: nowrap;
 }
 .key-cards .cards-list .card .card-content > *:last-child {
   margin-bottom: 0;
@@ -3053,6 +3086,7 @@ body .socials-share-wrapper .sharedaddy .sd-block .sd-content .sharing-hidden .i
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .description a {
   text-decoration: underline;
   text-underline-offset: 2px;
+  white-space: nowrap;
 }
 .content-promo .carousel-wrapper .carousel-item .item-inner .item-content .group-cta {
   margin-top: 32px;
@@ -3689,6 +3723,7 @@ section.main-content .main-content-inner .content-wrapper .__content a {
   text-decoration: underline;
   text-underline-offset: 2px;
   word-break: break-all;
+  white-space: nowrap;
 }
 section.main-content .main-content-inner .content-wrapper .__content img {
   margin: 30px 0;
@@ -4240,6 +4275,9 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
 .members-list-section .members-list-wrapper .members-list .member .__info .desc *:last-child {
   margin-bottom: 0;
 }
+.members-list-section .members-list-wrapper .members-list .member .__info .desc a {
+  white-space: nowrap;
+}
 @media only screen and (max-width: 1200px) {
   .members-list-section .members-list-wrapper .title {
     font-size: 2.188rem;
@@ -4396,6 +4434,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   color: var(--post-brand-color, #019BC2);
   text-decoration: underline;
   text-underline-offset: 2px;
+  white-space: nowrap;
 }
 .faqs-section .faqs-wrapper .accordion__content {
   transition: height 0.3s ease-out;
@@ -4954,6 +4993,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
 }
 .contact-us-section .ctu-wrapper .ctu-content a {
   color: inherit;
+  white-space: nowrap;
 }
 .contact-us-section .ctu-wrapper .ctu-button {
   display: inline-block;
