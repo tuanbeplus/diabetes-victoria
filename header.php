@@ -81,7 +81,7 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 					setCookie('sf_auth_code', responseCode, 1);
 
 					// Redirect to Members Hub page 
-					window.location.href = <?php echo $sf_community_url ?>'/supporterportalauth/s/';
+					window.location.href = "<?php echo $sf_community_url ?>/supporterportalauth/s/";
 				}
 
 				// Redirect to Sign In page if not member logged in
