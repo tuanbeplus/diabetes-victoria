@@ -63,10 +63,10 @@ function dv_get_salesforce_user_access_token($authorization_code) {
     return $data;
 }
 
-
 function dv_get_salesforce_user_info($access_token) {
+    $sf_site_url = get_field('salesforce_site_url', 'option');
     // Salesforce User Info Endpoint
-    $userinfo_url = 'https://login.salesforce.com/services/oauth2/userinfo';
+    $userinfo_url = $sf_site_url .'/services/oauth2/userinfo';
     // Prepare the request headers
     $args = array(
         'headers' => array(

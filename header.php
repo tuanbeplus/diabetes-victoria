@@ -18,6 +18,7 @@ $logo_white_color = $site_logo['logo_white_color'] ?? '';
 $logo_full_color = $site_logo['logo_full_color'] ?? '';
 $right_text_align = get_field('enable_rtl', get_the_ID());
 $is_right_text_align = $right_text_align ? $right_text_align : false;
+$sf_community_url = get_field('salesforce_community_url', 'option');
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -79,8 +80,8 @@ $is_right_text_align = $right_text_align ? $right_text_align : false;
 					// Set member cookie
 					setCookie('sf_auth_code', responseCode, 1);
 
-					// Redirect to Members Hub page
-					window.location.href = 'https://diabetesvic--dvfullcopy.sandbox.my.site.com/supporterportalauth/s/';
+					// Redirect to Members Hub page 
+					window.location.href = <?php echo $sf_community_url ?>'/supporterportalauth/s/';
 				}
 
 				// Redirect to Sign In page if not member logged in
