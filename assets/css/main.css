@@ -567,11 +567,13 @@ section.post-title h1 {
   left: 0;
   background: #fff;
 }
-.member-login-overlay .dv-spinner {
+.member-login-overlay .loading-wrapper {
   position: absolute;
-  left: 48%;
+  left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+.member-login-overlay .dv-spinner {
   width: 50px;
   height: 50px;
   border: 6px rgba(1, 155, 194, 0.26) solid;

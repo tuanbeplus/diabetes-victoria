@@ -140,7 +140,9 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 </head>
 
 <div class="member-login-overlay">
-	<div class="dv-spinner"></div>
+	<div class="loading-wrapper">
+		<div class="dv-spinner"></div>
+	</div>
 </div>
 
 <body <?php body_class(); ?>>
