@@ -113,8 +113,7 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 				}
 			});
 			
-
-			$('#btn-member-logout').each(function() {
+			$('.btn-member-logout').each(function() {
 				let button = $(this)
 				let authCode = getCookie("sf_auth_code");
 				
@@ -126,7 +125,7 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 				}
 			});
 
-			$(document).on('click', '#btn-member-logout', function(e) {
+			$(document).on('click', '.btn-member-logout', function(e) {
 				e.preventDefault()
 				if (confirm('Are you sure you want to log out?')) {
 					// Delete member cookie
@@ -141,7 +140,8 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 </head>
 
 <div class="member-login-overlay">
-	<div class="spinner-logging">
+	<div class="dv-spinner"></div>
+	<div class="spinner-logging" style="display:none;">
 		<?php echo dv_get_icon_svg('spinner-logining'); ?>
 	</div>
 </div>
@@ -169,7 +169,7 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 							</a>
 						</div>
 						<div class="users-action">
-							<a id="btn-member-logout" href="?action=member_logout">
+							<a class="btn-member-logout" href="?action=member_logout">
 								<span>
 									<i class="fa-solid fa-arrow-right-from-bracket"></i>
 								</span>
