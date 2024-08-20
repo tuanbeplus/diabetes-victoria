@@ -141,9 +141,6 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 
 <div class="member-login-overlay">
 	<div class="dv-spinner"></div>
-	<div class="spinner-logging" style="display:none;">
-		<?php echo dv_get_icon_svg('spinner-logining'); ?>
-	</div>
 </div>
 
 <body <?php body_class(); ?>>
