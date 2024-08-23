@@ -12,14 +12,37 @@ add_filter('upload_mimes', 'dv_custom_mime_types');
  * Google Analytics
  */
 function dv_google_analytics() {
-    $ga4 = get_field('google_analytics_4', 'option');
 
+    $ga4 = get_field('google_analytics_4', 'option');
     if(!empty($ga4)) {
         echo $ga4;
     }
-    
 }
 add_action('wp_head', 'dv_google_analytics', 1);
+
+/**
+ * Google Tag Manager (Head)
+ */
+function dv_google_tag_manager_head() {
+
+    $gtm_head = get_field('google_tag_manager_head', 'option');
+    if(!empty($gtm_head)) {
+        echo $gtm_head;
+    }
+}
+add_action('wp_head', 'dv_google_tag_manager_head', 1);
+
+/**
+ * Google Tag Manager (Body)
+ */
+function dv_google_tag_manager_body() {
+
+    $gtm_body = get_field('google_tag_manager_body', 'option');
+    if(!empty($gtm_body)) {
+        echo $gtm_body;
+    }
+}
+add_action('wp_body_open', 'dv_google_tag_manager_body', 99);
 
 /**
  * Custom WP query on search page
