@@ -19,7 +19,20 @@ $logo_full_color = $site_logo['logo_full_color'] ?? '';
 $right_text_align = get_field('enable_rtl', get_the_ID());
 $is_right_text_align = $right_text_align ? $right_text_align : false;
 $sf_community_url = get_field('salesforce_community_url', 'option');
+// Member Sign up
+$member_sign_up = get_field('member_sign_up', 'option');
+$member_sign_up_link = !empty($member_sign_up['page_link']) ? $member_sign_up['page_link'] : '/sign-up-as-member';
+// Member Login
+$member_login = get_field('member_login', 'option');
+$member_login_link = !empty($member_login['login_page']) ? $member_login['login_page'] : '/member-login';
+// Member Logged in
+$member_logged_in = get_field('member_logged_in', 'option');
+$member_hub_link = !empty($member_logged_in['member_page']) ? $member_logged_in['member_page'] : '/members-hub';
+// Member Content
+$member_content = get_field('member_content', get_the_ID());
+$is_member_content = $member_content ? $member_content : 0;
 ?>
+
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -27,7 +40,7 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<?php wp_head(); ?>
-	<script>
+	<script id="member-login-js">
 		jQuery(document).ready(function ($) {
 			// Function to set a cookie
 			function setCookie(name, value, days) {
@@ -86,16 +99,23 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 
 				// Redirect to Sign In page if not member logged in
 				let authCodeCookie = getCookie("sf_auth_code");
-				if (authCodeCookie === '' || authCodeCookie === null) {
-					let siteBody = $('body')
-					if (siteBody.hasClass('page-id-2148') 
-						|| siteBody.hasClass('parent-pageid-2148')
-						|| siteBody.hasClass('single-resource')
-						|| siteBody.hasClass('single-member_recipes')
-					) {
-						overlay.show()
-						window.location.href = '/sign-up-as-member/';
+				let isMemberContent = <?php echo $is_member_content ?>;
+				let siteBody = $('body');
+				if (isMemberContent == true 
+					|| siteBody.hasClass('single-resource')
+					|| siteBody.hasClass('single-member_recipes')
+					|| siteBody.hasClass('tax-resource_categories')
+					|| siteBody.hasClass('tax-member_recipe_cat')
+				) {
+					if (authCodeCookie === '' || authCodeCookie === null) {
+						window.location.href = "<?php echo $member_sign_up_link ?>";
 					}
+					else {
+						overlay.hide()
+					}
+				}
+				else {
+					overlay.hide()
 				}
 			});
 
@@ -105,11 +125,11 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 				
 				if (authCode === '' || authCode === null) {
 					button.html('<span>Member Login<span>')
-					button.attr('href', '/member-login')
+					button.attr('href', "<?php echo $member_login_link ?>")
 				}
 				else {
 					button.html('<span>My Membership<span>')
-					button.attr('href', '/members-hub')
+					button.attr('href', "<?php echo $member_hub_link ?>")
 				}
 			});
 			
@@ -139,11 +159,13 @@ $sf_community_url = get_field('salesforce_community_url', 'option');
 	</script>
 </head>
 
-<div class="member-login-overlay">
-	<div class="loading-wrapper">
-		<div class="dv-spinner"></div>
+<?php if ($is_member_content == true || get_post_type() == 'resource' || get_post_type() == 'member_recipes'): ?>
+	<div class="member-login-overlay">
+		<div class="loading-wrapper">
+			<div class="dv-spinner"></div>
+		</div>
 	</div>
-</div>
+<?php endif; ?>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>

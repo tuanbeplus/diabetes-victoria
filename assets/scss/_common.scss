@@ -577,15 +577,14 @@ section.post-title {
 
 // Member login loading white overlay
 .member-login-overlay {
-    display: none;
-    opacity: 0.9;
+    // display: none;
     position: fixed;
     z-index: 999999;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    background: #fff;
+    background: rgb(255 255 255 / 95%);
     .loading-wrapper {
         position: absolute;
         left: 50%;

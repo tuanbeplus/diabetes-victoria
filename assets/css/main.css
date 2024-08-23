@@ -557,15 +557,13 @@ section.post-title h1 {
 }
 
 .member-login-overlay {
-  display: none;
-  opacity: 0.9;
   position: fixed;
   z-index: 999999;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
 }
 .member-login-overlay .loading-wrapper {
   position: absolute;
