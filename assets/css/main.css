@@ -1030,6 +1030,9 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+.header-inner .users-action .btn-member-logout {
+  display: none;
+}
 @media only screen and (max-width: 1440px) {
   .header-inner .users-action * {
     font-size: 0.875rem;
@@ -2560,7 +2563,7 @@ body .socials-share-wrapper .sharedaddy .sd-block .sd-content .sharing-hidden .i
 .hero-carousel .carousel-wrapper .carousel-item .item-inner .item-content .group-cta .primary-cta {
   display: block;
   max-width: 300px;
-  padding: 14px 36px 12px;
+  padding: 14px 36px 10px;
   font-size: 1.125rem;
   font-family: "ITC-Avant-Garde-Gothic-Pro_Bold";
   line-height: 120%;

@@ -292,6 +292,9 @@ header.site-header {
             text-decoration: underline;
             text-underline-offset: 2px;
         }
+        .btn-member-logout {
+            display: none;
+        }
         @media only screen and (max-width: 1440px) {
             * {
                 font-size: 0.875rem;
