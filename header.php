@@ -107,11 +107,18 @@ $is_member_content = $member_content ? $member_content : 0;
 					|| siteBody.hasClass('tax-resource_categories')
 					|| siteBody.hasClass('tax-member_recipe_cat')
 				) {
+					// Not exist Cookie
 					if (authCodeCookie === '' || authCodeCookie === null) {
 						window.location.href = "<?php echo $member_sign_up_link ?>";
 					}
+					// Exist Cookie
 					else {
-						overlay.hide()
+						if (responseCode && communityUrl) {
+							overlay.show()
+						}
+						else {
+							overlay.hide()
+						}
 					}
 				}
 				else {

@@ -178,9 +178,15 @@ jQuery(document).ready(function ($) {
      * Set css variable to HTML tag
      */
     function dv_set_css_variable() {
-        let header_height = $('header.site-header').height();
+        let header_height = $('header.site-header').outerHeight();
+        let breadcrumb_height = 0;
+        let breadcrumb = $('header nav.breadcrumb');
+        if (breadcrumb.length > 0) {
+            breadcrumb_height = breadcrumb.outerHeight();
+        }
         // Set the CSS variable --header-height
         $('html').css('--header-height', header_height + 'px');
+        $('html').css('--breadcrumb-height', breadcrumb_height + 'px');
     }
 
     /**
@@ -325,6 +331,7 @@ jQuery(document).ready(function ($) {
     // Open Nav mobile
     $(document).on('click', '#btn-nav-bar', function(e){
         e.preventDefault()
+        let siteBody = $('body')
         let nav_mobile = $('header nav#site-navigation')
         let site_tools = $('#pojo-a11y-toolbar')
         if ($(this).hasClass('active')) {
@@ -336,6 +343,7 @@ jQuery(document).ready(function ($) {
             site_tools.hide()
         }
         nav_mobile.toggleClass('active')
+        siteBody.toggleClass('hidden')
     });
 
     // Open sort options
@@ -789,6 +797,18 @@ jQuery(document).ready(function ($) {
             $(this).addClass('active')
             catsList.slideDown(200)
         }
+    });
+
+    // Toggle Sub menu of the menu item
+    $(document).on('click', 'nav#site-navigation ul li.menu-item-has-children', function(e) {
+        e.preventDefault()
+        $(this).toggleClass('active')
+    });
+    $(document).on('click', 'nav#site-navigation ul li a', function(e) {
+        e.stopPropagation()
+    });
+    $(document).on('click', 'nav#site-navigation ul li .sub-menu', function(e) {
+        e.stopPropagation()
     });
     
 })

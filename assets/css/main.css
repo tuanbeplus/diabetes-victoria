@@ -4,6 +4,10 @@
   text-rendering: optimizeLegibility;
 }
 
+html {
+  --header-height: 200px;
+}
+
 body {
   margin: 0;
   margin-top: var(--header-height);
@@ -14,6 +18,9 @@ body {
   font-weight: normal;
   line-height: 140%;
   background-color: var(--post-bg-color, #F5FBFD);
+}
+body.hidden {
+  overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -586,6 +593,37 @@ section.post-title h1 {
   }
 }
 
+/* Custom style Table */
+.table-wrapper table {
+  width: 100%;
+}
+.table-wrapper table th > *,
+.table-wrapper table td > * {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.table-wrapper table th > * :first-child,
+.table-wrapper table td > * :first-child {
+  margin-top: 0;
+}
+.table-wrapper table th > * :last-child,
+.table-wrapper table td > * :last-child {
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 768px) {
+  .table-wrapper table th, .table-wrapper table td {
+    font-size: 0.75rem;
+    min-width: 140px;
+    padding: 14px 10px 10px;
+  }
+  .table-wrapper table th > *, .table-wrapper table td > * {
+    font-size: 0.75rem;
+  }
+  .table-wrapper table td li {
+    font-size: 0.75rem;
+  }
+}
+
 /*************************** Laptop **************************/
 @media only screen and (max-width: 1440px) {
   h1 {
@@ -764,6 +802,11 @@ section.post-title h1 {
 body.admin-bar header.site-header {
   top: 32px;
 }
+@media only screen and (max-width: 768px) {
+  body.admin-bar header.site-header {
+    top: 46px;
+  }
+}
 
 body.home header nav#site-navigation {
   border-bottom: 1px solid #99D6E9;
@@ -806,7 +849,7 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list li.menu-item 
   color: #019BC2;
 }
 header.site-header.sticky nav#site-navigation ul#primary-menu-list li.menu-item-has-children::after {
-  background-image: url("/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-blu.svg");
+  background-image: url(/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-blu.svg);
 }
 header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.menu-item a {
   color: #ffffff;
@@ -1069,11 +1112,6 @@ header.site-header.sticky nav#site-navigation ul#primary-menu-list .sub-menu li.
     display: flex;
   }
 }
-@media only screen and (max-width: 768px) {
-  .user-action-mobile * {
-    font-size: 0.875rem;
-  }
-}
 
 #header-logo img {
   width: 214px;
@@ -1155,14 +1193,14 @@ nav#site-navigation ul#primary-menu-list li.menu-item-has-children::after {
   display: block;
   width: 16px;
   height: 16px;
-  background-image: url("/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-white.svg");
+  background-image: url(/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-white.svg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   transition: all 0.3s;
 }
 nav#site-navigation ul#primary-menu-list li.menu-item-has-children:hover > .sub-menu {
-  display: block !important;
+  display: block;
 }
 nav#site-navigation ul#primary-menu-list li.menu-item-has-children:hover::after {
   transform: rotate(-180deg);
@@ -1317,15 +1355,24 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   #btn-nav-bar {
     display: block;
   }
+  body.admin-bar nav#site-navigation {
+    height: calc(100vh - var(--header-height) - var(--wp-admin--admin-bar--height) + var(--breadcrumb-height) + 2px);
+  }
   nav#site-navigation {
     display: none;
+    height: calc(100vh - var(--header-height) + var(--breadcrumb-height) + 2px);
+    overflow-y: auto;
     position: absolute;
     right: 0;
     left: 0;
+    margin-top: -1px;
     padding: 16px 0 40px;
     background-color: #019BC2;
     border-top: 1px solid #99D6E9;
     animation: nav-slide-show 0.2s linear both;
+  }
+  nav#site-navigation.active {
+    display: block;
   }
   nav#site-navigation .primary-menu-container {
     max-width: 890px;
@@ -1344,9 +1391,21 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     color: #ffffff !important;
   }
   nav#site-navigation ul#primary-menu-list li.menu-item-has-children::after {
-    background-image: url("/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-white.svg") !important;
+    background-image: url(/wp-content/themes/diabetes-victoria/assets/imgs/icon-chevron-down-white.svg) !important;
     position: absolute;
     right: 2px;
+  }
+  nav#site-navigation ul#primary-menu-list li.menu-item-has-children:hover > .sub-menu {
+    display: none;
+  }
+  nav#site-navigation ul#primary-menu-list li.menu-item-has-children:hover::after {
+    transform: none;
+  }
+  nav#site-navigation ul#primary-menu-list li.menu-item-has-children.active > .sub-menu {
+    display: block !important;
+  }
+  nav#site-navigation ul#primary-menu-list li.menu-item-has-children.active::after {
+    transform: rotate(-180deg) !important;
   }
   nav#site-navigation ul#primary-menu-list .sub-menu {
     position: relative;
@@ -1360,9 +1419,6 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   }
   nav#site-navigation ul#primary-menu-list .sub-menu li.menu-item {
     border: none;
-  }
-  nav#site-navigation.active {
-    display: block;
   }
 }
 @media only screen and (max-width: 782px) {
@@ -1425,6 +1481,9 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     height: -moz-fit-content;
     height: fit-content;
   }
+  .top-menu-mobile #top-menu .top-menu-list #btn-phone:hover svg g {
+    fill: #019BC2;
+  }
   .top-menu-mobile #top-menu .top-menu-list #btn-member-login {
     padding: 13px 22px 11px;
     line-height: 1;
@@ -1432,10 +1491,16 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     height: -moz-fit-content;
     height: fit-content;
   }
+  .top-menu-mobile #top-menu .top-menu-list #btn-member-login:hover {
+    color: #019BC2;
+  }
   .top-menu-mobile #top-menu .top-menu-list #btn-search {
     padding: 12px 16px;
     height: -moz-fit-content;
     height: fit-content;
+  }
+  .top-menu-mobile #top-menu .top-menu-list #btn-search:hover {
+    color: inherit;
   }
   .top-menu-mobile #top-menu .top-menu-list #btn-donate {
     padding: 13px 22px 11px;
@@ -1456,6 +1521,7 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
     width: 120px;
   }
   #btn-nav-bar {
+    margin: 0 -4px 0 0;
     font-size: 26px;
   }
   nav#site-navigation .primary-menu-container {
@@ -1483,9 +1549,6 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
   }
   .search-common-wrapper #btn-close-search {
     right: 20px;
-  }
-  nav#site-navigation {
-    height: 1000px;
   }
 }
 @media only screen and (max-width: 430px) {
@@ -1520,22 +1583,16 @@ nav#site-navigation ul#primary-menu-list .sub-menu {
 }
 @keyframes nav-slide-show {
   0% {
+    opacity: 0;
     visibility: hidden;
-    transform: translateX(110%);
-  }
-  20% {
-    visibility: hidden;
-    transform: translateX(80%);
+    transform: translateX(101%);
   }
   50% {
     visibility: visible;
     transform: translateX(50%);
   }
-  80% {
-    visibility: visible;
-    transform: translateX(20%);
-  }
   100% {
+    opacity: 1;
     visibility: visible;
     transform: translateX(0%);
   }
@@ -4076,6 +4133,9 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
 @media only screen and (max-width: 430px) {
   section.main-content .main-content-inner .content-wrapper .__content iframe {
     height: 200px !important;
+  }
+  section.main-content .main-content-inner .content-wrapper .__content a {
+    white-space: normal;
   }
   section.main-content .main-content-inner .content-wrapper .wp-video {
     height: 260px;

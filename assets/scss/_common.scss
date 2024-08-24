@@ -17,10 +17,17 @@ $primary_font_medium: 'ITC-Avant-Garde-Gothic-Pro_Medium';
 $primary_font_demi:   'ITC-Avant-Garde-Gothic-Pro_Demi';
 $primary_font_bold:   'ITC-Avant-Garde-Gothic-Pro_Bold';
 
+// Path variables
+$dv_img_dir: "/wp-content/themes/diabetes-victoria/assets/imgs";
+
 *, ::before, ::after {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+html {
+    --header-height: 200px;
 }
 
 body {
@@ -33,6 +40,9 @@ body {
     font-weight: normal;
     line-height: 140%;
     background-color: var(--post-bg-color, $dv_background);
+    &.hidden {
+        overflow: hidden;
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -603,6 +613,37 @@ section.post-title {
             height: 40px;
             border: 5px rgb(1 155 194 / 26%) solid;
             border-top: 5px $primary_color solid;
+        }
+    }
+}
+
+/* Custom style Table */
+.table-wrapper table {
+    width: 100%;
+    th > *,
+    td > * {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        :first-child {
+            margin-top: 0;
+        }
+        :last-child {
+            margin-bottom: 0;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        th, td {
+            font-size: 0.75rem;
+            min-width: 140px;
+            padding: 14px 10px 10px;
+            > * {
+                font-size: 0.75rem;
+            }
+        }
+        td {
+            li {
+                font-size: 0.75rem;
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
  * Define theme path
  */
 define('DV_SCRIPT_SUFFIX', 'false' ); // 'true' or 'false' type string
-define('DV_THEME_VER', rand());
+define('DV_THEME_VER', '1.4');
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
 /**
@@ -18,15 +18,12 @@ function dv_enqueue_scripts()
     // Font Awesome
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
 
-    // Cookie JS
-    // wp_enqueue_style('cookie-js', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
-
     // Slick Carousel
     wp_enqueue_style('slick-carousel-style', get_template_directory_uri() . '/assets/slick/slick.css?r=' . DV_THEME_VER);
 	wp_enqueue_script('slick-carousel-script', get_template_directory_uri() . '/assets/slick/slick.min.js', array(), DV_THEME_VER, true);
 
     // Main style
-    wp_enqueue_style('custom-style', get_template_directory_uri() . '/assets/css/custom.css?r=' . DV_THEME_VER);
+    // wp_enqueue_style('custom-style', get_template_directory_uri() . '/assets/css/custom.css?r=' . DV_THEME_VER);
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.css?r=' . DV_THEME_VER);
 
     // Main script
