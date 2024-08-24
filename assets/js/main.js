@@ -178,6 +178,7 @@ jQuery(document).ready(function ($) {
      * Set css variable to HTML tag
      */
     function dv_set_css_variable() {
+        var viewport_height = $(window).height();
         let header_height = $('header.site-header').outerHeight();
         let breadcrumb_height = 0;
         let breadcrumb = $('header nav.breadcrumb');
@@ -185,6 +186,7 @@ jQuery(document).ready(function ($) {
             breadcrumb_height = breadcrumb.outerHeight();
         }
         // Set the CSS variable --header-height
+        $('html').css('--viewport-height', viewport_height + 'px');
         $('html').css('--header-height', header_height + 'px');
         $('html').css('--breadcrumb-height', breadcrumb_height + 'px');
     }

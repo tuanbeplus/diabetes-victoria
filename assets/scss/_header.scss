@@ -627,12 +627,12 @@ nav#site-navigation {
     }
     body.admin-bar {
         nav#site-navigation {
-            height: calc(100vh - var(--header-height) - var(--wp-admin--admin-bar--height) + var(--breadcrumb-height) + 2px);
+            height: calc(var(--viewport-height) - var(--header-height) - var(--wp-admin--admin-bar--height) + var(--breadcrumb-height) + 2px);
         }
     }
     nav#site-navigation {
         display: none;
-        height: calc(100vh - var(--header-height) + var(--breadcrumb-height) + 2px);
+        height: calc(var(--viewport-height) - var(--header-height) + var(--breadcrumb-height) + 2px);
         overflow-y: auto;
         position: absolute;
         right: 0;
