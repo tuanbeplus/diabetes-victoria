@@ -100,12 +100,13 @@
     /********************** Mobile ********************/
     @media only screen and (max-width: 600px) {
         .search-header {
-            margin-top: 60px;
+            margin-top: 18vh;
             img.site-logo {
                 width: 120px;
             }
         }
         form.search-form {
+            margin: 6vh auto auto;
             input[type=search] {
                 padding: 14px 16px 12px;
                 font-size: 1rem;

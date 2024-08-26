@@ -496,6 +496,20 @@ section.main-content {
             }
             .sidebar {
                 max-width: 100%;
+                .on-this-page {
+                    ul {
+                        li {
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+                .secondary-info {
+                    ul {
+                        li {
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
                 .additional-info-boxes {
                     margin-top: 24px;
                 }

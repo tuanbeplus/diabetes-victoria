@@ -336,6 +336,7 @@ jQuery(document).ready(function ($) {
         let siteBody = $('body')
         let nav_mobile = $('header nav#site-navigation')
         let site_tools = $('#pojo-a11y-toolbar')
+        let btnScrollTop = $('#btn-scroll-top')
         if ($(this).hasClass('active')) {
             $(this).removeClass('active')
             site_tools.show()
@@ -346,6 +347,7 @@ jQuery(document).ready(function ($) {
         }
         nav_mobile.toggleClass('active')
         siteBody.toggleClass('hidden')
+        btnScrollTop.removeClass('show')
     });
 
     // Open sort options

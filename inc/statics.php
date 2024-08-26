@@ -3,7 +3,7 @@
  * Define theme path
  */
 define('DV_SCRIPT_SUFFIX', 'false' ); // 'true' or 'false' type string
-define('DV_THEME_VER', '1.4');
+define('DV_THEME_VER', '1.5');
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
 /**

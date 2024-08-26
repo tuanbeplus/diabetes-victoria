@@ -327,6 +327,7 @@ jQuery(document).ready(function ($) {
     var siteBody = $('body');
     var nav_mobile = $('header nav#site-navigation');
     var site_tools = $('#pojo-a11y-toolbar');
+    var btnScrollTop = $('#btn-scroll-top');
     if ($(this).hasClass('active')) {
       $(this).removeClass('active');
       site_tools.show();
@@ -336,6 +337,7 @@ jQuery(document).ready(function ($) {
     }
     nav_mobile.toggleClass('active');
     siteBody.toggleClass('hidden');
+    btnScrollTop.removeClass('show');
   });
 
   // Open sort options

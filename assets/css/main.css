@@ -4125,6 +4125,12 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   section.main-content .main-content-inner .sidebar {
     max-width: 100%;
   }
+  section.main-content .main-content-inner .sidebar .on-this-page ul li {
+    margin-bottom: 10px;
+  }
+  section.main-content .main-content-inner .sidebar .secondary-info ul li {
+    margin-bottom: 10px;
+  }
   section.main-content .main-content-inner .sidebar .additional-info-boxes {
     margin-top: 24px;
   }
@@ -5543,10 +5549,13 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
 }
 @media only screen and (max-width: 600px) {
   .global-search-wrapper .search-header {
-    margin-top: 60px;
+    margin-top: 18vh;
   }
   .global-search-wrapper .search-header img.site-logo {
     width: 120px;
+  }
+  .global-search-wrapper form.search-form {
+    margin: 6vh auto auto;
   }
   .global-search-wrapper form.search-form input[type=search] {
     padding: 14px 16px 12px;
@@ -5897,9 +5906,14 @@ form.search-form .form-suggest ul.suggest-list li a {
 }
 @media only screen and (max-width: 550px) {
   .contact-phones-popup .contact-phones-wrapper {
+    margin: 22vh 24px !important;
     padding: 80px 24px 40px;
   }
   .contact-phones-popup .contact-phones-wrapper .inner {
     gap: 30px;
+  }
+  .contact-phones-popup .contact-phones-wrapper #btn-close-contacts-popup {
+    top: 16px;
+    right: 16px;
   }
 }
