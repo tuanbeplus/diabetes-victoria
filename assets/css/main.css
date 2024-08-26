@@ -4125,7 +4125,7 @@ section.main-content .main-content-inner .sidebar .additional-info-boxes .aib-bo
   section.main-content .main-content-inner .sidebar {
     max-width: 100%;
   }
-  section.main-content .main-content-inner .sidebar .on-this-page ul li {
+  section.main-content .main-content-inner .sidebar .on-this-page ul.links-list li {
     margin-bottom: 10px;
   }
   section.main-content .main-content-inner .sidebar .secondary-info ul li {
