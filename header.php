@@ -18,19 +18,9 @@ $logo_white_color = $site_logo['logo_white_color'] ?? '';
 $logo_full_color = $site_logo['logo_full_color'] ?? '';
 $right_text_align = get_field('enable_rtl', get_the_ID());
 $is_right_text_align = $right_text_align ? $right_text_align : false;
-$sf_community_url = get_field('salesforce_community_url', 'option');
-// Member Sign up
-$member_sign_up = get_field('member_sign_up', 'option');
-$member_sign_up_link = !empty($member_sign_up['page_link']) ? $member_sign_up['page_link'] : '/sign-up-as-member';
-// Member Login
-$member_login = get_field('member_login', 'option');
-$member_login_link = !empty($member_login['login_page']) ? $member_login['login_page'] : '/member-login';
-// Member Logged in
-$member_logged_in = get_field('member_logged_in', 'option');
-$member_hub_link = !empty($member_logged_in['member_page']) ? $member_logged_in['member_page'] : '/members-hub';
 // Member Content
 $member_content = get_field('member_content', get_the_ID());
-$is_member_content = $member_content ? $member_content : 0;
+$is_member_content = ($member_content == true) ? $member_content : 0;
 ?>
 
 <!doctype html>
@@ -40,130 +30,6 @@ $is_member_content = $member_content ? $member_content : 0;
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<?php wp_head(); ?>
-	<script id="member-login-js">
-		jQuery(document).ready(function ($) {
-			// Function to set a cookie
-			function setCookie(name, value, days) {
-				var expires = "";
-				if (days) {
-					var date = new Date();
-					date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-					expires = "; expires=" + date.toUTCString();
-				}
-				document.cookie = name + "=" + (value || "") + expires + "; path=/";
-			}
-
-			// Function to get a cookie value by name
-			function getCookie(name) {
-				var nameEQ = name + "=";
-				var cookies = document.cookie.split(';');
-				for (var i = 0; i < cookies.length; i++) {
-					var cookie = cookies[i];
-					while (cookie.charAt(0) === ' ') {
-						cookie = cookie.substring(1);
-					}
-					if (cookie.indexOf(nameEQ) === 0) {
-						return cookie.substring(nameEQ.length, cookie.length);
-					}
-				}
-				return null;
-			}
-
-			// Function to reset (delete) a cookie
-			function resetCookie(name) {
-				// Set the cookie with a past expiration date to delete it
-				document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
-			}
-
-			// Function to get a URL parameter by name
-			function getUrlParameter(name) {
-				var regex = new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)');
-				var results = regex.exec(window.location.search);
-				return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-			}
-
-			$(function() {
-				// Get params on URL
-				let responseCode = getUrlParameter("code")
-				let communityUrl = getUrlParameter("sfdc_community_url")
-				let overlay = $('.member-login-overlay')
-				if (responseCode && communityUrl) {
-					overlay.show()
-
-					// Set member cookie
-					setCookie('sf_auth_code', responseCode, 1);
-
-					// Redirect to Members Hub page 
-					window.location.href = "<?php echo $sf_community_url ?>/supporterportalauth/s/";
-				}
-
-				// Redirect to Sign In page if not member logged in
-				let authCodeCookie = getCookie("sf_auth_code");
-				let isMemberContent = <?php echo $is_member_content ?>;
-				let siteBody = $('body');
-				if (isMemberContent == true 
-					|| siteBody.hasClass('single-resource')
-					|| siteBody.hasClass('single-member_recipes')
-					|| siteBody.hasClass('tax-resource_categories')
-					|| siteBody.hasClass('tax-member_recipe_cat')
-				) {
-					// Not exist Cookie
-					if (authCodeCookie === '' || authCodeCookie === null) {
-						window.location.href = "<?php echo $member_sign_up_link ?>";
-					}
-					// Exist Cookie
-					else {
-						if (responseCode && communityUrl) {
-							overlay.show()
-						}
-						else {
-							overlay.hide()
-						}
-					}
-				}
-				else {
-					overlay.hide()
-				}
-			});
-
-			$('#btn-member-login').each(function() {
-				let button = $(this)
-				let authCode = getCookie("sf_auth_code");
-				
-				if (authCode === '' || authCode === null) {
-					button.html('<span>Member Login<span>')
-					button.attr('href', "<?php echo $member_login_link ?>")
-				}
-				else {
-					button.html('<span>My Membership<span>')
-					button.attr('href', "<?php echo $member_hub_link ?>")
-				}
-			});
-			
-			$('.btn-member-logout').each(function() {
-				let button = $(this)
-				let authCode = getCookie("sf_auth_code");
-				
-				if (authCode === '' || authCode === null) {
-					button.hide()
-				}
-				else {
-					button.show()
-				}
-			});
-
-			$(document).on('click', '.btn-member-logout', function(e) {
-				e.preventDefault()
-				if (confirm('Are you sure you want to log out?')) {
-					// Delete member cookie
-					resetCookie("sf_auth_code");
-
-					// Redirect to Members Hub page
-					window.location.href = '/';
-				}
-			});
-		});
-	</script>
 </head>
 
 <?php if ($is_member_content == true || get_post_type() == 'resource' || get_post_type() == 'member_recipes'): ?>

@@ -36,7 +36,7 @@ $languages          = get_field('languages', 'option');
                 </li>
                 <li class="member-login">
                     <a id="btn-member-login" href="<?php echo $login_page ?>" 
-                        class="is_logged_in" role="button">
+                        class="btn-member-login is_logged_in" role="button">
                         <span><?php echo $member_login['button_text'] ?? 'Member Login'; ?></span>
                     </a>
                 </li>
