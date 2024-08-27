@@ -2,6 +2,7 @@ jQuery(document).ready(function ($) {
     // Prepare member login data
     const {
         isMemberContent,
+        isSearchPage,
         memberHubLink,
         memberLoginLink,
         memberSignUpLink,
@@ -61,6 +62,7 @@ jQuery(document).ready(function ($) {
 
     $(function() {
         // Get params on URL
+        let searchKey = getUrlParameter("s") 
         let errorName = getUrlParameter("error")
         let errorDesc = getUrlParameter("error_description")
         let responseCode = getUrlParameter("code")
@@ -97,6 +99,11 @@ jQuery(document).ready(function ($) {
         // Redirect to Sign In page if not member logged in
         let authCodeCookie = getCookie("sf_auth_code");
         if (isMemberContent == true || postTypeName == 'resource' || postTypeName == 'member_recipes') {
+            // Return if is seach page
+            if (isSearchPage || searchKey) {
+                overlay.hide()
+                return;
+            }
             // Not exist Cookie
             if (!authCodeCookie || authCodeCookie.trim() === '') {
                 window.location.href = memberSignUpLink;

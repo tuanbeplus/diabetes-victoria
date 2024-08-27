@@ -33,11 +33,13 @@ $is_member_content = ($member_content == true) ? $member_content : 0;
 </head>
 
 <?php if ($is_member_content == true || get_post_type() == 'resource' || get_post_type() == 'member_recipes'): ?>
-	<div class="member-login-overlay">
-		<div class="loading-wrapper">
-			<div class="dv-spinner"></div>
+	<?php if ( !is_search() ): ?>
+		<div class="member-login-overlay">
+			<div class="loading-wrapper">
+				<div class="dv-spinner"></div>
+			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 <?php endif; ?>
 
 <body <?php body_class(); ?>>

@@ -62,6 +62,7 @@ function dv_enqueue_scripts()
         'member_login_data',
         array( 
             'isMemberContent'  => $is_member_content,
+            'isSearchPage'     => is_search(),
             'memberHubLink'    => $member_hub_link,
             'memberLoginLink'  => $member_login_link,
             'memberSignUpLink' => $member_sign_up_link,
