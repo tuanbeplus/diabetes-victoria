@@ -348,6 +348,7 @@ jQuery(document).ready(function ($) {
         nav_mobile.toggleClass('active')
         siteBody.toggleClass('hidden')
         btnScrollTop.removeClass('show')
+        dv_aria_expanded_status($(this));
     });
 
     // Open sort options
@@ -544,8 +545,8 @@ jQuery(document).ready(function ($) {
     $(document).on('click', '#btn-donate', function(e){
         e.preventDefault()
         let this_btn = $(this) 
-        window.location.href = this_btn.attr('href')
-        return
+        // window.location.href = this_btn.attr('href')
+        // return
         this_btn.addClass('active')
         let adminBar = $('#wpadminbar')
         let wrapper_margin = this_btn.outerHeight();

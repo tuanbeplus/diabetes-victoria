@@ -3,7 +3,7 @@
  * Define theme path
  */
 define('DV_SCRIPT_SUFFIX', 'false' ); // 'true' or 'false' type string
-define('DV_THEME_VER', '1.6');
+define('DV_THEME_VER', '1.7');
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
 /**
@@ -24,7 +24,7 @@ function dv_enqueue_scripts()
 
     // Main style
     // wp_enqueue_style('custom-style', get_template_directory_uri() . '/assets/css/custom.css?r=' . DV_THEME_VER);
-    wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main'.dv_suffix().'.css?r=' . DV_THEME_VER);
+    wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.bundle.css?r=' . DV_THEME_VER);
 
     // Main script
 	wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main'.dv_suffix().'.js', array(), DV_THEME_VER, true);

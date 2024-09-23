@@ -17,17 +17,17 @@ $languages          = get_field('languages', 'option');
 
 <div id="top-menu">
     <div class="container">
-        <ul class="top-menu-list">
+        <div class="top-menu-list">
             <?php if (!empty($useful_links)): ?>
-                <div class="useful-links-list col-left">
+                <ul class="useful-links-list col-left">
                 <?php foreach ($useful_links as $item): ?>
                     <li>
                         <a href="<?php echo $item['item_link']; ?>"><?php echo $item['item_text']; ?></a>
                     </li>
                 <?php endforeach; ?>
-                </div>
+                </ul>
             <?php endif; ?>
-            <div class="col-right">
+            <ul class="col-right">
                 <li class="phone">
                     <button id="btn-phone" title="Contact Phones" aria-label="Contact Phones"
                         aria-expanded="false" aria-controls="contact-phones-area">
@@ -47,10 +47,10 @@ $languages          = get_field('languages', 'option');
                     </button>
                 </li>
                 <li class="donate">
-                    <button id="btn-donate" aria-expanded="false" aria-controls="donate-popup" style="display:none;">
+                    <button id="btn-donate" aria-expanded="false" aria-controls="donate-popup">
                         <span><?php echo $donate['button_text'] ?? 'Donate'; ?></span>
                     </button>
-                    <a id="btn-donate" role="button" href="<?php echo esc_url( $donate_page ) ?>">
+                    <a id="btn-donate" role="button" href="<?php echo esc_url( $donate_page ) ?>" style="display:none;">
                         <span><?php echo $donate['button_text'] ?? 'Donate'; ?></span>
                     </a>
                 </li>
@@ -60,8 +60,8 @@ $languages          = get_field('languages', 'option');
                         <?php echo dv_get_icon_svg('icon-languages'); ?>
                     </a>
                 </li>
-            </div>
-        </ul>
+            </ul>
+        </div>
     </div>
 </div>
 

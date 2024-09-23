@@ -72,9 +72,9 @@ $is_member_content = ($member_content == true) ? $member_content : 0;
 								<span>Logout</span>
 							</a>
 						</div>
-						<button id="btn-nav-bar">
-							<span class="icon-bar"><i class="fa-solid fa-bars"></i></span>
-							<span class="icon-close"><i class="fa-solid fa-xmark"></i></span>
+						<button id="btn-nav-bar" aria-label="Open navigation menu" aria-controls="site-navigation" aria-expanded="false">
+							<span class="icon-bar" aria-hidden="true"><i class="fa-solid fa-bars"></i></span>
+							<span class="icon-close" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
 						</button>
 					</div>
 				<?php endif; ?>

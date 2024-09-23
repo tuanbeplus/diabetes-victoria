@@ -22,7 +22,8 @@ $other_ways_link = $donate['other_ways_to_get_involved'];
                                 <?php foreach ($amount_options as $row): ?>
                                     <input type="radio" name="amount" 
                                             id="amount-<?php echo $row['amount'] ?>"
-                                            value="<?php echo $row['amount'] ?>">
+                                            value="<?php echo $row['amount'] ?>"
+                                            <?php if ($row['amount'] == 50) echo 'checked="checked"'; ?>>
                                     <label for="amount-<?php echo $row['amount'] ?>">
                                         <?php echo '$'.$row['amount'].'.00'; ?>
                                     </label>
@@ -30,7 +31,7 @@ $other_ways_link = $donate['other_ways_to_get_involved'];
                             <?php endif; ?>
                         </div>
                         <input type="number" name="amount" id="other-amount" placeholder="Or enter an amount $">
-                        <a id="btn-regular-gift" role="button" href="<?php echo $regular_gift_link; ?>">
+                        <a id="btn-regular-gift" role="button" href="<?php echo $regular_gift_link; ?>" style="display:none;">
                             Make it a regular gift
                         </a>
                     </div>
