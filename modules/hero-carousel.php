@@ -118,7 +118,7 @@ if( get_row_layout() == 'hero_carousel' ):
         $pd_top = get_sub_field('padding_top');
         $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '0';
         $pd_bottom = get_sub_field('padding_bottom');
-        $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '60px';
+        $pd_bottom = (isset($pd_bottom) && $pd_bottom !== '') ? $pd_bottom . 'px' : '0';
         
         echo '<style>
                 #hero-carousel-'. $section_id .' {
