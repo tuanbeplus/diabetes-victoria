@@ -60,7 +60,9 @@ add_action('pre_get_posts', 'dv_custom_search_posts_per_page');
  * Remove the editor from page
  */
 add_action( 'init', function() {
-    remove_post_type_support( 'page', 'editor' );
+    remove_post_type_support('page', 'editor');
+    remove_post_type_support('post', 'comments'); 
+    remove_post_type_support('post', 'trackbacks'); 
 }, 99);
 
 /**

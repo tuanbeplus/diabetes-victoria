@@ -27,7 +27,7 @@ function dv_register_member_recipe_cpt() {
 		'hierarchical'    => false,
 		'menu_icon'       => 'dashicons-book-alt',
 		'rewrite'         => array('slug' => 'member-recipes'), // Permalinks format
-		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'comments', 'custom-fields')
+		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'custom-fields')
   	);
 
     register_post_type( 'member_recipes' , $args );

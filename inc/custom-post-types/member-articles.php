@@ -35,7 +35,7 @@ function dv_resources_register() {
 		'hierarchical'    => false,
 		'menu_icon'       => 'dashicons-admin-post',
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
-		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'comments', 'custom-fields')
+		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'custom-fields')
   	);
 
   register_post_type( 'resource' , $args );

@@ -35,7 +35,7 @@ function dv_recipe_register() {
 		'hierarchical'    => false,
 		'menu_icon'       => 'dashicons-book',
 		'rewrite'         => array('slug' => $cpt_slug), // Permalinks format
-		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'comments', 'custom-fields')
+		'supports'        => array('title', 'editor', 'thumbnail', 'author', 'custom-fields')
   	);
 
   register_post_type( 'recipe' , $args );
@@ -58,18 +58,6 @@ function dv_recipe_taxonomy() {
 			"rewrite"        => true
 		)
 	);
-
-	// register_taxonomy(
-    //     'recipe_tag',
-    //     'recipe',
-    //     array(
-    //         'hierarchical'  => false,
-    //         'label'         => __( 'Tags', 'diabetes-victoria' ),
-    //         'singular_name' => __( 'Tag', 'diabetes-victoria' ),
-    //         'rewrite'       => true,
-    //         'query_var'     => true
-    //     )
-    // );
 
 }
 add_action('init', 'dv_recipe_taxonomy', 1);
