@@ -32,7 +32,15 @@ $is_member_content = ($member_content == true) ? $member_content : 0;
 	<?php wp_head(); ?>
 </head>
 
-<?php if ($is_member_content == true || get_post_type() == 'resource' || get_post_type() == 'member_recipes'): ?>
+<?php if (!isset($_REQUEST['code']) && !isset($_REQUEST['sfdc_community_url'])): ?>
+	<script>
+		if (localStorage) {
+			localStorage.setItem('dv_redirect_url', window.location.href);
+		}
+	</script>
+<?php endif; ?>
+
+<?php if ($is_member_content == true || get_post_type() == 'resource' || get_post_type() == 'member_recipes' || isset($_REQUEST['code'])): ?>
 	<?php if ( !is_search() ): ?>
 		<div class="member-login-overlay">
 			<div class="loading-wrapper">

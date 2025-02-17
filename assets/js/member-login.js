@@ -5,7 +5,6 @@ jQuery(document).ready(function ($) {
         isSearchPage,
         memberHubLink,
         memberLoginLink,
-        memberSignUpLink,
         sfCommunityUrl,
         siteHomeUrl,
         postTypeName
@@ -86,12 +85,11 @@ jQuery(document).ready(function ($) {
         if (responseCode && communityUrl) {
             // Show the loading overlay
             overlay.show()
-
             // Set member cookie
             let isCookieSet = setCookie('sf_auth_code', responseCode, 1);
             if (isCookieSet) {
-                // Redirect to Members Hub page 
-                window.location.href = sfCommunityUrl + "/supporterportalauth/s/";
+                // Redirect to pre page 
+                window.location.href = localStorage.dv_redirect_url ? localStorage.dv_redirect_url : siteHomeUrl;
                 return;
             }
         }
@@ -106,7 +104,7 @@ jQuery(document).ready(function ($) {
             }
             // Not exist Cookie
             if (!authCodeCookie || authCodeCookie.trim() === '') {
-                window.location.href = memberSignUpLink;
+                window.location.href = memberLoginLink;
                 return;
             }
             // Exist Cookie
@@ -171,5 +169,6 @@ jQuery(document).ready(function ($) {
                 alert('Error: Unable to log out. Please try again.');
             }
         }
-    });
+    });        
+
 });

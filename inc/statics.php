@@ -3,7 +3,7 @@
  * Define theme path
  */
 define('DV_SCRIPT_SUFFIX', 'false' ); // 'true' or 'false' type string
-define('DV_THEME_VER', '1.8');
+define('DV_THEME_VER', '1.9');
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
 /**
@@ -23,7 +23,6 @@ function dv_enqueue_scripts()
 	wp_enqueue_script('slick-carousel-script', get_template_directory_uri() . '/assets/slick/slick.min.js', array(), DV_THEME_VER, true);
 
     // Main style
-    // wp_enqueue_style('custom-style', get_template_directory_uri() . '/assets/css/custom.css?r=' . DV_THEME_VER);
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.bundle.css?r=' . DV_THEME_VER);
 
     // Main script
@@ -44,9 +43,6 @@ function dv_enqueue_scripts()
 
     // Salesforce Community Url
     $sf_community_url = get_field('salesforce_community_url', 'option');
-    // Member Sign up
-    $member_sign_up = get_field('member_sign_up', 'option');
-    $member_sign_up_link = !empty($member_sign_up['page_link']) ? $member_sign_up['page_link'] : '/sign-up-as-member';
     // Member Login
     $member_login = get_field('member_login', 'option');
     $member_login_link = !empty($member_login['login_page']) ? $member_login['login_page'] : '/member-login';
@@ -65,7 +61,6 @@ function dv_enqueue_scripts()
             'isSearchPage'     => is_search(),
             'memberHubLink'    => $member_hub_link,
             'memberLoginLink'  => $member_login_link,
-            'memberSignUpLink' => $member_sign_up_link,
             'postTypeName'     => get_post_type(),
             'sfCommunityUrl'   => $sf_community_url,
             'siteHomeUrl'      => home_url(),

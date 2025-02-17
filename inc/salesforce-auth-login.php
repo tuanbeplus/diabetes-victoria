@@ -121,19 +121,3 @@ function dv_salesforce_member_logout() {
     }
 }
 // add_action('init', 'dv_salesforce_member_logout');
-
-/**
- * Redirect to Sign up page if not logged in member
- * 
- */
-function dv_redirect_sign_up_page() {
-    global $post;
-    if (empty($_COOKIE['sf_auth_code'])) {
-        if ($post->ID == 2148 || get_post_type() == 'resource' || get_post_type() == 'member_recipes') {
-            wp_redirect(home_url( '/sign-up-as-member' ));
-        }
-    }
-}
-// add_action ('init', 'dv_redirect_sign_up_page');
-
-

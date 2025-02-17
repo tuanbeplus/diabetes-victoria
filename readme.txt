@@ -1,6 +1,6 @@
 ==== WP Diabetes Victoria Theme ====
 
-Version: 1.8
+Version: 1.9
 
 Tags: flexible-content, accessibility-ready, blog, custom-menu, featured-images, translation-ready, right-sidebar, theme-options, full-width-template
 
