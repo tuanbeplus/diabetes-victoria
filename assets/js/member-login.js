@@ -61,12 +61,43 @@ jQuery(document).ready(function ($) {
 
     $(function() {
         // Get params on URL
-        let searchKey = getUrlParameter("s") 
-        let errorName = getUrlParameter("error")
-        let errorDesc = getUrlParameter("error_description")
-        let responseCode = getUrlParameter("code")
-        let communityUrl = getUrlParameter("sfdc_community_url")
-        let overlay = $('.member-login-overlay')
+        let searchKey = getUrlParameter("s");
+        let errorName = getUrlParameter("error");
+        let errorDesc = getUrlParameter("error_description");
+        let responseCode = getUrlParameter("code");
+        let communityUrl = getUrlParameter("sfdc_community_url");
+        let overlay = $('.member-login-overlay');
+        let redirectUrl = localStorage.getItem('dv_redirect_url');
+        
+        // Redirect to Sign In page if not member logged in
+        let authCodeCookie = getCookie("sf_auth_code");
+        if (isMemberContent == true || postTypeName == 'resource' || postTypeName == 'member_recipes') {
+            if (!isSearchPage && localStorage) {
+                localStorage.setItem('dv_redirect_url', window.location.href);
+            }
+            // Return if is seach page
+            if (isSearchPage || searchKey) {
+                overlay.hide()
+                return;
+            }
+            // Not exist Cookie
+            if (!authCodeCookie || authCodeCookie.trim() === '') {
+                window.location.href = memberLoginLink;
+                return;
+            } else { // Exist Cookie
+                if (responseCode && communityUrl) {
+                    overlay.show()
+                }
+                else {
+                    overlay.hide()
+                }
+            }
+        } else if (window.location.pathname === '/member-login/') {
+            overlay.hide()
+        } else {
+            localStorage.removeItem('dv_redirect_url');
+            overlay.hide()
+        }
 
         // Handle Errors
         if (errorName && errorDesc) {
@@ -89,36 +120,9 @@ jQuery(document).ready(function ($) {
             let isCookieSet = setCookie('sf_auth_code', responseCode, 1);
             if (isCookieSet) {
                 // Redirect to pre page 
-                window.location.href = localStorage.dv_redirect_url ? localStorage.dv_redirect_url : siteHomeUrl;
+                window.location.href = redirectUrl ? redirectUrl : memberHubLink;
                 return;
             }
-        }
-
-        // Redirect to Sign In page if not member logged in
-        let authCodeCookie = getCookie("sf_auth_code");
-        if (isMemberContent == true || postTypeName == 'resource' || postTypeName == 'member_recipes') {
-            // Return if is seach page
-            if (isSearchPage || searchKey) {
-                overlay.hide()
-                return;
-            }
-            // Not exist Cookie
-            if (!authCodeCookie || authCodeCookie.trim() === '') {
-                window.location.href = memberLoginLink;
-                return;
-            }
-            // Exist Cookie
-            else {
-                if (responseCode && communityUrl) {
-                    overlay.show()
-                }
-                else {
-                    overlay.hide()
-                }
-            }
-        }
-        else {
-            overlay.hide()
         }
     });
 

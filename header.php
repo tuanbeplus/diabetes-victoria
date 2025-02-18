@@ -18,9 +18,10 @@ $logo_white_color = $site_logo['logo_white_color'] ?? '';
 $logo_full_color = $site_logo['logo_full_color'] ?? '';
 $right_text_align = get_field('enable_rtl', get_the_ID());
 $is_right_text_align = $right_text_align ? $right_text_align : false;
-// Member Content
 $member_content = get_field('member_content', get_the_ID());
-$is_member_content = ($member_content == true) ? $member_content : 0;
+$is_member_content = ($member_content == true) ? true : false;
+$member_hub_page = get_field('member_logged_in', 'option');
+$member_hub_link = !empty($member_hub_page['member_page']) ? $member_hub_page['member_page'] : '/members-hub';
 ?>
 
 <!doctype html>
@@ -32,16 +33,8 @@ $is_member_content = ($member_content == true) ? $member_content : 0;
 	<?php wp_head(); ?>
 </head>
 
-<?php if (!isset($_REQUEST['code']) && !isset($_REQUEST['sfdc_community_url'])): ?>
-	<script>
-		if (localStorage) {
-			localStorage.setItem('dv_redirect_url', window.location.href);
-		}
-	</script>
-<?php endif; ?>
-
-<?php if ($is_member_content == true || get_post_type() == 'resource' || get_post_type() == 'member_recipes' || isset($_REQUEST['code'])): ?>
-	<?php if ( !is_search() ): ?>
+<?php if ( !is_search() ): ?>
+	<?php if ($is_member_content === true || get_post_type() === 'resource' || get_post_type() === 'member_recipes' || isset($_REQUEST['code'])): ?>
 		<div class="member-login-overlay">
 			<div class="loading-wrapper">
 				<div class="dv-spinner"></div>
