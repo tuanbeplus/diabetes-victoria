@@ -1,21 +1,27 @@
 
 // color variables
-$primary_color:   #019BC2;
-$secondary_color: #3F51B5;
-$tertiary_color:  #E9730C;
-$accent_color:    #99D6E9;
-$dv_black:        #223540;
-$dv_background:   #F5FBFD;
-$dv_white:        #ffffff;
+$primary_color:   var(--primary-color);
+$secondary_color: var(--secondary-color);
+$tertiary_color:  var(--tertiary-color);
+$accent_color:    var(--accent-color);
+$dv_black:        var(--black-color);
+$dv_background:   var(--background-color);
+$dv_white:        var(--white-color);
 $dv_dark:         #007995;
-$donate_color:    #3F51B5;
+$donate_color:    var(--secondary-color);
 
 // font variables
-$primary_font_light:  'ITC-Avant-Garde-Gothic-Pro_Light';
-$primary_font_book:   'ITC-Avant-Garde-Gothic-Pro_Book';
-$primary_font_medium: 'ITC-Avant-Garde-Gothic-Pro_Medium';
-$primary_font_demi:   'ITC-Avant-Garde-Gothic-Pro_Demi';
-$primary_font_bold:   'ITC-Avant-Garde-Gothic-Pro_Bold';
+// $primary_font_light:  'ITC-Avant-Garde-Gothic-Pro_Light';
+// $primary_font_book:   'ITC-Avant-Garde-Gothic-Pro_Book';
+// $primary_font_medium: 'ITC-Avant-Garde-Gothic-Pro_Medium';
+// $primary_font_demi:   'ITC-Avant-Garde-Gothic-Pro_Demi';
+// $primary_font_bold:   'ITC-Avant-Garde-Gothic-Pro_Bold';
+
+$primary_font_light:  'Majorant-Light';
+$primary_font_book:   'Majorant-Regular';
+$primary_font_medium: 'Majorant-Regular';
+$primary_font_demi:   'Majorant-Medium';
+$primary_font_bold:   'Majorant-Medium';
 
 // Path variables
 $dv_img_dir: "/wp-content/themes/diabetes-victoria/assets/imgs";
@@ -107,19 +113,12 @@ li {
     }
 }
 
-ul {
-    li {
-        &::marker {
-            font-size: 1.2rem;
-        }
-    }
-}
-
 strong, b {
     font-family: $primary_font_bold;
 }
 
 a {
+    color: $secondary_color;
     text-decoration: none;
 }
 
@@ -243,7 +242,7 @@ header.sticky {
 }
 .breadcrumb {
     padding: 24px 0 22px;
-    background-color: var(--post-brand-color, #99D6E9);
+    background-color: var(--post-brand-color, $secondary_color);
     .breadcrumb-list {
         max-width: 1054px;
         list-style: none;
@@ -257,22 +256,25 @@ header.sticky {
         li {
             margin: 0;
             padding: 0;
-            color: var(--post-sub-brand-color, $dv_dark);
+            color: var(--post-sub-brand-color, $dv_white);
             font-size: 0.875rem;
             font-family: $primary_font_bold;
             &:last-child {
-                margin-top: 1px;
+                position: relative;
+                top: -1px;
             }
             a {
+                position: relative;
+                top: -2px;
                 display: block;
                 line-height: 1.5rem;
-                color: var(--post-sub-brand-color, $dv_dark);
+                color: var(--post-sub-brand-color, $dv_white);
                 text-decoration: underline;
                 text-underline-offset: 2px;
             }
         }
         .arrow {
-            color: var(--post-sub-brand-color, $dv_dark);
+            color: var(--post-sub-brand-color, $dv_white);
             font-family: $primary_font_bold;
         }
     }
@@ -587,7 +589,6 @@ section.post-title {
 
 // Member login loading white overlay
 .member-login-overlay {
-    // display: none;
     position: fixed;
     z-index: 999999;
     top: 0;
@@ -605,14 +606,14 @@ section.post-title {
         width: 50px;
         height: 50px;
         border: 6px rgb(1 155 194 / 26%) solid;
-        border-top: 6px $primary_color solid;
+        border-top: 6px $secondary_color solid;
     }
     @media only screen and (max-width: 768px) {
         .dv-spinner {
             width: 40px;
             height: 40px;
             border: 5px rgb(1 155 194 / 26%) solid;
-            border-top: 5px $primary_color solid;
+            border-top: 5px $secondary_color solid;
         }
     }
 }
@@ -795,6 +796,9 @@ section.post-title {
     }
 }
 @media only screen and (max-width: 500px) {
+    section.post-title {
+        padding: 20px 0;
+    }
     .posts-list {
         grid-template-columns: repeat(1, 1fr);
     }

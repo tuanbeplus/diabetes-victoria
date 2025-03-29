@@ -74,7 +74,7 @@
         }
         .load-more-cta {
             position: relative;
-            padding: 14px 32px 12px;
+            padding: 14px 32px;
             display: inline-block;
             font-size: 1rem;
             font-family: $primary_font_bold;
@@ -84,7 +84,7 @@
             border: none;
             transition: all 0.3s;
             &:hover {
-                background-color: #007995;
+                background-color: $secondary_color;
             }
             .loading-wrapper {
                 display: none;
@@ -103,30 +103,15 @@
             }
         }
     }
-}
 
-@keyframes card-zoom-out {
-    from { 
-        transform: scale(0.1);
-    }
-	to { 
-        transform: scale(1);
-    }
-}
-
-@media only screen and (max-width: 1440px) {
-    .latest-posts {
+    @media only screen and (max-width: 1440px) {
         .posts-wrapper {
             .heading {
                 font-size: 2rem;
             }
         }
     }
-}
-
-/*************************** Tablet **************************/
-@media only screen and (max-width: 1024px) {
-    .latest-posts {
+    @media only screen and (max-width: 1024px) {
         .posts-wrapper {
             .top {
                 margin-bottom: 32px;
@@ -136,10 +121,7 @@
             }
         }
     }
-}
-
-@media only screen and (max-width: 768px) {
-    .latest-posts {
+    @media only screen and (max-width: 768px) {
         .posts-wrapper {
             .top {
                 margin-bottom: 24px;
@@ -152,11 +134,7 @@
             }
         }
     }
-}
-
-/*************************** Mobile **************************/
-@media only screen and (max-width: 600px) {
-    .latest-posts {
+    @media only screen and (max-width: 600px) {
         .posts-wrapper {
             .top {
                 flex-wrap: wrap;
@@ -166,9 +144,18 @@
                 margin-top: 24px;
             }
             .load-more-cta {
-                padding: 12px 20px 10px;
+                padding: 12px 20px;
                 font-size: 0.875rem;
             }
         }
+    }    
+}
+
+@keyframes card-zoom-out {
+    from { 
+        transform: scale(0.1);
+    }
+	to { 
+        transform: scale(1);
     }
 }

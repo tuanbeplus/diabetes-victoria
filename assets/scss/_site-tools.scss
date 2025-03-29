@@ -25,13 +25,13 @@
         width: 40px;
         height: 40px;
         transform: rotate(180deg);
-        background-color: #fff;
+        background-color: $dv_background;
         &.show {
             visibility: visible;
         }
         svg {
             #menu-item {
-                stroke: var(--post-brand-color, $dv_dark);
+                stroke: var(--post-brand-color, $primary_color);
             }
         }
     }
@@ -71,7 +71,7 @@ body {
                 }
             }
             .pojo-a11y-toolbar-toggle {
-                left: -244px;
+                left: -230px;
             }
         }
         .pojo-a11y-toolbar-overlay {
@@ -81,14 +81,14 @@ body {
             transform: translateY(100%);
             visibility: hidden;
             opacity: 0;
-            border: 1px solid var(--post-brand-color, #007995);
+            border: 1px solid $primary_color;
 
             .pojo-a11y-toolbar-title {
                 font-family: $primary_font_bold;
             }
 
             ul.pojo-a11y-toolbar-items {
-                border-color: var(--post-brand-color, #007995)!important;
+                border-color: var(--post-brand-color, $primary_color)!important;
                 li.pojo-a11y-toolbar-item {
                     margin: 0;
                     padding: 0;
@@ -96,11 +96,11 @@ body {
                     a {
                         transition: all 0.2s;
                         &.active {
-                            background-color: var(--post-brand-color, #007995)!important;
+                            background-color: $primary_color !important;
                         }
                         &:hover {
                             color: #fff;
-                            background-color: var(--post-brand-color, #007995);
+                            background-color: $primary_color;
                         }
                         .pojo-a11y-toolbar-text {
                             vertical-align: unset;
@@ -120,15 +120,15 @@ body {
                 display: flex;
                 align-items: center;
                 gap: 32px;
-                padding: 28px 34px 26px;
+                padding: 26px 30px 22px;
                 width: 340px;
                 font-size: 1.125rem;
                 font-family: $primary_font_bold;
                 line-height: 120%;
                 border: none;
                 border-radius: 0 54px 54px 0;
-                color: var(--post-sub-brand-color, $dv_dark);
-                background-color: var(--post-brand-color, #99D6E9);
+                color: $primary_color;
+                background-color: $tertiary_color;
                 box-sizing: unset;
                 box-shadow: 0 0 2px 0 rgba(0,0,0,0.2)!important;
                 transition: all 0.3s;
@@ -143,7 +143,7 @@ body {
                     line-height: 1;
                     svg {
                         g path {
-                            fill: var(--post-sub-brand-color, $dv_dark);
+                            fill: $primary_color;
                         }
                     }
                 }
@@ -153,7 +153,7 @@ body {
         #btn-close-accessibility-toolbar {
             display: none;
             box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
-            background-color: var(--post-brand-color, #007995);
+            background-color: $primary_color;
         }
 
         .background-overlay {
@@ -183,19 +183,19 @@ body {
             height: 45px;
             padding: 0;
             line-height: 1;
-            background-color: var(--post-brand-color, #99D6E9);
+            background-color: $tertiary_color;
             border: none;
             border-radius: 0 22px 22px 0;
             box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
             svg {
                 rect#Rectangle {
-                    fill: var(--post-brand-color, #99D6E9);
+                    fill: $tertiary_color;
                 }
                 circle, line {
-                    stroke: var(--post-sub-brand-color, #007995);
+                    stroke: $primary_color;
                 }
                 circle:first-of-type {
-                    fill: var(--post-brand-color, #99D6E9);
+                    fill: $tertiary_color;
                     stroke: none;
                 }
             }
@@ -220,7 +220,7 @@ body {
                 right: 20px;
                 top: 20px;
                 transition: all 0.3s;
-                background-color: var(--post-brand-color, #007995);
+                background-color: $primary_color;
             }
             .essb_links {
                 margin-bottom: 0;

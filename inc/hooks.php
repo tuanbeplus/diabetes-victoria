@@ -193,9 +193,10 @@ function dv_custom_wp_login_logo() {
     ?>
     <style type="text/css">
         #login h1 a, .login h1 a {
-            background-image: url("<?php echo DV_IMG_DIR ?>dv-logo-full-color.png");
-            width:190px;
-            background-size: 190px;
+            margin-bottom: 32px;
+            background-image: url("/wp-content/uploads/2025/03/DV_Brandmark_Primary_FullCol_RGB_Cropped.svg");
+            width: 260px;
+            background-size: contain;
             background-repeat: no-repeat;
         }
     </style>
@@ -210,3 +211,33 @@ function dv_custom_wp_login_logo_url() {
     return home_url();
 }
 add_filter('login_headerurl', 'dv_custom_wp_login_logo_url');
+
+/**
+ * Add css global vars
+ */
+function dv_add_custom_css_variables() {
+    // Get values from ACF options
+    $global_color  = get_field('global_color', 'options') ?? '';
+    $primary_color = (isset($global_color['primary_color']) && $global_color['primary_color'] != '') ? $global_color['primary_color'] : '#04284E';
+    $second_color  = (isset($global_color['secondary_color']) && $global_color['secondary_color'] != '') ? $global_color['secondary_color'] : '#2B468C';
+    $tertiary_color  = (isset($global_color['tertiary_color']) && $global_color['tertiary_color'] != '') ? $global_color['tertiary_color'] : '#2B468C';
+    $accent_color  = (isset($global_color['accent_color']) && $global_color['accent_color'] != '') ? $global_color['accent_color'] : '#4E93FF';
+    $bg_color      = (isset($global_color['background_color']) && $global_color['background_color'] != '') ? $global_color['background_color'] : '#ECE2D8';
+    $white_color   = (isset($global_color['white_color']) && $global_color['white_color'] != '') ? $global_color['white_color'] : '#FFFFFF';
+    $black_color   = (isset($global_color['black_color']) && $global_color['black_color'] != '') ? $global_color['black_color'] : '#000000';
+    ?>
+    <style>
+        :root {
+            --primary-color: <?php echo esc_attr($primary_color); ?>;
+            --secondary-color: <?php echo esc_attr($second_color); ?>;
+            --tertiary-color: <?php echo esc_attr($tertiary_color); ?>;
+            --accent-color: <?php echo esc_attr($accent_color); ?>;
+            --background-color: <?php echo esc_attr($bg_color); ?>;
+            --white-color: <?php echo esc_attr($white_color); ?>;
+            --black-color: <?php echo esc_attr($black_color); ?>;
+        }
+    </style>
+    <?php
+}
+add_action('wp_head', 'dv_add_custom_css_variables', 10);
+

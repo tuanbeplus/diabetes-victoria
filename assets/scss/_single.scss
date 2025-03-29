@@ -37,7 +37,7 @@
                 }
                 a {
                     font-family: $primary_font_demi;
-                    color: var(--post-brand-color, #019BC2);
+                    color: var(--post-brand-color, $primary_color);
                     text-decoration: underline;
                     text-underline-offset: 2px;
                     white-space: nowrap;

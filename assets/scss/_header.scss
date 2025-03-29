@@ -11,7 +11,7 @@ body.admin-bar {
 body.home {
     header {
         nav#site-navigation {
-            border-bottom: 1px solid #99D6E9;
+            border-bottom: 1px solid #d8d8d8;
         }
     }
 }
@@ -22,7 +22,6 @@ header.site-header {
     top: 0;
     z-index: 10;
     background-color: $primary_color;
-    animation: dv-slide-down 0.3s linear both;
     &.sticky {
         background-color: rgba(255, 255, 255, 0.95);
         box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
@@ -58,7 +57,7 @@ header.site-header {
                 }
                 li.menu-item-has-children{
                     &::after {
-                        background-image: url(#{$dv_img_dir}/icon-chevron-down-blu.svg);
+                        background-image: url(#{$dv_img_dir}/icon-chevron-down-darkblue.svg);
                     }
                 }
                 .sub-menu {
@@ -128,7 +127,19 @@ header.site-header {
                 transition: all 0.3s;
             }
             svg {
-                transition: all 0.3s;
+                g {
+                    fill: $primary_color;
+                }
+                g#search {
+                    circle {
+                        fill: #fff;
+                        stroke: $primary_color;
+                    }
+                    line {
+                        fill: $primary_color;
+                        stroke: $primary_color;
+                    }
+                }
             }
         }
         .useful-links-list {
@@ -137,7 +148,7 @@ header.site-header {
             height: 100%;
             padding: 18px 16px 16px 0;
             li {
-                padding: 2px 8px 0;
+                padding: 1px 8px 2px;
                 border-right: 2px solid $primary_color;
                 border-left: none;
                 font-size: 0.875rem;
@@ -230,8 +241,17 @@ header.site-header {
             &:hover {
                 color: $dv_white;
                 background-color: $primary_color;
-                svg g {
-                    stroke: $dv_white;
+                svg {
+                    g {
+                        circle {
+                            stroke: #fff;
+                            fill: var(--primary-color);
+                        }
+                        line {
+                            fill: #fff;
+                            stroke: #fff;
+                        }
+                    }
                 }
             }
         }
@@ -259,12 +279,17 @@ header.site-header {
             align-items: center;
             gap: 6px;
             padding: 14px 30px;
-            color: $dv_dark;
+            color: $dv_white;
             font-size: 1.25rem;
             line-height: 1;
-            background-color: $accent_color;
-            svg g#language-solid {
-                transition: all 0.3s;
+            background-color: $tertiary_color;
+            svg {
+                g#language-solid {
+                    transition: all 0.3s;
+                }
+                g {
+                    fill: $dv_white;
+                }
             }
         }
         #btn-languages:hover {
@@ -299,11 +324,6 @@ header.site-header {
         }
         .btn-member-logout {
             display: none;
-        }
-        @media only screen and (max-width: 1440px) {
-            * {
-                font-size: 0.875rem;
-            }
         }
         @media only screen and (max-width: 1024px) {
             display: none;
@@ -393,7 +413,7 @@ nav#site-navigation {
         }
         li.menu-item {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             position: relative;
             gap: 8px;
             margin: 0;
@@ -452,6 +472,7 @@ nav#site-navigation {
             z-index: 10;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
             animation: menuDropDown 0.3s linear both;
+            border: 1px solid #647a91;
         }
     }
 }
@@ -655,7 +676,8 @@ nav#site-navigation {
             li.menu-item {
                 padding: 12px 0;
                 flex-direction: column;
-                border-bottom: 1px solid #99D6E9;
+                align-items: normal;
+                border-bottom: 1px solid #d8d8d8;
                 a {
                     color: $dv_white!important;
                 }
@@ -689,9 +711,10 @@ nav#site-navigation {
                 padding: 0 16px;
                 width: 100%;
                 box-shadow: none;
-                border-left: 1px solid #99D6E9;
                 transform: none;
                 animation: none;
+                border: none;
+                border-left: 1px solid #d8d8d8;
                 li.menu-item {
                     border: none;
                 }

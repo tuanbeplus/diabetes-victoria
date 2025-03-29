@@ -21,8 +21,8 @@ if( get_row_layout() == 'hero_carousel' ):
                     if (!empty($item)): 
                         $title = $item['title'];
                         $image = $item['image'];
-                        $text_color = !empty($item['text_color']) ? $item['text_color'] : '#fff';
-                        $background_color = !empty($item['background_color']) ? $item['background_color'] : '#019BC2';
+                        $text_color = !empty($item['text_color']) ? $item['text_color'] : 'var(--white-color)';
+                        $background_color = !empty($item['background_color']) ? $item['background_color'] : 'var(--primary-color)';
                         $description = $item['description'];
                         $primary_cta = $item['primary_cta'];
                         $secondary_cta = $item['secondary_cta'];
@@ -61,7 +61,6 @@ if( get_row_layout() == 'hero_carousel' ):
                                     <!-- Carousel image -->
                                     <div class="item-img">
                                         <img class="main-img" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>" loading="lazy">
-                                        <img class="quote-shape" src="<?php echo DV_IMG_DIR.'quote-shape-blu-2.png'; ?>" alt="Quote Shape" loading="lazy">
                                     </div><!-- .Carousel image -->
                                 <?php endif; ?>
                             </div>
@@ -114,7 +113,7 @@ if( get_row_layout() == 'hero_carousel' ):
         <?php
         // Style
         $bg_color = get_sub_field('background_color');
-        $bg_color = !empty($bg_color) ? $bg_color : '#019BC2';
+        $bg_color = !empty($bg_color) ? $bg_color : 'var(--primary-color)';
         $pd_top = get_sub_field('padding_top');
         $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '0';
         $pd_bottom = get_sub_field('padding_bottom');

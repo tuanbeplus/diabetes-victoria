@@ -43,6 +43,7 @@
             border: none;
             background: none;
             font-size: 1rem;
+            line-height: 1;
             font-family: $primary_font_bold;
             color: #fff;
             text-decoration: underline;
@@ -50,6 +51,7 @@
             transition: all 0.2s;
             &:hover {
                 .close-icon {
+                    color: $donate_color;
                     background-color: #fff;
                 }
             }
@@ -60,8 +62,8 @@
                 padding: 6px;
                 font-size: 22px;
                 line-height: 1;
-                background-color: #99D6E9;
-                color: $donate_color;
+                background-color: $tertiary_color;
+                color: #fff;
             }
         }
         form {
@@ -121,7 +123,7 @@
                     font-size: 1rem;
                     color: #fff;
                     border: 2px solid #fff;
-                    background-color: #4F9BCE;
+                    background-color: $tertiary_color;
                     font-family: $primary_font_bold;
                     &::placeholder {
                         font-family: $primary_font_medium;

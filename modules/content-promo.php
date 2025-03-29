@@ -43,7 +43,7 @@ if( get_row_layout() == 'content_promo' ):
                         $title = $item['title'];
                         $image = $item['image'];
                         $text_color = !empty($item['text_color']) ? $item['text_color'] : '#FFF';
-                        $background_color = !empty($item['background_color']) ? $item['background_color'] : '';
+                        $background_color = !empty($item['background_color']) ? $item['background_color'] : 'var(--primary-color)';
                         $cta_background_color = !empty($item['cta_background_color']) ? $item['cta_background_color'] : '#FFF';
                         $description = $item['description'];
                         $primary_cta = $item['primary_cta'];

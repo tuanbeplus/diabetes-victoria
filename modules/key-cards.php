@@ -25,7 +25,7 @@ if( get_row_layout() == 'key_cards' ):
                 <ul class="cards-list">
                 <?php foreach ($cards_list as $index => $row): 
                     $card = $row['card'] ?? '';
-                    $brand_color = ($card['brand_color'] !== '') ? $card['brand_color'] : '#019BC2';
+                    $brand_color = ($card['brand_color'] !== '') ? $card['brand_color'] : 'var(--tertiary-color)';
                     $img_url = !empty($card['image']['url']) ? $card['image']['url'] : DV_IMG_DIR.'card-img-placeholder.png';
                     $img_alt = $card['image']['alt'] ?? '';
                     $landing_page_name = !empty($card['landing_page_name']) ? $card['landing_page_name'] : $card['landing_page_link'];

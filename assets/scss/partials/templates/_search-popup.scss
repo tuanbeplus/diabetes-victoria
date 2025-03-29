@@ -164,6 +164,16 @@ form.search-form {
             display: inline-block;
             width: 20px;
             height: 20px;
+            svg {
+                g {
+                    circle {
+                        stroke: $primary_color;
+                    }
+                    line {
+                        stroke: $primary_color;
+                    }
+                }
+            }
         }
     }
     .form-suggest {

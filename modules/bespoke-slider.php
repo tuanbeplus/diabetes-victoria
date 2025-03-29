@@ -120,7 +120,7 @@ $carousel_json = json_encode($carousel_data);
 <?php 
 // Style
 $bg_color = get_sub_field('background_color');
-$bg_color = !empty($bg_color) ? $bg_color : '#223540';
+$bg_color = !empty($bg_color) ? $bg_color : 'var(--background-color)';
 $pd_top = get_sub_field('padding_top');
 $pd_top = (isset($pd_top) && $pd_top !== '') ? $pd_top . 'px' : '0';
 $pd_bottom = get_sub_field('padding_bottom');
