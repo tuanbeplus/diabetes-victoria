@@ -11,12 +11,6 @@ $dv_dark:         #007995;
 $donate_color:    var(--secondary-color);
 
 // font variables
-// $primary_font_light:  'ITC-Avant-Garde-Gothic-Pro_Light';
-// $primary_font_book:   'ITC-Avant-Garde-Gothic-Pro_Book';
-// $primary_font_medium: 'ITC-Avant-Garde-Gothic-Pro_Medium';
-// $primary_font_demi:   'ITC-Avant-Garde-Gothic-Pro_Demi';
-// $primary_font_bold:   'ITC-Avant-Garde-Gothic-Pro_Bold';
-
 $primary_font_light:  'Majorant-Light';
 $primary_font_book:   'Majorant-Regular';
 $primary_font_medium: 'Majorant-Regular';
@@ -45,6 +39,7 @@ body {
     font-family: $primary_font_medium;
     font-weight: normal;
     line-height: 140%;
+    color: var(--black-color);
     background-color: var(--post-bg-color, $dv_background);
     &.hidden {
         overflow: hidden;

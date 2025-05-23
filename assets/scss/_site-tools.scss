@@ -128,7 +128,7 @@ body {
                 border: none;
                 border-radius: 0 54px 54px 0;
                 color: $primary_color;
-                background-color: $tertiary_color;
+                background-color: #d9e7ff;
                 box-sizing: unset;
                 box-shadow: 0 0 2px 0 rgba(0,0,0,0.2)!important;
                 transition: all 0.3s;
@@ -183,19 +183,19 @@ body {
             height: 45px;
             padding: 0;
             line-height: 1;
-            background-color: $tertiary_color;
+            background-color: #d9e7ff;
             border: none;
             border-radius: 0 22px 22px 0;
             box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
             svg {
                 rect#Rectangle {
-                    fill: $tertiary_color;
+                    fill: #d9e7ff;
                 }
                 circle, line {
                     stroke: $primary_color;
                 }
                 circle:first-of-type {
-                    fill: $tertiary_color;
+                    fill: #d9e7ff;
                     stroke: none;
                 }
             }

@@ -279,16 +279,16 @@ header.site-header {
             align-items: center;
             gap: 6px;
             padding: 14px 30px;
-            color: $dv_white;
+            color: $primary_color;
             font-size: 1.25rem;
             line-height: 1;
-            background-color: $tertiary_color;
+            background-color: #d9e7ff;
             svg {
                 g#language-solid {
                     transition: all 0.3s;
                 }
                 g {
-                    fill: $dv_white;
+                    fill: $primary_color;
                 }
             }
         }

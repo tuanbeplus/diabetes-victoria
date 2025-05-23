@@ -25,8 +25,9 @@ if( get_row_layout() == 'key_cards' ):
                 <ul class="cards-list">
                 <?php foreach ($cards_list as $index => $row): 
                     $card = $row['card'] ?? '';
-                    $brand_color = ($card['brand_color'] !== '') ? $card['brand_color'] : 'var(--tertiary-color)';
-                    $img_url = !empty($card['image']['url']) ? $card['image']['url'] : DV_IMG_DIR.'card-img-placeholder.png';
+                    $brand_color = ($card['brand_color'] !== '') ? $card['brand_color'] : 'var(--secondary-color)';
+                    $cta_color = ($card['brand_color'] !== '') ? $card['brand_color'] : 'var(--tertiary-color)';
+                    $img_url = !empty($card['image']['url']) ? $card['image']['url'] : DV_IMG_DIR .'DV-placeholder-img.png';
                     $img_alt = $card['image']['alt'] ?? '';
                     $landing_page_name = !empty($card['landing_page_name']) ? $card['landing_page_name'] : $card['landing_page_link'];
                     $landing_page_link = $card['landing_page_link'] ?? '';
@@ -82,11 +83,11 @@ if( get_row_layout() == 'key_cards' ):
                                     color: <?php echo $brand_color ?>!important;
                                 }
                                 #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .card-cta a {
-                                    border: 2px solid <?php echo $brand_color ?>!important;
-                                    background-color: <?php echo $brand_color ?>!important;
+                                    border: 2px solid <?php echo $cta_color ?>!important;
+                                    background-color: <?php echo $cta_color ?>!important;
                                 }
                                 #key-cards-section-<?php echo $section_id; ?> #card-<?php echo $index; ?> .card-cta a:hover {
-                                    color: <?php echo $brand_color; ?>!important;
+                                    color: <?php echo $cta_color; ?>!important;
                                     box-shadow: inset 400px 0 0 0 #fff!important;
                                 }
                             </style><!-- .Custom brand color -->

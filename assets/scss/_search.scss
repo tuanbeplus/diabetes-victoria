@@ -76,6 +76,14 @@
                     width: 16px;
                     height: 16px;
                     transition: all 0.2s;
+                    svg {
+                        fill: $primary_color;
+                        stroke: $primary_color;
+                        g {
+                            fill: $primary_color;
+                            stroke: $primary_color;
+                        }
+                    }
                 }
                 &.active {
                     .chevron-icon {
