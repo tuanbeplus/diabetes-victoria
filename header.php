@@ -89,7 +89,7 @@ $member_hub_link = !empty($member_hub_page['member_page']) ? $member_hub_page['m
 
 	<div class="site-tools">
 		<button id="btn-scroll-top" title="Go to top">
-			<?php echo dv_get_icon_svg('icon-chevron-down-blu'); ?>
+			<?php echo dv_get_icon_svg('icon-chevron-down-darkblue'); ?>
 		</button><!-- #button scroll to top -->
 	</div>
 
