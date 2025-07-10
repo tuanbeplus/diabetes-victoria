@@ -815,5 +815,15 @@ jQuery(document).ready(function ($) {
     $(document).on('click', 'nav#site-navigation ul li .sub-menu', function(e) {
         e.stopPropagation()
     });
+
+    $(document).on('click', '.sharedaddy .share-print.sd-button', function(e) {
+        e.preventDefault();
+        // Instantly scroll to the top of the page
+        window.scrollTo(0, 0);
+        // Wait 100ms, then trigger the print dialog
+        setTimeout(function () {
+            window.print();
+        }, 100);
+    });
     
 })

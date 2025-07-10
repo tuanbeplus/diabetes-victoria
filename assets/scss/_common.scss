@@ -799,3 +799,16 @@ section.post-title {
     }
 }
 
+/* Print-specific styles */
+@media print {
+    .site-tools,
+    #pojo-a11y-toolbar {
+        display: none !important;
+    }
+    header.site-header {
+        position: relative !important;
+    }
+    body {
+        margin-top: 0 !important;
+    }
+}
