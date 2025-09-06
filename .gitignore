@@ -1,6 +1,46 @@
-node_modules
+# Node modules directory
+node_modules/
+
+# macOS system files
 .DS_Store
+
+# Laravel Mix/webpack build files
 webpack.mix.js
 mix-manifest.json
+
+# NPM/Yarn package manager files
 package-lock.json
 package.json
+yarn.lock
+
+# VSCode settings
+.vscode/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# SASS cache
+.sass-cache/
+
+# Composer files (if PHP composer is used)
+composer.lock
+composer.phar
+
+# Environment files
+.env
+.env.*
+
+# WordPress uploads (if not versioned)
+# /wp-content/uploads/
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+
+# IDE files
+.idea/
+*.sublime-workspace
+*.sublime-project
+# End of Selection

@@ -35,12 +35,11 @@ header.site-header {
             }
         }
         #header-logo {
-            img.logo-white-color {
-                display: none;
-            }
-            img.logo-full-color {
-                display: block;
+            img {
                 width: 132px;
+                &.logo-full-color {
+                    display: block;
+                }
             }
         }
         #btn-nav-bar {
@@ -357,15 +356,20 @@ header.site-header {
     }
 }
 
-
 // Logo
 #header-logo {
+    position: relative;
     img {
         width: 214px;
         max-width: 100%;
-    }
-    img.logo-full-color {
-        display: none;
+        transition: all 0.3s;
+        &.logo-full-color {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
     }
 }
 
@@ -407,7 +411,7 @@ nav#site-navigation {
         padding: 0;
         display: flex;
         justify-content: left;
-        gap: 2px;
+        gap: 8px;
         > li.menu-item:first-child{
             padding-left: 2px;
         }
@@ -443,8 +447,8 @@ nav#site-navigation {
             &::after {
                 content: "";
                 display: block;
-                width: 16px;
-                height: 16px;
+                width: 15px;
+                height: 15px;
                 background-image: url(#{$dv_img_dir}/icon-chevron-down-white.svg);
                 background-repeat: no-repeat;
                 background-size: contain;
@@ -471,7 +475,7 @@ nav#site-navigation {
             background-color: $primary_color;
             z-index: 10;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-            animation: menuDropDown 0.3s linear both;
+            animation: menuDropDown 0.4s ease;
             border: 1px solid #647a91;
         }
     }
@@ -480,7 +484,7 @@ nav#site-navigation {
 @keyframes menuDropDown {
     0% {
         opacity: 0.8;
-        transform: translateY(90%);
+        transform: translateY(95%);
     }
     100% {
         opacity: 1;

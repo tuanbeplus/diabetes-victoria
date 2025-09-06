@@ -5,51 +5,113 @@ jQuery(document).ready(function ($) {
         isSearchPage,
         memberHubLink,
         memberLoginLink,
-        sfCommunityUrl,
         siteHomeUrl,
-        postTypeName
+        postTypeName,
+        contentForMemberType
     } = member_login_data;
 
-    // Function to set a cookie
-    function setCookie(name, value, days) {
-        // If the value is an empty string or not a string -> do not set the cookie
-        if (typeof value !== 'string' || value.trim() === '') {
+    // Function to validate membership data from URL
+    function validateMembershipData(memberData) {
+        if (!memberData.recordTypeId || !memberData.memberType || !memberData.membershipType) {
             return false;
         }
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
+        // Check if dates are valid (not "NA")
+        if (memberData.expiryDate === "NA" || memberData.gracePeriodDate === "NA") {
+            return false;
         }
-        // Set the cookie
-        document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
-        // Verify if the cookie was successfully set
-        return document.cookie.indexOf(name + "=" + encodeURIComponent(value)) !== -1;
+        // Validate member type
+        const validMemberTypes = ['Paid', 'Free'];
+        if (!validMemberTypes.includes(memberData.memberType)) {
+            return false;
+        }
+        // Validate membership type: accept any non-empty string (e.g. "Free Ongoing")
+        if (typeof memberData.membershipType !== 'string' || memberData.membershipType.trim() === '') {
+            return false;
+        }
+        return true;
     }
 
-    // Function to get a cookie value by name
-    function getCookie(name) {
-        var nameEQ = name + "=";
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            while (cookie.charAt(0) === ' ') {
-                cookie = cookie.substring(1);
-            }
-            if (cookie.indexOf(nameEQ) === 0) {
-                return cookie.substring(nameEQ.length, cookie.length);
+    // Function to determine membership tier
+    function determineMembershipTier(memberData) {
+        if (!memberData || !validateMembershipData(memberData)) {
+            return 'none';
+        }
+        // Check if membership is expired
+        if (isMembershipExpired(memberData.expiryDate, memberData.gracePeriodDate)) {
+            return 'expired';
+        }
+        // Return tier based on member type
+        return memberData.memberType === 'Paid' ? 'full' : 'free';
+    }
+
+    // Function to check if membership is expired
+    function isMembershipExpired(expiryDate, gracePeriodDate) {
+        if (expiryDate === "NA" || gracePeriodDate === "NA") {
+            return true; // Consider NA as expired
+        }
+        const currentDate = new Date();
+        const gracePeriodTimestamp = convertDateToTimestamp(gracePeriodDate);
+        
+        return currentDate.getTime() > gracePeriodTimestamp;
+    }
+
+    // Function to convert DDMMYYYY date to timestamp
+    function convertDateToTimestamp(dateStr) {
+        if (dateStr.length !== 8) {
+            return 0;
+        }
+        const day = parseInt(dateStr.substring(0, 2));
+        const month = parseInt(dateStr.substring(2, 4)) - 1; // Month is 0-indexed
+        const year = parseInt(dateStr.substring(4, 8));
+        
+        return new Date(year, month, day).getTime();
+    }
+
+    // Function to store membership data
+    function storeMembershipData(memberData) {
+        const membershipData = {
+            recordTypeId: memberData.recordTypeId,
+            memberType: memberData.memberType,
+            membershipType: memberData.membershipType,
+            expiryDate: memberData.expiryDate,
+            gracePeriodDate: memberData.gracePeriodDate,
+            timestamp: Date.now()
+        };
+        
+        // Store in localStorage
+        if (localStorage) {
+            localStorage.setItem('dv_membership_data', JSON.stringify(membershipData));
+        }
+    }
+
+    // Function to get stored membership data
+    function getStoredMembershipData() {
+        if (localStorage) {
+            try {
+                const stored = localStorage.getItem('dv_membership_data');
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error('Error parsing membership data from localStorage:', e);
             }
         }
         return null;
     }
 
-    // Function to reset (delete) a cookie
-    function resetCookie(name) {
-        // Set the cookie with a past expiration date to delete it
-        document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
-        // Verify if the cookie was successfully deleted
-        return document.cookie.indexOf(name + "=") === -1;
+    // Function to determine redirect URL based on membership tier
+    function determineRedirectUrl(membershipTier) {
+        switch (membershipTier) {
+            case 'full':
+                return memberHubLink;
+            case 'free':
+                return siteHomeUrl + '/members-hub-free-test/';
+            case 'expired':
+                return siteHomeUrl + '/renew-membership/';
+            case 'none':
+            default:
+                return siteHomeUrl + '/join-membership/';
+        }
     }
 
     // Function to get a URL parameter by name
@@ -64,33 +126,84 @@ jQuery(document).ready(function ($) {
         let searchKey = getUrlParameter("s");
         let errorName = getUrlParameter("error");
         let errorDesc = getUrlParameter("error_description");
-        let responseCode = getUrlParameter("code");
-        let communityUrl = getUrlParameter("sfdc_community_url");
+        
+        // New membership parameters
+        let recordTypeId = getUrlParameter("RecordTypeId");
+        let memberType = getUrlParameter("DA_Member_Type__c");
+        let membershipType = getUrlParameter("DA_Membership_Type__c");
+        let expiryDate = getUrlParameter("Membership_Expiry_Date__pc");
+        let gracePeriodDate = getUrlParameter("DA_Expiry_after_grace_period__c");
+        
         let overlay = $('.member-login-overlay');
         let redirectUrl = localStorage.getItem('dv_redirect_url');
         
-        // Redirect to Sign In page if not member logged in
-        let authCodeCookie = getCookie("sf_auth_code");
-        if (isMemberContent == true || postTypeName == 'resource' || postTypeName == 'member_recipes') {
+        // Process membership data from URL if present
+        if (recordTypeId && memberType && membershipType) {
+            const memberData = {
+                recordTypeId: recordTypeId,
+                memberType: memberType,
+                membershipType: membershipType,
+                expiryDate: expiryDate,
+                gracePeriodDate: gracePeriodDate
+            };
+            
+            // Store membership data
+            storeMembershipData(memberData);
+            
+            // Determine membership tier and redirect
+            const membershipTier = determineMembershipTier(memberData);
+            const redirectUrl = determineRedirectUrl(membershipTier);
+            
+            // Redirect to appropriate page
+            window.location.href = redirectUrl;
+            return;
+        }
+        
+        // Check membership access based on stored data
+        let storedMembershipData = getStoredMembershipData();
+        let hasStoredMembership = !!storedMembershipData;
+        let currentMembershipTier = hasStoredMembership ? determineMembershipTier(storedMembershipData) : 'none';
+        let requiresMemberAccess = isMemberContent == true || postTypeName == 'resource' || postTypeName == 'member_recipes';
+        
+        if (requiresMemberAccess) {
             if (!isSearchPage && localStorage) {
                 localStorage.setItem('dv_redirect_url', window.location.href);
             }
-            // Return if is seach page
+            
+            // Return if is search page
             if (isSearchPage || searchKey) {
                 overlay.hide()
                 return;
             }
-            // Not exist Cookie
-            if (!authCodeCookie || authCodeCookie.trim() === '') {
+            
+            // Check if user has membership session
+            if (!hasStoredMembership) {
+                // Not logged in yet → go to login page
                 window.location.href = memberLoginLink;
                 return;
-            } else { // Exist Cookie
-                if (responseCode && communityUrl) {
-                    overlay.show()
+            }
+            // Logged in but tier invalid/none/expired
+            if (currentMembershipTier === 'none' || currentMembershipTier === 'expired') {
+                if (currentMembershipTier === 'expired') {
+                    window.location.href = siteHomeUrl + '/renew-membership/';
+                } else {
+                    // Already logged in but no membership → join
+                    window.location.href = siteHomeUrl + '/join-membership/';
                 }
-                else {
-                    overlay.hide()
-                }
+                return;
+            } 
+            // Enforce ACF option for member-only pages
+            else if (
+                isMemberContent == true &&
+                contentForMemberType === 'full_member_only' &&
+                currentMembershipTier === 'free'
+            ) {
+                // Free members cannot access full-only content
+                window.location.href = siteHomeUrl + '/members-hub-free-test/';
+                return;
+            } else {
+                // Valid membership, hide overlay
+                overlay.hide()
             }
         } else if (window.location.pathname === '/member-login/') {
             overlay.hide()
@@ -98,7 +211,6 @@ jQuery(document).ready(function ($) {
             localStorage.removeItem('dv_redirect_url');
             overlay.hide()
         }
-
         // Handle Errors
         if (errorName && errorDesc) {
             // Show the loading overlay
@@ -113,47 +225,54 @@ jQuery(document).ready(function ($) {
             }
         }
 
-        if (responseCode && communityUrl) {
-            // Show the loading overlay
-            overlay.show()
-            // Set member cookie
-            let isCookieSet = setCookie('sf_auth_code', responseCode, 1);
-            if (isCookieSet) {
-                // Redirect to pre page 
-                window.location.href = redirectUrl ? redirectUrl : memberHubLink;
-                return;
-            }
-        }
+        // Note: OAuth "code" flow no longer used; URL carries membership params directly
     });
 
     // Show/hide button member login, membership
     $('.btn-member-login').each(function() {
         let button = $(this)
-        let authCode = getCookie("sf_auth_code");
+        let storedMembershipData = getStoredMembershipData();
+        let hasStoredMembership = !!storedMembershipData;
+        let currentMembershipTier = hasStoredMembership ? determineMembershipTier(storedMembershipData) : 'none';
         
-        // Not exist Cookie
-        if (!authCode || authCode.trim() === '') {
-            button.html('<span>Member Login<span>')
+        // Not logged in yet → show Member Login
+        if (!hasStoredMembership) {
+            button.html('<span>Member Login</span>')
             button.attr('href', memberLoginLink)
         }
-        // Exist Cookie
+        // Exist Cookie and membership data
         else {
-            button.html('<span>My Membership<span>')
-            button.attr('href', memberHubLink)
+            // Show different text based on membership tier
+            let buttonText = 'My Membership';
+            let buttonUrl = memberHubLink;
+            
+            if (currentMembershipTier === 'none') {
+                buttonText = 'Join Membership';
+                buttonUrl = siteHomeUrl + '/join-membership/';
+            } else 
+            if (currentMembershipTier === 'expired') {
+                buttonText = 'Renew Membership';
+                buttonUrl = siteHomeUrl + '/renew-membership/';
+            } else if (currentMembershipTier === 'free') {
+                buttonText = 'Free Member Hub';
+                buttonUrl = siteHomeUrl + '/members-hub-free-test/';
+            } else if (currentMembershipTier === 'full') {
+                buttonText = 'My Membership';
+                buttonUrl = memberHubLink;
+            }
+            
+            button.html('<span>' + buttonText + '</span>')
+            button.attr('href', buttonUrl)
         }
     });
     
     // Show/hide button member logout
     $('.btn-member-logout').each(function() {
         let button = $(this)
-        let authCode = getCookie("sf_auth_code");
-        
-        // Not exist Cookie
-        if (!authCode || authCode.trim() === '') {
+        let hasMembership = !!getStoredMembershipData();
+        if (!hasMembership) {
             button.hide()
-        }
-        // Exist Cookie
-        else {
+        } else {
             button.show()
         }
     });
@@ -162,16 +281,14 @@ jQuery(document).ready(function ($) {
     $(document).on('click', '.btn-member-logout', function(e) {
         e.preventDefault()
         if (confirm('Are you sure you want to log out?')) {
-            // Delete member cookie
-            let isCookieDeleted = resetCookie("sf_auth_code");
-            if (isCookieDeleted) {
-                // Redirect to home page
-                window.location.href = siteHomeUrl;
-                return;
+            // Clear localStorage only
+            if (localStorage) {
+                localStorage.removeItem('dv_redirect_url');
+                localStorage.removeItem('dv_membership_data');
             }
-            else {
-                alert('Error: Unable to log out. Please try again.');
-            }
+            // Redirect to home page
+            window.location.href = siteHomeUrl;
+            return;
         }
     });        
 

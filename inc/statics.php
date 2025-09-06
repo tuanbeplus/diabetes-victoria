@@ -3,7 +3,7 @@
  * Define theme path
  */
 define('DV_SCRIPT_SUFFIX', 'false' ); // 'true' or 'false' type string
-define('DV_THEME_VER', '2.0.1');
+define('DV_THEME_VER', time());
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
 /**
@@ -45,6 +45,9 @@ function dv_enqueue_scripts() {
     // Member Content
     $member_content = get_field('member_content', get_the_ID());
     $is_member_content = ($member_content == true) ? true : false;
+    // Content access rule (ACF option): 'full_member_only' | 'full_and_free_member'
+    $content_for_member_type = get_field('content_for_member_type', get_the_ID());
+    $content_for_member_type = $content_for_member_type ? $content_for_member_type : 'full_and_free_member';
     // Localize member login data
     wp_localize_script(
         'member-login',
@@ -57,6 +60,7 @@ function dv_enqueue_scripts() {
             'postTypeName'     => get_post_type(),
             'sfCommunityUrl'   => $sf_community_url,
             'siteHomeUrl'      => home_url(),
+            'contentForMemberType' => $content_for_member_type,
         )
     );
 }

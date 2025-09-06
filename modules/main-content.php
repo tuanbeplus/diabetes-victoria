@@ -146,7 +146,16 @@ if( get_row_layout() == 'main_content' ):
                 <!-- Content -->
                 <div class="content-wrapper">
                     <?php if ($media_options == 'image' && !empty($banner_image['url'])): ?>
-                        <img class="__banner" src="<?php echo $banner_image['url']; ?>" alt="<?php echo $banner_image['alt']; ?>">
+                        <div class="__banner-wrapper" style="<?php if(!empty($banner_image['width']) && !empty($banner_image['height'])): ?>padding-top:<?php echo (intval($banner_image['height'])/intval($banner_image['width'])*100); ?>%;<?php endif; ?>">
+                            <div class="__banner-placeholder"></div>
+                            <img 
+                                class="__banner" 
+                                src="<?php echo $banner_image['url']; ?>" 
+                                alt="<?php echo $banner_image['alt']; ?>" 
+                                loading="lazy"
+                                onload="this.previousElementSibling && (this.previousElementSibling.style.display='none');"
+                            >
+                        </div>
                     <?php endif; ?>
 
                     <?php if($media_options == 'video' && !empty($video_url)) 

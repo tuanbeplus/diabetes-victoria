@@ -284,3 +284,4 @@ function dv_get_direct_child_posts_from_parent($post_id) {
 
 	return $child_posts;
 }
+

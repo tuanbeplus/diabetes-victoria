@@ -131,8 +131,26 @@ echo '} </style>';
         </div><!-- .Sidebar -->
 
         <div class="content-wrapper">
-            <?php if (!empty($feature_img_url)): ?>
-                <img class="__banner" src="<?php echo $feature_img_url; ?>" alt="<?php echo $feature_img_alt; ?>">
+            <?php
+            // Get the feature image data array
+            $banner_image = !empty($feature_img_id) ? wp_get_attachment_image_src($feature_img_id, 'full') : null;
+            if (!empty($banner_image)) :
+                $banner_url = $banner_image[0];
+                $banner_width = $banner_image[1];
+                $banner_height = $banner_image[2];
+                // Calculate aspect ratio for padding-top
+                $padding_top = (!empty($banner_width) && !empty($banner_height)) ? (intval($banner_height) / intval($banner_width) * 100) : 0;
+            ?>
+                <div class="__banner-wrapper" style="<?php if($padding_top): ?>padding-top:<?php echo $padding_top; ?>%;<?php endif; ?>">
+                    <div class="__banner-placeholder"></div>
+                    <img 
+                        class="__banner" 
+                        src="<?php echo esc_url($banner_url); ?>" 
+                        alt="<?php echo esc_attr($feature_img_alt); ?>"
+                        loading="lazy"
+                        onload="this.previousElementSibling && (this.previousElementSibling.style.display='none');"
+                    >
+                </div>
             <?php else: ?>
                 <?php dv_the_post_thumbnail_default($post_id) ?>
             <?php endif; ?>

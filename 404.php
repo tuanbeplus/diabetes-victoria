@@ -12,8 +12,8 @@ get_header();
 $page_template_404 = get_field('404_page_template', 'option');
 if (!empty($page_template_404)) {
 	// Redirect to 404 page template
-	wp_redirect( $page_template_404 );
-	exit;
+	// wp_redirect( $page_template_404 );
+	// exit;
 }
 ?>
 
