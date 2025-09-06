@@ -254,7 +254,6 @@ jQuery(document).ready(function ($) {
                 buttonText = 'Renew Membership';
                 buttonUrl = siteHomeUrl + '/renew-membership/';
             } else if (currentMembershipTier === 'free') {
-                buttonText = 'Free Member Hub';
                 buttonUrl = siteHomeUrl + '/members-hub-free-test/';
             } else if (currentMembershipTier === 'full') {
                 buttonText = 'My Membership';

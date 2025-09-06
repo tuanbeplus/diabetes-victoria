@@ -102,40 +102,64 @@ function dv_get_latest_posts($query_args = array()) {
 function dv_breadcrumb() {
 	global $post;
 	$arrow_right = '<span class="arrow"> &gt; </span>';
-	
+
 	if (is_front_page() || is_404()) {
 		return;
 	}
-	
+
 	echo '<nav aria-label="Breadcrumbs" class="breadcrumb">';
 	echo '  <ol class="breadcrumb-list">';
 	echo '    <li><a href="' . esc_url(home_url()) . '">Home</a></li>' . $arrow_right;
-	
+
 	if (is_archive()) {
 		$post_type = get_post_type_object(get_post_type());
 		if ($post_type) {
 			echo '<li><a href="' . home_url('/' . $post_type->rewrite['slug'] . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
 		}
 		the_archive_title('<li aria-current="page"><span>', '</span></li>');
-	} 
+	}
 	elseif (is_single()) {
 		$post_type = get_post_type_object(get_post_type());
 		if ($post_type) {
 			echo '<li><a href="' . home_url('/' . $post_type->rewrite['slug'] . '/') . '">' . esc_html($post_type->label) . '</a></li>' . $arrow_right;
 			// Get all taxonomies for the post type of the given post ID
 			$taxonomies = get_object_taxonomies($post_type->name, 'names');
+			$category_link_printed = false;
 			foreach ($taxonomies as $taxonomy) {
 				if (isset($taxonomy) && !empty($taxonomy)) {
 					$terms = wp_get_post_terms($post->ID, $taxonomy);
 					if (isset($terms) && !empty($terms)) {
-						echo '<li><a href="' . home_url('/' . $terms[0]->slug . '/') . '">' . esc_html($terms[0]->name) . '</a></li>' . $arrow_right;
-						break;
+						$term = $terms[0];
+						// Custom handling for recipe and member_recipes post types
+						if ($post_type->name === 'recipe' && $taxonomy === 'recipe_categories') {
+							$cat_link = get_term_link($term, $taxonomy);
+							if (!is_wp_error($cat_link)) {
+								echo '<li><a href="' . esc_url($cat_link) . '">' . esc_html($term->name) . '</a></li>' . $arrow_right;
+								$category_link_printed = true;
+								break;
+							}
+						} elseif ($post_type->name === 'member_recipes' && $taxonomy === 'member_articles_cat') {
+							$cat_link = get_term_link($term, $taxonomy);
+							if (!is_wp_error($cat_link)) {
+								echo '<li><a href="' . esc_url($cat_link) . '">' . esc_html($term->name) . '</a></li>' . $arrow_right;
+								$category_link_printed = true;
+								break;
+							}
+						} elseif (!$category_link_printed) {
+							// Default for posts: use category or tag
+							$cat_link = get_term_link($term, $taxonomy);
+							if (!is_wp_error($cat_link)) {
+								echo '<li><a href="' . esc_url($cat_link) . '">' . esc_html($term->name) . '</a></li>' . $arrow_right;
+								$category_link_printed = true;
+								break;
+							}
+						}
 					}
 				}
 			}
 		}
 		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
-	} 
+	}
 	elseif (is_page()) {
 		if ($post->post_parent) {
 			$ancestors = array_reverse(get_post_ancestors($post->ID));
@@ -144,11 +168,11 @@ function dv_breadcrumb() {
 			}
 		}
 		echo '<li aria-current="page"><span>' . esc_html(get_the_title()) . '</span></li>';
-	} 
+	}
 	elseif (is_search()) {
 		echo '<li aria-current="page"><span>Search results for: ' . esc_html(get_search_query()) . '</span></li>';
 	}
-	
+
 	echo '  </ol>';
 	echo '</nav>';
 }
