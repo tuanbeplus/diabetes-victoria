@@ -3,11 +3,22 @@ jQuery(document).ready(function ($) {
     const {
         isMemberContent,
         isSearchPage,
-        memberHubLink,
-        memberLoginLink,
         siteHomeUrl,
         postTypeName,
-        contentForMemberType
+        contentForMemberType,
+        // New ACF field data
+        membersLogin,
+        membersSignUp,
+        membersHub,
+        membersHubFree,
+        renewMembership,
+        joinMembership,
+        // Fallback URLs for backward compatibility
+        memberHubLink,
+        memberLoginLink,
+        memberHubFreeLink,
+        renewMembershipLink,
+        joinMembershipLink
     } = member_login_data;
 
     // Function to validate membership data from URL
@@ -103,14 +114,63 @@ jQuery(document).ready(function ($) {
     function determineRedirectUrl(membershipTier) {
         switch (membershipTier) {
             case 'full':
-                return memberHubLink;
+                return getAcfUrl(membersHub, memberHubLink);
             case 'free':
-                return siteHomeUrl + '/members-hub-free-test/';
+                return getAcfUrl(membersHubFree, memberHubFreeLink);
             case 'expired':
-                return siteHomeUrl + '/renew-membership/';
+                return getAcfUrl(renewMembership, renewMembershipLink);
             case 'none':
             default:
-                return siteHomeUrl + '/join-membership/';
+                return getAcfUrl(joinMembership, joinMembershipLink);
+        }
+    }
+
+    // Helper functions to get ACF field data
+    function getAcfUrl(field, fallback) {
+        return (field && field.url) ? field.url : fallback;
+    }
+    
+    function getAcfText(field, fallback) {
+        return (field && field.text) ? field.text : fallback;
+    }
+
+    // Function to check if user can access content based on membership tier and URL
+    function canAccessContent(membershipTier, targetUrl) {
+        // If no membership, can't access any member content
+        if (membershipTier === 'none' || membershipTier === 'expired') {
+            return false;
+        }
+        
+        // Parse the target URL to check what type of content it is
+        try {
+            const url = new URL(targetUrl, window.location.origin);
+            const pathname = url.pathname;
+            
+            // Check if it's a member content page based on URL patterns
+            const isMemberContentPage = pathname.includes('/members-hub') || 
+                pathname.includes('/member-') ||
+                pathname.includes('/resource') ||
+                pathname.includes('/member-recipes');
+            
+            if (!isMemberContentPage) {
+                // Not a member content page, allow access
+                return true;
+            }
+            
+            // For member content pages, check tier restrictions
+            if (membershipTier === 'free') {
+                // Free members can access most content
+                // The page-level access control will handle specific restrictions
+                return true;
+            } else if (membershipTier === 'full') {
+                // Full members can access all content
+                return true;
+            }
+            
+            return false;
+        } catch (e) {
+            // If URL parsing fails, be conservative and deny access
+            return false;
         }
     }
 
@@ -150,13 +210,22 @@ jQuery(document).ready(function ($) {
             // Store membership data
             storeMembershipData(memberData);
             
-            // Determine membership tier and redirect
+            // Determine membership tier
             const membershipTier = determineMembershipTier(memberData);
-            const redirectUrl = determineRedirectUrl(membershipTier);
             
-            // Redirect to appropriate page
-            window.location.href = redirectUrl;
-            return;
+            // Check if user has access to the originally intended content
+            const originalUrl = localStorage.getItem('dv_redirect_url');
+            if (originalUrl && canAccessContent(membershipTier, originalUrl)) {
+                // User has permission, redirect to original content
+                localStorage.removeItem('dv_redirect_url');
+                window.location.href = originalUrl;
+                return;
+            } else {
+                // No original URL or no permission, use standard redirect
+                const redirectUrl = determineRedirectUrl(membershipTier);
+                window.location.href = redirectUrl;
+                return;
+            }
         }
         
         // Check membership access based on stored data
@@ -179,16 +248,16 @@ jQuery(document).ready(function ($) {
             // Check if user has membership session
             if (!hasStoredMembership) {
                 // Not logged in yet → go to login page
-                window.location.href = memberLoginLink;
+                window.location.href = getAcfUrl(membersLogin, memberLoginLink);
                 return;
             }
             // Logged in but tier invalid/none/expired
             if (currentMembershipTier === 'none' || currentMembershipTier === 'expired') {
                 if (currentMembershipTier === 'expired') {
-                    window.location.href = siteHomeUrl + '/renew-membership/';
+                    window.location.href = getAcfUrl(renewMembership, renewMembershipLink);
                 } else {
                     // Already logged in but no membership → join
-                    window.location.href = siteHomeUrl + '/join-membership/';
+                    window.location.href = getAcfUrl(joinMembership, joinMembershipLink);
                 }
                 return;
             } 
@@ -199,7 +268,7 @@ jQuery(document).ready(function ($) {
                 currentMembershipTier === 'free'
             ) {
                 // Free members cannot access full-only content
-                window.location.href = siteHomeUrl + '/members-hub-free-test/';
+                window.location.href = getAcfUrl(membersHubFree, memberHubFreeLink);
                 return;
             } else {
                 // Valid membership, hide overlay
@@ -216,7 +285,7 @@ jQuery(document).ready(function ($) {
             // Show the loading overlay
             overlay.show()
             if (confirm('Error: Unable to login. Please try again.')) {
-                window.location.href = memberLoginLink;
+                window.location.href = getAcfUrl(membersLogin, memberLoginLink);
                 return;
             }
             else {
@@ -237,27 +306,30 @@ jQuery(document).ready(function ($) {
         
         // Not logged in yet → show Member Login
         if (!hasStoredMembership) {
-            button.html('<span>Member Login</span>')
-            button.attr('href', memberLoginLink)
+            const loginText = getAcfText(membersLogin, 'Member Login');
+            const loginUrl = getAcfUrl(membersLogin, memberLoginLink);
+            button.html('<span>' + loginText + '</span>')
+            button.attr('href', loginUrl)
         }
         // Exist Cookie and membership data
         else {
             // Show different text based on membership tier
-            let buttonText = 'My Membership';
-            let buttonUrl = memberHubLink;
+            let buttonText = getAcfText(membersHub, 'My Membership');
+            let buttonUrl = getAcfUrl(membersHub, memberHubLink);
             
             if (currentMembershipTier === 'none') {
-                buttonText = 'Join Membership';
-                buttonUrl = siteHomeUrl + '/join-membership/';
+                buttonText = getAcfText(joinMembership, 'Join Membership');
+                buttonUrl = getAcfUrl(joinMembership, joinMembershipLink);
             } else 
             if (currentMembershipTier === 'expired') {
-                buttonText = 'Renew Membership';
-                buttonUrl = siteHomeUrl + '/renew-membership/';
+                buttonText = getAcfText(renewMembership, 'Renew Membership');
+                buttonUrl = getAcfUrl(renewMembership, renewMembershipLink);
             } else if (currentMembershipTier === 'free') {
-                buttonUrl = siteHomeUrl + '/members-hub-free-test/';
+                buttonText = getAcfText(membersHubFree, 'Free Member Hub');
+                buttonUrl = getAcfUrl(membersHubFree, memberHubFreeLink);
             } else if (currentMembershipTier === 'full') {
-                buttonText = 'My Membership';
-                buttonUrl = memberHubLink;
+                buttonText = getAcfText(membersHub, 'My Membership');
+                buttonUrl = getAcfUrl(membersHub, memberHubLink);
             }
             
             button.html('<span>' + buttonText + '</span>')

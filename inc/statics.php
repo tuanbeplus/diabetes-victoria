@@ -21,7 +21,7 @@ function dv_enqueue_scripts() {
     // Main style
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.bundle.css?r=' . DV_THEME_VER);
     // Main script
-	wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main'.dv_suffix().'.js', array(), DV_THEME_VER, true);
+	wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main.bundle.js', array(), DV_THEME_VER, true);
 	wp_enqueue_script('custom-script', get_template_directory_uri() . '/assets/js/custom.js', array(), DV_THEME_VER, true);
     // Localize admin ajax
     wp_localize_script(
@@ -32,16 +32,26 @@ function dv_enqueue_scripts() {
         )
     );
     // Member login script
-	wp_enqueue_script('member-login', get_template_directory_uri() . '/assets/js/member-login'.dv_suffix().'.js', array(), DV_THEME_VER, false);
+	wp_enqueue_script('member-login', get_template_directory_uri() . '/assets/js/member-login.bundle.js', array(), DV_THEME_VER, false);
 
     // Salesforce Community Url
     $sf_community_url = get_field('salesforce_community_url', 'option');
-    // Member Login
-    $member_login = get_field('member_login', 'option');
-    $member_login_link = !empty($member_login['login_page']) ? $member_login['login_page'] : '/member-login/';
-    // Member Logged in
-    $member_logged_in = get_field('member_logged_in', 'option');
-    $member_hub_link = !empty($member_logged_in['member_page']) ? $member_logged_in['member_page'] : '/members-hub/';
+    
+    // New ACF fields for member login flow
+    $members_login = get_field('members_login', 'option');
+    $members_sign_up = get_field('members_sign_up', 'option');
+    $members_hub = get_field('members_hub', 'option');
+    $members_hub_free = get_field('members_hub_free', 'option');
+    $renew_membership = get_field('renew_membership', 'option');
+    $join_membership = get_field('join_membership', 'option');
+    
+    // Fallback values
+    $member_login_link = !empty($members_login['url']) ? $members_login['url'] : '/member-login/';
+    $member_hub_link = !empty($members_hub['url']) ? $members_hub['url'] : '/members-hub/';
+    $member_hub_free_link = !empty($members_hub_free['url']) ? $members_hub_free['url'] : '/members-hub-free-test/';
+    $renew_membership_link = !empty($renew_membership['url']) ? $renew_membership['url'] : '/renew-membership/';
+    $join_membership_link = !empty($join_membership['url']) ? $join_membership['url'] : '/join-membership/';
+    
     // Member Content
     $member_content = get_field('member_content', get_the_ID());
     $is_member_content = ($member_content == true) ? true : false;
@@ -55,12 +65,23 @@ function dv_enqueue_scripts() {
         array( 
             'isMemberContent'  => $is_member_content,
             'isSearchPage'     => is_search(),
-            'memberHubLink'    => $member_hub_link,
-            'memberLoginLink'  => $member_login_link,
             'postTypeName'     => get_post_type(),
             'sfCommunityUrl'   => $sf_community_url,
             'siteHomeUrl'      => home_url(),
             'contentForMemberType' => $content_for_member_type,
+            // New ACF field data
+            'membersLogin'     => $members_login,
+            'membersSignUp'    => $members_sign_up,
+            'membersHub'       => $members_hub,
+            'membersHubFree'   => $members_hub_free,
+            'renewMembership'  => $renew_membership,
+            'joinMembership'   => $join_membership,
+            // Fallback URLs for backward compatibility
+            'memberHubLink'    => $member_hub_link,
+            'memberLoginLink'  => $member_login_link,
+            'memberHubFreeLink' => $member_hub_free_link,
+            'renewMembershipLink' => $renew_membership_link,
+            'joinMembershipLink' => $join_membership_link,
         )
     );
 }

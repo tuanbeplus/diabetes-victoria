@@ -662,11 +662,12 @@ nav#site-navigation {
         position: absolute;
         right: 0;
         left: 0;
+        z-index: 100;
         margin-top: -1px;
         padding: 16px 0 40px;
         background-color: $primary_color;
-        border-top: 1px solid #99D6E9;
-        animation: nav-slide-show 0.2s linear both;
+        border-top: 1px solid #d8d8d8;
+        animation: nav-slide-show 0.3s ease;
         &.active {
             display: block;
         }
@@ -747,7 +748,7 @@ nav#site-navigation {
                 padding: 10px 0 12px;
             }
             #header-logo {
-                img.logo-full-color {
+                img {
                     width: 120px;
                 }
             }
@@ -888,19 +889,19 @@ nav#site-navigation {
     }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 480px) {
     header.site-header {
         &.sticky {
             #header-logo {
-                img.logo-full-color {
-                    width: 110px;
+                img{
+                    width: 100px;
                 }
             }
         }
     }
     #header-logo {
         img {
-            width: 110px;
+            width: 100px;
         }
     }
     #btn-nav-bar {
@@ -916,6 +917,10 @@ nav#site-navigation {
                     flex-direction: column;
                     padding-left: 4px;
                     row-gap: 20px;
+                }
+                .col-right {
+                    max-width: 380px;
+                    margin: auto;
                 }
             }
         }
@@ -939,21 +944,8 @@ nav#site-navigation {
 @keyframes nav-slide-show {
     0% {
         opacity: 0;
-        visibility: hidden;
         transform: translateX(101%);
     }
-    // 20% {
-    //     visibility: hidden;
-    //     transform: translateX(80%);
-    // }
-    50% {
-        visibility: visible;
-        transform: translateX(50%);
-    }
-    // 80% {
-    //     visibility: visible;
-    //     transform: translateX(20%);
-    // }
     100% {
         opacity: 1;
         visibility: visible;

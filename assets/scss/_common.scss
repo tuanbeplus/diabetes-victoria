@@ -443,6 +443,11 @@ section.post-title {
 	border-radius: 50%;
 	-webkit-animation: spCircRot .6s infinite linear;
 	animation: spCircRot .6s infinite linear;
+    @media(max-width: 768px) {
+        width: 24px;
+	    height: 24px;
+        border-width: 3px;
+    }
 }
 @keyframes spCircRot {
 	from { transform: rotate(0deg); }
@@ -780,7 +785,7 @@ section.post-title {
         min-width: 100%;
     }
     .breadcrumb {
-        padding: 18px 0 16px;
+        padding: 14px 0 12px;
     }
     .posts-list {
         row-gap: 24px;

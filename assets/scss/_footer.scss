@@ -20,6 +20,9 @@ footer.site-footer {
         list-style: none;
         color: $dv_white;
         font-size: 0.875rem;
+        @media only screen and (max-width: 500px) {
+            min-width: auto;
+        }
     }
     a {
         color: $dv_white;
@@ -157,7 +160,6 @@ footer.site-footer {
             }
             .quick-links {
                 justify-content: left;
-                flex-wrap: wrap;
                 gap: 80px;
                 ul.contacts-list {
                     margin-top: 40px;
@@ -182,7 +184,7 @@ footer.site-footer {
         }
         .footer-wrapper {
             .quick-links {
-                gap: 40px;
+                gap: 32px;
                 ul {
                     margin-top: 20px;
                     margin-bottom: 0;
@@ -197,7 +199,7 @@ footer.site-footer {
         .footer-wrapper {
             gap: 30px;
             .quick-links {
-                gap: 30px;
+                gap: 24px;
             }
         }
     }
