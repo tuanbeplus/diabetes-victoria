@@ -98,7 +98,7 @@ if( get_row_layout() == 'hero_carousel' ):
                 infinite: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                accessibility: true,
+                accessibility: false,
                 speed: 800,
                 autoplay: <?php echo $autoplay; ?>,
                 autoplaySpeed: <?php echo $autoplay_speed.'000'; ?>,

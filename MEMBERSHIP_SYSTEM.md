@@ -1,178 +1,133 @@
-# Diabetes Victoria Membership System (JavaScript-Only)
+# Diabetes Victoria Membership System (JavaScript-only)
 
 ## Overview
 
-The updated membership system now performs membership lookup directly from URL parameters passed by Salesforce using **JavaScript-only** logic. This eliminates the need for additional API calls and provides faster authentication with better user experience.
+The membership flow is entirely client-side. Salesforce redirects back to the site with membership data in URL parameters. JavaScript reads those parameters, validates and stores them in `localStorage`, determines the membership tier, and redirects accordingly. WordPress templates rely on the stored data to protect content on the client-side.
 
-## How It Works
+No PHP-based processing, sessions, or cookies are used for this feature.
 
-### 1. Salesforce Redirect with Membership Data
-When users complete authentication with Salesforce, they are redirected back to WordPress with membership data directly in the URL:
+## Flow
 
-```
-https://dvicstg.wpenginepowered.com/members-hub?
-  RecordTypeId=01290000000G5VKAA0
-  &DA_Member_Type__c=Paid
-  &DA_Membership_Type__c=Full
-  &Membership_Expiry_Date__pc=18122027
-  &DA_Expiry_after_grace_period__c=18012028
-```
+1) Salesforce redirects back with membership params in the URL.
+2) JS extracts params, validates, stores to `localStorage` as `dv_membership_data`.
+3) JS determines tier: `full`, `free`, `expired`, `none`.
+4) If a pre-login target URL exists in `localStorage` (`dv_redirect_url`) and the user has permission, redirect to that URL; otherwise use default tier redirects.
+5) On every page load, JS enforces access rules and updates the header button.
 
-### 2. JavaScript Processing
-The system uses JavaScript to:
-- Extract membership data from URL parameters
-- Validate the data format and values
-- Store membership data in cookies and localStorage
-- Determine membership tier based on data
-- Redirect users to appropriate pages
+## URL Parameters
 
-### 3. Membership Data Parameters
-The system processes these URL parameters:
-- `RecordTypeId`: Member record type (e.g., "01290000000G5VKAA0")
-- `DA_Member_Type__c`: Paid or Free
-- `DA_Membership_Type__c`: Full, Family, Concession, Student, Senior
-- `Membership_Expiry_Date__pc`: Expiry date (DDMMYYYY format or "NA")
-- `DA_Expiry_after_grace_period__c`: Grace period expiry (DDMMYYYY format or "NA")
+Required parameters passed by Salesforce in the redirect URL:
+- `RecordTypeId`
+- `DA_Member_Type__c` (Paid|Free)
+- `DA_Membership_Type__c` (e.g. Full, Family, Concession, Student, Senior, Free Ongoing, etc.)
+- `Membership_Expiry_Date__pc` (DDMMYYYY or "NA")
+- `DA_Expiry_after_grace_period__c` (DDMMYYYY or "NA")
 
-### 4. Membership Tiers
-The system categorizes users into four tiers:
-- **`full`**: Paid members with active membership
-- **`free`**: Free members with active membership  
-- **`expired`**: Members whose grace period has expired or "NA" dates
-- **`none`**: Non-members or invalid data
+Notes:
+- `DA_Membership_Type__c` is accepted as any non-empty string.
+- Dates may be "NA"; these are treated as invalid/expired.
 
-### 5. Redirect Logic
-Based on membership status, users are redirected to:
-- **Full Members**: `/members-hub/` (access to all member content)
-- **Free Members**: `/members-hub-free-test/` (limited access)
-- **Expired Members**: `/renew-membership/` (renewal required)
-- **Non-Members**: `/join-membership/` (join required)
+## LocalStorage
 
-## Security Features
-
-### 1. Data Validation
-- Validates all required parameters are present
-- Checks member type against allowed values
-- Validates membership type against allowed values
-- Validates date format (DDMMYYYY)
-
-### 2. Session Management
-- Stores membership data in both session and encrypted cookies
-- 30-day cookie expiration
-- Automatic session cleanup on logout
-
-### 3. Content Protection
-- Server-side validation prevents unauthorized access
-- Even if users bookmark protected pages, access is denied without valid membership
-- Different access levels for different content types
-
-## Usage Examples
-
-### Protecting Content in Templates
-```php
-// Check if user can access full member content
-if (dv_user_can_access_content('full')) {
-    // Show full member content
+Data is stored under `dv_membership_data` as JSON:
+```json
+{
+  "recordTypeId": "...",
+  "memberType": "Paid|Free",
+  "membershipType": "Full|Free Ongoing|...",
+  "expiryDate": "DDMMYYYY|NA",
+  "gracePeriodDate": "DDMMYYYY|NA"
 }
-
-// Check if user can access any member content
-if (dv_user_can_access_content('any')) {
-    // Show member content
-}
-
-// Redirect if no access
-dv_redirect_if_no_access('full', 'current-page-slug');
 ```
 
-### JavaScript Integration
-The system automatically provides membership data to JavaScript:
-```javascript
-// Access membership tier
-console.log(member_login_data.userMembershipTier); // 'full', 'free', 'expired', 'none'
+When a non-logged-in user attempts to access member content, the intended URL is stored as `dv_redirect_url` and used post-login to return the user to the original page if permitted.
 
-// Access membership data
-console.log(member_login_data.membershipData);
-```
+## Membership Tier Determination
 
-## Configuration
+Tier is computed client-side:
+- `expired`: If `gracePeriodDate` is in the past, or any relevant date is "NA".
+- `full`: `memberType` is `Paid` and not expired.
+- `free`: `memberType` is `Free` and not expired.
+- `none`: Anything else (missing/invalid data).
 
-### Required ACF Fields
-Ensure these fields are configured in ACF Options:
-- `salesforce_client_id`
-- `salesforce_callback_url`
-- `salesforce_community_url`
-- `member_login` (with `login_page` subfield)
-- `member_logged_in` (with `member_page` subfield)
+## Redirects After Login
 
-### Page Requirements
-Create these pages for proper redirects:
-- `/member-login/` - Login page
-- `/members-hub/` - Full member hub
-- `/members-hub-free-test/` - Free member hub
-- `/renew-membership/` - Renewal page
-- `/join-membership/` - Join page
-- `/member-login-error/` - Error page
+On successful parsing of URL parameters:
+- If `dv_redirect_url` exists and the user has permission, redirect there and clear the key.
+- Otherwise, redirect by tier using ACF-configured URLs:
+  - `full` → `members_hub`
+  - `free` → `members_hub_free`
+  - `expired` → `renew_membership`
+  - `none` → `join_membership`
 
-## Error Handling
+## Access Control (Client-side)
 
-### Invalid Membership Data
-If membership data is invalid or missing:
-- User is redirected to `/member-login-error/`
-- Error page explains the issue
-- Provides options to try again or contact support
+On page load, JS enforces access rules:
+- If the page is member content (`member_content` meta true) or is a member post type:
+  - If no stored membership → redirect to `members_login` and set `dv_redirect_url` to the current page.
+  - If tier is `none` → redirect to `join_membership`.
+  - If tier is `expired` → redirect to `renew_membership`.
+  - If tier is `free` and the site-wide ACF option `content_for_member_type` is `full_member_only` → redirect to `members_hub_free`.
 
-### Expired Memberships
-- Users are redirected to renewal page
-- Grace period logic is applied
-- Clear messaging about membership status
+Additional allowances:
+- Free members may access `member_recipes` and `resource` post types (still respecting the site-wide `content_for_member_type` option).
+
+## ACF Configuration
+
+All URLs and button texts come from ACF Options and are localized to JS (each with `{ text, url }`):
+- `members_login`
+- `members_sign_up`
+- `members_hub`
+- `members_hub_free`
+- `renew_membership`
+- `join_membership`
+
+There is also a site-wide option:
+- `content_for_member_type` with values `full_member_only` or `full_and_free_member` (default `full_and_free_member`).
+
+## Header Button Logic (Client-side)
+
+The header button (`.btn-member-login`) updates by tier:
+- No stored membership: show `members_login.text`, link to `members_login.url`.
+- Tier `none`: show `join_membership.text`, link to `join_membership.url`.
+- Tier `expired`: show `renew_membership.text`, link to `renew_membership.url`.
+- Tier `free`: show `members_hub_free.text`, link to `members_hub_free.url`.
+- Tier `full`: show `members_hub.text`, link to `members_hub.url`.
+
+The logout button (`.btn-member-logout`) is visible when membership data exists. Clicking it clears `dv_membership_data` and `dv_redirect_url`.
+
+## Security Considerations
+
+- Parameters are trusted to come from Salesforce but should ideally be verified with a signature/nonce. This has been acknowledged but is not implemented yet.
+- All logic is client-side. Avoid exposing sensitive info in the URL beyond what is required.
 
 ## Testing
 
-### Test Scenarios
-1. **Full Member**: Should access all member content
-2. **Free Member**: Should only access free member content
-3. **Expired Member**: Should be redirected to renewal
-4. **Non-Member**: Should be redirected to join page
-5. **Invalid Data**: Should see error page
-
-### URL Testing
-Test with different URL parameters:
+Example URLs:
 ```
 // Full member
-?code=123&sfdc_community_url=test&RecordTypeId=DA VIC Member&DA_Member_Type__c=Paid&DA_Membership_Type__c=Full&Membership_Expiry_Date__pc=18122027&DA_Expiry_after_grace_period__c=18012028
+?RecordTypeId=01290000000G5VKAA0&DA_Member_Type__c=Paid&DA_Membership_Type__c=Full&Membership_Expiry_Date__pc=18122027&DA_Expiry_after_grace_period__c=18012028
 
-// Free member
-?code=123&sfdc_community_url=test&RecordTypeId=DA VIC Member&DA_Member_Type__c=Free&DA_Membership_Type__c=Student&Membership_Expiry_Date__pc=18122027&DA_Expiry_after_grace_period__c=18012028
+// Free member (Free Ongoing)
+?RecordTypeId=01290000000G5VKAA0&DA_Member_Type__c=Free&DA_Membership_Type__c=Free%20Ongoing&Membership_Expiry_Date__pc=10112027&DA_Expiry_after_grace_period__c=10112027
 
-// Expired member
-?code=123&sfdc_community_url=test&RecordTypeId=DA VIC Member&DA_Member_Type__c=Paid&DA_Membership_Type__c=Full&Membership_Expiry_Date__pc=01012020&DA_Expiry_after_grace_period__c=01012020
+// Expired
+?RecordTypeId=01290000000G5VKAA0&DA_Member_Type__c=Paid&DA_Membership_Type__c=Full&Membership_Expiry_Date__pc=01012020&DA_Expiry_after_grace_period__c=01012020
+
+// None (invalid/missing params)
+?RecordTypeId=&DA_Member_Type__c=&DA_Membership_Type__c=&Membership_Expiry_Date__pc=NA&DA_Expiry_after_grace_period__c=NA
 ```
+
+Scenarios to verify:
+1) Redirect-back: visit protected page while not logged in → login → return to original URL if permitted.
+2) Free vs full: free users blocked only when `content_for_member_type` is `full_member_only`.
+3) Post types: free users can access `member_recipes` and `resource`.
+4) Expired users always sent to `renew_membership`.
+5) None users sent to `join_membership`; header shows Join Membership.
 
 ## Troubleshooting
 
-### Common Issues
-1. **Missing Parameters**: Check Salesforce configuration
-2. **Invalid Dates**: Ensure DDMMYYYY format
-3. **Cookie Issues**: Check browser settings and domain configuration
-4. **Redirect Loops**: Verify page URLs exist
-
-### Debug Mode
-Add this to wp-config.php for debugging:
-```php
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-```
-
-Check `/wp-content/debug.log` for error messages.
-
-## Migration Notes
-
-### From Old System
-- Old `sf_auth_code` cookie is still supported
-- New `dv_membership_data` cookie stores additional data
-- Both systems work together during transition
-
-### Backward Compatibility
-- Existing logged-in users continue to work
-- New login flow uses enhanced system
-- Gradual migration is supported
+- No redirect-back: ensure `dv_redirect_url` is set when redirecting unauthenticated users to login.
+- Free user blocked unexpectedly: check `content_for_member_type` ACF option.
+- Incorrect redirects: verify the ACF URL fields are populated and localized to JS.
+- Date parsing: confirm DDMMYYYY format; "NA" will mark the membership as expired.

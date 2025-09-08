@@ -26,13 +26,11 @@ function dv_get_code_challenge_verifier() {
 
 
 function dv_get_salesforce_user_access_token($authorization_code) {
-
     $sf_client_id = get_field('salesforce_client_id', 'option');
     $sf_client_secret = get_field('salesforce_client_secret', 'option');
     $sf_callback_url = get_field('salesforce_callback_url', 'option');
     $sf_community_url = get_field('salesforce_community_url', 'option');
     $code_verifier = dv_get_code_challenge_verifier()['code_verifier'] ?? '';
-
     // Salesforce Token URL
     $token_url = $sf_community_url .'/forms/services/oauth2/token';
 
@@ -62,62 +60,3 @@ function dv_get_salesforce_user_access_token($authorization_code) {
 
     return $data;
 }
-
-function dv_get_salesforce_user_info($access_token) {
-    $sf_site_url = get_field('salesforce_site_url', 'option');
-    // Salesforce User Info Endpoint
-    $userinfo_url = $sf_site_url .'/services/oauth2/userinfo';
-    // Prepare the request headers
-    $args = array(
-        'headers' => array(
-            'Authorization' => 'Bearer ' . $access_token,
-        )
-    );
-    // Make the request to Salesforce
-    $response = wp_remote_get($userinfo_url, $args);
-    // Check for errors in the response
-    if (is_wp_error($response)) {
-        return 'Request failed: ' . $response->get_error_message();
-    }
-    // Retrieve and decode the response body
-    $body = wp_remote_retrieve_body($response);
-    $data = json_decode($body, true);
-
-    return $data;
-}
-
-/**
- * Salesforce Oauth Login by community URL
- * 
- */
-function dv_salesforce_oauth_login() {
-    
-    if( isset($_REQUEST['code']) && isset($_REQUEST['sfdc_community_url']) ){
-        setcookie('sf_auth_code', $_REQUEST['code'], time() + (86400 * 30), "/"); // 86400 = 1 day
-
-        $redirect_url = get_field('salesforce_callback_url', 'option');
-        ?>
-        <script>
-            window.location.href = '<?php echo $redirect_url ?>';
-        </script>
-        <?php
-    }
-}
-// add_action('init', 'dv_salesforce_oauth_login');
-
-/**
- * Salesforce Member Logout
- * 
- */
-function dv_salesforce_member_logout() {
-    
-    if( isset($_GET['action']) && $_GET['action'] == 'member_logout' ){
-        setcookie('sf_auth_code', null, time(), '/');
-        ?>
-        <script>
-            window.location.href = '/';
-        </script>
-        <?php
-    }
-}
-// add_action('init', 'dv_salesforce_member_logout');
