@@ -95,6 +95,24 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    // Function to check if session has expired (1 day = 24 hours)
+    function isSessionExpired(timestamp) {
+        if (!timestamp) {
+            return true;
+        }
+        const oneDayInMs = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        const currentTime = Date.now();
+        return (currentTime - timestamp) > oneDayInMs;
+    }
+
+    // Function to clear expired session data
+    function clearExpiredSession() {
+        if (localStorage) {
+            localStorage.removeItem('dv_membership_data');
+            localStorage.removeItem('dv_redirect_url');
+        }
+    }
+
     // Function to get stored membership data
     function getStoredMembershipData() {
         if (localStorage) {
@@ -231,6 +249,17 @@ jQuery(document).ready(function ($) {
         // Check membership access based on stored data
         let storedMembershipData = getStoredMembershipData();
         let hasStoredMembership = !!storedMembershipData;
+        
+        // Check if session has expired (1 day)
+        if (hasStoredMembership && storedMembershipData.timestamp) {
+            if (isSessionExpired(storedMembershipData.timestamp)) {
+                // Session expired, clear data and treat as not logged in
+                clearExpiredSession();
+                hasStoredMembership = false;
+                storedMembershipData = null;
+            }
+        }
+        
         let currentMembershipTier = hasStoredMembership ? determineMembershipTier(storedMembershipData) : 'none';
         let requiresMemberAccess = isMemberContent == true || postTypeName == 'resource' || postTypeName == 'member_recipes';
         
@@ -302,6 +331,17 @@ jQuery(document).ready(function ($) {
         let button = $(this)
         let storedMembershipData = getStoredMembershipData();
         let hasStoredMembership = !!storedMembershipData;
+        
+        // Check if session has expired (1 day)
+        if (hasStoredMembership && storedMembershipData.timestamp) {
+            if (isSessionExpired(storedMembershipData.timestamp)) {
+                // Session expired, clear data and treat as not logged in
+                clearExpiredSession();
+                hasStoredMembership = false;
+                storedMembershipData = null;
+            }
+        }
+        
         let currentMembershipTier = hasStoredMembership ? determineMembershipTier(storedMembershipData) : 'none';
         
         // Not logged in yet → show Member Login
@@ -340,7 +380,18 @@ jQuery(document).ready(function ($) {
     // Show/hide button member logout
     $('.btn-member-logout').each(function() {
         let button = $(this)
-        let hasMembership = !!getStoredMembershipData();
+        let storedMembershipData = getStoredMembershipData();
+        let hasMembership = !!storedMembershipData;
+        
+        // Check if session has expired (1 day)
+        if (hasMembership && storedMembershipData.timestamp) {
+            if (isSessionExpired(storedMembershipData.timestamp)) {
+                // Session expired, clear data and treat as not logged in
+                clearExpiredSession();
+                hasMembership = false;
+            }
+        }
+        
         if (!hasMembership) {
             button.hide()
         } else {
