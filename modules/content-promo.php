@@ -40,16 +40,16 @@ if( get_row_layout() == 'content_promo' ):
                     }
                     if (!empty($item)): 
                         $landing_page = $item['landing_page'];
-                        $title = $item['title'];
-                        $image = $item['image'];
+                        $title = $item['title'] ?? '';
+                        $image = $item['image'] ?? [];
                         $text_color = !empty($item['text_color']) ? $item['text_color'] : '#FFF';
                         $background_color = !empty($item['background_color']) ? $item['background_color'] : 'var(--primary-color)';
                         $cta_background_color = !empty($item['cta_background_color']) ? $item['cta_background_color'] : '#FFF';
-                        $description = $item['description'];
-                        $primary_cta = $item['primary_cta'];
-                        $secondary_cta = $item['secondary_cta'];
-                        $additional_links = $item['additional_links'];
-                        $links_list = $item['additional_links']['links_list'];
+                        $description = $item['description'] ?? '';
+                        $primary_cta = $item['primary_cta'] ?? '';
+                        $secondary_cta = $item['secondary_cta'] ?? '';
+                        $additional_links = $item['additional_links'] ?? '';
+                        $links_list = $item['additional_links']['links_list'] ?? '';
                         ?>
                         <div class="carousel-item item-<?php echo $id; ?>" style="background-color:<?php echo $background_color; ?>">
                             <div class="item-inner container">
@@ -65,12 +65,12 @@ if( get_row_layout() == 'content_promo' ):
                                     <!-- Main content -->
                                     <div class="main-content"> 
                                         <div class="col-left">
-                                            <?php if ($title): ?>
+                                            <?php if (!empty($title)): ?>
                                                 <h2 class="title"><span><?php echo $title; ?></span></h2>
                                             <?php endif; ?>
 
-                                            <?php if ($item['description']): ?>
-                                                <div class="description"><?php echo $item['description']; ?></div>
+                                            <?php if (!empty($description)): ?>
+                                                <div class="description"><?php echo $description; ?></div>
                                             <?php endif; ?>
 
                                             <?php if ($primary_cta['visibility'] == true || $secondary_cta['visibility'] == true): ?>
@@ -110,10 +110,23 @@ if( get_row_layout() == 'content_promo' ):
                                     </div><!-- .Main content -->
                                 </div><!-- .Carousel content -->
 
-                                <?php if ($image && $image['url']): ?>
+                                <?php
+                                // Get medium_large image size if available
+                                $img_url = '';
+                                if ($image && isset($image['ID'])) {
+                                    $img_data = wp_get_attachment_image_src($image['ID'], 'medium_large');
+                                    if ($img_data && isset($img_data[0])) {
+                                        $img_url = $img_data[0];
+                                    }
+                                }
+                                if (!$img_url && $image && isset($image['url'])) {
+                                    $img_url = $image['url'];
+                                }
+                                ?>
+                                <?php if ($img_url): ?>
                                     <!-- Carousel image -->
                                     <div class="item-img">
-                                        <img class="main-img" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>">
+                                        <img class="main-img" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($image['alt'] ?? ''); ?>">
                                     </div><!-- .Carousel image -->
                                 <?php endif; ?>
                             </div>

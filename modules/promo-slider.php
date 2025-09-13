@@ -11,7 +11,11 @@ $template = get_sub_field('templates');
 $settings = get_sub_field('settings');
 $slides = get_sub_field('slides');
 $section_id = rand(0, 999);
-$dots = ($settings['dots']) ? 'true' : 'false';
+
+// Fix: Only show dots if more than 1 slide
+$slide_count = is_array($slides) ? count($slides) : 0;
+$dots = ($settings['dots'] && $slide_count > 1) ? 'true' : 'false';
+
 $autoplay = ($settings['autoplay']) ? 'true' : 'false';
 $autoplay_speed = $settings['autoplay_speed'] ?? '3000';
 
@@ -41,10 +45,25 @@ if(!empty($slides)):
                     ?>
                     <div class="slide-item item-<?php echo $id; ?>">
                         <div class="item-inner container">
-                            <?php if ($image && $image['url']): ?>
-                                <div class="item-img">
-                                    <img class="" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>">
-                                </div>
+                            <?php if ($image && isset($image['ID'])): ?>
+                                <?php
+                                    // Get medium_large image size if available
+                                    $img_url = '';
+                                    if ($image && isset($image['ID'])) {
+                                        $img_data = wp_get_attachment_image_src($image['ID'], 'medium_large');
+                                        if ($img_data && isset($img_data[0])) {
+                                            $img_url = $img_data[0];
+                                        }
+                                    }
+                                    if (!$img_url && $image && isset($image['url'])) {
+                                        $img_url = $image['url'];
+                                    }
+                                ?>
+                                <?php if ($img_url): ?>
+                                    <div class="item-img">
+                                        <img class="" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($image['alt'] ?? ''); ?>">
+                                    </div>
+                                <?php endif; ?>
                             <?php endif; ?>
                             <div class="item-content">
                                 <?php if ($sub_title): ?>

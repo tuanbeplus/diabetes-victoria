@@ -195,7 +195,7 @@ function dv_custom_wp_login_logo() {
         #login h1 a, .login h1 a {
             margin-bottom: 32px;
             background-image: url("/wp-content/uploads/2025/03/DV_Brandmark_Primary_FullCol_RGB_Cropped.svg");
-            width: 260px;
+            width: 240px;
             background-size: contain;
             background-repeat: no-repeat;
         }

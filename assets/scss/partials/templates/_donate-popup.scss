@@ -65,6 +65,11 @@
                 background-color: $tertiary_color;
                 color: #fff;
                 transition: all 0.2s;
+                @media only screen and (max-width: 600px) {
+                    width: 32px;
+                    height: 30px;
+                    font-size: 18px;
+                }
             }
         }
         form {
@@ -115,6 +120,9 @@
                         color: $donate_color;
                         background-color: #fff;
                     }
+                    @media only screen and (max-width: 600px) {
+                        gap: 20px;
+                    }
                 }
                 input#other-amount {
                     width: 100%;
@@ -146,6 +154,9 @@
                         background-color: #fff;
                     }
                 }
+                @media only screen and (max-width: 600px) {
+                    gap: 20px;
+                }
             }
             .form-footer {
                 display: flex;
@@ -164,36 +175,18 @@
                         color: #fff;
                         background-color: $donate_color;
                     }
-                }
-            }
-        }
-    }
-
-    @media only screen and (max-width: 600px) {
-        .donate-wrapper {
-            padding: 60px 24px 40px;
-            form {
-                .amount-options {
-                    gap: 20px;
-                    .amounts-list {
-                        gap: 20px;
-                    }
-                }
-                .form-footer {
-                    flex-direction: column-reverse;
-                    gap: 20px;
-                    #btn-continue-donate {
+                    @media only screen and (max-width: 600px) {
                         width: fit-content;
                     }
                 }
-            }
-            #btn-close-donate {
-                .close-icon {
-                    width: 32px;
-                    height: 30px;
-                    font-size: 18px;
+                @media only screen and (max-width: 600px) {
+                    flex-direction: column-reverse;
+                    gap: 20px;
                 }
             }
+        }
+        @media only screen and (max-width: 600px) {
+            padding: 60px 24px 40px;
         }
     }
 }

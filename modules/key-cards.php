@@ -27,8 +27,23 @@ if( get_row_layout() == 'key_cards' ):
                     $card = $row['card'] ?? '';
                     $brand_color = ($card['brand_color'] !== '') ? $card['brand_color'] : 'var(--secondary-color)';
                     $cta_color = ($card['brand_color'] !== '') ? $card['brand_color'] : 'var(--tertiary-color)';
-                    $img_url = !empty($card['image']['url']) ? $card['image']['url'] : DV_IMG_DIR .'DV-placeholder-img.png';
-                    $img_alt = $card['image']['alt'] ?? '';
+                    
+                    // Get medium_large image size if available
+                    $img_url = DV_IMG_DIR . 'DV-placeholder-img.png';
+                    $img_alt = '';
+                    if (!empty($card['image']) && !empty($card['image']['ID'])) {
+                        $img_data = wp_get_attachment_image_src($card['image']['ID'], 'medium_large');
+                        if ($img_data && isset($img_data[0])) {
+                            $img_url = $img_data[0];
+                        } elseif (!empty($card['image']['url'])) {
+                            $img_url = $card['image']['url'];
+                        }
+                        $img_alt = $card['image']['alt'] ?? '';
+                    } elseif (!empty($card['image']['url'])) {
+                        $img_url = $card['image']['url'];
+                        $img_alt = $card['image']['alt'] ?? '';
+                    }
+
                     $landing_page_name = !empty($card['landing_page_name']) ? $card['landing_page_name'] : $card['landing_page_link'];
                     $landing_page_link = $card['landing_page_link'] ?? '';
                     $title = $card['title'] ?? '';
@@ -40,7 +55,7 @@ if( get_row_layout() == 'key_cards' ):
                         <li id="card-<?php echo $index; ?>" class="card" <?php if ($cards_per_row == 2) echo 'style="max-width:540px;"';?> >
                             <div class="card-body">
                                 <div class="card-img">
-                                    <img src="<?php echo $img_url; ?>" alt="<?php echo $img_alt; ?>" loading="lazy">
+                                    <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($img_alt); ?>" loading="lazy">
                                 </div>
                                 <div class="card-content">
                                     <?php if (!empty($landing_page_link)): ?>

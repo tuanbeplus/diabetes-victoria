@@ -3,21 +3,40 @@
     background-color: var(--s-bg-color);
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 100px);
-    @media(max-width: 1024px) {
+    @media (max-width: 1024px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.75);
         padding-bottom: calc(var(--s-pd-bottom, 100px) * 0.75);
     }
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         padding-top: calc(var(--s-pd-top, 60px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 100px) * 0.5);
     }
     .container {
         max-width: 990px;
+        @media (max-width: 1024px) {
+            max-width: 900px;
+        }
+        @media (max-width: 768px) {
+            max-width: 700px;
+        }
     }
     .heading {
         margin: 0 0 26px;
         font-size: 2.313rem;
         color: var(--post-brand-color, $primary_color);
+        @media (max-width: 1200px) {
+            font-size: 2rem;
+        }
+        @media (max-width: 1024px) {
+            font-size: 1.875rem;
+        }
+        @media (max-width: 768px) {
+            margin: 0 0 20px;
+            font-size: 1.8rem;
+        }
+        @media (max-width: 600px) {
+            font-size: 1.5rem;
+        }
     }
     form {
         max-width: 100%;
@@ -25,6 +44,13 @@
             display: flex;
             gap: 30px;
             border: none;
+            @media (max-width: 1024px) {
+                gap: 20px;
+            }
+            @media (max-width: 600px) {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
             input[type=search] {
                 padding: 20px 24px 16px;
                 font-size: 1rem;
@@ -32,6 +58,13 @@
                 border: 2px solid var(--post-brand-color, $primary_color);
                 &::placeholder {
                     color: $dv_black;
+                }
+                @media (max-width: 1024px) {
+                    padding: 16px 20px 14px;
+                }
+                @media (max-width: 600px) {
+                    padding: 12px 16px 10px;
+                    font-size: 0.875rem;
                 }
             }
             button.search-submit-btn {
@@ -47,94 +80,32 @@
                     color: var(--post-brand-color, $primary_color);
                     box-shadow: inset 300px 0 0 0 #fff;
                 }
+                @media (max-width: 1024px) {
+                    padding: 17px 44px 16px;
+                }
+                @media (max-width: 600px) {
+                    padding: 14px 34px 10px;
+                    font-size: 0.875rem;
+                }
             }
         }
         .form-suggest {
             font-size: 1rem;
             font-family: $primary_font_bold;
+            @media (max-width: 1024px) {
+                font-size: 0.875rem;
+            }
             ul.suggest-list {
                 li {
                     margin: 0;
                     padding: 0;
                     font-size: 1rem;
+                    @media (max-width: 1024px) {
+                        font-size: 0.875rem;
+                    }
                     a {
                         color: var(--post-brand-color, $primary_color);
                     }
-                }
-            }
-        }
-    }
-}
-
-/*************************** laptop **************************/
-@media only screen and (max-width: 1200px) {
-    .search-section {
-        .heading {
-            font-size: 2rem;
-        }
-    }
-}
-
-/*************************** Tablet **************************/
-@media only screen and (max-width: 1024px) {
-    .search-section {
-        .container {
-            max-width: 900px;
-        }
-        .heading {
-            font-size: 1.875rem;
-        }
-        form {
-            .form-wrapper {
-                gap: 20px;
-                input[type=search] {
-                    padding: 16px 20px 14px;
-                }
-                button.search-submit-btn {
-                    padding: 17px 44px 16px;
-                }
-            }
-            .form-suggest {
-                font-size: 0.875rem;
-                ul.suggest-list {
-                    li {
-                        font-size: 0.875rem;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .search-section {
-        .container {
-            max-width: 700px;
-        }
-        .heading {
-            margin: 0 0 20px;
-            font-size: 1.8rem;
-        }
-    }
-}
-
-/*************************** Mobile **************************/
-@media only screen and (max-width: 600px) {
-    .search-section {
-        .heading {
-            font-size: 1.5rem;
-        }
-        form {
-            .form-wrapper {
-                flex-wrap: wrap;
-                gap: 16px;
-                input[type=search] {
-                    padding: 12px 16px 10px;
-                    font-size: 0.875rem;
-                }
-                button.search-submit-btn {
-                    padding: 14px 34px 10px;
-                    font-size: 0.875rem;
                 }
             }
         }

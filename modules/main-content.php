@@ -145,13 +145,20 @@ if( get_row_layout() == 'main_content' ):
                 
                 <!-- Content -->
                 <div class="content-wrapper">
-                    <?php if ($media_options == 'image' && !empty($banner_image['url'])): ?>
-                        <div class="__banner-wrapper" style="<?php if(!empty($banner_image['width']) && !empty($banner_image['height'])): ?>padding-top:<?php echo (intval($banner_image['height'])/intval($banner_image['width'])*100); ?>%;<?php endif; ?>">
+                    <?php if ($media_options == 'image' && !empty($banner_image['ID'])): ?>
+                        <?php
+                            // Get the 'large' size image
+                            $large_img = wp_get_attachment_image_src($banner_image['ID'], 'medium_large');
+                            $banner_img_url = $large_img && isset($large_img[0]) ? $large_img[0] : $banner_image['url'];
+                            $banner_img_width = $large_img && isset($large_img[1]) ? $large_img[1] : ($banner_image['width'] ?? '');
+                            $banner_img_height = $large_img && isset($large_img[2]) ? $large_img[2] : ($banner_image['height'] ?? '');
+                        ?>
+                        <div class="__banner-wrapper" style="<?php if(!empty($banner_img_width) && !empty($banner_img_height)): ?>padding-top:<?php echo (intval($banner_img_height)/intval($banner_img_width)*100); ?>%;<?php endif; ?>">
                             <div class="__banner-placeholder"></div>
                             <img 
                                 class="__banner" 
-                                src="<?php echo $banner_image['url']; ?>" 
-                                alt="<?php echo $banner_image['alt']; ?>" 
+                                src="<?php echo esc_url($banner_img_url); ?>" 
+                                alt="<?php echo esc_attr($banner_image['alt']); ?>" 
                                 loading="lazy"
                                 onload="this.previousElementSibling && (this.previousElementSibling.style.display='none');"
                             >

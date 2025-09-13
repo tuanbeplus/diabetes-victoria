@@ -58,6 +58,9 @@
                     margin-bottom: 0;
                 }
             }
+            @media only screen and (max-width: 550px) {
+                gap: 30px;
+            }
         }
         #btn-close-contacts-popup {
             position: absolute;
@@ -83,19 +86,14 @@
                 background-color: #fff;
                 color: $primary_color;
             }
-        }
-    }
-    @media only screen and (max-width: 550px) {
-        .contact-phones-wrapper {
-            margin: 22vh 24px!important;
-            padding: 80px 24px 40px;
-            .inner {
-                gap: 30px;
-            }
-            #btn-close-contacts-popup {
+            @media only screen and (max-width: 550px) {
                 top: 16px;
                 right: 16px;
             }
+        }
+        @media only screen and (max-width: 550px) {
+            margin: 22vh 24px!important;
+            padding: 80px 24px 40px;
         }
     }
 }

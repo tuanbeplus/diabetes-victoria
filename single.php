@@ -132,8 +132,8 @@ echo '} </style>';
 
         <div class="content-wrapper">
             <?php
-            // Get the feature image data array
-            $banner_image = !empty($feature_img_id) ? wp_get_attachment_image_src($feature_img_id, 'full') : null;
+            // Get the feature image data array (use 'large' size instead of 'full')
+            $banner_image = !empty($feature_img_id) ? wp_get_attachment_image_src($feature_img_id, 'medium_large') : null;
             if (!empty($banner_image)) :
                 $banner_url = $banner_image[0];
                 $banner_width = $banner_image[1];
@@ -326,7 +326,7 @@ $max_posts = is_array($max_posts) ? count($max_posts) : '';
                 <li class="post post-<?php echo $post->ID; ?>">
                     <div class="__thumb">
                         <?php if (!empty(get_the_post_thumbnail($post->ID))): ?>
-                            <?php echo get_the_post_thumbnail($post->ID, 'medium_large'); ?>
+                            <?php echo get_the_post_thumbnail($post->ID, 'medium'); ?>
                         <?php else: ?>
                             <?php dv_the_post_thumbnail_default($post->ID) ?>
                         <?php endif; ?>

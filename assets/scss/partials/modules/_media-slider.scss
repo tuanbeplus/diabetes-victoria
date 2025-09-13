@@ -1,19 +1,27 @@
-
 .media-slider-section {
     position: relative;
     background: var(--s-bg-color, #fff);
     padding-top: var(--s-pd-top, 60px);
     padding-bottom: var(--s-pd-bottom, 60px);
-    @media(max-width: 1024px) {
+    .container {
+        max-width: 1446px;
+        @media (max-width: 1200px) {
+            max-width: 1100px;
+        }
+        @media (max-width: 1024px) {
+            max-width: 900px;
+        }
+        @media (max-width: 768px) {
+            max-width: 700px;
+        }
+    }
+    @media (max-width: 1024px) {
         padding-top: 50px;
         padding-bottom: 50px;
     }
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         padding-top: 40px;
         padding-bottom: 40px;
-    }
-    .container {
-        max-width: 1446px;
     }
     .media-slider-wrapper {
         .media-slider-heading {
@@ -24,6 +32,18 @@
             color: $primary_color;
             max-width: 1030px;
             margin: 0 auto 30px;
+            @media (max-width: 1200px) {
+                font-size: 2.188rem;
+            }
+            @media (max-width: 1024px) {
+                font-size: 1.875rem;
+            }
+            @media (max-width: 768px) {
+                font-size: 1.8rem;
+            }
+            @media (max-width: 600px) {
+                font-size: 1.5rem;
+            }
         }
         .carousel-wrapper {
             overflow: hidden;
@@ -41,6 +61,9 @@
             }
             .carousel-inner {
                 padding: 0 30px;
+                @media (max-width: 768px) {
+                    padding: 0 15px;
+                }
             }
             .media-item {
                 &--inner {
@@ -58,48 +81,6 @@
                         object-fit: cover;
                     }
                 }
-            }
-        }
-    }
-    @media(max-width: 1200px) {
-        .container {
-            max-width: 1100px;
-        }
-        .media-slider-wrapper {
-            .media-slider-heading {
-                font-size: 2.188rem;
-            }
-        }
-    }
-    @media(max-width: 1024px) {
-        .container {
-            max-width: 900px;
-        }
-        .media-slider-wrapper {
-            .media-slider-heading {
-                font-size: 1.875rem;
-            }
-        }
-    }
-    @media(max-width: 768px) {
-        .container {
-            max-width: 700px;
-        }
-        .media-slider-wrapper {
-            .media-slider-heading {
-                font-size: 1.8rem;
-            }
-            .carousel-wrapper {
-                .carousel-inner {
-                    padding: 0 15px;
-                }
-            }
-        }
-    }
-    @media(max-width: 600px) {
-        .media-slider-wrapper {
-            .media-slider-heading {
-                font-size: 1.5rem;
             }
         }
     }

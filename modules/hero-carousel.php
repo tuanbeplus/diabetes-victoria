@@ -19,24 +19,24 @@ if( get_row_layout() == 'hero_carousel' ):
                 <?php foreach ($carousel_list as $id => $row): 
                     $item = $row['carousel_item'] ?? '';
                     if (!empty($item)): 
-                        $title = $item['title'];
-                        $image = $item['image'];
+                        $title = $item['title'] ?? '';
+                        $image = $item['image'] ?? '';
                         $text_color = !empty($item['text_color']) ? $item['text_color'] : 'var(--white-color)';
                         $background_color = !empty($item['background_color']) ? $item['background_color'] : 'var(--primary-color)';
-                        $description = $item['description'];
-                        $primary_cta = $item['primary_cta'];
-                        $secondary_cta = $item['secondary_cta'];
+                        $description = $item['description'] ?? '';
+                        $primary_cta = $item['primary_cta'] ?? '';
+                        $secondary_cta = $item['secondary_cta'] ?? '';
                         ?>
                         <div class="carousel-item item-<?php echo $id; ?>" style="background-color:<?php echo $background_color; ?>">
                             <div class="item-inner container">
                                 <div class="item-content">
                                     <!-- Main content -->
                                     <div class="main-content">
-                                        <?php if ($title): ?>
+                                        <?php if (!empty($title)): ?>
                                             <h1 class="title"><?php echo $title; ?></h1>
                                         <?php endif; ?>
 
-                                        <?php if ($item['description']): ?>
+                                        <?php if (!empty($description)): ?>
                                             <div class="description"><?php echo $item['description']; ?></div>
                                         <?php endif; ?>
 
@@ -57,10 +57,23 @@ if( get_row_layout() == 'hero_carousel' ):
                                     </div><!-- .Main content -->
                                 </div>
 
-                                <?php if ($image && $image['url']): ?>
+                                <?php 
+                                // Get medium_large image size if available
+                                $img_url = '';
+                                if ($image && isset($image['ID'])) {
+                                    $img_data = wp_get_attachment_image_src($image['ID'], 'medium_large');
+                                    if ($img_data && isset($img_data[0])) {
+                                        $img_url = $img_data[0];
+                                    }
+                                }
+                                if (!$img_url && $image && isset($image['url'])) {
+                                    $img_url = $image['url'];
+                                }
+                                ?>
+                                <?php if ($img_url): ?>
                                     <!-- Carousel image -->
                                     <div class="item-img">
-                                        <img class="main-img" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt'] ?? ''; ?>" loading="lazy">
+                                        <img class="main-img" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($image['alt'] ?? ''); ?>" loading="lazy">
                                     </div><!-- .Carousel image -->
                                 <?php endif; ?>
                             </div>

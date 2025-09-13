@@ -2,11 +2,11 @@
     background-color: var(--s-bg-color, #fff);
     padding-top: var(--s-pd-top, 90px);
     padding-bottom: var(--s-pd-bottom, 90px);
-    @media(max-width: 1024px) {
+    @media (max-width: 1024px) {
         padding-top: calc(var(--s-pd-top, 90px) * 0.75);
         padding-bottom: calc(var(--s-pd-bottom, 90px) * 0.75);
     }
-    @media(max-width: 430px) {
+    @media (max-width: 430px) {
         padding-top: calc(var(--s-pd-top, 90px) * 0.5);
         padding-bottom: calc(var(--s-pd-bottom, 90px) * 0.5);
     }
@@ -19,68 +19,39 @@
         flex-wrap: wrap;
         column-gap: 150px;
         row-gap: 80px;
+        @media (max-width: 1200px) {
+            column-gap: 120px;
+        }
+        @media (max-width: 1024px) {
+            column-gap: 100px;
+            row-gap: 60px;
+        }
+        @media (max-width: 768px) {
+            column-gap: 80px;
+        }
+        @media (max-width: 430px) {
+            column-gap: 40px;
+            row-gap: 40px;
+        }
         .logo {
             img {
                 width: auto;
                 display: block;
                 height: 100%;
                 object-fit: contain;
+                @media (max-width: 1024px) {
+                    max-width: 180px;
+                }
+                @media (max-width: 768px) {
+                    max-width: 160px;
+                }
+                @media (max-width: 430px) {
+                    max-width: 120px;
+                }
             }
             &:last-child {
                 img {
                     margin-top: -12px;
-                }
-            }
-        }
-    }
-}
-
-/*************************** Laptop **************************/
-@media only screen and (max-width: 1200px) {
-    .partner-logos {
-        .logos {
-            column-gap: 120px;
-        }
-    }
-}
-
-/*************************** Tablet **************************/
-@media only screen and (max-width: 1024px) {
-    .partner-logos {
-        .logos {
-            column-gap: 100px;
-            row-gap: 60px;
-            .logo {
-                img {
-                    max-width: 180px;
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .partner-logos {
-        .logos {
-            column-gap: 80px;
-            .logo {
-                img {
-                    max-width: 160px;
-                }
-            }
-        }
-    }
-}
-
-/*************************** Mobile **************************/
-@media only screen and (max-width: 430px) {
-    .partner-logos {
-        .logos {
-            column-gap: 40px;
-            row-gap: 40px;
-            .logo {
-                img {
-                    max-width: 120px;
                 }
             }
         }

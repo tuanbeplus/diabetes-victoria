@@ -6,7 +6,7 @@ footer.site-footer {
         color: $dv_white;
         font-size: 0.875rem;
     }
-    ul , ol {
+    ul, ol {
         padding: 0;
         margin: 20px 0;
         li:last-child {
@@ -37,12 +37,23 @@ footer.site-footer {
         img {
             display: block;
             width: 100%;
+            @media only screen and (max-width: 500px) {
+                height: 150px;
+                object-fit: cover;
+            }
         }
     }
     .footer-logo.tablet {
         display: none;
         img {
             width: 160px;
+            @media only screen and (max-width: 500px) {
+                width: 140px;
+            }
+        }
+        @media only screen and (max-width: 1024px) {
+            display: block;
+            padding-top: 40px;
         }
     }
     .footer-wrapper {
@@ -61,6 +72,9 @@ footer.site-footer {
             *:last-child {
                 margin-bottom: 0;
             }
+            @media only screen and (max-width: 768px) {
+                max-width: 100%;
+            }
         }
         .quick-links {
             display: flex;
@@ -71,6 +85,32 @@ footer.site-footer {
                 li {
                     white-space: nowrap;
                 }
+                @media only screen and (max-width: 768px) {
+                    margin-top: 40px;
+                }
+            }
+            @media only screen and (max-width: 1440px) {
+                gap: 100px;
+            }
+            @media only screen and (max-width: 1200px) {
+                gap: 60px;
+            }
+            @media only screen and (max-width: 1024px) {
+                // no change for quick-links
+            }
+            @media only screen and (max-width: 768px) {
+                justify-content: left;
+                gap: 80px;
+            }
+            @media only screen and (max-width: 500px) {
+                gap: 32px;
+                ul {
+                    margin-top: 20px;
+                    margin-bottom: 0;
+                }
+            }
+            @media only screen and (max-width: 400px) {
+                gap: 24px;
             }
         }
         .footer-logo {
@@ -80,12 +120,45 @@ footer.site-footer {
             img {
                 width: 160px;
             }
+            @media only screen and (max-width: 1024px) {
+                display: none;
+            }
+        }
+        @media only screen and (max-width: 1440px) {
+            gap: 100px;
+        }
+        @media only screen and (max-width: 1200px) {
+            gap: 80px;
+        }
+        @media only screen and (max-width: 1024px) {
+            padding: 20px 0 30px;
+            justify-content: left;
+        }
+        @media only screen and (max-width: 768px) {
+            justify-content: left;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        @media only screen and (max-width: 500px) {
+            .quick-links {
+                gap: 32px;
+                ul {
+                    margin-top: 20px;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        @media only screen and (max-width: 400px) {
+            gap: 30px;
         }
     }
     .copyright {
         text-align: center;
         margin: 0;
         padding-bottom: 66px;
+        @media only screen and (max-width: 1024px) {
+            padding-bottom: 40px;
+        }
     }
     .acknowledgement {
         padding: 74px 0;
@@ -99,108 +172,8 @@ footer.site-footer {
             margin-right: 28px;
             width: 66px;
         }
-    }
-}
-
-/*************************** Laptop **************************/
-@media only screen and (max-width: 1440px) {
-    footer.site-footer {
-        .footer-wrapper {
-            gap: 100px;
-            .quick-links {
-                gap: 100px;
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    footer.site-footer {
-        .footer-wrapper {
-            gap: 80px;
-            .quick-links {
-                gap: 60px;
-            }
-        }
-    }
-}
-
-/*************************** Tablet **************************/
-@media only screen and (max-width: 1024px) {
-    footer.site-footer {
-        .footer-logo.tablet {
-            display: block;
-            padding-top: 40px;
-        }
-        .footer-wrapper {
-            padding: 20px 0 30px;
-            justify-content: left;
-            .footer-logo {
-                display: none;
-            }
-        }
-        .copyright {
-            padding-bottom: 40px;
-        }
-        .acknowledgement {
+        @media only screen and (max-width: 1024px) {
             padding: 40px 0;
-        }
-    }
-}
-
-/*************************** Mobile **************************/
-@media only screen and (max-width: 768px) {
-    footer.site-footer {
-        .footer-wrapper {
-            justify-content: left;
-            flex-wrap: wrap;
-            gap: 40px;
-            .info {
-                max-width: 100%;
-            }
-            .quick-links {
-                justify-content: left;
-                gap: 80px;
-                ul.contacts-list {
-                    margin-top: 40px;
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    footer.site-footer {
-        .footer-banner {
-            img {
-                height: 150px;
-                object-fit: cover;
-            }
-        }
-        .footer-logo.tablet {
-            img {
-                width: 140px;
-            }
-        }
-        .footer-wrapper {
-            .quick-links {
-                gap: 32px;
-                ul {
-                    margin-top: 20px;
-                    margin-bottom: 0;
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 400px) {
-    footer.site-footer {
-        .footer-wrapper {
-            gap: 30px;
-            .quick-links {
-                gap: 24px;
-            }
         }
     }
 }

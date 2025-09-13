@@ -27,6 +27,12 @@
                 color: $dv_black;
                 background-color: #fff;
                 border: 1px solid $primary_color;
+                @media only screen and (max-width: 1024px) {
+                    padding: 16px 18px 15px;
+                }
+                @media only screen and (max-width: 600px) {
+                    padding: 14px 16px 12px;
+                }
             }
             button[type=submit] {
                 width: fit-content;
@@ -42,6 +48,22 @@
                 &:hover {
                     background-color: $secondary_color;
                 }
+                @media only screen and (max-width: 1024px) {
+                    padding: 18px 40px;
+                }
+                @media only screen and (max-width: 600px) {
+                    padding: 14px 26px 12px;
+                    font-size: 0.875rem;
+                }
+            }
+            @media only screen and (max-width: 1024px) {
+                margin-bottom: 32px;
+            }
+            @media only screen and (max-width: 600px) {
+                margin-bottom: 24px;
+                flex-wrap: wrap;
+                justify-content: right;
+                gap: 16px;
             }
         }
         .search-result-info {
@@ -157,7 +179,6 @@
             }
         }
     }
-    
     #search-results {
         position: relative;
         width: 100%;
@@ -194,6 +215,9 @@
             }
             .__title {
                 margin: 0 0 6px;
+                @media only screen and (max-width: 600px) {
+                    font-size: 1rem;
+                }
             }
             .__link {
                 display: inline-block;
@@ -212,14 +236,29 @@
                 * {
                     word-break: break-all;
                 }
+                @media only screen and (max-width: 600px) {
+                    margin-bottom: 8px;
+                    font-size: 0.813rem;
+                }
             }
             .__summary {
                 font-size: 0.875rem;
                 font-family: $primary_font_book;
+                @media only screen and (max-width: 600px) {
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
             }
         }
+        @media only screen and (max-width: 1024px) {
+            padding: 32px 24px;
+        }
+        @media only screen and (max-width: 600px) {
+            padding: 24px 16px;
+        }
     }
-
     .bottom-cta {
         margin-top: 42px;
         display: flex;
@@ -253,74 +292,23 @@
                     display: block;
                 }
             }
-        }
-    }
-
-    /********************* Tablet ********************/
-    @media only screen and (max-width: 1024px) {
-        max-width: 900px;
-        padding: 40px 15px 80px;
-        form.search-results-form {
-            .search-inner {
-                margin-bottom: 32px;
-                input[type=search] {
-                    padding: 16px 18px 15px;
-                }
-                button[type=submit] {
-                    padding: 18px 40px;
-                }
-            }
-        }
-        #search-results {
-            padding: 32px 24px;
-        }
-    }
-    @media only screen and (max-width: 768px) {
-        max-width: 700px;
-    }
-
-    /********************* Mobile ********************/
-    @media only screen and (max-width: 600px) {
-        padding: 40px 15px 40px;
-        form.search-results-form {
-            .search-inner {
-                margin-bottom: 24px;
-                flex-wrap: wrap;
-                justify-content: right;
-                gap: 16px;
-                input[type=search] {
-                    padding: 14px 16px 12px;
-                }
-                button[type=submit] {
-                    padding: 14px 26px 12px;
-                    font-size: 0.875rem;
-                }
-            }
-        }
-        #search-results {
-            padding: 24px 16px;
-            .result-item {
-                .__title {
-                    font-size: 1rem;
-                }
-                .__link {
-                    margin-bottom: 8px;
-                    font-size: 0.813rem;
-                }
-                .__summary {
-                    overflow: hidden;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                }
-            }
-        }
-        .bottom-cta {
-            margin-top: 32px;
-            #btn-load-more-results {
+            @media only screen and (max-width: 600px) {
                 padding: 12px 22px 10px;
                 font-size: 0.875rem;
             }
         }
+        @media only screen and (max-width: 600px) {
+            margin-top: 32px;
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        max-width: 900px;
+        padding: 40px 15px 80px;
+    }
+    @media only screen and (max-width: 768px) {
+        max-width: 700px;
+    }
+    @media only screen and (max-width: 600px) {
+        padding: 40px 15px 40px;
     }
 }

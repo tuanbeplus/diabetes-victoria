@@ -15,6 +15,14 @@
                 height: 200px;
                 border-radius: 100%;
                 object-fit: cover;
+                @media only screen and (max-width: 1024px) {
+                    width: 160px;
+                    height: 160px;
+                }
+                @media only screen and (max-width: 600px) {
+                    width: 120px;
+                    height: 120px;
+                }
             }
         }
         .info {
@@ -26,6 +34,9 @@
             }
             .__name {
                 margin-bottom: 14px;
+                @media only screen and (max-width: 600px) {
+                    font-size: 1.125rem;
+                }
             }
             .__qualifi {
                 margin-top: 14px;
@@ -42,42 +53,23 @@
                     text-underline-offset: 2px;
                     white-space: nowrap;
                 }
-            }
-        }
-    }
-    @media only screen and (max-width: 1024px) {
-        .author-profile-wrapper {
-            gap: 40px;
-            .profile-picture {
-                img {
-                    width: 160px;
-                    height: 160px;
+                @media only screen and (max-width: 600px) {
+                    text-align: justify;
                 }
             }
         }
-    }
-    @media only screen and (max-width: 600px) {
-        padding-bottom: 40px;
-        .author-profile-wrapper {
+        @media only screen and (max-width: 1024px) {
+            gap: 40px;
+        }
+        @media only screen and (max-width: 600px) {
             padding: 24px;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
             text-align: center;
-            .profile-picture {
-                img {
-                    width: 120px;
-                    height: 120px;
-                }
-            }
-            .info {
-                .__name {
-                    font-size: 1.125rem;
-                }
-                .__bio {
-                    text-align: justify;
-                }
-            }
         }
+    }
+    @media only screen and (max-width: 600px) {
+        padding-bottom: 40px;
     }
 }

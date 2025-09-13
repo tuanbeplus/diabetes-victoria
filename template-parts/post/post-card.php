@@ -10,7 +10,7 @@
 <li class="post post-<?php the_ID() ?>">
     <div class="__thumb">
         <?php if (!empty(get_the_post_thumbnail(get_the_ID()))): ?>
-            <?php echo get_the_post_thumbnail(get_the_ID(), 'medium_large'); ?>
+            <?php echo get_the_post_thumbnail(get_the_ID(), 'medium'); ?>
         <?php else: ?>
             <?php dv_the_post_thumbnail_default(get_the_ID()) ?>
         <?php endif; ?>
