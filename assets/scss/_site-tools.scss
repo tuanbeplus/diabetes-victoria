@@ -174,16 +174,6 @@ body {
                     }
                 }
             }
-            @media only screen and (max-width: 1440px) {
-                #btn-toggle-accessibility-toolbar {
-                    margin: 0;
-                }
-            }
-            @media only screen and (max-width: 600px) {
-                #btn-toggle-accessibility-toolbar {
-                    margin: 0;
-                }
-            }
         }
         #btn-close-accessibility-toolbar {
             display: none;

@@ -776,13 +776,13 @@ nav#site-navigation {
             &.current_page_item {
                 > a {
                     text-decoration: underline;
-                    text-underline-offset: 2px;
+                    text-underline-offset: 4px;
                 }
             }
             &.current-menu-item {
                 > a {
                     text-decoration: underline;
-                    text-underline-offset: 2px;
+                    text-underline-offset: 4px;
                 }
             }
             a {
@@ -868,6 +868,7 @@ nav#site-navigation {
                 border-bottom: 1px solid #d8d8d8;
                 a {
                     color: $dv_white!important;
+                    width: fit-content;
                 }
             }
             li.menu-item-has-children {

@@ -26,10 +26,6 @@ jQuery(document).ready(function ($) {
         if (!memberData.recordTypeId || !memberData.memberType || !memberData.membershipType) {
             return false;
         }
-        // Check if dates are valid (not "NA")
-        if (memberData.expiryDate === "NA" || memberData.gracePeriodDate === "NA") {
-            return false;
-        }
         // Validate member type
         const validMemberTypes = ['Paid', 'Free'];
         if (!validMemberTypes.includes(memberData.memberType)) {
@@ -37,6 +33,11 @@ jQuery(document).ready(function ($) {
         }
         // Validate membership type: accept any non-empty string (e.g. "Free Ongoing")
         if (typeof memberData.membershipType !== 'string' || memberData.membershipType.trim() === '') {
+            return false;
+        }
+        // For paid members, dates must be valid (not "NA")
+        // For free members, "NA" dates are allowed (no expiry required)
+        if (memberData.memberType === 'Paid' && (memberData.expiryDate === "NA" || memberData.gracePeriodDate === "NA")) {
             return false;
         }
         return true;
@@ -48,7 +49,7 @@ jQuery(document).ready(function ($) {
             return 'none';
         }
         // Check if membership is expired
-        if (isMembershipExpired(memberData.expiryDate, memberData.gracePeriodDate)) {
+        if (isMembershipExpired(memberData.expiryDate, memberData.gracePeriodDate, memberData.memberType)) {
             return 'expired';
         }
         // Return tier based on member type
@@ -56,9 +57,14 @@ jQuery(document).ready(function ($) {
     }
 
     // Function to check if membership is expired
-    function isMembershipExpired(expiryDate, gracePeriodDate) {
-        if (expiryDate === "NA" || gracePeriodDate === "NA") {
-            return true; // Consider NA as expired
+    function isMembershipExpired(expiryDate, gracePeriodDate, memberType) {
+        // Free members with "NA" dates are never expired (no expiry required)
+        if (memberType === 'Free' && (expiryDate === "NA" || gracePeriodDate === "NA")) {
+            return false;
+        }
+        // For paid members, "NA" dates are considered expired
+        if (memberType === 'Paid' && (expiryDate === "NA" || gracePeriodDate === "NA")) {
+            return true;
         }
         const currentDate = new Date();
         const gracePeriodTimestamp = convertDateToTimestamp(gracePeriodDate);

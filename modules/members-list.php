@@ -20,14 +20,34 @@ if( get_row_layout() == 'members_list' ):
                     <?php endif; ?>
                     <ul class="members-list">
                     <?php foreach ($members_list as $member): 
-                        $img_url = !empty($member['member_info']['image']) ? $member['member_info']['image'] : DV_IMG_DIR .'user-placeholder.jpeg';
+                        // Get image ID if available, else fallback to URL or placeholder
+                        $image_field = $member['member_info']['image'] ?? '';
+                        $img_url = DV_IMG_DIR . 'user-placeholder.jpeg';
+                        if (!empty($image_field)) {
+                            // If it's an array with ID (ACF image field), get medium size
+                            if (is_array($image_field) && !empty($image_field['ID'])) {
+                                $img_array = wp_get_attachment_image_src($image_field['ID'], 'medium');
+                                if ($img_array && !empty($img_array[0])) {
+                                    $img_url = $img_array[0];
+                                }
+                            } elseif (is_numeric($image_field)) {
+                                // If it's just an ID
+                                $img_array = wp_get_attachment_image_src($image_field, 'medium');
+                                if ($img_array && !empty($img_array[0])) {
+                                    $img_url = $img_array[0];
+                                }
+                            } elseif (is_string($image_field)) {
+                                // If it's a URL string, use as is (no resizing possible)
+                                $img_url = $image_field;
+                            }
+                        }
                         $name = $member['member_info']['name'] ?? '';
                         $qualifications = $member['member_info']['qualifications'] ?? '';
                         $description = $member['member_description'] ?? '';
                         ?>
                         <li class="member">
                             <div class="__img">
-                                <img src="<?php echo $img_url ?>" alt="Member Image">
+                                <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($name) ?>">
                             </div>
                             <div class="__info">
                                 <?php if (!empty($name)): ?>

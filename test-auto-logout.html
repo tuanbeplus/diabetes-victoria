@@ -58,7 +58,8 @@
     
     <div class="test-section">
         <h2>Test Controls</h2>
-        <button class="test-button" onclick="simulateLogin()">Simulate Login (Fresh Session)</button>
+        <button class="test-button" onclick="simulateLogin()">Simulate Paid Login (Fresh Session)</button>
+        <button class="test-button" onclick="simulateFreeLogin()">Simulate Free Login (NA dates)</button>
         <button class="test-button" onclick="simulateExpiredLogin()">Simulate Expired Login (25 hours ago)</button>
         <button class="test-button" onclick="checkSessionStatus()">Check Current Session Status</button>
         <button class="test-button" onclick="clearAllData()">Clear All Data</button>
@@ -101,14 +102,16 @@
             if (!memberData.recordTypeId || !memberData.memberType || !memberData.membershipType) {
                 return false;
             }
-            if (memberData.expiryDate === "NA" || memberData.gracePeriodDate === "NA") {
-                return false;
-            }
             const validMemberTypes = ['Paid', 'Free'];
             if (!validMemberTypes.includes(memberData.memberType)) {
                 return false;
             }
             if (typeof memberData.membershipType !== 'string' || memberData.membershipType.trim() === '') {
+                return false;
+            }
+            // For paid members, dates must be valid (not "NA")
+            // For free members, "NA" dates are allowed (no expiry required)
+            if (memberData.memberType === 'Paid' && (memberData.expiryDate === "NA" || memberData.gracePeriodDate === "NA")) {
                 return false;
             }
             return true;
@@ -118,14 +121,19 @@
             if (!memberData || !validateMembershipData(memberData)) {
                 return 'none';
             }
-            if (isMembershipExpired(memberData.expiryDate, memberData.gracePeriodDate)) {
+            if (isMembershipExpired(memberData.expiryDate, memberData.gracePeriodDate, memberData.memberType)) {
                 return 'expired';
             }
             return memberData.memberType === 'Paid' ? 'full' : 'free';
         }
 
-        function isMembershipExpired(expiryDate, gracePeriodDate) {
-            if (expiryDate === "NA" || gracePeriodDate === "NA") {
+        function isMembershipExpired(expiryDate, gracePeriodDate, memberType) {
+            // Free members with "NA" dates are never expired (no expiry required)
+            if (memberType === 'Free' && (expiryDate === "NA" || gracePeriodDate === "NA")) {
+                return false;
+            }
+            // For paid members, "NA" dates are considered expired
+            if (memberType === 'Paid' && (expiryDate === "NA" || gracePeriodDate === "NA")) {
                 return true;
             }
             const currentDate = new Date();
@@ -222,7 +230,21 @@
             };
             
             storeMembershipData(memberData);
-            logResult('✅ Simulated fresh login with valid membership data', 'info');
+            logResult('✅ Simulated fresh paid login with valid membership data', 'info');
+            updateLocalStorageDisplay();
+        }
+
+        function simulateFreeLogin() {
+            const memberData = {
+                recordTypeId: '01290000000G5VKAA0',
+                memberType: 'Free',
+                membershipType: 'Free Ongoing',
+                expiryDate: 'NA',
+                gracePeriodDate: 'NA'
+            };
+            
+            storeMembershipData(memberData);
+            logResult('✅ Simulated free login with NA dates (no expiry required)', 'info');
             updateLocalStorageDisplay();
         }
 

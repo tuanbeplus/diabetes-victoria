@@ -607,7 +607,7 @@ section.post-title {
         &:hover {
             box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px;
             .__thumb img {
-                transform: scale(1.06);
+                transform: scale(1.1);
             }
         }
         .__thumb {
@@ -618,7 +618,7 @@ section.post-title {
                 display: block;
                 height: 100%;
                 object-fit: cover;
-                transition: all 0.5s;
+                transition: all 0.9s;
             }
         }
         .post-meta {
@@ -634,7 +634,7 @@ section.post-title {
                 .term {
                     text-align: right;
                     font-family: $primary_font_demi;
-                    color: var(--post-brand-color, #019BC2);
+                    color: var(--post-brand-color, #2b468c);
                 }
                 .date {
                     white-space: nowrap;
@@ -675,7 +675,7 @@ section.post-title {
 }
 
 .pdfembed-iframe{
-    border: 3px solid var(--post-brand-color, #019BC2) !important;
+    border: 3px solid var(--post-brand-color, #2b468c) !important;
 }
 
 .dv-editor-content {
