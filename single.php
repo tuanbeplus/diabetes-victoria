@@ -229,7 +229,12 @@ echo '} </style>';
 <?php 
 $author_info = get_field('author_info');
 $profile_picture = $author_info['infomations']['profile_picture'] ?? array();
-$picture_url = $profile_picture['url'] ?? DV_IMG_DIR .'user-placeholder.jpeg';
+// Get medium size image if available
+if (!empty($profile_picture) && isset($profile_picture['sizes']['medium_large'])) {
+    $picture_url = $profile_picture['sizes']['medium_large'];
+} else {
+    $picture_url = $profile_picture['url'] ?? DV_IMG_DIR .'user-placeholder.jpeg';
+}
 $picture_alt = $profile_picture['alt'] ?? 'Author Picture Placeholder';
 $author_name = $author_info['infomations']['name'] ?? '';
 $author_qualifi = $author_info['infomations']['qualifications'] ?? '';
