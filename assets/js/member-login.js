@@ -13,6 +13,8 @@ jQuery(document).ready(function ($) {
         membersHubFree,
         renewMembership,
         joinMembership,
+        // Membership types map from ACF options
+        membershipTypes,
         // Fallback URLs for backward compatibility
         memberHubLink,
         memberLoginLink,
@@ -20,6 +22,10 @@ jQuery(document).ready(function ($) {
         renewMembershipLink,
         joinMembershipLink
     } = member_login_data;
+
+    // Normalize membership types arrays from ACF
+    const fullMembersTypeList = (membershipTypes && Array.isArray(membershipTypes.fullMembersHub)) ? membershipTypes.fullMembersHub.map(function(t){ return String(t).trim(); }) : [];
+    const freeMembersTypeList = (membershipTypes && Array.isArray(membershipTypes.freeMembersHub)) ? membershipTypes.freeMembersHub.map(function(t){ return String(t).trim(); }) : [];
 
     // Function to validate membership data from URL
     function validateMembershipData(memberData) {
@@ -31,10 +37,23 @@ jQuery(document).ready(function ($) {
         if (!validMemberTypes.includes(memberData.memberType)) {
             return false;
         }
-        // Validate membership type: accept any non-empty string (e.g. "Free Ongoing")
+        // Validate membership type: must be non-empty
         if (typeof memberData.membershipType !== 'string' || memberData.membershipType.trim() === '') {
             return false;
         }
+        // If ACF membership types are provided, ensure membershipType matches one of them
+        const mt = memberData.membershipType.trim();
+        const isFullType = fullMembersTypeList.indexOf(mt) !== -1;
+        const isFreeType = freeMembersTypeList.indexOf(mt) !== -1;
+        if ((fullMembersTypeList.length || freeMembersTypeList.length) && !isFullType && !isFreeType) {
+            return false;
+        }
+        // Business rules:
+        // - If membershipType is in free list, DA_Member_Type__c must be 'Free'
+        if (isFreeType && memberData.memberType !== 'Free') {
+            return false;
+        }
+        // - If membershipType is in full list, DA_Member_Type__c can be 'Free' or 'Paid' (allowed)
         // For paid members, dates must be valid (not "NA")
         // For free members, "NA" dates are allowed (no expiry required)
         if (memberData.memberType === 'Paid' && (memberData.expiryDate === "NA" || memberData.gracePeriodDate === "NA")) {
@@ -52,7 +71,15 @@ jQuery(document).ready(function ($) {
         if (isMembershipExpired(memberData.expiryDate, memberData.gracePeriodDate, memberData.memberType)) {
             return 'expired';
         }
-        // Return tier based on member type
+        // Determine tier based on membership type lists first
+        const mt = (memberData.membershipType || '').trim();
+        if (fullMembersTypeList.indexOf(mt) !== -1) {
+            return 'full';
+        }
+        if (freeMembersTypeList.indexOf(mt) !== -1) {
+            return 'free';
+        }
+        // Fallback based on member type if lists are not configured
         return memberData.memberType === 'Paid' ? 'full' : 'free';
     }
 

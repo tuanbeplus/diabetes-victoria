@@ -2,7 +2,7 @@
 /**
  * Define theme path
  */
-define('DV_THEME_VER', '2.1.0');
+define('DV_THEME_VER', '2.1.1');
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
 /**
@@ -44,6 +44,35 @@ function dv_enqueue_scripts() {
     $renew_membership = get_field('renew_membership', 'option');
     $join_membership = get_field('join_membership', 'option');
     
+    // Membership types (ACF option: membership_types)
+    $membership_types_option = get_field('membership_types', 'option');
+    $full_members_types = array();
+    $free_members_types = array();
+    if (!empty($membership_types_option) && is_array($membership_types_option)) {
+        if (!empty($membership_types_option['full_members_hub']) && is_array($membership_types_option['full_members_hub'])) {
+            foreach ($membership_types_option['full_members_hub'] as $item) {
+                if (!empty($item['type'])) {
+                    $full_members_types[] = $item['type'];
+                }
+            }
+        }
+        if (!empty($membership_types_option['free_members_hub']) && is_array($membership_types_option['free_members_hub'])) {
+            foreach ($membership_types_option['free_members_hub'] as $item) {
+                if (!empty($item['type'])) {
+                    $free_members_types[] = $item['type'];
+                }
+            }
+        }
+    }
+
+    // If membership types are empty, set default values
+    if (empty($full_members_types)) {
+        $full_members_types = array('Family', 'Full', 'Concession', 'Health', 'Professional', 'Kids', 'Teen', 'Staff', 'Life');
+    }
+    if (empty($free_members_types)) {
+        $free_members_types = array('Free Ongoing', 'Trial');
+    }
+    
     // Fallback values
     $member_login_link = !empty($members_login['url']) ? $members_login['url'] : '/member-login/';
     $member_hub_link = !empty($members_hub['url']) ? $members_hub['url'] : '/members-hub/';
@@ -75,6 +104,11 @@ function dv_enqueue_scripts() {
             'membersHubFree'   => $members_hub_free,
             'renewMembership'  => $renew_membership,
             'joinMembership'   => $join_membership,
+            // Membership types map
+            'membershipTypes'  => array(
+                'fullMembersHub' => $full_members_types,
+                'freeMembersHub' => $free_members_types,
+            ),
             // Fallback URLs for backward compatibility
             'memberHubLink'    => $member_hub_link,
             'memberLoginLink'  => $member_login_link,
