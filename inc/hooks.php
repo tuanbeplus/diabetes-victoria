@@ -241,3 +241,21 @@ function dv_add_custom_css_variables() {
 }
 add_action('wp_head', 'dv_add_custom_css_variables', 10);
 
+/**
+ * Exclude posts with 'member_content' set to 1 from search results and AJAX queries.
+ */
+add_action('pre_get_posts', function ($query) {
+    if (
+        ( !is_admin() && $query->is_search() )
+        || ( defined('DOING_AJAX') && DOING_AJAX )
+    ) {
+        $meta_query   = $query->get('meta_query') ?: [];
+        $meta_query[] = [
+            'key'     => 'member_content',
+            'value'   => 1,
+            'compare' => '!=',
+        ];
+
+        $query->set('meta_query', $meta_query);
+    }
+});
