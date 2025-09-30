@@ -67,7 +67,7 @@ function dv_enqueue_scripts() {
 
     // If membership types are empty, set default values
     if (empty($full_members_types)) {
-        $full_members_types = array('Family', 'Full', 'Concession', 'Health', 'Professional', 'Kids', 'Teen', 'Staff', 'Life');
+        $full_members_types = array('Family', 'Full', 'Concession', 'Health Professional', 'Kids', 'Teen', 'Staff', 'Life');
     }
     if (empty($free_members_types)) {
         $free_members_types = array('Free Ongoing', 'Trial');
