@@ -9,6 +9,15 @@ function dv_query_search_results() {
     $search_orderby = isset($_POST['search_orderby']) ? $_POST['search_orderby'] : '';
     $search_order = isset($_POST['search_order']) ? $_POST['search_order'] : '';
 
+    // Add meta_query to exclude posts with 'member_content' set to true
+    $meta_query = array(
+        array(
+            'key'     => 'member_content',
+            'value'   => true,
+            'compare' => '!=',
+        ),
+    );
+
     // Custom query to fetch more search results based on the $query and $page.
     $args = array(
         's' => $key_word,
@@ -18,6 +27,7 @@ function dv_query_search_results() {
         'posts_per_page' => 6,
         'orderby' => $search_orderby,
         'order' => $search_order,
+        'meta_query' => $meta_query,
     );
     $search_query = new WP_Query($args);
     $search_result = '';
@@ -47,6 +57,7 @@ function dv_query_search_results() {
         'posts_per_page' => -1,
         'orderby' => $search_orderby,
         'order' => $search_order,
+        'meta_query' => $meta_query,
     );
     $all_posts_query = new WP_Query($second_args);
     // Get total number of search results
