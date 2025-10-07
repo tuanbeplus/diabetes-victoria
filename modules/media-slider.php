@@ -16,6 +16,9 @@ if (empty($heading) && empty($list_item)) {
     return;
 }
 
+// Determine if there is only one slide
+$slide_count = is_array($list_item) ? count($list_item) : 0;
+
 $carousel_data = array();
 $carousel_data['infinite'] = false;
 $carousel_data['slidesToShow'] = 1;
@@ -24,7 +27,8 @@ $carousel_data['accessibility'] = false;
 $carousel_data['autoplay'] = false;
 $carousel_data['autoplaySpeed'] = 2000;
 $carousel_data['arrows'] = true;
-$carousel_data['dots'] = true;
+// Only show dots if more than one slide
+$carousel_data['dots'] = ($slide_count > 1);
 $carousel_data['dotsClass'] = 'slick-dots-custom';
 $carousel_data['pauseOnFocus'] = true;
 $carousel_data['pauseOnHover'] = true;

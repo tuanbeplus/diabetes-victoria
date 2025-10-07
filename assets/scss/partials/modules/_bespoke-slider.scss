@@ -36,8 +36,8 @@
             font-size: 1.688rem;
             font-weight: normal;
             line-height: 1;
-            color: #fff;
-            background: $primary_color;
+            color: $primary_color;
+            background: $dv_background;
             display: inline-block;
             min-width: 230px;
             text-align: center;
@@ -61,6 +61,28 @@
         .carousel-wrapper {
             overflow: hidden;
             @extend .__carousel-navigation-style;
+            .slick-dots-custom {
+                li {
+                    button {
+                        color: #fff;
+                    }
+                }
+            }
+            .slick-arrow {
+                &.slick-next {
+                    background-color: #fff;
+                    &::before {
+                        border-left-color: $primary_color;
+                    }
+                }
+                &.slick-prev {
+                    background-color: #fff;
+                    &::before {
+                        border-right-color: $primary_color;
+                    }
+                }
+            }
+            
             .slick-list {
                 position: relative;
                 max-width: 1080px;

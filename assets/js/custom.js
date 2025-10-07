@@ -84,8 +84,11 @@
         var carousel = $('.js-carousel');
 
         $.each(carousel, function () {
-            $(this).find('.slick-dots-custom li').each(function(){
-                $(this).find('button').html('<span>' + $(this).find('button').attr('aria-label') + '</span>');
+            var $dots = $(this).find('.slick-dots-custom li');
+            var total = $dots.length;
+            $dots.each(function(index){
+                var pageNum = index + 1;
+                $(this).find('button').html('<span>' + pageNum + ' of ' + total + '</span>');
             });
         });
     }
