@@ -59,12 +59,12 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: $primary_font_bold;
+    font-weight: bold;
+    line-height: 120%;
 }
 
 h1 {
     font-size: 2.313rem;
-    line-height: 120%;
-    font-weight: bold;
     @media only screen and (max-width: 1440px) {
         font-size: 2.125rem;
     }
@@ -80,8 +80,6 @@ h1 {
 }
 h2 {
     font-size: 1.688rem;
-    line-height: 120%;
-    font-weight: bold;
     @media only screen and (max-width: 1024px) {
         font-size: 1.625rem;
     }
@@ -90,12 +88,8 @@ h2 {
     }
 }
 h3 {
-    margin: 20px 0;
     font-size: 1.313rem;
-    line-height: 120%;
-    font-weight: bold;
     @media only screen and (max-width: 1024px) {
-        margin: 18px 0;
         font-size: 1.275rem;
     }
     @media only screen and (max-width: 768px) {
@@ -104,18 +98,12 @@ h3 {
 }
 h4 {
     font-size: 1.213rem;
-    line-height: 120%;
-    font-weight: bold;
 }
 h5 {
     font-size: 1.113rem;
-    line-height: 120%;
-    font-weight: bold;
 }
 h6 {
     font-size: 1.013rem;
-    line-height: 120%;
-    font-weight: bold;
 }
 
 p , li {
