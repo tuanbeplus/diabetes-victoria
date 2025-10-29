@@ -30,9 +30,6 @@
                 @media only screen and (max-width: 1024px) {
                     padding: 16px 18px 15px;
                 }
-                @media only screen and (max-width: 600px) {
-                    padding: 14px 16px 12px;
-                }
             }
             button[type=submit] {
                 width: fit-content;
@@ -52,8 +49,7 @@
                     padding: 18px 40px;
                 }
                 @media only screen and (max-width: 600px) {
-                    padding: 14px 26px 12px;
-                    font-size: 0.875rem;
+                    width: 100%;
                 }
             }
             @media only screen and (max-width: 1024px) {
@@ -215,8 +211,8 @@
             }
             .__title {
                 margin: 0 0 6px;
-                @media only screen and (max-width: 600px) {
-                    font-size: 1rem;
+                @media only screen and (max-width: 767px) {
+                    font-size: 1.125rem;
                 }
             }
             .__link {
@@ -236,9 +232,9 @@
                 * {
                     word-break: break-all;
                 }
-                @media only screen and (max-width: 600px) {
+                @media only screen and (max-width: 767px) {
                     margin-bottom: 8px;
-                    font-size: 0.813rem;
+                    font-size: 0.975rem;
                 }
             }
             .__summary {
@@ -291,10 +287,6 @@
                 .loading-wrapper {
                     display: block;
                 }
-            }
-            @media only screen and (max-width: 600px) {
-                padding: 12px 22px 10px;
-                font-size: 0.875rem;
             }
         }
         @media only screen and (max-width: 600px) {

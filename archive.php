@@ -45,6 +45,11 @@ $featured_image = get_field('featured_image', get_queried_object());
 $cat_img_url = $featured_image['url'] ?? '';
 $cat_img_alt = $featured_image['alt'] ?? '';
 
+// Get banner image size for padding-top aspect ratio if available
+$cat_img_width = $featured_image['width'] ?? '';
+$cat_img_height = $featured_image['height'] ?? '';
+$padding_top = (!empty($cat_img_width) && !empty($cat_img_height)) ? (intval($cat_img_height) / intval($cat_img_width) * 100) : 0;
+
 $post_type = get_post_type_object(get_post_type());
 $post_type_label = $post_type->label ?? 'Article';
 
@@ -95,7 +100,16 @@ $posts_query = new WP_Query($args);
         <!-- Content -->
         <div class="content-wrapper">
             <?php if (!empty($cat_img_url)): ?>
-                <img class="__banner" src="<?php echo $cat_img_url ?>" alt="<?php echo $cat_img_alt ?>">
+                <div class="__banner-wrapper"<?php if($padding_top): ?> style="padding-top:<?php echo $padding_top; ?>%;"<?php endif; ?>>
+                    <div class="__banner-placeholder"></div>
+                    <img
+                        class="__banner"
+                        src="<?php echo esc_url($cat_img_url); ?>"
+                        alt="<?php echo esc_attr($cat_img_alt); ?>"
+                        loading="lazy"
+                        onload="this.previousElementSibling && (this.previousElementSibling.style.display='none');"
+                    >
+                </div>
             <?php else: ?>
                 <?php dv_the_post_thumbnail_default($post->ID) ?>
             <?php endif; ?>

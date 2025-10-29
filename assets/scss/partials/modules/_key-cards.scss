@@ -175,9 +175,6 @@
                     background-color: $primary_color;
                     border: 2px solid transparent;
                     transition: all 0.4s;
-                    @media (max-width: 768px) {
-                        font-size: 0.875rem;
-                    }
                 }
             }
         }

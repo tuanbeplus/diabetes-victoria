@@ -43,15 +43,6 @@ body {
     &.hidden {
         overflow: hidden;
     }
-    @media only screen and (max-width: 1024px) {
-        // No body-specific styles here
-    }
-    @media only screen and (max-width: 768px) {
-        // No body-specific styles here
-    }
-    @media only screen and (max-width: 600px) {
-        // No body-specific styles here
-    }
     @media print {
         margin-top: 0 !important;
     }
@@ -73,9 +64,6 @@ h1 {
     }
     @media only screen and (max-width: 768px) {
         font-size: 1.875rem;
-    }
-    @media only screen and (max-width: 600px) {
-        font-size: 1.625rem;
     }
 }
 h2 {
@@ -383,9 +371,6 @@ section.post-title {
     @media only screen and (max-width: 1024px) {
         padding: 30px 0;
     }
-    @media only screen and (max-width: 500px) {
-        padding: 20px 0;
-    }
 }
 
 .__carousel-navigation-style {
@@ -634,9 +619,6 @@ section.post-title {
             font-size: 1.125rem;
             line-height: 130%;
             font-family: $primary_font_bold;
-            @media only screen and (max-width: 600px) {
-                font-size: 1rem;
-            }
             a {
                 display: block;
                 color: $dv_black;

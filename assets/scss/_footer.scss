@@ -47,9 +47,7 @@ footer.site-footer {
         display: none;
         img {
             width: 160px;
-            @media only screen and (max-width: 500px) {
-                width: 140px;
-            }
+            margin-left: -10px;
         }
         @media only screen and (max-width: 1024px) {
             display: block;
