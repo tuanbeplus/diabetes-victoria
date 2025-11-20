@@ -8,15 +8,15 @@ function dv_register_member_recipe_cpt() {
 	$labels = array(
 		'name'               => esc_html__( 'Member Recipes', 'diabetes-victoria' ),
 		'singular_name'      => esc_html__( 'Member Recipe', 'diabetes-victoria' ),
-		'add_new'            => esc_html__( 'Add New', 'diabetes-victoria' ),
+		'add_new'            => esc_html__( 'Add New Member Recipe', 'diabetes-victoria' ),
 		'add_new_item'       => esc_html__( 'Add New Member Recipe', 'diabetes-victoria' ),
 		'all_items'          => esc_html__( 'All Member Recipes', 'diabetes-victoria' ),
-		'edit_item'          => esc_html__( 'Edit Recipe', 'diabetes-victoria' ),
+		'edit_item'          => esc_html__( 'Edit Member Recipe', 'diabetes-victoria' ),
 		'new_item'           => esc_html__( 'Add New Member Recipe', 'diabetes-victoria' ),
 		'view_item'          => esc_html__( 'View Item', 'diabetes-victoria' ),
 		'search_items'       => esc_html__( 'Search Member Recipes', 'diabetes-victoria' ),
-		'not_found'          => esc_html__( 'No recipe(s) found', 'diabetes-victoria' ),
-		'not_found_in_trash' => esc_html__( 'No recipe(s) found in trash', 'diabetes-victoria' )
+		'not_found'          => esc_html__( 'No Member Recipe(s) found', 'diabetes-victoria' ),
+		'not_found_in_trash' => esc_html__( 'No Member Recipe(s) found in trash', 'diabetes-victoria' )
 	);
 
   	$args = array(
@@ -45,9 +45,9 @@ function dv_register_member_recipes_taxonomy() {
 		array("member_recipes"),
 		array(
 			"hierarchical"   => true,
-			"label"          => "Categories",
-			"singular_label" => "Category",
-			"rewrite"        => true
+			"label"          => "Member Recipes Categories",
+			"singular_label" => "Member Recipes Category",
+			"rewrite"        => true,
 		)
 	);
 

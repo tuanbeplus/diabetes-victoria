@@ -29,7 +29,7 @@ function dv_get_latest_posts($query_args = array()) {
     $post_type     = $query_args['post_type'] ?? 'post';
     $paged         = $query_args['paged'] ?? 1;
     $number_posts  = $query_args['posts_per_page'] ?? -1;
-    $order		   = $query_args['order'] ?? 'DESC';
+    $order         = $query_args['order'] ?? 'DESC';
     $categories    = $query_args['categories'] ?? array();
     $tags          = $query_args['tags'] ?? array();
 
@@ -46,46 +46,49 @@ function dv_get_latest_posts($query_args = array()) {
 
     // // Taxonomy query based on post type
     if ($post_type == 'post') {
-		if (!empty($categories)) {
-			$args['tax_query'][] = array(
+        if (!empty($categories)) {
+            $args['tax_query'][] = array(
                 'taxonomy' => 'category',
                 'field'    => 'term_id',
                 'terms'    => $categories,
                 'operator' => 'IN',
                 'include_children' => false,
             );
-		}
-		if (!empty($tags)) {
-			$args['tax_query'][] = array(
+        }
+        if (!empty($tags)) {
+            $args['tax_query'][] = array(
                 'taxonomy' => 'post_tag',
                 'field'    => 'term_id',
                 'terms'    => $tags,
                 'operator' => 'IN',
                 'include_children' => false,
             );
-		}
+        }
     }
-	else {
-		$taxonomy_map = array(
-            'resource' 		 => 'resource_categories',
-            'recipe' 		 => 'recipe_categories',
-            'member_recipes' => 'member_recipe_cat'
+    else {
+        $taxonomy_map = array(
+            'resource'        => 'resource_categories',
+            'recipe'          => 'recipe_categories',
+            'member_recipes'  => 'member_recipe_cat'
         );
         $taxonomy_name = $taxonomy_map[$post_type] ?? '';
 
         if (!empty($categories) && !empty($taxonomy_name)) {
             $args['tax_query'][] = array(
-				'taxonomy' => $taxonomy_name,
-				'field'    => 'id',
-				'terms'    => $categories,
-				'operator' => 'IN',
-				'include_children' => false,
-			);
+                'taxonomy' => $taxonomy_name,
+                'field'    => 'id',
+                'terms'    => $categories,
+                'operator' => 'IN',
+                'include_children' => false,
+            );
         }
     }
 
     // Execute the query and return results
     $posts = get_posts($args);
+
+    // Always reset post data after using get_posts in case anything global was setup
+    wp_reset_postdata();
 
     // Error handling (optional)
     if (is_wp_error($posts)) {
@@ -309,3 +312,70 @@ function dv_get_direct_child_posts_from_parent($post_id) {
 	return $child_posts;
 }
 
+
+/**
+ * Get the appropriate footer banner image for a given post.
+ *
+ * Determines which footer banner to display, prioritizing (in order):
+ * 1. Custom footer banner (if set for the current post)
+ * 2. Banner by post type (page, post, resource, recipe, or member_recipes)
+ * 3. Default fallback banner image (if none set)
+ *
+ * @param int $post_id The ID of the post to retrieve the footer banner for.
+ *
+ * @return array Associative array with 'url' and 'alt' keys for the footer banner image.
+ */
+function dv_get_footer_banner_image($post_id) {
+	// Default banner values
+	$default_banner = [
+		'url' => DV_IMG_DIR . 'default-footer-banner.png',
+		'alt' => 'Diabetes Victoria Footer Banner Image',
+	];
+
+	// Always use default banner on search page or if $post_id is empty/invalid
+	if ( is_search() || empty($post_id) || !get_post($post_id) ) {
+		return $default_banner;
+	}
+
+	// Map post types to their corresponding option field names
+	$type_banner_fields = [
+		'page'           => 'footer_banner_for_pages',
+		'post'           => 'footer_banner_for_articles',
+		'resource'       => 'footer_banner_for_members_articles',
+		'recipe'         => 'footer_banner_for_recipes',
+		'member_recipes' => 'footer_banner_for_members_recipes',
+	];
+
+	$post_type = get_post_type($post_id);
+
+	// If this is not one of the five allowed post types, use default banner
+	if ( !isset($type_banner_fields[$post_type]) ) {
+		return $default_banner;
+	}
+
+	// Try fetching a custom footer banner (per post)
+	$custom_footer_banner = get_field('custom_footer_banner', $post_id);
+
+	// Start with type-based banner
+	$footer_banner = $default_banner;
+	$type_banner = get_field( $type_banner_fields[$post_type], 'option' );
+	if ( !empty($type_banner) && !empty($type_banner['url']) ) {
+		$footer_banner = $type_banner;
+	}
+
+	// Override with custom banner if available
+	if ( !empty($custom_footer_banner) && !empty($custom_footer_banner['url']) ) {
+		$footer_banner = $custom_footer_banner;
+	}
+
+	// Ensure fallback to default if url is missing
+	if ( empty($footer_banner['url']) ) {
+		$footer_banner = $default_banner;
+	}
+	// Set a default alt attribute if not present
+	if ( empty($footer_banner['alt']) ) {
+		$footer_banner['alt'] = $default_banner['alt'];
+	}
+
+	return $footer_banner;
+}

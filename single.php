@@ -361,4 +361,8 @@ $max_posts = is_array($max_posts) ? count($max_posts) : '';
 </section><!-- .Latest Post -->
 <?php endif; ?>
 
-<?php get_footer(); 
+<?php
+// Reset Post Data
+wp_reset_postdata();
+
+get_footer(); 

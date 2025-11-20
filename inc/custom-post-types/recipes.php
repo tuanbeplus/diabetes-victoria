@@ -53,8 +53,8 @@ function dv_recipe_taxonomy() {
 		array("recipe"),
 		array(
 			"hierarchical"   => true,
-			"label"          => "Categories",
-			"singular_label" => "Category",
+			"label"          => "Recipes Categories",
+			"singular_label" => "Recipes Category",
 			"rewrite"        => true
 		)
 	);

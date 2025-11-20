@@ -16,15 +16,15 @@ function dv_resources_register() {
 	$labels = array(
 		'name'               => esc_html__( 'Member Articles', 'diabetes-victoria' ),
 		'singular_name'      => esc_html__( 'Member Article', 'diabetes-victoria' ),
-		'add_new'            => esc_html__( 'Add New', 'diabetes-victoria' ),
-		'add_new_item'       => esc_html__( 'Add New Article', 'diabetes-victoria' ),
+		'add_new'            => esc_html__( 'Add New Member Article', 'diabetes-victoria' ),
+		'add_new_item'       => esc_html__( 'Add New Member Article', 'diabetes-victoria' ),
 		'all_items'          => esc_html__( 'All Member Articles', 'diabetes-victoria' ),
-		'edit_item'          => esc_html__( 'Edit Article', 'diabetes-victoria' ),
-		'new_item'           => esc_html__( 'Add New Article', 'diabetes-victoria' ),
+		'edit_item'          => esc_html__( 'Edit Member Article', 'diabetes-victoria' ),
+		'new_item'           => esc_html__( 'Add New Member Article', 'diabetes-victoria' ),
 		'view_item'          => esc_html__( 'View Item', 'diabetes-victoria' ),
-		'search_items'       => esc_html__( 'Search Articles', 'diabetes-victoria' ),
-		'not_found'          => esc_html__( 'No Resource(s) found', 'diabetes-victoria' ),
-		'not_found_in_trash' => esc_html__( 'No Resource(s) found in trash', 'diabetes-victoria' )
+		'search_items'       => esc_html__( 'Search Member Articles', 'diabetes-victoria' ),
+		'not_found'          => esc_html__( 'No Member Articles(s) found', 'diabetes-victoria' ),
+		'not_found_in_trash' => esc_html__( 'No Member Articles(s) found in trash', 'diabetes-victoria' )
 	);
 
   	$args = array(
@@ -53,8 +53,8 @@ function dv_resources_taxonomy() {
 		array("resource"),
 		array(
 			'hierarchical'  => true,
-			'label'         => __( 'Categories', 'diabetes-victoria' ),
-			'singular_name' => __( 'Category', 'diabetes-victoria' ),
+			'label'         => __( 'Member Articles Categories', 'diabetes-victoria' ),
+			'singular_name' => __( 'Member Articles Category', 'diabetes-victoria' ),
 			'rewrite' 		=> array('slug' => 'member_articles_cat'),
             'query_var'     => true
 		)

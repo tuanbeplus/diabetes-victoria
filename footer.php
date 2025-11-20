@@ -10,7 +10,6 @@
  */
 
 $post_id = get_the_ID();
-$footer_banner = get_field('custom_footer_banner', $post_id);
 $footer_title = get_field('footer_title', 'option') ?? 'Diabetes Victoria';
 $footer_description = get_field('footer_description', 'option');
 $certified_image = get_field('certified_image', 'option');
@@ -18,6 +17,9 @@ $quick_links = get_field('quick_links', 'option');
 $footer_logo = get_field('footer_logo', 'option');
 $copyright = get_field('copyright', 'option');
 $acknowledgement = get_field('acknowledgement', 'option');
+$footer_banner = dv_get_footer_banner_image($post_id);
+$footer_banner_url = $footer_banner['url'] ?? '';
+$footer_banner_alt = $footer_banner['alt'] ?? '';
 ?>
 			</main><!-- #main -->
 		</div><!-- #primary -->
@@ -25,10 +27,8 @@ $acknowledgement = get_field('acknowledgement', 'option');
 
 	<footer id="colophon" class="site-footer">
 		<div class="footer-banner">
-			<?php if (isset($footer_banner['url']) && !empty($footer_banner['url'])): ?>
-				<img src="<?php echo $footer_banner['url']; ?>" alt="<?php echo $footer_banner['alt'] ?? 'DV Footer Banner'; ?>" loading="lazy">
-			<?php else: ?>
-				<img src="<?php echo DV_IMG_DIR .'footer-banner-default.jpeg'; ?>" alt="DV Footer Banner" loading="lazy">
+			<?php if (!empty($footer_banner_url) && !empty($footer_banner_alt)): ?>
+				<img src="<?php echo $footer_banner_url ?>" alt="<?php echo $footer_banner_alt ?>" loading="lazy">
 			<?php endif; ?>
 		</div><!-- #banner -->
 		<div class="container">
