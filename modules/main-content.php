@@ -74,7 +74,7 @@ if( get_row_layout() == 'main_content' ):
                                 <!-- /In This Section -->
                             <?php endif; ?>
                             <div class="on-this-page">
-                                <h2 class="__heading"><?php echo $on_this_page['heading']; ?></h2>
+                                <h2 class="__heading"><?php echo $on_this_page['heading'] ?? ''; ?></h2>
                                 <?php if ($on_this_page_options == 'auto_tocs'): ?>
                                     <ul id="tocs" class="links-list" role="list"></ul>
                                 <?php endif; ?>
@@ -82,7 +82,7 @@ if( get_row_layout() == 'main_content' ):
                                     <ul id="custom-links" class="links-list" role="list">
                                     <?php foreach ($custom_links as $item): ?>
                                         <li>
-                                            <a href="<?php echo $item['link'] ?>"><?php echo $item['text'] ?></a>
+                                            <a href="<?php echo $item['link'] ?? '' ?>"><?php echo $item['text'] ?? '' ?></a>
                                         </li>
                                     <?php endforeach; ?>
                                     </ul>
@@ -96,8 +96,8 @@ if( get_row_layout() == 'main_content' ):
                                         $icon_url = !empty($item['icon']['url']) ? $item['icon']['url'] : DV_IMG_DIR .'arrow-up-right-from-square-solid.svg';
                                         ?>
                                         <li>
-                                            <img class="__icon" src="<?php echo $icon_url; ?>" alt="<?php echo $item['icon']['alt'] ?>">
-                                            <div class="__info"><?php echo $item['info'] ?></div>
+                                            <img class="__icon" src="<?php echo $icon_url; ?>" alt="<?php echo $item['icon']['alt'] ?? '' ?>">
+                                            <div class="__info"><?php echo $item['info'] ?? '' ?></div>
                                         </li>
                                     <?php endforeach; ?>
                                     </ul>
@@ -172,11 +172,11 @@ if( get_row_layout() == 'main_content' ):
                         <div class="__content">
                             <?php if(!empty($content_title)) echo '<h2 class="__title">'.$content_title.'</h2>'; ?>
 
-                            <?php echo $content_editor; ?>
+                            <?php echo $content_editor ?? ''; ?>
 
                             <?php if ($bottom_cta['visibility'] == true && !empty($bottom_cta['link'])): ?>
-                                <a class="__cta" href="<?php echo $bottom_cta['link']; ?>" role="button">
-                                    <span><?php echo $bottom_cta['text']; ?></span>
+                                <a class="__cta" href="<?php echo $bottom_cta['link'] ?? ''; ?>" role="button">
+                                    <span><?php echo $bottom_cta['text'] ?? ''; ?></span>
                                 </a>
                             <?php endif; ?>
                         </div>
