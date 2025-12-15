@@ -215,9 +215,11 @@ function dv_get_post_summary($post_id) {
 	$post_content = get_the_content($post_id);
 	$summary = '';
 	$summary .= $post_content;
-	foreach ($page_builder as $module) {
-		if ($module['acf_fc_layout'] == 'main_content') {
-			$summary .= $module['content_editor'];
+	if (!empty($page_builder) && is_array($page_builder)) {
+		foreach ($page_builder as $module) {
+			if ($module['acf_fc_layout'] == 'main_content') {
+				$summary .= $module['content_editor'];
+			}
 		}
 	}
 	$trim_summary = wp_trim_words( $summary , 35, ' (...)' );

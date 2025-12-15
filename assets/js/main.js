@@ -8,28 +8,31 @@ jQuery(document).ready(function ($) {
     // Call the function on page load
     dv_set_css_variable();
 
+    // Set search form values from URL params on page load
+    dv_set_search_params_from_url();
+
     // Resize event
-    $(window).on('resize', function() {
+    $(window).on('resize', function () {
         dv_set_css_variable();
     });
 
     // Scroll event
-    $(window).on('scroll', function() {  
+    $(window).on('scroll', function () {
         // Call the scroll events function
         dv_apply_all_scroll_events();
     })
 
     // Load event
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         // Call the scroll events function
         dv_apply_all_scroll_events();
     });
 
     // Event listener for resize, scroll, and load events on the window
-    $(window).on('resize scroll load', function() {
+    $(window).on('resize scroll load', function () {
         // Function to activate elements in the viewport
         function dv_activate_section_in_view(selector) {
-            $(selector).each(function() {
+            $(selector).each(function () {
                 if ($(this).dv_is_element_in_viewport()) {
                     $(this).addClass('active');
                 }
@@ -63,7 +66,7 @@ jQuery(document).ready(function ($) {
         // Sticky header
         if ($(window).scrollTop() > 10) {
             $('header.site-header').addClass('sticky')
-            $('.site-content').css('margin-top', header_height+'px')
+            $('.site-content').css('margin-top', header_height + 'px')
         }
         else {
             $('header.site-header').removeClass('sticky')
@@ -89,7 +92,7 @@ jQuery(document).ready(function ($) {
             let sibar_scroll_offset = $('#main-content-sidebar').offset().top - $('#content.site-content').offset().top;
             if ($(window).scrollTop() > sibar_scroll_offset) {
                 $('#main-content-sidebar').addClass('sticky')
-                $('#main-content-sidebar .sidebar-inner').css('top', offset_top+'px')
+                $('#main-content-sidebar .sidebar-inner').css('top', offset_top + 'px')
             }
             else {
                 $('#main-content-sidebar').removeClass('sticky')
@@ -101,13 +104,13 @@ jQuery(document).ready(function ($) {
     /**
      * Check the element in viewport
      */
-    $.fn.dv_is_element_in_viewport = function() {
+    $.fn.dv_is_element_in_viewport = function () {
         let elementTop = $(this).offset().top;
         let elementBottom = elementTop + $(this).outerHeight();
-    
+
         let viewportTop = $(window).scrollTop();
         let viewportBottom = viewportTop + $(window).height();
-    
+
         return elementBottom > viewportTop && elementTop < viewportBottom;
     };
 
@@ -141,17 +144,17 @@ jQuery(document).ready(function ($) {
             let key_cards = site_content.find('.key-cards .card').not('.key-cards.hide_in_TOC .card');
 
             if (key_cards.length > 0) {
-                key_cards.each(function() {
+                key_cards.each(function () {
                     let card = $(this)
                     let landing_page = card.find('h3.landing-page')
                     let card_title = card.find('h3.card-title')
-    
+
                     if (landing_page.length > 0 && card_title.length > 0) {
                         all_heading_tags = all_heading_tags.add(landing_page);
-                    } 
+                    }
                     else if (landing_page.length > 0) {
                         all_heading_tags = all_heading_tags.add(landing_page);
-                    } 
+                    }
                     else {
                         all_heading_tags = all_heading_tags.add(card_title);
                     }
@@ -160,7 +163,7 @@ jQuery(document).ready(function ($) {
             // Check if there are any <h2> tags
             if (all_heading_tags.length > 0) {
                 // Iterate over each <h2> tag
-                all_heading_tags.each(function() {
+                all_heading_tags.each(function () {
                     counter++;
                     let heading = $(this);
                     // Create a TOC item with a link to the corresponding <h2> tag
@@ -199,10 +202,10 @@ jQuery(document).ready(function ($) {
         let item_content = $('.ipro-carousel-section .ipro-item--content');
         let wrapper = item_content.closest('.ipro-carousel-section');
         let elements = wrapper.find('.ipro-item--content');
-        
+
         // Iterate through these elements to find the maximum height
         var maxHeight = 0;
-        elements.each(function() {
+        elements.each(function () {
             var currentHeight = $(this).outerHeight();
             if (currentHeight > maxHeight) {
                 maxHeight = currentHeight;
@@ -214,16 +217,21 @@ jQuery(document).ready(function ($) {
     setTimeout(dv_set_height_all_carousel_items, 500);
 
     /**
-     * Update the param 's' in URL when search 
+     * Update all search params (s, orderby, order) in URL
      */
-    function dv_update_search_keyword_param_url(button) {
+    function dv_update_search_params_url(button) {
 
         let form = button.closest('form')
 
         let searchInput = form.find('input[type=search]').val(); // Get the search input value
+        let searchOrderBy = form.find('input[type=radio][name=orderby]:checked').val(); // Get orderby value
+        let searchOrder = form.find('input[type=radio][name=order]:checked').val(); // Get order value
         let currentUrl = new URL(window.location.href); // Get the current URL
 
-        currentUrl.searchParams.set('s', searchInput); // Set or update the 's' parameter
+        // Set or update the search parameters
+        currentUrl.searchParams.set('s', searchInput);
+        currentUrl.searchParams.set('orderby', searchOrderBy);
+        currentUrl.searchParams.set('order', searchOrder);
 
         history.pushState(null, '', currentUrl); // Update the URL without reloading the page
 
@@ -233,16 +241,40 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    /**
+     * Read URL params and set form values on page load
+     */
+    function dv_set_search_params_from_url() {
+        let currentUrl = new URL(window.location.href);
+        let formSearch = $('form.search-results-form');
+
+        if (formSearch.length > 0) {
+            // Get parameters from URL
+            let orderby = currentUrl.searchParams.get('orderby');
+            let order = currentUrl.searchParams.get('order');
+
+            // Set orderby radio button if parameter exists
+            if (orderby) {
+                formSearch.find('input[type=radio][name=orderby][value=' + orderby + ']').prop('checked', true);
+            }
+
+            // Set order radio button if parameter exists
+            if (order) {
+                formSearch.find('input[type=radio][name=order][value=' + order + ']').prop('checked', true);
+            }
+        }
+    }
+
     // Click to hide accessibility options
-    $(document).on('click', '#pojo-a11y-toolbar .background-overlay', function(e){
+    $(document).on('click', '#pojo-a11y-toolbar .background-overlay', function (e) {
         e.preventDefault()
         let pojo_toolbar = $('nav#pojo-a11y-toolbar');
 
         pojo_toolbar.removeClass('pojo-a11y-toolbar-open');
     });
-    
+
     // Click to hide accessibility tools
-    $(document).on('click', '#btn-close-accessibility-toolbar', function(e){
+    $(document).on('click', '#btn-close-accessibility-toolbar', function (e) {
         e.preventDefault()
         let pojo_toolbar = $('nav#pojo-a11y-toolbar');
 
@@ -250,7 +282,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Click to show socials share options
-    $(document).on('click', '#btn-socials-share', function(e){
+    $(document).on('click', '#btn-socials-share', function (e) {
         e.preventDefault()
         let share_content = $(this).closest('.socials-share-wrapper').find('.share-content')
         // Scroll to the top of the document with smooth animation
@@ -258,7 +290,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Click to hide socials share options
-    $(document).on('click', '#btn-close-share', function(e){
+    $(document).on('click', '#btn-close-share', function (e) {
         e.preventDefault()
         let share_content = $(this).closest('.socials-share-wrapper').find('.share-content')
         // Scroll to the top of the document with smooth animation
@@ -266,15 +298,15 @@ jQuery(document).ready(function ($) {
     });
 
     // Click to scroll to top
-    $(document).on('click', '#btn-scroll-top', function(e){
+    $(document).on('click', '#btn-scroll-top', function (e) {
         e.preventDefault()
         // Scroll to the top of the document with smooth animation
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // ------------------ Search Popup ------------------
     // Click to open Search popup
-    $(document).on('click', '#btn-search', function(e){
+    $(document).on('click', '#btn-search', function (e) {
         e.preventDefault()
         let search_wrapper = $('.global-search-wrapper')
         let search_overlay = $('.search-overlay')
@@ -284,14 +316,14 @@ jQuery(document).ready(function ($) {
         search_wrapper.toggleClass('active')
         search_overlay.toggleClass('active')
         dv_aria_expanded_status($(this));
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
             input_field.focus();
         }, 200);
     });
 
     // Click button to close Search popup
-    $(document).on('click', '#btn-close-search', function(e){
+    $(document).on('click', '#btn-close-search', function (e) {
         e.preventDefault()
         let btn_search = $('#btn-search')
         let search_wrapper = $('.global-search-wrapper')
@@ -304,7 +336,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Focus out to close Search popup
-    $(document).on('blur', '#btn-close-search', function(e){
+    $(document).on('blur', '#btn-close-search', function (e) {
         e.preventDefault()
         let btn_search = $('#btn-search')
         let search_wrapper = $('.global-search-wrapper')
@@ -317,7 +349,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Click overlay to close Search popup
-    $(document).on('click', '.global-search-wrapper', function(e){
+    $(document).on('click', '.global-search-wrapper', function (e) {
         e.preventDefault();
         let btn_search = $('#btn-search')
 
@@ -325,13 +357,13 @@ jQuery(document).ready(function ($) {
         btn_search.removeClass('active')
         btn_search.attr('aria-expanded', 'false');
     });
-    $(document).on('click', '.global-search-wrapper form', function(e){
+    $(document).on('click', '.global-search-wrapper form', function (e) {
         e.stopPropagation();
     });
     // ------------------ /Search Popup ------------------
 
     // Open Nav mobile
-    $(document).on('click', '#btn-nav-bar', function(e){
+    $(document).on('click', '#btn-nav-bar', function (e) {
         e.preventDefault()
         let siteBody = $('body')
         let nav_mobile = $('header nav#site-navigation')
@@ -352,7 +384,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Open sort options
-    $(document).on('click', '#btn-open-sort', function(e){
+    $(document).on('click', '#btn-open-sort', function (e) {
         e.preventDefault()
         let wrapper = $(this).closest('.results-sort')
         let sort_options = wrapper.find('.sort-options')
@@ -362,7 +394,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Close sort options
-    $(document).on('click', '#btn-close-sort-opts', function(e){
+    $(document).on('click', '#btn-close-sort-opts', function (e) {
         e.preventDefault()
         let wrapper = $(this).closest('.results-sort')
         let sort_options = wrapper.find('.sort-options')
@@ -373,7 +405,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Attach click event to the document
-    $(document).on('click', function(e) {
+    $(document).on('click', function (e) {
         // Check if the click is outside the .sort-options element
         if (!$(e.target).closest('.results-sort').length) {
             $('#btn-open-sort').removeClass('active')
@@ -381,12 +413,12 @@ jQuery(document).ready(function ($) {
         }
     });
     // Prevent the popup from closing when clicking inside it
-    $(document).on('click', '.results-sort', function(e) {
+    $(document).on('click', '.results-sort', function (e) {
         e.stopPropagation();
     });
 
     // Ajax show search results
-    $(document).on('click', '#btn-show-search-results', function(e){
+    $(document).on('click', '#btn-show-search-results', function (e) {
         e.stopPropagation()
         let btnLoadMore = $('#btn-load-more-results')
         let formSearch = $('form.search-results-form')
@@ -398,26 +430,26 @@ jQuery(document).ready(function ($) {
         let numberAllResults = formSearch.find('#number-all-results')
         let searchResults = $('#search-results')
 
-        // Update search keyword to param 's' on URL
-        dv_update_search_keyword_param_url($(this));
+        // Update all search params (s, orderby, order) to URL
+        dv_update_search_params_url($(this));
 
         $.ajax({
             type: 'POST',
             url: ajaxUrl,
-            data:{
-                'action'         : 'dv_query_search_results',
-                'key_word'       : keyWord,
-                'page'           : page,
-                'search_orderby' : searchOrderBy,
-                'search_order'   : searchOrder,
+            data: {
+                'action': 'dv_query_search_results',
+                'key_word': keyWord,
+                'page': page,
+                'search_orderby': searchOrderBy,
+                'search_order': searchOrder,
             },
-            beforeSend : function ( xhr ) {
+            beforeSend: function (xhr) {
                 searchResults.addClass('loading')
             },
-            success:function(response){
+            success: function (response) {
                 searchResults.removeClass('loading')
                 btnLoadMore.show();
-                
+
                 if (response.search_result && response.found_posts > 0) {
                     let results_html = '<div class="loading-wrapper"><p class="mess">Loading...</p><div class="dv-spinner"></div></div>';
                     results_html += response.search_result;
@@ -440,14 +472,20 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    // Auto-trigger search when sort options are changed
+    $(document).on('click', '.search-results-form input[type=radio][name=orderby], .search-results-form input[type=radio][name=order]', function (e) {
+        // Trigger search automatically when radio button is clicked
+        $('#btn-show-search-results').click();
+    });
+
     // Ajax show search results
-    $(document).on('click', '#btn-apply-sort', function(e){
+    $(document).on('click', '#btn-apply-sort', function (e) {
         e.preventDefault()
         $('#btn-show-search-results').click();
     });
 
     // Ajax Load more search results
-    $(document).on('click', '#btn-load-more-results', function(e){
+    $(document).on('click', '#btn-load-more-results', function (e) {
         e.preventDefault()
         let btn = $(this)
         btn.show();
@@ -462,17 +500,17 @@ jQuery(document).ready(function ($) {
         $.ajax({
             type: 'POST',
             url: ajaxUrl,
-            data:{
-                'action'         : 'dv_query_search_results',
-                'key_word'       : keyWord,
-                'page'           : page,
-                'search_orderby' : searchOrderBy,
-                'search_order'   : searchOrder,
+            data: {
+                'action': 'dv_query_search_results',
+                'key_word': keyWord,
+                'page': page,
+                'search_orderby': searchOrderBy,
+                'search_order': searchOrder,
             },
-            beforeSend : function ( xhr ) {
+            beforeSend: function (xhr) {
                 btn.addClass('loading')
             },
-            success:function(response){
+            success: function (response) {
                 searchResults.append(response.search_result)
                 btn.data('next-page', page + 1);
                 btn.removeClass('loading')
@@ -488,7 +526,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Ajax Load more search results
-    $(document).on('click', '.latest-posts .load-more-cta', function(e){
+    $(document).on('click', '.latest-posts .load-more-cta', function (e) {
         e.preventDefault()
         let btn = $(this)
         let sectionWrapper = btn.closest('.latest-posts')
@@ -515,20 +553,20 @@ jQuery(document).ready(function ($) {
         $.ajax({
             type: 'POST',
             url: ajaxUrl,
-            data:{
-                'action'         : 'dv_load_more_latest_posts',
-                'paged'          : paged,
-                'post_type'      : postType,
-                'number_posts'   : numberPosts,
-                'order_by'       : orderBy,
-                'categories'     : postCats,
-                'tags'           : postTags,
-                'has_post_meta'  : hasPostMeta,
+            data: {
+                'action': 'dv_load_more_latest_posts',
+                'paged': paged,
+                'post_type': postType,
+                'number_posts': numberPosts,
+                'order_by': orderBy,
+                'categories': postCats,
+                'tags': postTags,
+                'has_post_meta': hasPostMeta,
             },
-            beforeSend : function ( xhr ) {
+            beforeSend: function (xhr) {
                 btn.addClass('loading')
             },
-            success:function(response){
+            success: function (response) {
                 postList.append(response)
                 btn.data('next-page', paged + 1);
                 btn.removeClass('loading')
@@ -542,9 +580,9 @@ jQuery(document).ready(function ($) {
 
     // ------------------ Donate Popup ------------------
     // Show donate popup
-    $(document).on('click', '#btn-donate', function(e){
+    $(document).on('click', '#btn-donate', function (e) {
         e.preventDefault()
-        let this_btn = $(this) 
+        let this_btn = $(this)
         // window.location.href = this_btn.attr('href')
         // return
         this_btn.addClass('active')
@@ -558,30 +596,30 @@ jQuery(document).ready(function ($) {
         let input_field = donate_popup.find('input#other-amount')
 
         donate_popup.toggleClass('show')
-        donate_wrapper.css('margin-top', wrapper_margin +'px')
+        donate_wrapper.css('margin-top', wrapper_margin + 'px')
         donate_wrapper.slideDown(200)
         dv_aria_expanded_status(this_btn);
 
-        setTimeout(function() {
+        setTimeout(function () {
             input_field.focus();
         }, 200);
     });
     // Click & Focus-out to Close Donate popup
-    $(document).on('click blur', '#btn-close-donate', function(e){
+    $(document).on('click blur', '#btn-close-donate', function (e) {
         e.preventDefault()
         dv_close_donate_popup()
     });
     // Click outside to close Donate popup
-    $(document).on('click', '#donate-popup', function(e){
+    $(document).on('click', '#donate-popup', function (e) {
         e.preventDefault()
         dv_close_donate_popup()
     });
     // Stop propagation for Donate wrapper
-    $(document).on('click', '#donate-popup .donate-wrapper', function(e){
+    $(document).on('click', '#donate-popup .donate-wrapper', function (e) {
         e.stopPropagation()
     });
     // Checked or un-checked amount radio button
-    $(document).on('click', '#donate-popup input[type=radio][name=amount]', function(e) {
+    $(document).on('click', '#donate-popup input[type=radio][name=amount]', function (e) {
         let btn_radio = $(this);
         if (btn_radio.data('checked')) {
             btn_radio.prop('checked', false);
@@ -592,7 +630,7 @@ jQuery(document).ready(function ($) {
         }
     });
     // Disable options amount or custom amount
-    $(document).on('click', '#donate-popup #btn-continue-donate', function(e) {
+    $(document).on('click', '#donate-popup #btn-continue-donate', function (e) {
         let custom_amount = $('#donate-popup input#other-amount')
         if (custom_amount.val() === '') {
             // Disable custom amount
@@ -611,7 +649,7 @@ jQuery(document).ready(function ($) {
         let donate_wrapper = donate_popup.find('.donate-wrapper')
         donate_popup.addClass('closing')
         donate_wrapper.slideUp(200)
-        setTimeout(function() {
+        setTimeout(function () {
             donate_popup.removeClass('show')
             $('#btn-donate').attr('aria-expanded', 'false');
             donate_popup.removeClass('closing')
@@ -621,9 +659,9 @@ jQuery(document).ready(function ($) {
 
     // ------------------ Members Login Popup ------------------
     // Click to show Members Login Area
-    $(document).on('click', '#btn-member-login', function(e){
+    $(document).on('click', '#btn-member-login', function (e) {
         e.preventDefault()
-        let this_btn = $(this) 
+        let this_btn = $(this)
         if (this_btn.hasClass('is_logged_in')) {
             window.location.href = this_btn.attr('href')
             return
@@ -638,25 +676,25 @@ jQuery(document).ready(function ($) {
         let input_field = login_popup.find('input#user_login')
 
         login_popup.addClass('show')
-        login_wrapper.css('margin-top', wrapper_margin +'px')
+        login_wrapper.css('margin-top', wrapper_margin + 'px')
         login_wrapper.slideDown(300)
         dv_aria_expanded_status(this_btn);
-        setTimeout(function() {
+        setTimeout(function () {
             input_field.focus();
         }, 200);
     });
     // Click & Focus-out to Close Members Login Area
-    $(document).on('click blur', '#btn-close-login-popup', function(e){
+    $(document).on('click blur', '#btn-close-login-popup', function (e) {
         e.preventDefault()
         dv_close_members_login_popup()
     });
     // Click outside to close Members Login Area
-    $(document).on('click', '#members-login-area', function(e){
+    $(document).on('click', '#members-login-area', function (e) {
         e.preventDefault()
         dv_close_members_login_popup()
     });
     // Stop propagation login wrapper
-    $(document).on('click', '#members-login-area .login-wrapper', function(e){
+    $(document).on('click', '#members-login-area .login-wrapper', function (e) {
         e.stopPropagation()
     });
     /**
@@ -667,14 +705,14 @@ jQuery(document).ready(function ($) {
         let login_wrapper = login_popup.find('.login-wrapper')
         login_popup.addClass('closing')
         login_wrapper.slideUp(200)
-        setTimeout(function() {
+        setTimeout(function () {
             login_popup.removeClass('show')
             $('#btn-member-login').attr('aria-expanded', 'false');
             login_popup.removeClass('closing')
         }, 200);
     }
     // Handle WP Members Login Ajax
-    $(document).on('click', 'form#member_login_form button[type=submit]', function(e) {
+    $(document).on('click', 'form#member_login_form button[type=submit]', function (e) {
         let form = $(this).closest('form#member_login_form')
         let userLogin = form.find('#user_login').val()
         let userPass = form.find('#user_pass').val()
@@ -684,30 +722,30 @@ jQuery(document).ready(function ($) {
         $.ajax({
             type: 'POST',
             url: ajaxUrl,
-            data:{
-                'action'  : 'dv_member_login_ajax',
-                'log'     : userLogin,
-                'pwd'     : userPass,
+            data: {
+                'action': 'dv_member_login_ajax',
+                'log': userLogin,
+                'pwd': userPass,
                 'security': security
             },
-            beforeSend : function ( xhr ) {
+            beforeSend: function (xhr) {
                 message.removeClass()
                 spinner.show()
             },
-            success:function(response){
+            success: function (response) {
                 spinner.hide()
                 message.css('opacity', '0')
-                        .css('opacity', '1')
-                        .addClass(response.status)
-                        .html(response.message);
-                if(response.status == 'success') {
+                    .css('opacity', '1')
+                    .addClass(response.status)
+                    .html(response.message);
+                if (response.status == 'success') {
                     window.location.href = '/';
                 }
             }
         });
     });
     // Members Confirm Logout
-    $(document).on('click', '.members-logout-link', function(event) {
+    $(document).on('click', '.members-logout-link', function (event) {
         if (!confirm('Are you sure you want to log out?')) {
             event.preventDefault();
         }
@@ -716,9 +754,9 @@ jQuery(document).ready(function ($) {
 
     // ------------------ Contact Phones Popup ------------------
     // Click to show Contact Phones Area
-    $(document).on('click', '#btn-phone', function(e){
+    $(document).on('click', '#btn-phone', function (e) {
         e.preventDefault()
-        let this_btn = $(this) 
+        let this_btn = $(this)
         let adminBar = $('#wpadminbar')
         let wrapper_margin = this_btn.outerHeight();
         if (adminBar.length > 0) {
@@ -726,28 +764,28 @@ jQuery(document).ready(function ($) {
         }
         let contacts_popup = $('#contact-phones-area')
         let contacts_wrapper = contacts_popup.find('.contact-phones-wrapper')
-        let first_contact = contacts_wrapper.find('.contacts-list a').first()        
+        let first_contact = contacts_wrapper.find('.contacts-list a').first()
 
         contacts_popup.addClass('show')
-        contacts_wrapper.css('margin-top', wrapper_margin +'px')
+        contacts_wrapper.css('margin-top', wrapper_margin + 'px')
         contacts_wrapper.slideDown(300)
         dv_aria_expanded_status(this_btn);
-        setTimeout(function() {
+        setTimeout(function () {
             first_contact.focus();
         }, 200);
     });
     // Click & Focus-out to Close  Contact Phones Area
-    $(document).on('click blur', '#btn-close-contacts-popup', function(e){
+    $(document).on('click blur', '#btn-close-contacts-popup', function (e) {
         e.preventDefault()
         dv_close_contact_phones_popup()
     });
     // Click outside to close Contact Phones Area
-    $(document).on('click', '#contact-phones-area', function(e){
+    $(document).on('click', '#contact-phones-area', function (e) {
         e.preventDefault()
         dv_close_contact_phones_popup()
     });
     // Stop propagation login wrapper
-    $(document).on('click', '#contact-phones-area .contact-phones-wrapper', function(e){
+    $(document).on('click', '#contact-phones-area .contact-phones-wrapper', function (e) {
         e.stopPropagation()
     });
     /**
@@ -758,7 +796,7 @@ jQuery(document).ready(function ($) {
         let contacts_wrapper = contacts_popup.find('.contact-phones-wrapper')
         contacts_popup.addClass('closing')
         contacts_wrapper.slideUp(200)
-        setTimeout(function() {
+        setTimeout(function () {
             contacts_popup.removeClass('show')
             $('#btn-phone').attr('aria-expanded', 'false');
             contacts_popup.removeClass('closing')
@@ -767,11 +805,11 @@ jQuery(document).ready(function ($) {
     // ------------------ /Contact Phones Popup ------------------
 
     // Smooth scrolling to anchor links
-    $(document).on('click', 'a[href^="#"]', function(e) {
+    $(document).on('click', 'a[href^="#"]', function (e) {
         let target = $(this.getAttribute('href'));
-        if( target.length ) {
+        if (target.length) {
             e.preventDefault();
-            let offset = ($('header#masthead').outerHeight()) + 24; 
+            let offset = ($('header#masthead').outerHeight()) + 24;
             let admin_bar = $('#wpadminbar');
             if (admin_bar.length > 0) {
                 offset = offset + admin_bar.outerHeight();
@@ -783,14 +821,14 @@ jQuery(document).ready(function ($) {
     });
 
     // Select all <table> elements and wrap them with a <div>
-    $('.main-content .content-wrapper table, .accordion__content-inner table, .dv-editor-content table').each(function() {
+    $('.main-content .content-wrapper table, .accordion__content-inner table, .dv-editor-content table').each(function () {
         if (!$(this).parent().hasClass('table-wrapper')) {
             $(this).wrap('<div class="table-wrapper" role="region" tabindex="0"></div>');
         }
     });
 
     // Toggle Categories list at Sidebar
-    $(document).on('click', '.sidebar #btn-toggle-categories', function(e) {
+    $(document).on('click', '.sidebar #btn-toggle-categories', function (e) {
         e.preventDefault()
         let sidebar = $(this).closest('.sidebar')
         let catsList = sidebar.find('ul.categories-list')
@@ -805,18 +843,18 @@ jQuery(document).ready(function ($) {
     });
 
     // Toggle Sub menu of the menu item
-    $(document).on('click', 'nav#site-navigation ul li.menu-item-has-children', function(e) {
+    $(document).on('click', 'nav#site-navigation ul li.menu-item-has-children', function (e) {
         e.preventDefault()
         $(this).toggleClass('active')
     });
-    $(document).on('click', 'nav#site-navigation ul li a', function(e) {
+    $(document).on('click', 'nav#site-navigation ul li a', function (e) {
         e.stopPropagation()
     });
-    $(document).on('click', 'nav#site-navigation ul li .sub-menu', function(e) {
+    $(document).on('click', 'nav#site-navigation ul li .sub-menu', function (e) {
         e.stopPropagation()
     });
 
-    $(document).on('click', '.sharedaddy .share-print.sd-button', function(e) {
+    $(document).on('click', '.sharedaddy .share-print.sd-button', function (e) {
         e.preventDefault();
         // Instantly scroll to the top of the page
         window.scrollTo(0, 0);
@@ -825,5 +863,5 @@ jQuery(document).ready(function ($) {
             window.print();
         }, 100);
     });
-    
+
 })

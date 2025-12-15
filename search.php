@@ -49,7 +49,7 @@ get_header();
 							<label for="sort-date">
 								<input id="sort-date" type="radio" 
 									name="orderby" value="date" 
-									<?php if ($_GET['orderby'] == 'date' || !isset($_GET['orderby']) || $_GET['orderby'] == '') echo 'checked="checked"'; ?>>
+									<?php if (!isset($_GET['orderby']) || $_GET['orderby'] == '' || $_GET['orderby'] == 'date') echo 'checked="checked"'; ?>>
 								Date
 							</label>
 							<label for="sort-title">
@@ -72,7 +72,7 @@ get_header();
 							<label for="sort-desc">
 								<input id="sort-desc" type="radio" 
 									name="order" value="DESC" 
-									<?php if ($_GET['order'] == 'DESC' || !isset($_GET['order']) || $_GET['order'] == '') echo 'checked="checked"'; ?>>
+									<?php if (!isset($_GET['order']) || $_GET['order'] == '' || $_GET['order'] == 'DESC') echo 'checked="checked"'; ?>>
 								Descending
 							</label>
 						</div>
