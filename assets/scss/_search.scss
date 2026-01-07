@@ -180,6 +180,7 @@
         width: 100%;
         padding: 38px 30px;
         background-color: #fff;
+        min-height: 50vh;
         &.loading {
             .loading-wrapper {
                 display: flex;

@@ -132,7 +132,7 @@ echo '} </style>';
 
         <div class="content-wrapper">
             <?php
-            // Get the feature image data array (use 'large' size instead of 'full')
+            // Get the feature image data array (use 'medium_large' size instead of 'full')
             $banner_image = !empty($feature_img_id) ? wp_get_attachment_image_src($feature_img_id, 'medium_large') : null;
             if (!empty($banner_image)) :
                 $banner_url = $banner_image[0];

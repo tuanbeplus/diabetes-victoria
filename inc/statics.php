@@ -2,7 +2,7 @@
 /**
  * Define theme path
  */
-define('DV_THEME_VER', '2.2.0');
+define('DV_THEME_VER', '2.2.1');
 define('DV_IMG_DIR', get_template_directory_uri() . '/assets/imgs/');
 
 /**

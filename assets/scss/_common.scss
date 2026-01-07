@@ -26,12 +26,13 @@ $dv_img_dir: "/wp-content/themes/diabetes-victoria/assets/imgs";
 }
 
 html {
-    --header-height: 200px;
+    --header-height: 0;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
 }
 
 body {
     margin: 0;
-    margin-top: var(--header-height);
     padding: 0;
     position: relative;
     letter-spacing: 0.2px;

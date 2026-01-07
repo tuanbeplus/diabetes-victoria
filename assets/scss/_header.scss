@@ -1,10 +1,10 @@
 body.admin-bar {
     header.site-header {
-        top: 32px;
-        @media only screen and (max-width: 768px) {
-            top: 46px;
-        }
         &.sticky {
+            top: 32px;
+            @media only screen and (max-width: 768px) {
+                top: 46px;
+            }
             @media only screen and (max-width: 782px) {
                 top: 46px;
             }
@@ -25,11 +25,12 @@ body.home {
 }
 header.site-header {
     width: 100%;
-    position: fixed;
+    position: relative;
     top: 0;
     z-index: 10;
     background-color: $primary_color;
     &.sticky {
+        position: fixed;
         background-color: rgba(255, 255, 255, 0.95);
         box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
         .header-inner {
@@ -807,7 +808,10 @@ nav#site-navigation {
             }
             &:hover {
                 > .sub-menu {
-                    display: block;
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateY(100%);
+                    transition: all 0.3s;
                 }
                 &::after {
                     transform: rotate(-180deg);
@@ -815,18 +819,23 @@ nav#site-navigation {
             }
         }
         .sub-menu {
-            display: none;
+            visibility: hidden;
+            opacity: 0;
             min-width: 220px;
             margin: 0;
             padding: 10px 16px;
             position: absolute;
-            transform: translateY(100%);
+            transform: translateY(106%);
             bottom: 1px;
             background-color: $primary_color;
             z-index: 10;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-            animation: menuDropDown 0.4s ease;
             border: 1px solid #647a91;
+            transition: all 0.5s;
+            @media only screen and (max-width: 1024px) {
+                transform: none !important;
+            }
+
         }
         @media only screen and (max-width: 1440px) {
             flex-wrap: wrap;
@@ -847,7 +856,7 @@ nav#site-navigation {
         padding: 16px 0 40px;
         background-color: $primary_color;
         border-top: 1px solid #d8d8d8;
-        animation: nav-slide-show 0.3s ease;
+        animation: navSlideShow 0.3s ease;
         &.active {
             display: block;
         }
@@ -892,6 +901,8 @@ nav#site-navigation {
                 }
             }
             .sub-menu {
+                display: none;
+                transform: none !important;
                 position: relative;
                 margin-left: 16px;
                 padding: 0 16px;
@@ -913,28 +924,8 @@ nav#site-navigation {
         }
     }
 }
-@keyframes menuDropDown {
-    0% {
-        opacity: 0.6;
-        transform: translateY(106%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(100%);
-    }
-}
-@keyframes dv-slide-down {
-    0% {
-        transform: translateY(-100%);
-    }
-    50% {
-        transform: translateY(-50%);
-    }
-    100% {
-        transform: translateY(0%);
-    }
-}
-@keyframes nav-slide-show {
+
+@keyframes navSlideShow {
     0% {
         opacity: 0;
         transform: translateX(101%);
