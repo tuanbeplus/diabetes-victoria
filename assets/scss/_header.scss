@@ -201,7 +201,7 @@ header.site-header {
                     }
                 }
                 #btn-donate {
-                    padding: 13px 22px 11px;
+                    padding: 13px 23px 11px;
                     line-height: 1;
                     height: fit-content;
                 }
@@ -875,6 +875,7 @@ nav#site-navigation {
                 a {
                     color: $dv_white!important;
                     width: fit-content;
+                    white-space: normal;
                 }
             }
             li.menu-item-has-children {
@@ -902,6 +903,8 @@ nav#site-navigation {
             }
             .sub-menu {
                 display: none;
+                opacity: 1;
+                visibility: visible;
                 transform: none !important;
                 position: relative;
                 margin-left: 16px;

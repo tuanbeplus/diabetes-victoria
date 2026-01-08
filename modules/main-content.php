@@ -35,6 +35,30 @@ if( get_row_layout() == 'main_content' ):
     }
     $child_pages = dv_get_direct_child_posts_from_parent($parent_page_id);
 
+    // Process video URL and determine video type
+    $video_type = '';
+    $video_embed_url = '';
+    
+    if (!empty($video_url)) {
+        // Check if it's a YouTube URL
+        if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i', $video_url, $youtube_match)) {
+            $video_type = 'youtube';
+            $youtube_id = $youtube_match[1];
+            $video_embed_url = 'https://www.youtube.com/embed/' . $youtube_id;
+        }
+        // Check if it's a Vimeo URL
+        elseif (preg_match('/(?:vimeo\.com\/)(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/i', $video_url, $vimeo_match)) {
+            $video_type = 'vimeo';
+            $vimeo_id = $vimeo_match[3];
+            $video_embed_url = 'https://player.vimeo.com/video/' . $vimeo_id;
+        }
+        // Otherwise treat as direct video file
+        else {
+            $video_type = 'direct';
+            $video_embed_url = $video_url;
+        }
+    }
+
     if (!empty($banner_image) || !empty($content_editor)):
         ?>
         <!-- Main content with sidebar section -->
@@ -164,9 +188,31 @@ if( get_row_layout() == 'main_content' ):
                             >
                         </div>
                     <?php endif; ?>
-
-                    <?php if($media_options == 'video' && !empty($video_url)) 
-                        echo do_shortcode( '[video src="'. $video_url .'"/]' ); ?>
+                    <?php if ($media_options == 'video' && !empty($video_embed_url)): ?>
+                        <?php if($video_type == 'youtube'): ?>
+                            <iframe 
+                                src="<?php echo esc_url($video_embed_url . '?autoplay=0&rel=0'); ?>" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen
+                                loading="lazy"
+                            ></iframe>
+                        <?php elseif($video_type == 'vimeo'): ?>
+                            <iframe 
+                                src="<?php echo esc_url($video_embed_url); ?>" 
+                                title="Vimeo video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen
+                                loading="lazy"
+                            ></iframe>
+                        <?php elseif($video_type == 'direct'): ?>
+                            <?php echo do_shortcode('[video src="' . esc_url($video_embed_url) . '"]'); ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
 
                     <?php if (!empty($content_editor)): ?>
                         <div class="__content">

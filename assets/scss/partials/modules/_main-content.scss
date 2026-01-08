@@ -120,55 +120,21 @@ section.main-content {
             img {
                 display: block;
             }
-            .wp-video {
-                width: 100%!important;
-                height: 390px;
-                .mejs-container {
-                    height: 390px!important;
-                    iframe {
-                        width: 100%!important;
-                        height: 390px!important;
-                    }
-                    video {
-                        height: 390px!important;
-                    }
-                }
+            iframe {
+                width: 100%;
+                min-height: 380px;
                 @media (max-width: 1024px) {
-                    height: 350px;
-                    .mejs-container {
-                        height: 350px!important;
-                        iframe {
-                            height: 350px!important;
-                        }
-                        video {
-                            height: 350px!important;
-                        }
-                    }
+                    min-height: 350px;
                 }
                 @media (max-width: 768px) {
-                    height: 320px;
-                    .mejs-container {
-                        height: 320px!important;
-                        iframe {
-                            height: 320px!important;
-                        }
-                        video {
-                            height: 320px!important;
-                        }
-                    }
+                    min-height: 320px;
                 }
                 @media (max-width: 430px) {
-                    height: 260px;
-                    .mejs-container {
-                        height: 260px!important;
-                        iframe {
-                            height: 260px!important;
-                        }
-                        video {
-                            height: 260px!important;
-                        }
-                    }
+                    min-height: 260px;
                 }
+            }
+            .wp-video {
+                width: 100%!important;
             }
             .__content {
                 padding: 38px 26px;
@@ -392,7 +358,7 @@ section.main-content {
                         border-radius: 4px;
                     }
                     &::-webkit-scrollbar-thumb {
-                        background: #ccc;
+                        background: #bbb;
                         border-radius: 4px;
                     }
                 }

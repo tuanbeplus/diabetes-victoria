@@ -814,9 +814,9 @@ jQuery(document).ready(function ($) {
             if (admin_bar.length > 0) {
                 offset = offset + admin_bar.outerHeight();
             }
-            $('html, body').stop().animate({
+            $('html, body').animate({
                 scrollTop: target.offset().top - offset
-            }, 300);
+            }, 300, 'swing');
         }
     });
 
@@ -862,6 +862,12 @@ jQuery(document).ready(function ($) {
         setTimeout(function () {
             window.print();
         }, 100);
+    });
+
+    $(document).on('click', '.wp-video .mejs-container .mejs-fullscreen-button', function (e) {
+        e.preventDefault();
+        let video = $(this).closest('.wp-video')
+        video.toggleClass('fullscreen')
     });
 
 })
