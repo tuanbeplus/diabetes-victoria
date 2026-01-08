@@ -771,14 +771,9 @@ nav#site-navigation {
             list-style: none;
             white-space: nowrap;
             font-family: $primary_font_bold;
-            &.current_page_item {
-                > a {
-                    color: #4E93FF;
-                }
-            }
             &.current-menu-item {
                 > a {
-                    color: #4E93FF;
+                    color: #80affa;
                 }
             }
             a {
