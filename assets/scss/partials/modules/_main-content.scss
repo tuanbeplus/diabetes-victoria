@@ -120,18 +120,13 @@ section.main-content {
             img {
                 display: block;
             }
-            iframe {
+            iframe, video {
                 width: 100%;
-                min-height: 380px;
-                @media (max-width: 1024px) {
-                    min-height: 350px;
-                }
-                @media (max-width: 768px) {
-                    min-height: 320px;
-                }
-                @media (max-width: 430px) {
-                    min-height: 260px;
-                }
+                max-width: 100%;
+            }
+            iframe[src*="youtube.com"], iframe[src*="vimeo.com"] {
+                height: 100%;
+                aspect-ratio: 16 / 9;
             }
             .wp-video {
                 width: 100%!important;
@@ -206,12 +201,6 @@ section.main-content {
                             float: none;
                             margin: 24px auto;
                         }
-                    }
-                }
-                iframe {
-                    width: 100%!important;
-                    @media (max-width: 430px) {
-                        height: 200px!important;
                     }
                 }
                 .__cta {
