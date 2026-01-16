@@ -30,6 +30,9 @@ $member_hub_link = !empty($member_hub_page['member_page']) ? $member_hub_page['m
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/Majorant-Light.otf" as="font" type="font/otf" crossorigin>
+	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/Majorant-Medium.otf" as="font" type="font/otf" crossorigin>
+	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/fonts/Majorant-Regular.otf" as="font" type="font/otf" crossorigin>
 	<?php wp_head(); ?>
 </head>
 
