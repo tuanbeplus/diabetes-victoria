@@ -45,6 +45,19 @@ function dv_google_tag_manager_body() {
 add_action('wp_body_open', 'dv_google_tag_manager_body', 99);
 
 /**
+ * Ortto Tracking Code
+ */
+function dv_ortto_tracking_code() {
+
+    $ortto_tracking_code = get_field('ortto_tracking_code', 'option');
+    if (!empty($ortto_tracking_code)) {
+        echo $ortto_tracking_code;
+    }
+}
+add_action('wp_head', 'dv_ortto_tracking_code', 1);
+
+
+/**
  * Custom WP query on search page
  */
 function dv_custom_search_posts_per_page($query) {
